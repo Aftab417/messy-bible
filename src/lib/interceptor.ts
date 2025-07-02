@@ -1,0 +1,73 @@
+import store from "@/redux";
+import axios, { InternalAxiosRequestConfig, AxiosError } from "axios";
+import { toast } from "react-hot-toast";
+
+type ErrorResponse = {
+  message?: string;
+  statusCode?: number;
+};
+
+const apiClient = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  withCredentials: true,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json"
+  }
+});
+
+// Request interceptor
+apiClient.interceptors.request.use(
+  (config: InternalAxiosRequestConfig) => {
+    const token = store.getState().user?.accessToken;
+    if (token) {
+      config.headers.Authorization =`Bearer ${token}`;
+    }
+    return config;
+  },
+  (error: AxiosError) => {
+    return Promise.reject(error);
+  }
+);
+
+// Response interceptor
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error: AxiosError<ErrorResponse>) => {
+    if (error.response) {
+      const { status, data } = error.response;
+      const errorMessage = data?.message || getDefaultErrorMessage(status);
+
+      toast.error(errorMessage);
+
+      if (status === 401) {
+        // Signal logout to the caller (don't redirect here)
+        return Promise.reject({ ...error, isUnauthorized: true });
+      }
+    } else {
+      toast.error("Network error. Please check your connection.");
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+// Helper for default error messages
+const getDefaultErrorMessage = (status?: number) => {
+  switch (status) {
+    case 401:
+      return "Session expired. Please log in again.";
+    case 403:
+      return "You do not have permission to access this resource.";
+    case 404:
+      return "The requested resource was not found.";
+    case 429:
+      return "Too many requests. Please slow down.";
+    case 500:
+      return "Internal server error. Please try again later.";
+    default:
+      return "An unexpected error occurred.";
+  }
+};
+
+export default apiClient;
