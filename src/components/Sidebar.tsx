@@ -35,7 +35,7 @@ const navItems = [
   },
   {
     label: "Game Management",
-    href: "/dentalManagement2",
+    href: "/GameManagement",
     icon: <FaFileAlt />
   },
   {

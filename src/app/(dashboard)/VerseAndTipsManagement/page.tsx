@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 import { GoPencil } from "react-icons/go";
 import { RiDeleteBin6Fill } from "react-icons/ri";
-import AddNewVerse from "./components/AddNewVerse";
-import AddNewTip from "./components/AddNewTip";
-import EditVerse from "./components/EditVerse";
-import EditTip from "./components/EditTip ";
+import AddNewVerse from "../VerseAndTipsManagement/components/AddNewVerse";
+import AddNewTip from "../VerseAndTipsManagement/components/AddNewTip";
+import EditVerse from "../VerseAndTipsManagement/components/EditVerse";
+import EditTip from "../VerseAndTipsManagement/components/EditTip ";
 
 const verses = [
   {
