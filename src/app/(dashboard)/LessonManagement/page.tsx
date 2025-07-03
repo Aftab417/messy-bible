@@ -1,12 +1,10 @@
 "use client";
 import type React from "react";
-import { useState} from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
-import {  ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { X } from "lucide-react";
-
-
 
 import { useRouter } from "next/navigation"; // Note: 'next/navigation' not 'next/router'
 
@@ -464,15 +462,14 @@ const dummyUsers = [
 ];
 
 const UserManagement = () => {
-
-const [aiMatching, setAiMatching] = useState(true);;
+  const [aiMatching, setAiMatching] = useState(true);
 
   const toggle = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
     setter((prev) => !prev);
   };
 
-  //#############> Yup Star<############### t 
-  //#############> Yup End <############### 
+  //#############> Yup Star<############### t
+  //#############> Yup End <###############
   const [users, setUsers] = useState(dummyUsers);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -617,6 +614,23 @@ const [aiMatching, setAiMatching] = useState(true);;
   const handleClick = () => {
     router.push("/LessonManagement/LessonDetails"); // Now this will work correctly
   };
+
+
+  interface Lesson {
+  LessonType: "AI" | "Manually"; // or string if more types exist
+  // Add other properties used in `setFormData()` if needed
+}
+
+ const handleEdit = (lesson: Lesson) => {
+  if (lesson.LessonType === "AI") {
+    setFormData(lesson); // preload form data
+    setIsAIModalOpen(true); // open modal
+  } else if (lesson.LessonType === "Manually") {
+    router.push("/LessonManagement/EditLesson");
+  }
+ 
+};
+
   // const  handleAdd= () => {
   //   router.push("/LessonManagement/AddLesson"); // Now this will work correctly
   // };
@@ -646,6 +660,7 @@ const [aiMatching, setAiMatching] = useState(true);;
     bibleReference: "",
     studyPlan: "",
     visibility: "private"
+    
   });
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -657,9 +672,7 @@ const [aiMatching, setAiMatching] = useState(true);;
     }));
   };
 
-
-  
-    const ageGroups = [
+  const ageGroups = [
     "Under 13",
     "13–17",
     "18–24",
@@ -679,25 +692,21 @@ const [aiMatching, setAiMatching] = useState(true);;
     "1 Corinthians 13"
   ];
 
-
-    const studyPlans = [
+  const studyPlans = [
     "Select Study Plan (e.g. 7 day)",
     "7 Day Plan",
     "30 Day Plan"
   ];
 
-    // Handle select changes
+  // Handle select changes
   const handleSelectChange = (name: string, value: string) => {
     setFormData((prev) => ({
       ...prev,
       [name]: value
     }));
-
-
   };
-    // Custom Select Component
+  // Custom Select Component
 
-    
   const CustomSelect = ({
     label,
     name,
@@ -712,10 +721,8 @@ const [aiMatching, setAiMatching] = useState(true);;
     placeholder: string;
   }) => {
     const [isOpen, setIsOpen] = useState(false);
-    
 
-      // Handle radio button changes
- 
+    // Handle radio button changes
 
     return (
       <div className="pb-[15px]">
@@ -757,7 +764,6 @@ const [aiMatching, setAiMatching] = useState(true);;
             </div>
           )}
         </div>
-        
       </div>
     );
   };
@@ -886,6 +892,24 @@ const [aiMatching, setAiMatching] = useState(true);;
                       </svg>
                     </button>
                     <button className="cursor-pointer mx-1  hover:scale-110 transition-transform duration-300 ease-in-out"></button>
+                    <button
+                      onClick={() => handleEdit(user)}
+                      className="cursor-pointer mx-1  hover:scale-110 transition-transform duration-300 ease-in-out"
+                    >
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect width="20" height="20" rx="3" fill="#F6805C" />
+                        <path
+                          d="M5.33333 14.6667H6.28333L12.8 8.15L11.85 7.2L5.33333 13.7167V14.6667ZM4.66667 16C4.47778 16 4.31956 15.936 4.192 15.808C4.06444 15.68 4.00044 15.5218 4 15.3333V13.7167C4 13.5389 4.03333 13.3693 4.1 13.208C4.16667 13.0467 4.26111 12.9051 4.38333 12.7833L12.8 4.38333C12.9333 4.26111 13.0807 4.16667 13.242 4.1C13.4033 4.03333 13.5727 4 13.75 4C13.9273 4 14.0996 4.03333 14.2667 4.1C14.4338 4.16667 14.5782 4.26667 14.7 4.4L15.6167 5.33333C15.75 5.45556 15.8471 5.6 15.908 5.76667C15.9689 5.93333 15.9996 6.1 16 6.26667C16 6.44444 15.9693 6.614 15.908 6.77533C15.8467 6.93667 15.7496 7.08378 15.6167 7.21667L7.21667 15.6167C7.09444 15.7389 6.95267 15.8333 6.79133 15.9C6.63 15.9667 6.46067 16 6.28333 16H4.66667ZM12.3167 7.68333L11.85 7.2L12.8 8.15L12.3167 7.68333Z"
+                          fill="white"
+                        />
+                      </svg>
+                    </button>
 
                     <button
                       onClick={() => handleDelete(user._id)}
@@ -1003,163 +1027,153 @@ const [aiMatching, setAiMatching] = useState(true);;
             onClick={() => setIsAIModalOpen(false)}
           />
 
-          <div className="relative bg-white rounded-[20px] p-6 w-full max-w-md mx-4 overflow-y-auto max-h-[90vh]">
-            {/* Close Button */}
-            <button
-              onClick={() => setIsAIModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-            >
-              <X className="w-7 h-7 text-[#F6805C] cursor-pointer hover:scale-125 transition-transform duration-300" />
-            </button>
-
-            {/* Form Header */}
-            <h2 className="text-[20px] font-semibold text-[#794A3A] mb-4">
-              + AI Lesson Regeneration
-            </h2>
-
-            {/* Form Body */}
-            <form className="space-y-4">
-              <div>
-
-                 <div className="flex items-center justify-between  bg-white   dark:bg-gray-700    w-full px-4 py-[0.85rem]   border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none">
-          <span  className="text-[#656565] font-inter text-sm not-italic font-normal leading-none capitalize"
->
-           Do you want to generate an image?
-          </span>
-          <div
-            onClick={() => toggle(setAiMatching)}
-            className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
-              aiMatching ? "bg-[#F6805C]" : "bg-gray-400"
-            }`}
-          >
+          <div className="relative bg-white rounded-[20px] w-full max-w-md mx-4 overflow-hidden">
             <div
-              className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${
-                aiMatching ? "translate-x-6" : "translate-x-0"
-              }`}
-            ></div>
-          </div>
-        </div>
-                <label className="block text-sm font-medium">
-                  Image Generation
-                </label>
-                <input type="checkbox" className="toggle toggle-orange-500" />
-              </div>
+              className="p-6 overflow-y-auto max-h-[80vh] 
+              [&::-webkit-scrollbar]:w-1 
+              [&::-webkit-scrollbar-thumb]:rounded-full 
+              [&::-webkit-scrollbar-thumb]:bg-gray-300 
+              [&::-webkit-scrollbar-track]:bg-gray-100"
+            >
+              {/* Close Button */}
 
+              {/* Form Header */}
+              <h2 className=" text-[20px] font-[500] leading-none text-[#794A3A] Fredoka text-center mb-8">
+                + AI Lesson Regeneration
+              </h2>
 
-              {/* Lesson Name */}
-              <div className="pb-[15px]">
-                <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
-                  Lesson Name
-                </label>
-                <input
-                  type="text"
-                  name="lessonName"
-                  value={formData.lessonName}
-                  onChange={handleInputChange}
-                  placeholder="Enter Lesson Name"
-                  className="w-full px-4 py-[0.85rem] dark:bg-gray-700 border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none"
-                />
-              </div>
+              {/* Form Body */}
+              <form className="space-y-4">
+                <div>
 
-
-                 {/* Description */}
-              <div className="pb-[15px]">
-                <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
-                  Description
-                </label>
-                <textarea
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                  placeholder="Enter Text Here"
-                  rows={3}
-                  className="w-full px-4 py-[0.85rem] dark:bg-gray-700 border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none"
-                  
-                />
-                
-              </div>
-
-
-                 <CustomSelect
-                label="Age Group"
-                name="ageGroup"
-                value={formData.ageGroup}
-                options={ageGroups}
-                placeholder="Select Age Group e.g, 25-30"
-              />
-
-
-  {/* Bible Reference */}
-              <CustomSelect
-                label="Bible Reference"
-                name="bibleReference"
-                value={formData.bibleReference}
-                options={bibleReferences}
-                placeholder="Select Bible Reference e.g., Galatians 5:22"
-              />
-
-
-
-   {/* Study Plan */}
-              <CustomSelect
-                label="Study Plan"
-                name="studyPlan"
-                value={formData.studyPlan}
-                options={studyPlans}
-                placeholder="Select Study Plan (e.g. 7 day)"
-              />
-
-
-
-                 {/* Save As */}
-              <div className="pb-[15px]">
-                <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
-                  Save As
-                </label>
-
-                <div className="grid  gap-4">
-                  <label className="flex items-center gap-2 p-4  border-1 border-[#AFAFAF] text-[#656565]  rounded-lg cursor-pointer justify-between">
-                    <span className="text-[#656565] text-[14px] font-[400] ">Public</span>
-                    <input
-                      type="radio"
-                      name="visibility"
-                      value="public"
-                      
-                      className="appearance-none w-4 h-4 border-2 border-red-400 rounded-full checked:bg-red-400 checked:border-red-400 transition"
-                    />
+                   <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
+                    Image Generation
                   </label>
-
-                  <label className="flex items-center gap-2 p-4 border-1 border-[#AFAFAF] rounded-lg cursor-pointer justify-between">
-                    <span className="text-[#656565] text-[14px] font-[400]">Private</span>
-                    <input
-                      type="radio"
-                      name="visibility"
-                      value="private"
-                      
-                      className="appearance-none w-4 h-4 border-2 border-red-400 rounded-full checked:bg-red-400 checked:border-red-400 transition"
-                    />
-                  </label>
+                  <div className="flex items-center justify-between  bg-white   dark:bg-gray-700    w-full px-4 py-[0.85rem]   border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none">
+                    <span className="text-[#656565]  w-[70%] font-inter text-sm not-italic font-normal leading-none capitalize">
+                      Do you want to generate an image?
+                    </span>
+                    <div
+                      onClick={() => toggle(setAiMatching)}
+                      className={`w-12  h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
+                        aiMatching ? "bg-[#F6805C]" : "bg-gray-400"
+                      }`}
+                    >
+                      <div
+                        className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${
+                          aiMatching ? "translate-x-6" : "translate-x-0"
+                        }`}
+                      ></div>
+                    </div>
+                  </div>
                 </div>
-                
-              </div>
 
-               
-              <div className="grid grid-cols-2  gap-4 mt-4">
-                <button
-                  type="button"
-                  onClick={() => setIsAIModalOpen(false)}
-                  className="bg-transparent text-[14px] font-[600]    py-3 rounded-[10px] px-[10px]  border-1 border-[#F6805C] text-[#F6805C]  hover:bg-[#F6805C]  hover:text-white  cursor-pointer "
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="hover:bg-transparent text-[14px] font-[600]    py-3 rounded-[10px] px-[10]  border-1 hover:border-[#F6805C] hover:text-[#F6805C] bg-[#F6805C]  text-white  cursor-pointer"
-                >
-                  Regenerate Lesson
-                </button>
-              </div>
-            </form>
+                {/* Lesson Name */}
+                <div className="pb-[15px]">
+                  <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
+                    Lesson Name
+                  </label>
+                  <input
+                    type="text"
+                    name="lessonName"
+                    value={formData.lessonName}
+                    onChange={handleInputChange}
+                    placeholder="Enter Lesson Name"
+                    className="w-full px-4 py-[0.85rem] dark:bg-gray-700 border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none"
+                  />
+                </div>
+
+                {/* Description */}
+                <div className="pb-[15px]">
+                  <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
+                    Description
+                  </label>
+                  <textarea
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    placeholder="Enter Text Here"
+                    rows={3}
+                    className="w-full px-4 py-[0.85rem] dark:bg-gray-700 border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none"
+                  />
+                </div>
+
+                <CustomSelect
+                  label="Age Group"
+                  name="ageGroup"
+                  value={formData.ageGroup}
+                  options={ageGroups}
+                  placeholder="Select Age Group e.g, 25-30"
+                />
+
+                {/* Bible Reference */}
+                <CustomSelect
+                  label="Bible Reference"
+                  name="bibleReference"
+                  value={formData.bibleReference}
+                  options={bibleReferences}
+                  placeholder="Select Bible Reference e.g., Galatians 5:22"
+                />
+
+                {/* Study Plan */}
+                <CustomSelect
+                  label="Study Plan"
+                  name="studyPlan"
+                  value={formData.studyPlan}
+                  options={studyPlans}
+                  placeholder="Select Study Plan (e.g. 7 day)"
+                />
+
+                {/* Save As */}
+                <div className="pb-[15px]">
+                  <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
+                    Save As
+                  </label>
+
+                  <div className="grid  gap-4">
+                    <label className="flex items-center gap-2 p-4  border-1 border-[#AFAFAF] text-[#656565]  rounded-lg cursor-pointer justify-between">
+                      <span className="text-[#656565] text-[14px] font-[400] ">
+                        Public
+                      </span>
+                      <input
+                        type="radio"
+                        name="visibility"
+                        value="public"
+                        className="appearance-none w-4 h-4 border-2 border-red-400 rounded-full checked:bg-red-400 checked:border-red-400 transition"
+                      />
+                    </label>
+
+                    <label className="flex items-center gap-2 p-4 border-1 border-[#AFAFAF] rounded-lg cursor-pointer justify-between">
+                      <span className="text-[#656565] text-[14px] font-[400]">
+                        Private
+                      </span>
+                      <input
+                        type="radio"
+                        name="visibility"
+                        value="private"
+                        className="appearance-none w-4 h-4 border-2 border-red-400 rounded-full checked:bg-red-400 checked:border-red-400 transition"
+                      />
+                    </label>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2  gap-4 mt-4">
+                  <button
+                    type="button"
+                    onClick={() => setIsAIModalOpen(false)}
+                    className="bg-transparent text-[14px] font-[600]    py-3 rounded-[10px] px-[10px]  border-1 border-[#F6805C] text-[#F6805C]  hover:bg-[#F6805C]  hover:text-white  cursor-pointer "
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="hover:bg-transparent text-[14px] font-[600]    py-3 rounded-[10px] px-[10]  border-1 hover:border-[#F6805C] hover:text-[#F6805C] bg-[#F6805C]  text-white  cursor-pointer"
+                  >
+                    Regenerate Lesson
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       )}
