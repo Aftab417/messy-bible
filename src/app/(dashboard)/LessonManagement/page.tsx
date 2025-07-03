@@ -1,7 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import type React from "react";
+import { useState} from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import {  ChevronDown } from "lucide-react";
+import { X } from "lucide-react";
+
+
 
 import { useRouter } from "next/navigation"; // Note: 'next/navigation' not 'next/router'
 
@@ -459,8 +464,20 @@ const dummyUsers = [
 ];
 
 const UserManagement = () => {
+
+const [aiMatching, setAiMatching] = useState(true);;
+
+  const toggle = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
+    setter((prev) => !prev);
+  };
+
+  //#############> Yup Star<############### t 
+  //#############> Yup End <############### 
   const [users, setUsers] = useState(dummyUsers);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const [isAIModalOpen, setIsAIModalOpen] = useState(false);
+
   const ITEMS_PER_PAGE = 8;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -491,8 +508,6 @@ const UserManagement = () => {
       toast.error("Failed to delete user");
     }
   };
-
- 
 
   const renderPaginationButtons = () => {
     const buttons = [];
@@ -602,10 +617,152 @@ const UserManagement = () => {
   const handleClick = () => {
     router.push("/LessonManagement/LessonDetails"); // Now this will work correctly
   };
-  const  handleAdd= () => {
-    router.push("/LessonManagement/AddLesson"); // Now this will work correctly
+  // const  handleAdd= () => {
+  //   router.push("/LessonManagement/AddLesson"); // Now this will work correctly
+  // };
+
+  const handleGenerateAI = () => {
+    closeModal(); // Close the first modal
+    setIsAIModalOpen(true); // Open the AI Lesson modal
   };
 
+  //##############> Modal start <################
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const handleGenerateManually = () => {
+    router.push("/LessonManagement/AddLesson");
+    closeModal();
+  };
+
+  // Handle form input changes
+
+  const [formData, setFormData] = useState({
+    lessonName: "",
+    description: "",
+    ageGroup: "",
+    bibleReference: "",
+    studyPlan: "",
+    visibility: "private"
+  });
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+
+  
+    const ageGroups = [
+    "Under 13",
+    "13–17",
+    "18–24",
+    "25–34",
+    "35–44",
+    "45–60",
+    "60+"
+  ];
+
+  const bibleReferences = [
+    "Genesis 1:1",
+    "John 3:16",
+    "Psalm 23",
+    "Matthew 5:16",
+    "Romans 8:28",
+    "Philippians 4:13",
+    "1 Corinthians 13"
+  ];
+
+
+    const studyPlans = [
+    "Select Study Plan (e.g. 7 day)",
+    "7 Day Plan",
+    "30 Day Plan"
+  ];
+
+    // Handle select changes
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+
+
+  };
+    // Custom Select Component
+
+    
+  const CustomSelect = ({
+    label,
+    name,
+    value,
+    options,
+    placeholder
+  }: {
+    label: string;
+    name: string;
+    value: string;
+    options: string[];
+    placeholder: string;
+  }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    
+
+      // Handle radio button changes
+ 
+
+    return (
+      <div className="pb-[15px]">
+        <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
+          {label}
+        </label>
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            className="w-full px-4 py-[0.85rem]  rounded-[8px] border border-[#AFAFAF] bg-[#FFF]  dark:bg-gray-700 dark:text-gray-100  bg-[#FFF] text-left flex justify-between items-center text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
+           "
+          >
+            <span className="font-inter">{value || placeholder}</span>
+            <ChevronDown
+              className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+            />
+          </button>
+
+          {isOpen && (
+            <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-700 border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto">
+              {options.map((option, index) => (
+                <div key={index}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleSelectChange(name, option);
+                      setIsOpen(false);
+                    }}
+                    className="w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-600 text-[#656565] dark:text-gray-100 font-mono text-[14px] transition-colors font-indie"
+                  >
+                    {option}
+                  </button>
+                  {index < options.length - 1 && (
+                    <div className="border-b border-gray-200 dark:border-gray-600 mx-2"></div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        
+      </div>
+    );
+  };
+
+  //##############> Modal End  <################
   return (
     <>
       <div className="lg:flex justify-between">
@@ -640,16 +797,16 @@ const UserManagement = () => {
           </div>
 
           <button
-           onClick={handleAdd}
-           className="bg-[#FA8059] cursor-pointer hover:bg-[#f96c42] text-white text-sm font-semibold px-[6px] w-full sm:w-[160px] py-[14px] rounded-[12px] transition mt-[10px] sm:mt-[0px]">
+            //  onClick={handleAdd}
+            onClick={openModal}
+            className="bg-[#FA8059] cursor-pointer hover:bg-[#f96c42] text-white text-sm font-semibold px-[6px] w-full sm:w-[160px] py-[14px] rounded-[12px] transition mt-[10px] sm:mt-[0px]"
+          >
             + Add New Lesson
           </button>
         </div>
       </div>
 
-      <div 
-      
-      className="py-[20px] text-[#794A3A] font-dm-sans text-[16px] font-semibold">
+      <div className="py-[20px] text-[#794A3A] font-dm-sans text-[16px] font-semibold">
         All Lessons
       </div>
 
@@ -793,6 +950,221 @@ const UserManagement = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Modal Start Start */}
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* Overlay */}
+          <div
+            className="absolute inset-0 bg-black/70  "
+            onClick={closeModal}
+          />
+
+          {/* Modal Content */}
+          <div className="relative bg-[#F9F9F9] rounded-[20px]   md:px-8 py-8 max-w-md w-full mx-4">
+            {/* Close Button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4  text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <X className="w-7 h-7 text-[#F6805C]  cursor-pointer hover:scale-125 transition-transform duration-300 ease-in-out" />
+            </button>
+
+            {/* Modal Body */}
+            <div className="space-y-4 p-[20px]">
+              {/* AI Generation Button */}
+              <button
+                onClick={handleGenerateAI}
+                className="w-full bg-[#6AC8C4]  hover:bg-teal-600 text-white text-[18px] cursor-pointer font-[500] py-4 px-6 rounded-[12px] transition-colors"
+              >
+                Generate Lesson Using AI
+              </button>
+
+              {/* Manual Generation Button */}
+              <button
+                onClick={handleGenerateManually}
+                className="w-full bg-[#F6805C] cursor-pointer hover:bg-orange-600 text-white text-[18px] font-[500] py-4 px-6 rounded-[12px] transition-colors"
+              >
+                Generate Lesson Manually
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Modal Start End */}
+
+      {/*##################> Second Modal Start<################  */}
+      {isAIModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div
+            className="absolute inset-0 bg-black/70"
+            onClick={() => setIsAIModalOpen(false)}
+          />
+
+          <div className="relative bg-white rounded-[20px] p-6 w-full max-w-md mx-4 overflow-y-auto max-h-[90vh]">
+            {/* Close Button */}
+            <button
+              onClick={() => setIsAIModalOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+            >
+              <X className="w-7 h-7 text-[#F6805C] cursor-pointer hover:scale-125 transition-transform duration-300" />
+            </button>
+
+            {/* Form Header */}
+            <h2 className="text-[20px] font-semibold text-[#794A3A] mb-4">
+              + AI Lesson Regeneration
+            </h2>
+
+            {/* Form Body */}
+            <form className="space-y-4">
+              <div>
+
+                 <div className="flex items-center justify-between  bg-white   dark:bg-gray-700    w-full px-4 py-[0.85rem]   border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none">
+          <span  className="text-[#656565] font-inter text-sm not-italic font-normal leading-none capitalize"
+>
+           Do you want to generate an image?
+          </span>
+          <div
+            onClick={() => toggle(setAiMatching)}
+            className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
+              aiMatching ? "bg-[#F6805C]" : "bg-gray-400"
+            }`}
+          >
+            <div
+              className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${
+                aiMatching ? "translate-x-6" : "translate-x-0"
+              }`}
+            ></div>
+          </div>
+        </div>
+                <label className="block text-sm font-medium">
+                  Image Generation
+                </label>
+                <input type="checkbox" className="toggle toggle-orange-500" />
+              </div>
+
+
+              {/* Lesson Name */}
+              <div className="pb-[15px]">
+                <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
+                  Lesson Name
+                </label>
+                <input
+                  type="text"
+                  name="lessonName"
+                  value={formData.lessonName}
+                  onChange={handleInputChange}
+                  placeholder="Enter Lesson Name"
+                  className="w-full px-4 py-[0.85rem] dark:bg-gray-700 border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none"
+                />
+              </div>
+
+
+                 {/* Description */}
+              <div className="pb-[15px]">
+                <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
+                  Description
+                </label>
+                <textarea
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                  placeholder="Enter Text Here"
+                  rows={3}
+                  className="w-full px-4 py-[0.85rem] dark:bg-gray-700 border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none"
+                  
+                />
+                
+              </div>
+
+
+                 <CustomSelect
+                label="Age Group"
+                name="ageGroup"
+                value={formData.ageGroup}
+                options={ageGroups}
+                placeholder="Select Age Group e.g, 25-30"
+              />
+
+
+  {/* Bible Reference */}
+              <CustomSelect
+                label="Bible Reference"
+                name="bibleReference"
+                value={formData.bibleReference}
+                options={bibleReferences}
+                placeholder="Select Bible Reference e.g., Galatians 5:22"
+              />
+
+
+
+   {/* Study Plan */}
+              <CustomSelect
+                label="Study Plan"
+                name="studyPlan"
+                value={formData.studyPlan}
+                options={studyPlans}
+                placeholder="Select Study Plan (e.g. 7 day)"
+              />
+
+
+
+                 {/* Save As */}
+              <div className="pb-[15px]">
+                <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
+                  Save As
+                </label>
+
+                <div className="grid  gap-4">
+                  <label className="flex items-center gap-2 p-4  border-1 border-[#AFAFAF] text-[#656565]  rounded-lg cursor-pointer justify-between">
+                    <span className="text-[#656565] text-[14px] font-[400] ">Public</span>
+                    <input
+                      type="radio"
+                      name="visibility"
+                      value="public"
+                      
+                      className="appearance-none w-4 h-4 border-2 border-red-400 rounded-full checked:bg-red-400 checked:border-red-400 transition"
+                    />
+                  </label>
+
+                  <label className="flex items-center gap-2 p-4 border-1 border-[#AFAFAF] rounded-lg cursor-pointer justify-between">
+                    <span className="text-[#656565] text-[14px] font-[400]">Private</span>
+                    <input
+                      type="radio"
+                      name="visibility"
+                      value="private"
+                      
+                      className="appearance-none w-4 h-4 border-2 border-red-400 rounded-full checked:bg-red-400 checked:border-red-400 transition"
+                    />
+                  </label>
+                </div>
+                
+              </div>
+
+               
+              <div className="grid grid-cols-2  gap-4 mt-4">
+                <button
+                  type="button"
+                  onClick={() => setIsAIModalOpen(false)}
+                  className="bg-transparent text-[14px] font-[600]    py-3 rounded-[10px] px-[10px]  border-1 border-[#F6805C] text-[#F6805C]  hover:bg-[#F6805C]  hover:text-white  cursor-pointer "
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="hover:bg-transparent text-[14px] font-[600]    py-3 rounded-[10px] px-[10]  border-1 hover:border-[#F6805C] hover:text-[#F6805C] bg-[#F6805C]  text-white  cursor-pointer"
+                >
+                  Regenerate Lesson
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/*##################> Second Modal  End <################ */}
     </>
   );
 };
