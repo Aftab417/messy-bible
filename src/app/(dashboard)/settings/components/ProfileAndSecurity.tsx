@@ -55,8 +55,8 @@ const ProfileAndSecurity = () => {
     <div className="space-y-6">
       {/* Profile Section */}
       <section>
-        <h3 className="font-semibold text-[#794A3A] mb-4">Profile</h3>
-        <div className="p-3 px-6 bg-[#F9F9F9] rounded-xl ">
+        <h3 className="font-semibold text-lg text-[#794A3A] mb-4">Profile</h3>
+        <div className="p-3 md:px-6 bg-[#F9F9F9] rounded-xl ">
           <div className="">
             <div className="flex gap-5 items-center">
               <div className="flex relative flex-col items-center mb-4">
@@ -108,7 +108,7 @@ const ProfileAndSecurity = () => {
                     type="text"
                     value={nameInput}
                     onChange={(e) => setNameInput(e.target.value)}
-                    className="w-full text-sm px-4 py-4 rounded-lg border border-[#AFAFAF] bg-white text-[#656565] focus:outline-none focus:ring-2 focus:ring-[#F6805C] pr-10"
+                    className="w-full text-sm px-4 py-4 rounded-lg border border-[#E5E5E5] bg-white text-[#656565] focus:outline-none focus:ring-2 focus:ring-[#F6805C] pr-10"
                   />
                   <button
                     type="button"
@@ -136,16 +136,16 @@ const ProfileAndSecurity = () => {
       </section>
 
       <section>
-        <h3 className="font-semibold text-[#333] mb-4">Security</h3>
+        <h3 className="font-semibold text-lg text-[#333] mb-4">Security</h3>
 
         <form
           onSubmit={securityFormik.handleSubmit}
-          className="p-3 px-6 bg-[#F9F9F9] rounded-xl shadow"
+          className="p-3 md:px-6 bg-[#F9F9F9] rounded-xl shadow"
           autoComplete="off"
         >
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div className="flex flex-col">
-              <label className="text-[15px] font-medium mb-2 text-[#333]">
+            <div className="flex flex-col col-span-2">
+              <label className="text-lg font-medium mb-2 text-[#5B5B5B]">
                 Old Password
               </label>
               <div className="relative">
@@ -156,7 +156,7 @@ const ProfileAndSecurity = () => {
                   value={securityFormik.values.oldPassword}
                   onChange={securityFormik.handleChange}
                   onBlur={securityFormik.handleBlur}
-                  className="w-full px-4 py-2 rounded-lg border border-[#E5E5E5] bg-white text-[#333] focus:outline-none focus:ring-2 focus:ring-[#F6805C]"
+                  className="w-full text-sm px-4 py-4 rounded-lg border border-[#E5E5E5] bg-white text-[#656565] focus:outline-none focus:ring-2 focus:ring-[#F6805C]"
                 />
                 <button
                   type="button"
@@ -164,7 +164,11 @@ const ProfileAndSecurity = () => {
                   onClick={() => setShowOld((v) => !v)}
                   tabIndex={-1}
                 >
-                  {showOld ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+                  {showOld ? (
+                    <FaEyeSlash size={18} className="cursor-pointer" />
+                  ) : (
+                    <FaEye size={18} className="cursor-pointer" />
+                  )}
                 </button>
               </div>
               {securityFormik.touched.oldPassword &&
@@ -174,8 +178,8 @@ const ProfileAndSecurity = () => {
                   </div>
                 )}
             </div>
-            <div className="flex flex-col">
-              <label className="text-[15px] font-medium mb-2 text-[#333]">
+            <div className="flex flex-col col-span-2 md:col-span-1">
+              <label className="text-lg font-medium mb-2 text-[#5B5B5B]">
                 New Password
               </label>
               <div className="relative">
@@ -186,7 +190,7 @@ const ProfileAndSecurity = () => {
                   value={securityFormik.values.newPassword}
                   onChange={securityFormik.handleChange}
                   onBlur={securityFormik.handleBlur}
-                  className="w-full px-4 py-2 rounded-lg border border-[#E5E5E5] bg-white text-[#333] focus:outline-none focus:ring-2 focus:ring-[#F6805C]"
+                  className="w-full px-4 py-4 text-sm rounded-lg border border-[#E5E5E5] bg-white text-[#656565]focus:outline-none focus:ring-2 focus:ring-[#F6805C]"
                 />
                 <button
                   type="button"
@@ -194,7 +198,11 @@ const ProfileAndSecurity = () => {
                   onClick={() => setShowNew((v) => !v)}
                   tabIndex={-1}
                 >
-                  {showNew ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+                  {showNew ? (
+                    <FaEyeSlash size={18} className="cursor-pointer" />
+                  ) : (
+                    <FaEye size={18} className="cursor-pointer" />
+                  )}
                 </button>
               </div>
               {securityFormik.touched.newPassword &&
@@ -204,8 +212,8 @@ const ProfileAndSecurity = () => {
                   </div>
                 )}
             </div>
-            <div className="flex flex-col">
-              <label className="text-[15px] font-medium mb-2 text-[#333]">
+            <div className="flex flex-col col-span-2 md:col-span-1">
+              <label className="text-lg font-medium mb-2 text-[#5B5B5B]">
                 Confirm Password
               </label>
               <div className="relative">
@@ -216,7 +224,7 @@ const ProfileAndSecurity = () => {
                   value={securityFormik.values.confirmPassword}
                   onChange={securityFormik.handleChange}
                   onBlur={securityFormik.handleBlur}
-                  className="w-full px-4 py-2 rounded-lg border border-[#E5E5E5] bg-white text-[#333] focus:outline-none focus:ring-2 focus:ring-[#F6805C]"
+                  className="w-full px-4 py-4 text-sm rounded-lg border border-[#E5E5E5] bg-white text-[#656565] focus:outline-none focus:ring-2 focus:ring-[#F6805C]"
                 />
                 <button
                   type="button"
@@ -224,7 +232,11 @@ const ProfileAndSecurity = () => {
                   onClick={() => setShowConfirm((v) => !v)}
                   tabIndex={-1}
                 >
-                  {showConfirm ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+                  {showConfirm ? (
+                    <FaEyeSlash size={18} className="cursor-pointer" />
+                  ) : (
+                    <FaEye size={18} className="cursor-pointer" />
+                  )}
                 </button>
               </div>
               {securityFormik.touched.confirmPassword &&
@@ -238,14 +250,14 @@ const ProfileAndSecurity = () => {
           <div className="flex gap-4 justify-end mt-8">
             <button
               type="button"
-              className="px-8 py-2 rounded-lg border border-[#F6805C] text-[#F6805C] font-semibold bg-white hover:bg-[#FFF3F0] transition"
+              className="px-8 py-3 text-base cursor-pointer rounded-lg border border-[#F6805C] text-[#F6805C] font-medium bg-white hover:bg-[#FFF3F0] transition"
               onClick={() => securityFormik.resetForm()}
             >
-              Update
+              Cancel
             </button>
             <button
               type="submit"
-              className="px-8 py-2 rounded-lg bg-[#F6805C] text-white font-semibold hover:bg-[#e96a4a] transition"
+              className="px-8 py-3 cursor-pointer text-base rounded-lg bg-[#F6805C] text-white font-medium hover:bg-[#e96a4a] transition"
             >
               Update
             </button>
