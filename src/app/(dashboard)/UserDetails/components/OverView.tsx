@@ -63,7 +63,7 @@ const OverView = () => {
             className="object-cover w-16 h-16 rounded-full"
           />
           <div>
-            <h2 className="text-[#333] font-dm-sans text-[19.509px] font-semibold leading-none">Qasim Muneer</h2>
+            <h2 className="text-[#333] font-dm-sans text-[19.509px] font-semibold leading-normal">Qasim Muneer</h2>
             <p className="text-sm text-[#333333] pt-2">Alice.Johnson@Example.Com</p>
           </div>
         </div>

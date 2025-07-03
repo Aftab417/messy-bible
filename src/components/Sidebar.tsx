@@ -20,12 +20,12 @@ const navItems = [
   },
   {
     label: "Sermon Management",
-    href: "/dentalManagement",
+    href: "/SermonActivity",
     icon: <FaFileAlt />
   },
   {
     label: "Devotional Management",
-    href: "/dentalManagement1",
+    href: "/DevotionalManagement",
     icon: <FaFileAlt />
   },
   {

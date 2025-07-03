@@ -521,7 +521,7 @@ const AddLesson = () => {
 
     return (
       <div className="pb-[15px]">
-        <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
+        <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
           {label}
         </label>
         <div className="relative">
@@ -573,7 +573,7 @@ const AddLesson = () => {
     <>
       <div className="lg:flex justify-between">
         <h1 className="text-[#794A3A] py-[30px] font-dm-sans text-[18px] font-semibold pt-[15px]">
-          {currentStep === 1 ? `Edit Lesson ` : "Edit Topics"}
+          {currentStep === 1 ? `Add Lesson ` : "Add Topics"}
         </h1>
       </div>
 
@@ -583,7 +583,7 @@ const AddLesson = () => {
             <>
               {/* Thumbnail Upload */}
               <div className="pb-[15px]">
-                <label className="text-[#5B5B5B] font-dm-sans text-[16px] font-semibold leading-normal pb-[10px] block">
+                <label className="text-[#5B5B5B] font-dm-sans text-[16px] font-semibold leading-none pb-[10px] block">
                   Thumbnail
                 </label>
                 <div className="border-1 border-[#AFAFAF] rounded-[8px] gap-5 bg-[#FFF] dark:bg-gray-800 py-6 mb-4 flex flex-col items-center justify-center relative">
@@ -616,7 +616,7 @@ const AddLesson = () => {
 
               {/* Lesson Name */}
               <div className="pb-[15px]">
-                <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
+                <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
                   Lesson Name
                 </label>
                 <input
@@ -644,7 +644,7 @@ const AddLesson = () => {
 
               {/* Description */}
               <div className="pb-[15px]">
-                <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
+                <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
                   Description
                 </label>
                 <textarea
@@ -712,7 +712,7 @@ const AddLesson = () => {
 
               {/* Save As */}
               <div className="pb-[15px]">
-                <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
+                <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
                   Save As
                 </label>
 
@@ -793,7 +793,7 @@ const AddLesson = () => {
                         <div className="py-4 space-y-4">
                           {/* Topic Name */}
                           <div>
-                            <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
+                            <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
                               Topic Name
                             </label>
                             <input
@@ -828,7 +828,7 @@ const AddLesson = () => {
 
                           {/* Scripture Reference */}
                           <div>
-                            <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
+                            <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
                               Scripture Reference 
                             </label>
                             <input
@@ -865,7 +865,7 @@ const AddLesson = () => {
 
                           {/* Description */}
                           <div>
-                            <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
+                            <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
                               Description 
                             </label>
                             <textarea
@@ -898,7 +898,7 @@ const AddLesson = () => {
 
                           {/* Verse Highlight */}
                           <div>
-                            <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
+                            <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
                               Verse Highlight 
                             </label>
                             <textarea
@@ -931,7 +931,7 @@ const AddLesson = () => {
 
                           {/* Reflection Question */}
                           <div>
-                            <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
+                            <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
                               Reflection Question 
                             </label>
                             <input

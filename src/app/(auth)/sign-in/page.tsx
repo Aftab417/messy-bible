@@ -120,10 +120,10 @@ export default function SignInPage() {
 
         <div className="flex justify-center">
           <div className="w-full md:w-7/12 bg-[#F9F9F9] rounded-[30px] md:p-24">
-            <h1 className="text-[#794A3A] text-center font-dm-sans text-[32px] font-semibold leading-none">
+            <h1 className="text-[#794A3A] text-center font-dm-sans text-[32px] font-semibold leading-normal">
               Login
             </h1>
-            <p className="text-[#5B5B5B] text-center font-inter text-[18px] font-light leading-none py-6">
+            <p className="text-[#5B5B5B] text-center font-inter text-[18px] font-light leading-normal py-6">
               {" "}
               Let’s Get to Know You!
             </p>
@@ -225,7 +225,7 @@ export default function SignInPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className={`text-[#FFF] font-manrope text-[16px] font-medium leading-none tracking-[0.32px] flex items-center   justify-center     transition px-3 mt-3 py-4 rounded-xl ${
+                className={`text-[#FFF] font-manrope text-[16px] font-medium leading-normal tracking-[0.32px] flex items-center   justify-center     transition px-3 mt-3 py-4 rounded-xl ${
                   loading
                     ? "bg-[#F6805C] cursor-not-allowed"
                     : "bg-[#F6805C] hover:bg-white hover:text-[#F6805C] border-1 border-[#F6805C] cursor-pointer"

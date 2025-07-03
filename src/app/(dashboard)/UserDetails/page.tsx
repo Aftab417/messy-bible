@@ -25,7 +25,7 @@ const Settings = () => {
     <main>
       <div className="mb-4">
         {/* <h1 className="text-2xl font-bold">Smile</h1> */}
-        <h1  className="py-[30px] text-[#794A3A] font-dm-sans text-[18px] font-semibold leading-none">
+        <h1  className="py-[30px] text-[#794A3A] font-dm-sans text-[18px] font-semibold leading-normal">
          Users Detail
         </h1>
 
@@ -38,7 +38,7 @@ const Settings = () => {
             <li>
               <button
                 onClick={() => setActiveTab("overview1")}
-                className={`w-full px-4 py-3 text-left   text-[17px] text-[#794A3A] font-inter text-lg font-semibold leading-none  rounded-[10px] cursor-pointer ${
+                className={`w-full px-4 py-3 text-left   text-[17px] text-[#794A3A] font-inter text-lg font-semibold leading-normal  rounded-[10px] cursor-pointer ${
                   activeTab === "overview1"
                     ? "bg-[#F6805C] text-white "
                     : "hover:bg-[#F6805C] hover:text-white dark:hover:bg-gray-700"
@@ -50,7 +50,7 @@ const Settings = () => {
             <li>
               <button
                 onClick={() => setActiveTab("lesson")}
-                className={` w-full px-4 py-3 text-left  text-[17px] text-[#794A3A] font-inter text-lg font-semibold leading-none  rounded-[10px] cursor-pointer ${
+                className={` w-full px-4 py-3 text-left  text-[17px] text-[#794A3A] font-inter text-lg font-semibold leading-normal  rounded-[10px] cursor-pointer ${
                   activeTab === "lesson"
                     ? "bg-[#F6805C] text-white"
                     : "hover:bg-[#F6805C] hover:text-white dark:hover:bg-gray-700"
@@ -62,7 +62,7 @@ const Settings = () => {
             <li>
               <button
                 onClick={() => setActiveTab("GameAct")}
-                className={` w-full px-4 py-3 text-left    text-[17px] text-[#794A3A] font-inter text-lg font-semibold leading-none  rounded-[10px] cursor-pointer ${
+                className={` w-full px-4 py-3 text-left    text-[17px] text-[#794A3A] font-inter text-lg font-semibold leading-normal  rounded-[10px] cursor-pointer ${
                   activeTab === "GameAct"
                     ? "bg-[#F6805C] text-white"
                     : "hover:bg-[#F6805C] hover:text-white dark:hover:bg-gray-700"
