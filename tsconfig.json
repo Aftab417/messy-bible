@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/(dashboard)/LessonManagement/AddLesson"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/(dashboard)/LessonManagement/AddLesson", "src/app/(dashboard)/LessonManagement/AddLesson"],
   "exclude": ["node_modules"]
 }
