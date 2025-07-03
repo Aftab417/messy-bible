@@ -32,46 +32,44 @@ export default function SignInPage() {
         .required("Required")
     }),
 
-// Dummy Login Start
-  onSubmit: async (values) => {
-    setLoading(true);
-    try {
-      // Simulated admin credentials
-   if (
-  values.email === "admin@gmail.com" &&
-  values.password === "12345678"
-) {
-  // const fakeUser = {
-  //   _id: "1234567890",
-  //   name: "Admin User",
-  //   email: "admin@gmail.com",
-  //   role: "admin",
-  //   is_verified: true,
-  //   is_two_factor: false,
-  //   is_active: true,
-  //   phone: "0000000000",
-  //   createdAt: new Date().toISOString(),
-  //   updatedAt: new Date().toISOString(),
-  //   accessToken: "dummyAccessToken123"
-  // };
+    // Dummy Login Start
+    onSubmit: async (values) => {
+      setLoading(true);
+      try {
+        // Simulated admin credentials
+        if (
+          values.email === "admin@gmail.com" &&
+          values.password === "12345678"
+        ) {
+          // const fakeUser = {
+          //   _id: "1234567890",
+          //   name: "Admin User",
+          //   email: "admin@gmail.com",
+          //   role: "admin",
+          //   is_verified: true,
+          //   is_two_factor: false,
+          //   is_active: true,
+          //   phone: "0000000000",
+          //   createdAt: new Date().toISOString(),
+          //   updatedAt: new Date().toISOString(),
+          //   accessToken: "dummyAccessToken123"
+          // };
 
-  toast.success("Login successful!");
-  // dispatch(setUser(fakeUser));
-  router.push("/");
-} else {
-        toast.error("Unauthorized access. Admins only.");
+          toast.success("Login successful!");
+          // dispatch(setUser(fakeUser));
+          router.push("/");
+        } else {
+          toast.error("Unauthorized access. Admins only.");
+        }
+      } catch (error) {
+        console.error("Login error:", error);
+        toast.error("An error occurred during login.");
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error("Login error:", error);
-      toast.error("An error occurred during login.");
-    } finally {
-      setLoading(false);
     }
-  }
 
-// Dummy Login End
-
-
+    // Dummy Login End
 
     // onSubmit: async (values) => {
     //   setLoading(true);
@@ -103,7 +101,6 @@ export default function SignInPage() {
     //   }
     // }
   });
-
 
   return (
     <main className=" min-h-screen   bg-[#6AC8C4] pb-14">
@@ -228,7 +225,7 @@ export default function SignInPage() {
               <button
                 type="submit"
                 disabled={loading}
-              className={`text-[#FFF] font-manrope text-[16px] font-medium leading-none tracking-[0.32px] flex items-center   justify-center     transition px-3 mt-3 py-4 rounded-xl ${
+                className={`text-[#FFF] font-manrope text-[16px] font-medium leading-none tracking-[0.32px] flex items-center   justify-center     transition px-3 mt-3 py-4 rounded-xl ${
                   loading
                     ? "bg-[#F6805C] cursor-not-allowed"
                     : "bg-[#F6805C] hover:bg-white hover:text-[#F6805C] border-1 border-[#F6805C] cursor-pointer"
