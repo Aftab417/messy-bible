@@ -4,7 +4,7 @@ import type React from "react";
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Upload, ChevronDown, Plus , Minus } from "lucide-react";
+import { Upload, ChevronDown, Plus, Minus } from "lucide-react";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
@@ -555,7 +555,7 @@ const AddLesson = () => {
                     {option}
                   </button>
                   {index < options.length - 1 && (
-                    <div className="border-b border-gray-200 dark:border-gray-600 mx-2"></div>
+                    <div className="mx-2 border-b border-gray-200 dark:border-gray-600"></div>
                   )}
                 </div>
               ))}
@@ -563,7 +563,7 @@ const AddLesson = () => {
           )}
         </div>
         {hasError && (
-          <p className="text-red-500 text-sm mt-1 font-dm-sans">{hasError}</p>
+          <p className="mt-1 text-sm text-red-500 font-dm-sans">{hasError}</p>
         )}
       </div>
     );
@@ -571,7 +571,7 @@ const AddLesson = () => {
 
   return (
     <>
-      <div className="lg:flex justify-between">
+      <div className="justify-between lg:flex">
         <h1 className="text-[#794A3A] py-[30px] font-dm-sans text-[18px] font-semibold pt-[15px]">
           {currentStep === 1 ? `Add Lesson ` : "Add Topics"}
         </h1>
@@ -636,7 +636,7 @@ const AddLesson = () => {
                   } bg-[#FFF]`}
                 />
                 {validationErrors.firstName && (
-                  <p className="text-red-500 text-sm mt-1 font-dm-sans">
+                  <p className="mt-1 text-sm text-red-500 font-dm-sans">
                     {validationErrors.firstName}
                   </p>
                 )}
@@ -664,7 +664,7 @@ const AddLesson = () => {
                   } bg-[#FFF] resize-none`}
                 />
                 {validationErrors.description && (
-                  <p className="text-red-500 text-sm mt-1 font-dm-sans">
+                  <p className="mt-1 text-sm text-red-500 font-dm-sans">
                     {validationErrors.description}
                   </p>
                 )}
@@ -702,7 +702,7 @@ const AddLesson = () => {
                 formData.studyPlan !== "Select Study Plan (e.g. 7 day)" && (
                   <div className="pb-[15px]">
                     <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-[8px] p-3">
-                      <p className="text-blue-700 dark:text-blue-300 text-sm font-medium">
+                      <p className="text-sm font-medium text-blue-700 dark:text-blue-300">
                         📝 {formData.topics.length} topics will be generated for
                         your {formData.studyPlan}
                       </p>
@@ -717,7 +717,7 @@ const AddLesson = () => {
                 </label>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <label className="flex items-center gap-2 p-4 border rounded-lg cursor-pointer justify-between">
+                  <label className="flex gap-2 justify-between items-center p-4 rounded-lg border cursor-pointer">
                     <span className="text-sm text-gray-700">Public</span>
                     <input
                       type="radio"
@@ -725,11 +725,11 @@ const AddLesson = () => {
                       value="public"
                       checked={formData.saveAs === "public"}
                       onChange={() => handleRadioChange("public")}
-                      className="appearance-none w-4 h-4 border-2 border-red-400 rounded-full checked:bg-red-400 checked:border-red-400 transition"
+                      className="w-4 h-4 rounded-full border-2 border-red-400 transition appearance-none checked:bg-red-400 checked:border-red-400"
                     />
                   </label>
 
-                  <label className="flex items-center gap-2 p-4 border rounded-lg cursor-pointer justify-between">
+                  <label className="flex gap-2 justify-between items-center p-4 rounded-lg border cursor-pointer">
                     <span className="text-sm text-gray-700">Private</span>
                     <input
                       type="radio"
@@ -737,12 +737,12 @@ const AddLesson = () => {
                       value="private"
                       checked={formData.saveAs === "private"}
                       onChange={() => handleRadioChange("private")}
-                      className="appearance-none w-4 h-4 border-2 border-red-400 rounded-full checked:bg-red-400 checked:border-red-400 transition"
+                      className="w-4 h-4 rounded-full border-2 border-red-400 transition appearance-none checked:bg-red-400 checked:border-red-400"
                     />
                   </label>
                 </div>
                 {validationErrors.saveAs && (
-                  <p className="text-red-500 text-sm mt-1 font-dm-sans">
+                  <p className="mt-1 text-sm text-red-500 font-dm-sans">
                     {validationErrors.saveAs}
                   </p>
                 )}
@@ -753,7 +753,7 @@ const AddLesson = () => {
               {/* Step 2: Add Topics */}
               <div className="pb-[15px]">
                 {formData.topics.length === 0 ? (
-                  <div className="text-center py-8">
+                  <div className="py-8 text-center">
                     <p className="text-gray-500 dark:text-gray-400">
                       Please select a study plan in Step 1 to generate topics
                     </p>
@@ -765,27 +765,26 @@ const AddLesson = () => {
                       className="border border-[#E5E5E5] rounded-[8px] mb-3 border-0  dark:bg-gray-800 overflow-hidden"
                     >
                       {/* Topic Header */}
-                      <div 
-                       onClick={() => toggleTopicExpansion(topic.id)}
-                      className="flex justify-between items-center cursor-pointer  rounded-[8px] p-3  border-1 border-[#AFAFAF] bg-[#FFF] dark:bg-gray-700">
-                        <div className="flex items-center gap-2">
+                      <div
+                        onClick={() => toggleTopicExpansion(topic.id)}
+                        className="flex justify-between items-center cursor-pointer  rounded-[8px] p-3  border-1 border-[#AFAFAF] bg-[#FFF] dark:bg-gray-700"
+                      >
+                        <div className="flex gap-2 items-center">
                           <span className="text-[#5B5B5B] font-dm-sans text-[12px] font-[600]">
                             Topic {index + 1}
                           </span>
-                         
                         </div>
                         <button
-  type="button"
-  onClick={() => toggleTopicExpansion(topic.id)}
-  className="w-8 h-8 flex items-center justify-center text-[#F6805C]  cursor-pointer rounded-full transition-colors"
->
-  {topic.isExpanded ? (
-    <Minus className="w-4 h-4" />
-  ) : (
-    <Plus className="w-4 h-4" />
-  )}
-</button>
-
+                          type="button"
+                          onClick={() => toggleTopicExpansion(topic.id)}
+                          className="w-8 h-8 flex items-center justify-center text-[#F6805C]  cursor-pointer rounded-full transition-colors"
+                        >
+                          {topic.isExpanded ? (
+                            <Minus className="w-4 h-4" />
+                          ) : (
+                            <Plus className="w-4 h-4" />
+                          )}
+                        </button>
                       </div>
 
                       {/* Topic Content - Only show when expanded */}
@@ -807,8 +806,6 @@ const AddLesson = () => {
                                 )
                               }
                               placeholder="Enter Topic Name"
-
-                                  
                               className={`border-1 border-[#AFAFAF] w-full px-3 py-3 dark:bg-gray-700 dark:text-gray-100 text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
                                 topicValidationErrors[index]?.topicName
                                   ? "focus:ring-red-500 border-red-500"
@@ -820,7 +817,7 @@ const AddLesson = () => {
                               } bg-[#FFF] placeholder-[#999999]`}
                             />
                             {topicValidationErrors[index]?.topicName && (
-                              <p className="text-red-500 text-sm mt-1 font-dm-sans">
+                              <p className="mt-1 text-sm text-red-500 font-dm-sans">
                                 {topicValidationErrors[index].topicName}
                               </p>
                             )}
@@ -829,7 +826,7 @@ const AddLesson = () => {
                           {/* Scripture Reference */}
                           <div>
                             <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
-                              Scripture Reference 
+                              Scripture Reference
                             </label>
                             <input
                               type="text"
@@ -854,7 +851,7 @@ const AddLesson = () => {
                             />
                             {topicValidationErrors[index]
                               ?.scriptureReference && (
-                              <p className="text-red-500 text-sm mt-1 font-dm-sans">
+                              <p className="mt-1 text-sm text-red-500 font-dm-sans">
                                 {
                                   topicValidationErrors[index]
                                     .scriptureReference
@@ -866,7 +863,7 @@ const AddLesson = () => {
                           {/* Description */}
                           <div>
                             <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
-                              Description 
+                              Description
                             </label>
                             <textarea
                               value={topic.description}
@@ -890,7 +887,7 @@ const AddLesson = () => {
                               } bg-[#FFF] resize-none placeholder-[#999999]`}
                             />
                             {topicValidationErrors[index]?.description && (
-                              <p className="text-red-500 text-sm mt-1 font-dm-sans">
+                              <p className="mt-1 text-sm text-red-500 font-dm-sans">
                                 {topicValidationErrors[index].description}
                               </p>
                             )}
@@ -899,7 +896,7 @@ const AddLesson = () => {
                           {/* Verse Highlight */}
                           <div>
                             <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
-                              Verse Highlight 
+                              Verse Highlight
                             </label>
                             <textarea
                               value={topic.verseHighlight}
@@ -923,7 +920,7 @@ const AddLesson = () => {
                               } bg-[#FFF] resize-none placeholder-[#999999]`}
                             />
                             {topicValidationErrors[index]?.verseHighlight && (
-                              <p className="text-red-500 text-sm mt-1 font-dm-sans">
+                              <p className="mt-1 text-sm text-red-500 font-dm-sans">
                                 {topicValidationErrors[index].verseHighlight}
                               </p>
                             )}
@@ -932,7 +929,7 @@ const AddLesson = () => {
                           {/* Reflection Question */}
                           <div>
                             <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
-                              Reflection Question 
+                              Reflection Question
                             </label>
                             <input
                               type="text"
@@ -957,7 +954,7 @@ const AddLesson = () => {
                             />
                             {topicValidationErrors[index]
                               ?.reflectionQuestion && (
-                              <p className="text-red-500 text-sm mt-1 font-dm-sans">
+                              <p className="mt-1 text-sm text-red-500 font-dm-sans">
                                 {
                                   topicValidationErrors[index]
                                     .reflectionQuestion
@@ -986,7 +983,7 @@ const AddLesson = () => {
           )}
 
           {/* Form Actions */}
-          <div className="block md:flex justify-between pt-4">
+          <div className="block justify-between pt-4 md:flex">
             {currentStep === 2 && (
               <button
                 type="button"
