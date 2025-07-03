@@ -615,19 +615,21 @@ const UserManagement = () => {
     router.push("/LessonManagement/LessonDetails"); // Now this will work correctly
   };
 
-  interface Lesson {
-    LessonType: "AI" | "Manually"; // or string if more types exist
-    // Add other properties used in `setFormData()` if needed
-  }
 
-  const handleEdit = (lesson: Lesson) => {
-    if (lesson.LessonType === "AI") {
-      setFormData(lesson); // preload form data
-      setIsAIModalOpen(true); // open modal
-    } else if (lesson.LessonType === "Manually") {
-      router.push("/LessonManagement/EditLesson");
-    }
-  };
+  interface Lesson {
+  LessonType: "AI" | "Manually"; // or string if more types exist
+  // Add other properties used in `setFormData()` if needed
+}
+
+ const handleEdit = (lesson: Lesson) => {
+  if (lesson.LessonType === "AI") {
+    setFormData(lesson); // preload form data
+    setIsAIModalOpen(true); // open modal
+  } else if (lesson.LessonType === "Manually") {
+    router.push("/LessonManagement/EditLesson");
+  }
+ 
+};
 
   // const  handleAdd= () => {
   //   router.push("/LessonManagement/AddLesson"); // Now this will work correctly
@@ -658,6 +660,7 @@ const UserManagement = () => {
     bibleReference: "",
     studyPlan: "",
     visibility: "private"
+    
   });
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -754,7 +757,7 @@ const UserManagement = () => {
                     {option}
                   </button>
                   {index < options.length - 1 && (
-                    <div className="mx-2 border-b border-gray-200 dark:border-gray-600"></div>
+                    <div className="border-b border-gray-200 dark:border-gray-600 mx-2"></div>
                   )}
                 </div>
               ))}
@@ -768,17 +771,17 @@ const UserManagement = () => {
   //##############> Modal End  <################
   return (
     <>
-      <div className="justify-between lg:flex">
+      <div className="lg:flex justify-between">
         <h1 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold pt-[15px]">
           Lesson Management
         </h1>
 
-        <div className="gap-4 items-center sm:flex">
+        <div className="sm:flex items-center gap-4">
           <div className="flex items-center bg-[#F5F5F5] rounded-[12px] px-[18px] py-[14px] md:w-[250px]">
             <input
               type="text"
               placeholder="Search User"
-              className="w-full text-sm text-gray-700 bg-transparent focus:outline-none placeholder:text-gray-400"
+              className="bg-transparent focus:outline-none text-sm text-gray-700 placeholder:text-gray-400 w-full"
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value);
@@ -813,7 +816,7 @@ const UserManagement = () => {
         All Lessons
       </div>
 
-      <div className="overflow-x-auto w-full">
+      <div className="w-full overflow-x-auto">
         <table className="min-w-[700px] w-full overflow-hidden shadow border-separate border-spacing-x-4">
           <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold ">
             <tr>
@@ -840,7 +843,7 @@ const UserManagement = () => {
               </th>
             </tr>
           </thead>
-          <tbody className="dark:bg-gray-900">
+          <tbody className="dark:bg-gray-900 ">
             {users.length === 0 ? (
               <tr>
                 <td colSpan={7} className="p-3 text-center">
@@ -869,9 +872,9 @@ const UserManagement = () => {
                   <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {user.LessonType}
                   </td>
-                  <td className="flex justify-center p-3">
+                  <td className="p-3 flex justify-center">
                     <button
-                      className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
+                      className="cursor-pointer mx-1  hover:scale-110 transition-transform duration-300 ease-in-out"
                       onClick={handleClick}
                     >
                       <svg
@@ -888,10 +891,10 @@ const UserManagement = () => {
                         />
                       </svg>
                     </button>
-                    <button className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"></button>
+                    <button className="cursor-pointer mx-1  hover:scale-110 transition-transform duration-300 ease-in-out"></button>
                     <button
                       onClick={() => handleEdit(user)}
-                      className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
+                      className="cursor-pointer mx-1  hover:scale-110 transition-transform duration-300 ease-in-out"
                     >
                       <svg
                         width="20"
@@ -910,7 +913,7 @@ const UserManagement = () => {
 
                     <button
                       onClick={() => handleDelete(user._id)}
-                      className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
+                      className="cursor-pointer mx-1  hover:scale-110 transition-transform duration-300 ease-in-out"
                     >
                       <svg
                         width="20"
@@ -976,16 +979,19 @@ const UserManagement = () => {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="flex fixed inset-0 z-50 justify-center items-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/70" onClick={closeModal} />
+          <div
+            className="absolute inset-0 bg-black/70  "
+            onClick={closeModal}
+          />
 
           {/* Modal Content */}
           <div className="relative bg-[#F9F9F9] rounded-[20px]   md:px-8 py-8 max-w-md w-full mx-4">
             {/* Close Button */}
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 text-gray-400 transition-colors hover:text-gray-600"
+              className="absolute top-4 right-4  text-gray-400 hover:text-gray-600 transition-colors"
             >
               <X className="w-7 h-7 text-[#F6805C]  cursor-pointer hover:scale-125 transition-transform duration-300 ease-in-out" />
             </button>
@@ -1015,7 +1021,7 @@ const UserManagement = () => {
 
       {/*##################> Second Modal Start<################  */}
       {isAIModalOpen && (
-        <div className="flex fixed inset-0 z-50 justify-center items-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div
             className="absolute inset-0 bg-black/70"
             onClick={() => setIsAIModalOpen(false)}
@@ -1041,7 +1047,6 @@ const UserManagement = () => {
                 <div>
 
                    <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
-
                     Image Generation
                   </label>
                   <div className="flex items-center justify-between  bg-white   dark:bg-gray-700    w-full px-4 py-[0.85rem]   border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none">
@@ -1125,7 +1130,7 @@ const UserManagement = () => {
                     Save As
                   </label>
 
-                  <div className="grid gap-4">
+                  <div className="grid  gap-4">
                     <label className="flex items-center gap-2 p-4  border-1 border-[#AFAFAF] text-[#656565]  rounded-lg cursor-pointer justify-between">
                       <span className="text-[#656565] text-[14px] font-[400] ">
                         Public
@@ -1134,7 +1139,7 @@ const UserManagement = () => {
                         type="radio"
                         name="visibility"
                         value="public"
-                        className="w-4 h-4 rounded-full border-2 border-red-400 transition appearance-none checked:bg-red-400 checked:border-red-400"
+                        className="appearance-none w-4 h-4 border-2 border-red-400 rounded-full checked:bg-red-400 checked:border-red-400 transition"
                       />
                     </label>
 
@@ -1146,13 +1151,13 @@ const UserManagement = () => {
                         type="radio"
                         name="visibility"
                         value="private"
-                        className="w-4 h-4 rounded-full border-2 border-red-400 transition appearance-none checked:bg-red-400 checked:border-red-400"
+                        className="appearance-none w-4 h-4 border-2 border-red-400 rounded-full checked:bg-red-400 checked:border-red-400 transition"
                       />
                     </label>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="grid grid-cols-2  gap-4 mt-4">
                   <button
                     type="button"
                     onClick={() => setIsAIModalOpen(false)}

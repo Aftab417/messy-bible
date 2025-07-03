@@ -12,7 +12,7 @@ const LessonAndSermons = () => {
   });
   return (
     <div className="">
-      <h1 className="pb-[20px] text-[#794A3A] font-dm-sans text-[18px] font-semibold leading-none">
+      <h1 className="pb-[20px] text-[#794A3A] font-dm-sans text-[18px] font-semibold leading-normal">
         Users Detail
       </h1>
 
@@ -66,7 +66,7 @@ const LessonAndSermons = () => {
           />
         </div>
       </div>
-      <h1 className="py-[20px] text-[#794A3A] font-dm-sans text-[18px] font-semibold leading-none">
+      <h1 className="py-[20px] text-[#794A3A] font-dm-sans text-[18px] font-semibold leading-normal">
         Sermons
       </h1>
 
