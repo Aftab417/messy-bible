@@ -4,469 +4,415 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { ChevronDown } from "lucide-react";
-import { X } from "lucide-react";
+ 
 
 import { useRouter } from "next/navigation"; // Note: 'next/navigation' not 'next/router'
 
 const dummyUsers = [
   {
     _id: "1",
-    lessonName: "Emma Johnson",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "Manually",
+     AgeGroup: "Young",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2023-05-15T08:23:12.000Z"
   },
   {
     _id: "2",
-    lessonName: "Liam Smith",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "AI",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2023-04-22T14:45:00.000Z"
   },
   {
     _id: "3",
-    lessonName: "Olivia Brown",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "Manually",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2023-03-10T09:12:33.000Z"
   },
   {
     _id: "4",
-    lessonName: "Noah Wilson",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2023-02-28T16:30:45.000Z"
   },
   {
     _id: "5",
-    lessonName: "Ava Taylor",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "AI",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2023-01-15T11:05:21.000Z"
   },
   {
     _id: "6",
-    lessonName: "William Anderson",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "AI",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2022-12-05T07:45:10.000Z"
   },
   {
     _id: "7",
-    lessonName: "Sophia Martinez",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "Manually",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2022-11-20T13:22:54.000Z"
   },
   {
     _id: "8",
-    lessonName: "Benjamin Thomas",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "Manually",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2022-10-10T10:15:30.000Z"
   },
   {
     _id: "9",
-    lessonName: "Isabella Garcia",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2022-09-01T18:40:15.000Z"
   },
   {
     _id: "10",
-    lessonName: "James Rodriguez",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "AI",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2022-08-12T09:30:45.000Z"
   },
   {
     _id: "11",
-    lessonName: "Mia Lee",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2022-07-25T14:20:33.000Z"
   },
   {
     _id: "12",
-    lessonName: "Elijah Perez",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "AI",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2022-06-30T11:10:22.000Z"
   },
   {
     _id: "13",
-    lessonName: "Charlotte Hall",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "AI",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2022-05-18T16:45:19.000Z"
   },
   {
     _id: "14",
-    lessonName: "Lucas Young",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2022-04-05T08:30:40.000Z"
   },
   {
     _id: "15",
-    lessonName: "Amelia Allen",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "Manually",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2022-03-12T12:15:25.000Z"
   },
   {
     _id: "16",
-    lessonName: "Mason King",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "AI",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2022-02-28T09:50:10.000Z"
   },
   {
     _id: "17",
-    lessonName: "Harper Wright",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "Manually",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2022-01-15T14:25:05.000Z"
   },
   {
     _id: "18",
-    lessonName: "Ethan Scott",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2021-12-10T17:40:30.000Z"
   },
   {
     _id: "19",
-    lessonName: "Evelyn Green",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2021-11-05T10:15:20.000Z"
   },
   {
     _id: "20",
-    lessonName: "Alexander Baker",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "AI",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2021-10-01T13:30:15.000Z"
   },
   {
     _id: "21",
-    lessonName: "Abigail Adams",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "AI",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2021-09-15T08:45:40.000Z"
   },
   {
     _id: "22",
-    lessonName: "Michael Nelson",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2021-08-20T11:20:25.000Z"
   },
   {
     _id: "23",
-    lessonName: "Emily Carter",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "AI",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2021-07-10T15:35:10.000Z"
   },
   {
     _id: "24",
-    lessonName: "Daniel Mitchell",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2021-06-05T09:10:45.000Z"
   },
   {
     _id: "25",
-    lessonName: "Elizabeth Roberts",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "Manually",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2021-05-01T12:25:30.000Z"
   },
   {
     _id: "26",
-    lessonName: "Matthew Turner",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2021-04-15T16:50:15.000Z"
   },
   {
     _id: "27",
-    lessonName: "Sofia Phillips",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "Manually",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2021-03-10T10:15:40.000Z"
   },
   {
     _id: "28",
-    lessonName: "Andrew Campbell",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "AI",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2021-02-05T13:40:25.000Z"
   },
   {
     _id: "29",
-    lessonName: "Avery Parker",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "Manually",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2021-01-01T17:05:10.000Z"
   },
   {
     _id: "30",
-    lessonName: "David Evans",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2020-12-15T09:30:45.000Z"
   },
   {
     _id: "31",
-    lessonName: "Scarlett Edwards",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "Manually",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2020-11-10T12:55:30.000Z"
   },
   {
     _id: "32",
-    lessonName: "Joseph Collins",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "Manually",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2020-10-05T16:20:15.000Z"
   },
   {
     _id: "33",
-    lessonName: "Victoria Stewart",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2020-09-01T10:45:40.000Z"
   },
   {
     _id: "34",
-    lessonName: "Jackson Sanchez",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2020-08-15T14:10:25.000Z"
   },
   {
     _id: "35",
-    lessonName: "Madison Morris",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "Manually",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2020-07-10T17:35:10.000Z"
   },
   {
     _id: "36",
-    lessonName: "Samuel Rogers",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "AI",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2020-06-05T11:00:45.000Z"
   },
   {
     _id: "37",
-    lessonName: "Luna Reed",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2020-05-01T14:25:30.000Z"
   },
   {
     _id: "38",
-    lessonName: "Sebastian Cook",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "Manually",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2020-04-15T17:50:15.000Z"
   },
   {
     _id: "39",
-    lessonName: "Chloe Morgan",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2020-03-10T10:15:40.000Z"
   },
   {
     _id: "40",
-    lessonName: "Henry Bell",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "AI",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2020-02-05T13:40:25.000Z"
   },
   {
     _id: "41",
-    lessonName: "Penelope Murphy",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "Manually",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2020-01-01T17:05:10.000Z"
   },
   {
     _id: "42",
-    lessonName: "Owen Bailey",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "AI",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2019-12-15T09:30:45.000Z"
   },
   {
     _id: "43",
-    lessonName: "Layla Rivera",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "Manually",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2019-11-10T12:55:30.000Z"
   },
   {
     _id: "44",
-    lessonName: "Gabriel Cooper",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2019-10-05T16:20:15.000Z"
   },
   {
     _id: "45",
-    lessonName: "Zoey Richardson",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2019-09-01T10:45:40.000Z"
   },
   {
     _id: "46",
-    lessonName: "Carter Cox",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "AI",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2019-08-15T14:10:25.000Z"
   },
   {
     _id: "47",
-    lessonName: "Nora Howard",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "Manually",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2019-07-10T17:35:10.000Z"
   },
   {
     _id: "48",
-    lessonName: "Jayden Ward",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2019-06-05T11:00:45.000Z"
   },
   {
     _id: "49",
-    lessonName: "Hannah Torres",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "7 Day Plan",
-    Visibility: "Private",
-    LessonType: "AI",
+     AgeGroup: "Old",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2019-05-01T14:25:30.000Z"
   },
   {
     _id: "50",
-    lessonName: "Luke Peterson",
+SermonTopic:"Walking in Faith",
     Createby: "admin",
-    StudyPlan: "30 Day Plan",
-    Visibility: "Public",
-    LessonType: "Manually",
+     AgeGroup: "Teen Age",
+     KeyVerse: "Galatians 5:22",
     createdAt: "2019-04-15T17:50:15.000Z"
   }
 ];
 
 const UserManagement = () => {
-  const [aiMatching, setAiMatching] = useState(true);
-
-  const toggle = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
-    setter((prev) => !prev);
-  };
+ 
 
   //#############> Yup Star<############### t
   //#############> Yup End <###############
@@ -547,6 +493,7 @@ const UserManagement = () => {
             ...
           </span>
         );
+        
       }
 
       const start = Math.max(2, currentPage - 1);
@@ -597,10 +544,10 @@ const UserManagement = () => {
   // Filter users based on search term
   const filteredUsers = users.filter(
     (user) =>
-      user.lessonName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user. SermonTopic.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.Createby.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.StudyPlan.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.Visibility.toLowerCase().includes(searchTerm.toLowerCase())
+      user. AgeGroup.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user. KeyVerse.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const totalPages = Math.ceil(filteredUsers.length / ITEMS_PER_PAGE);
@@ -612,22 +559,13 @@ const UserManagement = () => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push("/LessonManagement/LessonDetails"); // Now this will work correctly
+    router.push("/SermonActivity/SermonDetail"); // Now this will work correctly
   };
 
+ 
 
-  interface Lesson {
-  LessonType: "AI" | "Manually"; // or string if more types exist
-  // Add other properties used in `setFormData()` if needed
-}
-
- const handleEdit = (lesson: Lesson) => {
-  if (lesson.LessonType === "AI") {
-    setFormData(lesson); // preload form data
+ const handleEdit = () => {
     setIsAIModalOpen(true); // open modal
-  } else if (lesson.LessonType === "Manually") {
-    router.push("/LessonManagement/EditLesson");
-  }
  
 };
 
@@ -635,31 +573,19 @@ const UserManagement = () => {
   //   router.push("/LessonManagement/AddLesson"); // Now this will work correctly
   // };
 
-  const handleGenerateAI = () => {
-    closeModal(); // Close the first modal
-    setIsAIModalOpen(true); // Open the AI Lesson modal
-  };
-
-  //##############> Modal start <################
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
-  const handleGenerateManually = () => {
-    router.push("/LessonManagement/AddLesson");
-    closeModal();
-  };
+ 
+ 
+ 
 
   // Handle form input changes
 
   const [formData, setFormData] = useState({
-    lessonName: "",
+SermonTopic:"Walking in Faith",
     description: "",
     ageGroup: "",
     bibleReference: "",
-    studyPlan: "",
-    visibility: "private"
+     AgeGroup: "",
+     KeyVerse: "Galatians 5:22"
     
   });
   const handleInputChange = (
@@ -692,10 +618,10 @@ const UserManagement = () => {
     "1 Corinthians 13"
   ];
 
-  const studyPlans = [
+  const  AgeGroups = [
     "Select Study Plan (e.g. 7 day)",
-    "7 Day Plan",
-    "30 Day Plan"
+    "Old",
+    "Teen Age"
   ];
 
   // Handle select changes
@@ -773,15 +699,15 @@ const UserManagement = () => {
     <>
       <div className="lg:flex justify-between">
         <h1 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold pt-[15px]">
-          Lesson Management
+            Sermon Activity 
         </h1>
 
-        <div className="sm:flex items-center gap-4">
+        <div className="gap-4 items-center sm:flex">
           <div className="flex items-center bg-[#F5F5F5] rounded-[12px] px-[18px] py-[14px] md:w-[250px]">
             <input
               type="text"
               placeholder="Search User"
-              className="bg-transparent focus:outline-none text-sm text-gray-700 placeholder:text-gray-400 w-full"
+              className="w-full text-sm text-gray-700 bg-transparent focus:outline-none placeholder:text-gray-400"
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value);
@@ -802,18 +728,13 @@ const UserManagement = () => {
             </svg>
           </div>
 
-          <button
-            //  onClick={handleAdd}
-            onClick={openModal}
-            className="bg-[#FA8059] cursor-pointer hover:bg-[#f96c42] text-white text-sm font-semibold px-[6px] w-full sm:w-[160px] py-[14px] rounded-[12px] transition mt-[10px] sm:mt-[0px]"
-          >
-            + Add New Lesson
-          </button>
+         
         </div>
+
       </div>
 
       <div className="py-[20px] text-[#794A3A] font-dm-sans text-[16px] font-semibold">
-        All Lessons
+         All Sermons
       </div>
 
       <div className="w-full overflow-x-auto">
@@ -824,7 +745,7 @@ const UserManagement = () => {
                 S.No:
               </th>
               <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Lesson Name
+                 Sermon Topic	
               </th>
               <th className="p-[5px] border-b border-[#505050] text-center w-fit">
                 Created By
@@ -833,11 +754,9 @@ const UserManagement = () => {
                 Study Plan
               </th>
               <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Visibility
+                 KeyVerse
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Lesson Type
-              </th>
+              
               <th className="p-[5px] border-b border-[#505050] text-center w-fit">
                 Actions
               </th>
@@ -857,21 +776,19 @@ const UserManagement = () => {
                     {(currentPage - 1) * ITEMS_PER_PAGE + i + 1}
                   </td>
                   <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    {user.lessonName}
+                    {user. SermonTopic}
                   </td>
                   <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {user.Createby}
                   </td>
                   <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    {user.StudyPlan}
+                    {user. AgeGroup}
                   </td>
                   <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    {user.Visibility}
+                    {user. KeyVerse}
                   </td>
 
-                  <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    {user.LessonType}
-                  </td>
+                  
                   <td className="p-3 flex justify-center">
                     <button
                       className="cursor-pointer mx-1  hover:scale-110 transition-transform duration-300 ease-in-out"
@@ -893,7 +810,7 @@ const UserManagement = () => {
                     </button>
                     <button className="cursor-pointer mx-1  hover:scale-110 transition-transform duration-300 ease-in-out"></button>
                     <button
-                      onClick={() => handleEdit(user)}
+                      onClick={() => handleEdit()}
                       className="cursor-pointer mx-1  hover:scale-110 transition-transform duration-300 ease-in-out"
                     >
                       <svg
@@ -977,48 +894,7 @@ const UserManagement = () => {
 
       {/* Modal Start Start */}
 
-      {/* Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          {/* Overlay */}
-          <div
-            className="absolute inset-0 bg-black/70  "
-            onClick={closeModal}
-          />
-
-          {/* Modal Content */}
-          <div className="relative bg-[#F9F9F9] rounded-[20px]   md:px-8 py-8 max-w-md w-full mx-4">
-            {/* Close Button */}
-            <button
-              onClick={closeModal}
-              className="absolute top-4 right-4  text-gray-400 hover:text-gray-600 transition-colors"
-            >
-              <X className="w-7 h-7 text-[#F6805C]  cursor-pointer hover:scale-125 transition-transform duration-300 ease-in-out" />
-            </button>
-
-            {/* Modal Body */}
-            <div className="space-y-4 p-[20px]">
-              {/* AI Generation Button */}
-              <button
-                onClick={handleGenerateAI}
-                className="w-full bg-[#6AC8C4]  hover:bg-teal-600 text-white text-[18px] cursor-pointer font-[500] py-4 px-6 rounded-[12px] transition-colors"
-              >
-                Generate Lesson Using AI
-              </button>
-
-              {/* Manual Generation Button */}
-              <button
-                onClick={handleGenerateManually}
-                className="w-full bg-[#F6805C] cursor-pointer hover:bg-orange-600 text-white text-[18px] font-[500] py-4 px-6 rounded-[12px] transition-colors"
-              >
-                Generate Lesson Manually
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-      {/* Modal Start End */}
-
+    
       {/*##################> Second Modal Start<################  */}
       {isAIModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -1027,7 +903,7 @@ const UserManagement = () => {
             onClick={() => setIsAIModalOpen(false)}
           />
 
-          <div className="relative bg-white rounded-[20px] w-full max-w-md mx-4 overflow-hidden">
+          <div className="relative bg-[#F9F9F9] rounded-[20px] w-full max-w-md mx-4 overflow-hidden">
             <div
               className="p-6 overflow-y-auto max-h-[80vh] 
               [&::-webkit-scrollbar]:w-1 
@@ -1039,64 +915,29 @@ const UserManagement = () => {
 
               {/* Form Header */}
               <h2 className=" text-[20px] font-[500] leading-normal text-[#794A3A] Fredoka text-center mb-8">
-                + AI Lesson Regeneration
+             Edit AI Sermon
               </h2>
 
               {/* Form Body */}
               <form className="space-y-4">
-                <div>
+               
 
-                   <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
-                    Image Generation
-                  </label>
-                  <div className="flex items-center justify-between  bg-white   dark:bg-gray-700    w-full px-4 py-[0.85rem]   border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none">
-                    <span className="text-[#656565]  w-[70%] font-inter text-sm not-italic font-normal leading-normal capitalize">
-                      Do you want to generate an image?
-                    </span>
-                    <div
-                      onClick={() => toggle(setAiMatching)}
-                      className={`w-12  h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
-                        aiMatching ? "bg-[#F6805C]" : "bg-gray-400"
-                      }`}
-                    >
-                      <div
-                        className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${
-                          aiMatching ? "translate-x-6" : "translate-x-0"
-                        }`}
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Lesson Name */}
+                {/*  Sermon Topic */}
                 <div className="pb-[15px]">
                   <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
-                    Lesson Name
+                     Topic 
                   </label>
                   <input
                     type="text"
-                    name="lessonName"
-                    value={formData.lessonName}
+                    name=" SermonTopic"
+                    value={formData. SermonTopic}
                     onChange={handleInputChange}
-                    placeholder="Enter Lesson Name"
+                    placeholder="Enter Topic "
                     className="w-full px-4 py-[0.85rem] dark:bg-gray-700 border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none"
                   />
                 </div>
 
-                {/* Description */}
-                <div className="pb-[15px]">
-                  <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
-                    Description
-                  </label>
-                  <textarea
-                    name="description"
-                    value={formData.description}
-                    onChange={handleInputChange}
-                    placeholder="Enter Text Here"
-                    rows={3}
-                    className="w-full px-4 py-[0.85rem] dark:bg-gray-700 border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none"
-                  />
-                </div>
+                
 
                 <CustomSelect
                   label="Age Group"
@@ -1118,9 +959,9 @@ const UserManagement = () => {
                 {/* Study Plan */}
                 <CustomSelect
                   label="Study Plan"
-                  name="studyPlan"
-                  value={formData.studyPlan}
-                  options={studyPlans}
+                  name=" AgeGroup"
+                  value={formData. AgeGroup}
+                  options={ AgeGroups}
                   placeholder="Select Study Plan (e.g. 7 day)"
                 />
 
@@ -1137,7 +978,7 @@ const UserManagement = () => {
                       </span>
                       <input
                         type="radio"
-                        name="visibility"
+                        name=" KeyVerse"
                         value="public"
                         className="appearance-none w-4 h-4 border-2 border-red-400 rounded-full checked:bg-red-400 checked:border-red-400 transition"
                       />
@@ -1149,7 +990,7 @@ const UserManagement = () => {
                       </span>
                       <input
                         type="radio"
-                        name="visibility"
+                        name=" KeyVerse"
                         value="private"
                         className="appearance-none w-4 h-4 border-2 border-red-400 rounded-full checked:bg-red-400 checked:border-red-400 transition"
                       />

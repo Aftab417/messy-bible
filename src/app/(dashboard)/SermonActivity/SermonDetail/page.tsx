@@ -7,14 +7,10 @@ export default function DetailDevotion() {
     <>
       <div className="lg:flex justify-between py-8">
         <h1 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold pt-[15px]">
-          Devotional Management
+          Sermons Detail
         </h1>
 
-        <div className="sm:flex items-center gap-4">
-          <button className="bg-[#FA8059] cursor-pointer hover:bg-[#f96c42] text-white text-sm font-semibold px-[18px] w-full sm:w-[200px] py-[14px] rounded-[12px] transition mt-[10px] sm:mt-[0px]">
-            Edit Sermon Using AI
-          </button>
-        </div>
+        
       </div>
 
       <div className="   space-y-4">
