@@ -3,7 +3,6 @@ import type React from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
-import { ChevronDown } from "lucide-react";
  
 
 import { useRouter } from "next/navigation"; // Note: 'next/navigation' not 'next/router'
@@ -419,8 +418,6 @@ const UserManagement = () => {
   const [users, setUsers] = useState(dummyUsers);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const [isAIModalOpen, setIsAIModalOpen] = useState(false);
-
   const ITEMS_PER_PAGE = 8;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -564,137 +561,7 @@ const UserManagement = () => {
 
  
 
- const handleEdit = () => {
-    setIsAIModalOpen(true); // open modal
  
-};
-
-  // const  handleAdd= () => {
-  //   router.push("/LessonManagement/AddLesson"); // Now this will work correctly
-  // };
-
- 
- 
- 
-
-  // Handle form input changes
-
-  const [formData, setFormData] = useState({
-SermonTopic:"Walking in Faith",
-    description: "",
-    ageGroup: "",
-    bibleReference: "",
-     AgeGroup: "",
-     KeyVerse: "Galatians 5:22"
-    
-  });
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const ageGroups = [
-    "Under 13",
-    "13–17",
-    "18–24",
-    "25–34",
-    "35–44",
-    "45–60",
-    "60+"
-  ];
-
-  const bibleReferences = [
-    "Genesis 1:1",
-    "John 3:16",
-    "Psalm 23",
-    "Matthew 5:16",
-    "Romans 8:28",
-    "Philippians 4:13",
-    "1 Corinthians 13"
-  ];
-
-  const  AgeGroups = [
-    "Select Study Plan (e.g. 7 day)",
-    "Old",
-    "Teen Age"
-  ];
-
-  // Handle select changes
-  const handleSelectChange = (name: string, value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-  // Custom Select Component
-
-  const CustomSelect = ({
-    label,
-    name,
-    value,
-    options,
-    placeholder
-  }: {
-    label: string;
-    name: string;
-    value: string;
-    options: string[];
-    placeholder: string;
-  }) => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    // Handle radio button changes
-
-    return (
-      <div className="pb-[15px]">
-        <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
-          {label}
-        </label>
-        <div className="relative">
-          <button
-            type="button"
-            onClick={() => setIsOpen(!isOpen)}
-            className="w-full px-4 py-[0.85rem]  rounded-[8px] border border-[#AFAFAF] bg-[#FFF]  dark:bg-gray-700 dark:text-gray-100  bg-[#FFF] text-left flex justify-between items-center text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
-           "
-          >
-            <span className="font-inter">{value || placeholder}</span>
-            <ChevronDown
-              className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
-            />
-          </button>
-
-          {isOpen && (
-            <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-700 border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto">
-              {options.map((option, index) => (
-                <div key={index}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      handleSelectChange(name, option);
-                      setIsOpen(false);
-                    }}
-                    className="w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-600 text-[#656565] dark:text-gray-100 font-mono text-[14px] transition-colors font-indie"
-                  >
-                    {option}
-                  </button>
-                  {index < options.length - 1 && (
-                    <div className="border-b border-gray-200 dark:border-gray-600 mx-2"></div>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  };
-
-  //##############> Modal End  <################
   return (
     <>
       <div className="lg:flex justify-between">
@@ -809,24 +676,7 @@ SermonTopic:"Walking in Faith",
                       </svg>
                     </button>
                     <button className="cursor-pointer mx-1  hover:scale-110 transition-transform duration-300 ease-in-out"></button>
-                    <button
-                      onClick={() => handleEdit()}
-                      className="cursor-pointer mx-1  hover:scale-110 transition-transform duration-300 ease-in-out"
-                    >
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect width="20" height="20" rx="3" fill="#F6805C" />
-                        <path
-                          d="M5.33333 14.6667H6.28333L12.8 8.15L11.85 7.2L5.33333 13.7167V14.6667ZM4.66667 16C4.47778 16 4.31956 15.936 4.192 15.808C4.06444 15.68 4.00044 15.5218 4 15.3333V13.7167C4 13.5389 4.03333 13.3693 4.1 13.208C4.16667 13.0467 4.26111 12.9051 4.38333 12.7833L12.8 4.38333C12.9333 4.26111 13.0807 4.16667 13.242 4.1C13.4033 4.03333 13.5727 4 13.75 4C13.9273 4 14.0996 4.03333 14.2667 4.1C14.4338 4.16667 14.5782 4.26667 14.7 4.4L15.6167 5.33333C15.75 5.45556 15.8471 5.6 15.908 5.76667C15.9689 5.93333 15.9996 6.1 16 6.26667C16 6.44444 15.9693 6.614 15.908 6.77533C15.8467 6.93667 15.7496 7.08378 15.6167 7.21667L7.21667 15.6167C7.09444 15.7389 6.95267 15.8333 6.79133 15.9C6.63 15.9667 6.46067 16 6.28333 16H4.66667ZM12.3167 7.68333L11.85 7.2L12.8 8.15L12.3167 7.68333Z"
-                          fill="white"
-                        />
-                      </svg>
-                    </button>
+                     
 
                     <button
                       onClick={() => handleDelete(user._id)}
@@ -895,131 +745,7 @@ SermonTopic:"Walking in Faith",
       {/* Modal Start Start */}
 
     
-      {/*##################> Second Modal Start<################  */}
-      {isAIModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div
-            className="absolute inset-0 bg-black/70"
-            onClick={() => setIsAIModalOpen(false)}
-          />
-
-          <div className="relative bg-[#F9F9F9] rounded-[20px] w-full max-w-md mx-4 overflow-hidden">
-            <div
-              className="p-6 overflow-y-auto max-h-[80vh] 
-              [&::-webkit-scrollbar]:w-1 
-              [&::-webkit-scrollbar-thumb]:rounded-full 
-              [&::-webkit-scrollbar-thumb]:bg-gray-300 
-              [&::-webkit-scrollbar-track]:bg-gray-100"
-            >
-              {/* Close Button */}
-
-              {/* Form Header */}
-              <h2 className=" text-[20px] font-[500] leading-normal text-[#794A3A] Fredoka text-center mb-8">
-             Edit AI Sermon
-              </h2>
-
-              {/* Form Body */}
-              <form className="space-y-4">
-               
-
-                {/*  Sermon Topic */}
-                <div className="pb-[15px]">
-                  <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
-                     Topic 
-                  </label>
-                  <input
-                    type="text"
-                    name=" SermonTopic"
-                    value={formData. SermonTopic}
-                    onChange={handleInputChange}
-                    placeholder="Enter Topic "
-                    className="w-full px-4 py-[0.85rem] dark:bg-gray-700 border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none"
-                  />
-                </div>
-
-                
-
-                <CustomSelect
-                  label="Age Group"
-                  name="ageGroup"
-                  value={formData.ageGroup}
-                  options={ageGroups}
-                  placeholder="Select Age Group e.g, 25-30"
-                />
-
-                {/* Bible Reference */}
-                <CustomSelect
-                  label="Bible Reference"
-                  name="bibleReference"
-                  value={formData.bibleReference}
-                  options={bibleReferences}
-                  placeholder="Select Bible Reference e.g., Galatians 5:22"
-                />
-
-                {/* Study Plan */}
-                <CustomSelect
-                  label="Study Plan"
-                  name=" AgeGroup"
-                  value={formData. AgeGroup}
-                  options={ AgeGroups}
-                  placeholder="Select Study Plan (e.g. 7 day)"
-                />
-
-                {/* Save As */}
-                <div className="pb-[15px]">
-                  <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
-                    Save As
-                  </label>
-
-                  <div className="grid  gap-4">
-                    <label className="flex items-center gap-2 p-4  border-1 border-[#AFAFAF] text-[#656565]  rounded-lg cursor-pointer justify-between">
-                      <span className="text-[#656565] text-[14px] font-[400] ">
-                        Public
-                      </span>
-                      <input
-                        type="radio"
-                        name=" KeyVerse"
-                        value="public"
-                        className="appearance-none w-4 h-4 border-2 border-red-400 rounded-full checked:bg-red-400 checked:border-red-400 transition"
-                      />
-                    </label>
-
-                    <label className="flex items-center gap-2 p-4 border-1 border-[#AFAFAF] rounded-lg cursor-pointer justify-between">
-                      <span className="text-[#656565] text-[14px] font-[400]">
-                        Private
-                      </span>
-                      <input
-                        type="radio"
-                        name=" KeyVerse"
-                        value="private"
-                        className="appearance-none w-4 h-4 border-2 border-red-400 rounded-full checked:bg-red-400 checked:border-red-400 transition"
-                      />
-                    </label>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2  gap-4 mt-4">
-                  <button
-                    type="button"
-                    onClick={() => setIsAIModalOpen(false)}
-                    className="bg-transparent text-[14px] font-[600]    py-3 rounded-[10px] px-[10px]  border-1 border-[#F6805C] text-[#F6805C]  hover:bg-[#F6805C]  hover:text-white  cursor-pointer "
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="hover:bg-transparent text-[14px] font-[600]    py-3 rounded-[10px] px-[10]  border-1 hover:border-[#F6805C] hover:text-[#F6805C] bg-[#F6805C]  text-white  cursor-pointer"
-                  >
-                    Regenerate Lesson
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/*##################> Second Modal  End <################ */}
+       
     </>
   );
 };
