@@ -102,11 +102,11 @@ const GenerateGameManually = () => {
   return (
     <main>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg font-semibold text-[#794A3A]">Add New Game</h2>
+        <h2 className="text-lg  font-semibold text-[#794A3A]">Add New Game</h2>
         <button
           type="button"
           onClick={formik.submitForm}
-          className="px-6 py-2 text-white bg-[#F6805C] rounded-lg font-semibold hover:opacity-90"
+          className="px-3 text-sm py-3 text-white bg-[#F6805C] rounded-lg font-semibold hover:opacity-90"
         >
           Publish
         </button>
@@ -271,10 +271,7 @@ const GenerateGameManually = () => {
                     First Question
                   </label>
                   {formik.values.questions.map((q, qIdx) => (
-                    <div
-                      key={qIdx}
-                      className="mb-6 bg-[#FAFAFA] p-4 rounded-lg border border-[#E5E5E5] bg-white"
-                    >
+                    <div key={qIdx} className="">
                       <input
                         type="text"
                         name={`questions[${qIdx}].question`}
@@ -299,7 +296,7 @@ const GenerateGameManually = () => {
                           </div>
                         )}
                       {q.options.map((opt, optIdx) => (
-                        <div key={optIdx} className="flex items-center mb-2">
+                        <div key={optIdx} className="relative mb-2">
                           <input
                             type="text"
                             name={`questions[${qIdx}].options[${optIdx}]`}
@@ -307,7 +304,7 @@ const GenerateGameManually = () => {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             placeholder={`Enter Option ${optIdx + 1}`}
-                            className="flex-1 px-4 py-2 border border-[#E5E5E5] bg-white rounded-lg focus:outline-none focus:ring-1 focus:ring-orange-400 focus:border-orange-400"
+                            className="flex-1 w-full px-4 py-2 pr-10 border border-[#E5E5E5] bg-white rounded-lg focus:outline-none focus:ring-1 focus:ring-orange-400 focus:border-orange-400"
                           />
                           <input
                             type="radio"
@@ -319,7 +316,10 @@ const GenerateGameManually = () => {
                                 optIdx
                               )
                             }
-                            className="ml-3 w-4 h-4 text-[#F6805C] border-[#F6805C] focus:ring-[#F6805C]"
+                            className={`absolute top-1/2 right-3 -translate-y-1/2 w-4 h-4 
+              appearance-none border-2 rounded-full 
+              ${q.correctAnswer === optIdx ? "border-[#F6805C]  bg-[#F6805C]" : "border-[#F6805C]"}
+              checked:accent-[#F6805C] `}
                           />
                         </div>
                       ))}
@@ -353,19 +353,21 @@ const GenerateGameManually = () => {
                         )}
                     </div>
                   ))}
-                  <button
-                    type="button"
-                    onClick={() =>
-                      push({
-                        question: "",
-                        options: ["", "", "", ""],
-                        correctAnswer: 0
-                      })
-                    }
-                    className="mt-2 px-6 py-2 bg-[#F6805C] text-white rounded-lg font-semibold hover:opacity-90 float-right"
-                  >
-                    + Add New Question
-                  </button>
+                  <div className="flex justify-end pt-5">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        push({
+                          question: "",
+                          options: ["", "", "", ""],
+                          correctAnswer: 0
+                        })
+                      }
+                      className="px-6 py-4 text-sm bg-[#F6805C] cursor-pointer text-white rounded-lg font-semibold hover:opacity-90"
+                    >
+                      + Add New Question
+                    </button>
+                  </div>
                 </div>
               )}
             </FieldArray>
