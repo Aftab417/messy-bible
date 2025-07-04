@@ -4,24 +4,36 @@ import { resetUser } from "@/redux/authSlice";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
-import { FaBookOpen, FaFileAlt, FaHome, FaUser } from "react-icons/fa";
-import { FiLogOut, FiChevronDown, FiChevronUp } from "react-icons/fi";
-import { IoIosSettings, IoMdClose } from "react-icons/io";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { IoMdClose } from "react-icons/io";
 import { useDispatch } from "react-redux";
+import Image from "next/image";
 
 const navItems = [
-  { label: "Dashboard", href: "/", icon: <FaHome /> },
-  { label: "Users Management", href: "/userManagement", icon: <FaUser /> },
+  {
+    label: "Dashboard",
+    href: "/",
+    icon: "/images/dashboard.png",
+    iconActive: "/images/wDashboard.png"
+  },
+  {
+    label: "Users Management",
+    href: "/userManagement",
+    icon: "/images/userManagement.png",
+    iconActive: "/images/wUserManagement.png"
+  },
   // Add a separator and heading after this item
   {
     label: "Lesson Management",
     href: "/LessonManagement",
-    icon: <FaBookOpen />
+    icon: "/images/lessonManagement.png",
+    iconActive: "/images/wLessonManagement.png"
   },
   {
     label: "Sermon Management",
     href: "#",
-    icon: <FaFileAlt />,
+    icon: "/images/sermonManagement.png",
+    iconActive: "/images/wSermonManagement.png",
     dropdown: [
       { label: "Sermon Activity", href: "/SermonActivity" },
       { label: "Sermon Templates", href: "/SermonTemplates" }
@@ -30,24 +42,33 @@ const navItems = [
   {
     label: "Devotional Management",
     href: "/DevotionalManagement",
-    icon: <FaFileAlt />
+    icon: "/images/devotionalManagement.png",
+    iconActive: "/images/wDevotionalManagement.png"
   },
   {
     label: "Verse & Tips Management",
     href: "/VerseAndTipsManagement",
-    icon: <FaFileAlt />
+    icon: "/images/verseAndTips.png",
+    iconActive: "/images/wVerseAndTips.png"
   },
   {
     label: "Game Management",
     href: "/GameManagement",
-    icon: <FaFileAlt />
+    icon: "/images/gameManagement.png",
+    iconActive: "/images/wGameManagement.png"
   },
   {
     label: "Subscription Management",
     href: "/SubscriptionManagement",
-    icon: <FaFileAlt />
+    icon: "/images/subscriptionManagement.png",
+    iconActive: "/images/wSubscriptionManagement.png"
   },
-  { label: "Settings", href: "/settings", icon: <IoIosSettings /> }
+  {
+    label: "Settings",
+    href: "/settings",
+    icon: "/images/setting.png",
+    iconActive: "/images/wSetting.png"
+  }
 ];
 
 interface SidebarProps {
@@ -60,10 +81,14 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
   const router = useRouter();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [logoutHover, setLogoutHover] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setOpenDropdown(null);
       }
     };
@@ -94,7 +119,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
 
   return (
     <div
-      className="flex flex-col items-center w-full h-full md:h-[90vh] overflow-y-auto p-2 text-[#5B5B5B] bg-[#F9F9F9] dark:bg-gray-900 min-w-72 [&::-webkit-scrollbar]:w-1 
+      className="flex flex-col items-center w-full h-full md:h-[90vh] overflow-y-auto p-2 text-[#5B5B5B] bg-[#F9F9F9] scrollbar-hide dark:bg-gray-900 min-w-72 [&::-webkit-scrollbar]:w-1 
   [&::-webkit-scrollbar-thumb]:rounded-full 
   [&::-webkit-scrollbar-thumb]:bg-gray-300 
   [&::-webkit-scrollbar-track]:bg-gray-100"
@@ -115,8 +140,8 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
               const isActive = pathname === item.href;
               const hasDropdown = item.dropdown;
               const isDropdownOpen = openDropdown === item.label;
-              const isDropdownItemActive = hasDropdown 
-                ? item.dropdown.some(option => pathname === option.href)
+              const isDropdownItemActive = hasDropdown
+                ? item.dropdown.some((option) => pathname === option.href)
                 : false;
 
               // Add separator and heading after Users Management (index 1)
@@ -133,11 +158,17 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                           : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
                       }`}
                     >
-                      <span
-                        className={`text-lg ${isActive ? "text-white" : ""}`}
-                      >
-                        {item.icon}
-                      </span>
+                      <Image
+                        src={
+                          isActive || isDropdownItemActive || isDropdownOpen
+                            ? item.iconActive
+                            : item.icon
+                        }
+                        alt={item.label}
+                        width={20}
+                        height={20}
+                        className={`w-5 h-5 object-contain ${isActive ? "":""}`}
+                      />
                       <span>{item.label}</span>
                     </Link>
 
@@ -163,10 +194,18 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                           : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
                       }`}
                     >
-                      <div className="flex items-center gap-3">
-                        <span className="text-lg">
-                          {item.icon}
-                        </span>
+                      <div className="flex gap-3 items-center">
+                        <Image
+                          src={
+                            isActive || isDropdownItemActive || isDropdownOpen
+                              ? item.iconActive
+                              : item.icon
+                          }
+                          alt={item.label}
+                          width={20}
+                          height={20}
+                          className="object-contain w-5 h-5"
+                        />
                         <span>{item.label}</span>
                       </div>
                       {isDropdownOpen ? (
@@ -191,7 +230,9 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                                   : "hover:text-[#F6805C] hover:font-semibold border-b border-b-[#AFAFAF]"
                               }`}
                             >
-                              <span className="text-center pl-[30px]">{option.label}</span>
+                              <span className="text-center pl-[30px]">
+                                {option.label}
+                              </span>
                             </Link>
                           );
                         })}
@@ -213,15 +254,21 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                           : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
                       }`}
                     >
-                      <span
-                        className={`text-lg ${isActive ? "text-white" : ""}`}
-                      >
-                        {item.icon}
-                      </span>
+                      <Image
+                        src={
+                          isActive || isDropdownItemActive || isDropdownOpen
+                            ? item.iconActive
+                            : item.icon
+                        }
+                        alt={item.label}
+                        width={20}
+                        height={20}
+                        className={`w-5 h-5 object-contain ${isActive ? "":""}`}
+                      />
                       <span>{item.label}</span>
                     </Link>
 
-                    <div className="my-3 w-full mt-[200px]"></div>
+                    <div className="my-3 mt-10 w-full"></div>
                   </div>
                 );
               }
@@ -237,9 +284,17 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                       : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
                   }`}
                 >
-                  <span className={`text-lg ${isActive ? "text-white" : ""}`}>
-                    {item.icon}
-                  </span>
+                  <Image
+                    src={
+                      isActive || isDropdownItemActive || isDropdownOpen
+                        ? item.iconActive
+                        : item.icon
+                    }
+                    alt={item.label}
+                    width={20}
+                    height={20}
+                    className={`w-5 h-5 object-contain ${isActive ? "":""}`}
+                  />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -249,9 +304,17 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
           <div className="">
             <button
               onClick={handleLogout}
+              onMouseEnter={() => setLogoutHover(true)}
+              onMouseLeave={() => setLogoutHover(false)}
               className="flex items-center cursor-pointer min-w-64 w-full gap-2 px-4 py-3 mb-3 hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all"
             >
-              <FiLogOut className="text-lg" />
+              <Image
+                src={logoutHover ? "/images/wLogout.png" : "/images/logout.png"}
+                alt="logout"
+                width={20}
+                height={20}
+                className="object-contain w-5 h-5"
+              />
               <span className=""> Logout</span>
             </button>
           </div>
