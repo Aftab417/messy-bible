@@ -24,7 +24,7 @@ const Settings = () => {
       </h1>
       {/* Sidebar */}
       <div className="flex flex-col gap-2 w-full lg:flex-row">
-        <div className="lg:w-1/5 w-full p-4 max-h-fit bg-[#f9f9f9] dark:bg-gray-900 shadow  rounded-xl">
+        <div className="lg:w-1/5 w-full p-4 max-h-fit bg-[#f9f9f9]  shadow  rounded-xl">
           <ul className="space-y-2">
             <li>
               <button
@@ -32,7 +32,7 @@ const Settings = () => {
                 className={`w-full px-4 py-3 text-left rounded-lg cursor-pointer ${
                   activeTab === "ProfileAndSecurity"
                     ? "bg-[#F6805C] text-white"
-                    : "hover:bg-gray-200 dark:hover:bg-gray-700"
+                    : "hover:bg-gray-200 "
                 }`}
               >
                 Profile & Security
@@ -44,7 +44,7 @@ const Settings = () => {
                 className={`w-full px-4 py-3 cursor-pointer text-left rounded-lg ${
                   activeTab === "Notifications"
                     ? "bg-[#F6805C] text-white"
-                    : "hover:bg-gray-200 dark:hover:bg-gray-700"
+                    : "hover:bg-gray-200 "
                 }`}
               >
                 Notifications

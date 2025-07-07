@@ -12,7 +12,7 @@ const Notifications = () => {
   };
 
   return (
-    <div className="p-6 w-full max-w-7xl bg-[#f9f9f9] rounded-xl dark:bg-gray-900">
+    <div className="p-6 w-full max-w-7xl bg-[#f9f9f9] rounded-xl ">
       <h1></h1>
       <div className="grid grid-cols-1 gap-4 mb-4 sm:grid-cols-2 sm:gap-4">
         <div className="flex justify-between items-center p-4 bg-white rounded-lg border border-[#E5E5E5]">

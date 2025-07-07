@@ -752,7 +752,7 @@ const UserManagement = () => {
           </button>
 
           {isOpen && (
-            <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-700 border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto">
+            <div className="absolute z-10 w-full mt-1 bg-white  border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto">
               {options.map((option, index) => (
                 <div key={index}>
                   <button
@@ -761,12 +761,12 @@ const UserManagement = () => {
                       handleSelectChange(name, option);
                       setIsOpen(false);
                     }}
-                    className="w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-600 text-[#656565] dark:text-gray-100 font-mono text-[14px] transition-colors font-indie"
+                    className="w-full px-4 py-3 text-left hover:bg-gray-50  text-[#656565]  font-mono text-[14px] transition-colors font-indie"
                   >
                     {option}
                   </button>
                   {index < options.length - 1 && (
-                    <div className="mx-2 border-b border-gray-200 dark:border-gray-600"></div>
+                    <div className="mx-2 border-b border-gray-200 "></div>
                   )}
                 </div>
               ))}
@@ -852,7 +852,7 @@ const UserManagement = () => {
               </th>
             </tr>
           </thead>
-          <tbody className="dark:bg-gray-900">
+          <tbody className="">
             {users.length === 0 ? (
               <tr>
                 <td colSpan={7} className="p-3 text-center">
@@ -1054,7 +1054,7 @@ const UserManagement = () => {
                   <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
                     Image Generation
                   </label>
-                  <div className="flex items-center justify-between  bg-white   dark:bg-gray-700    w-full px-4 py-[0.85rem]   border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none">
+                  <div className="flex items-center justify-between  bg-white      w-full px-4 py-[0.85rem]   border-1 border-[#AFAFAF] rounded-[8px]  text-[#656565] font-normal focus:outline-none">
                     <span className="text-[#656565]  w-[70%] font-inter text-sm not-italic font-normal leading-normal capitalize">
                       Do you want to generate an image?
                     </span>
@@ -1084,7 +1084,7 @@ const UserManagement = () => {
                     value={formData.lessonName}
                     onChange={handleInputChange}
                     placeholder="Enter Lesson Name"
-                    className="w-full px-4 py-[0.85rem] dark:bg-gray-700 border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none"
+                    className="w-full px-4 py-[0.85rem] border-1 border-[#AFAFAF] rounded-[8px] text-[#656565] font-normal focus:outline-none"
                   />
                 </div>
 
@@ -1099,7 +1099,7 @@ const UserManagement = () => {
                     onChange={handleInputChange}
                     placeholder="Enter Text Here"
                     rows={3}
-                    className="w-full px-4 py-[0.85rem] dark:bg-gray-700 border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none"
+                    className="w-full px-4 py-[0.85rem]  border-1 border-[#AFAFAF] rounded-[8px]  text-[#656565] font-normal focus:outline-none"
                   />
                 </div>
 
