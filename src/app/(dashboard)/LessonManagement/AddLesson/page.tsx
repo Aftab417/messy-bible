@@ -542,7 +542,7 @@ const AddLesson = () => {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className={`w-full px-4 py-[0.85rem] dark:bg-gray-700 dark:text-gray-100 text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
+            className={`w-full px-4 py-[0.85rem]  text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
               hasError
                 ? "focus:ring-red-500 border-red-500"
                 : "focus:ring-[#F6805C]"
@@ -555,7 +555,7 @@ const AddLesson = () => {
           </button>
 
           {isOpen && (
-            <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-700 border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto">
+            <div className="absolute z-10 w-full mt-1 bg-white  border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto">
               {options.map((option, index) => (
                 <div key={index}>
                   <button
@@ -564,12 +564,12 @@ const AddLesson = () => {
                       handleSelectChange(name, option);
                       setIsOpen(false);
                     }}
-                    className="w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-600 text-[#656565] dark:text-gray-100 font-mono text-[14px] transition-colors font-indie"
+                    className="w-full px-4 py-3 text-left hover:bg-gray-50  text-[#656565]  font-mono text-[14px] transition-colors font-indie"
                   >
                     {option}
                   </button>
                   {index < options.length - 1 && (
-                    <div className="mx-2 border-b border-gray-200 dark:border-gray-600"></div>
+                    <div className="mx-2 border-b border-gray-200"></div>
                   )}
                 </div>
               ))}
@@ -591,7 +591,7 @@ const AddLesson = () => {
         </h1>
       </div>
 
-      <div className="bg-[#F9F9F9] dark:bg-gray-900 dark:text-white rounded-[16px] w-full max-w-4xl p-6">
+      <div className="bg-[#F9F9F9]   rounded-[16px] w-full max-w-4xl p-6">
         <form onSubmit={handleSubmit}>
           {currentStep === 1 ? (
             <>
@@ -600,7 +600,7 @@ const AddLesson = () => {
                 <label className="text-[#5B5B5B] font-dm-sans text-[16px] font-semibold leading-none pb-[10px] block">
                   Thumbnail
                 </label>
-                <div className="border-1 border-[#AFAFAF] rounded-[8px] gap-5 bg-[#FFF] dark:bg-gray-800 py-6 mb-4 flex flex-col items-center justify-center relative">
+                <div className="border-1 border-[#AFAFAF] rounded-[8px] gap-5 bg-[#FFF] py-6 mb-4 flex flex-col items-center justify-center relative">
                   <input
                     type="file"
                     id="profilePhoto"
@@ -619,8 +619,8 @@ const AddLesson = () => {
                     </div>
                   ) : (
                     <>
-                      <Upload className="w-10 h-10 text-[#F6805C] dark:text-gray-300" />
-                      <p className="text-[#FFF] font-[600] px-[12px] py-[12px] hover:bg-orange-600 bg-[#F6805C] rounded-[8px] dark:text-white text-[14px] mt-1">
+                      <Upload className="w-10 h-10 text-[#F6805C] " />
+                      <p className="text-[#FFF] font-[600] px-[12px] py-[12px] hover:bg-orange-600 bg-[#F6805C] rounded-[8px]  text-[14px] mt-1">
                         Upload Image
                       </p>
                     </>
@@ -639,7 +639,7 @@ const AddLesson = () => {
                   value={formData.firstName}
                   onChange={handleInputChange}
                   placeholder="Enter Lesson Name"
-                  className={`w-full px-4 py-[0.85rem] dark:bg-gray-700 dark:text-gray-100 text-[#656565] font-normal focus:outline-none   ${
+                  className={`w-full px-4 py-[0.85rem]  text-[#656565] font-normal focus:outline-none   ${
                     validationErrors.firstName
                       ? "focus:ring-red-500 border-red-500"
                       : "focus:ring-[#F6805C]"
@@ -667,7 +667,7 @@ const AddLesson = () => {
                   onChange={handleInputChange}
                   placeholder="Enter Text Here"
                   rows={1}
-                  className={`w-full px-4 py-[0.85rem] dark:bg-gray-700 dark:text-gray-100 text-[#656565] font-normal focus:outline-none   ${
+                  className={`w-full px-4 py-[0.85rem]  text-[#656565] font-normal focus:outline-none   ${
                     validationErrors.description
                       ? "focus:ring-red-500 border-red-500"
                       : "focus:ring-[#F6805C]"
@@ -715,8 +715,8 @@ const AddLesson = () => {
               {formData.studyPlan &&
                 formData.studyPlan !== "Select Study Plan (e.g. 7 day)" && (
                   <div className="pb-[15px]">
-                    <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-[8px] p-3">
-                      <p className="text-sm font-medium text-blue-700 dark:text-blue-300">
+                    <div className="bg-blue-50  border border-blue-200  rounded-[8px] p-3">
+                      <p className="text-sm font-medium text-blue-700">
                         📝 {formData.topics.length} topics will be generated for
                         your {formData.studyPlan}
                       </p>
@@ -768,7 +768,7 @@ const AddLesson = () => {
               <div className="pb-[15px]">
                 {formData.topics.length === 0 ? (
                   <div className="py-8 text-center">
-                    <p className="text-gray-500 dark:text-gray-400">
+                    <p className="text-gray-500">
                       Please select a study plan in Step 1 to generate topics
                     </p>
                   </div>
@@ -776,12 +776,12 @@ const AddLesson = () => {
                   formData.topics.map((topic, index) => (
                     <div
                       key={topic.id}
-                      className="border border-[#E5E5E5] rounded-[8px] mb-3 border-0  dark:bg-gray-800 overflow-hidden"
+                      className=" border-[#E5E5E5] rounded-[8px] mb-3    overflow-hidden"
                     >
                       {/* Topic Header */}
                       <div
                         onClick={() => toggleTopicExpansion(topic.id)}
-                        className="flex justify-between items-center cursor-pointer  rounded-[8px] p-3  border-1 border-[#AFAFAF] bg-[#FFF] dark:bg-gray-700"
+                        className="flex justify-between items-center cursor-pointer  rounded-[8px] p-3  border-1 border-[#AFAFAF] bg-[#FFF] "
                       >
                         <div className="flex gap-2 items-center">
                           <span className="text-[#5B5B5B] font-dm-sans text-[12px] font-[600]">
@@ -820,7 +820,7 @@ const AddLesson = () => {
                                 )
                               }
                               placeholder="Enter Topic Name"
-                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3 dark:bg-gray-700 dark:text-gray-100 text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
+                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3  text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
                                 topicValidationErrors[index]?.topicName
                                   ? "focus:ring-red-500 border-red-500"
                                   : "focus:ring-[#F6805C]"
@@ -853,7 +853,7 @@ const AddLesson = () => {
                                 )
                               }
                               placeholder="Enter Scripture Reference"
-                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3 dark:bg-gray-700 dark:text-gray-100 text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
+                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3   text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
                                 topicValidationErrors[index]?.scriptureReference
                                   ? "focus:ring-red-500 border-red-500"
                                   : "focus:ring-[#F6805C]"
@@ -890,7 +890,7 @@ const AddLesson = () => {
                               }
                               placeholder="Enter Text Here"
                               rows={4}
-                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3 dark:bg-gray-700 dark:text-gray-100 text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
+                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3  text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
                                 topicValidationErrors[index]?.description
                                   ? "focus:ring-red-500 border-red-500"
                                   : "focus:ring-[#F6805C]"
@@ -923,7 +923,7 @@ const AddLesson = () => {
                               }
                               placeholder="Enter Text Here"
                               rows={3}
-                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3 dark:bg-gray-700 dark:text-gray-100 text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
+                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3 text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
                                 topicValidationErrors[index]?.verseHighlight
                                   ? "focus:ring-red-500 border-red-500"
                                   : "focus:ring-[#F6805C]"
@@ -956,7 +956,7 @@ const AddLesson = () => {
                                 )
                               }
                               placeholder="Enter Reflection Question"
-                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3 dark:bg-gray-700 dark:text-gray-100 text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
+                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3   text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
                                 topicValidationErrors[index]?.reflectionQuestion
                                   ? "focus:ring-red-500 border-red-500"
                                   : "focus:ring-[#F6805C]"
