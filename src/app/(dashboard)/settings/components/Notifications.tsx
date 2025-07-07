@@ -16,7 +16,7 @@ const Notifications = () => {
       <h1></h1>
       <div className="grid grid-cols-1 gap-4 mb-4 sm:grid-cols-2 sm:gap-4">
         <div className="flex justify-between items-center p-4 bg-white rounded-lg border border-[#E5E5E5]">
-          <span className="font-medium text-[14.5px] text-[#333333] dark:text-gray-100">
+          <span className="font-medium text-[14.5px] text-[#333333] ">
             Email Notifications
           </span>
           <div
@@ -34,7 +34,7 @@ const Notifications = () => {
         </div>
 
         <div className="flex justify-between border border-[#E5E5E5] items-center p-4 bg-white rounded-lg ">
-          <span className="font-medium text-[14.5px] text-[#333333] dark:text-gray-100">
+          <span className="font-medium text-[14.5px] text-[#333333] ">
             System Alerts Notifications
           </span>
           <div
@@ -53,8 +53,8 @@ const Notifications = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-4 mb-4 sm:grid-cols-2 sm:gap-4">
-        <div className="flex justify-between border border-[#E5E5E5] items-center p-4 bg-white rounded-lg dark:bg-gray-700">
-          <span className="font-medium text-[14.5px] text-[#333333] dark:text-gray-100">
+        <div className="flex justify-between border border-[#E5E5E5] items-center p-4 bg-white rounded-lg ">
+          <span className="font-medium text-[14.5px] text-[#333333] ">
             New User Activity Notifications
           </span>
           <div
@@ -72,7 +72,7 @@ const Notifications = () => {
         </div>
 
         <div className="flex justify-between border border-[#E5E5E5] items-center p-4 bg-white rounded-lg ">
-          <span className="font-medium text-[14.5px] text-[#333333] dark:text-gray-100">
+          <span className="font-medium text-[14.5px] text-[#333333] ">
             Weekly Summary Email Notification
           </span>
           <div
