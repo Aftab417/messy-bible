@@ -24,8 +24,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AI Smile Enalyze",
-  description: "AI Smile Enalyze"
+  title: "Messy Bible Dashboard",
+  description: "Messy Bible Dashboard",
+  icons: {
+    icon: "/images/logo.png"
+  }
 };
 
 export default function RootLayout({
