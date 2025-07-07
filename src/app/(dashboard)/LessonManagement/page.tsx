@@ -742,7 +742,7 @@ const UserManagement = () => {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="w-full px-4 py-[0.85rem]  rounded-[8px] border border-[#AFAFAF]  dark:bg-gray-700 dark:text-gray-100  bg-[#FFF] text-left flex justify-between items-center text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
+            className="w-full px-4 py-[0.85rem]  rounded-[8px] border border-[#AFAFAF]   bg-[#FFF] text-left flex justify-between items-center text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
            "
           >
             <span className="font-inter">{value || placeholder}</span>

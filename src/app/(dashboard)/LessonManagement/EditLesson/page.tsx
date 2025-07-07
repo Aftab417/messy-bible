@@ -529,7 +529,7 @@ const AddLesson = () => {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className={`w-full px-4 py-[0.85rem] dark:bg-gray-700 dark:text-gray-100 text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
+            className={`w-full px-4 py-[0.85rem]  text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
               hasError
                 ? "focus:ring-red-500 border-red-500"
                 : "focus:ring-[#F6805C]"
@@ -626,7 +626,7 @@ const AddLesson = () => {
                   value={formData.firstName}
                   onChange={handleInputChange}
                   placeholder="Enter Lesson Name"
-                  className={`w-full px-4 py-[0.85rem] dark:bg-gray-700 dark:text-gray-100 text-[#656565] font-normal focus:outline-none   ${
+                  className={`w-full px-4 py-[0.85rem]  text-[#656565] font-normal focus:outline-none   ${
                     validationErrors.firstName
                       ? "focus:ring-red-500 border-red-500"
                       : "focus:ring-[#F6805C]"
@@ -654,7 +654,7 @@ const AddLesson = () => {
                   onChange={handleInputChange}
                   placeholder="Enter Text Here"
                   rows={1}
-                  className={`w-full px-4 py-[0.85rem] dark:bg-gray-700 dark:text-gray-100 text-[#656565] font-normal focus:outline-none   ${
+                  className={`w-full px-4 py-[0.85rem]  text-[#656565] font-normal focus:outline-none   ${
                     validationErrors.description
                       ? "focus:ring-red-500 border-red-500"
                       : "focus:ring-[#F6805C]"
@@ -807,7 +807,7 @@ const AddLesson = () => {
                                 )
                               }
                               placeholder="Enter Topic Name"
-                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3 dark:bg-gray-700 dark:text-gray-100 text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
+                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3  text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
                                 topicValidationErrors[index]?.topicName
                                   ? "focus:ring-red-500 border-red-500"
                                   : "focus:ring-[#F6805C]"
@@ -840,7 +840,7 @@ const AddLesson = () => {
                                 )
                               }
                               placeholder="Enter Scripture Reference"
-                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3 dark:bg-gray-700 dark:text-gray-100 text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
+                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3  text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
                                 topicValidationErrors[index]?.scriptureReference
                                   ? "focus:ring-red-500 border-red-500"
                                   : "focus:ring-[#F6805C]"
@@ -877,7 +877,7 @@ const AddLesson = () => {
                               }
                               placeholder="Enter Text Here"
                               rows={4}
-                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3 dark:bg-gray-700 dark:text-gray-100 text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
+                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3  text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
                                 topicValidationErrors[index]?.description
                                   ? "focus:ring-red-500 border-red-500"
                                   : "focus:ring-[#F6805C]"
@@ -910,7 +910,7 @@ const AddLesson = () => {
                               }
                               placeholder="Enter Text Here"
                               rows={3}
-                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3 dark:bg-gray-700 dark:text-gray-100 text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
+                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3  text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
                                 topicValidationErrors[index]?.verseHighlight
                                   ? "focus:ring-red-500 border-red-500"
                                   : "focus:ring-[#F6805C]"
@@ -943,7 +943,7 @@ const AddLesson = () => {
                                 )
                               }
                               placeholder="Enter Reflection Question"
-                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3 dark:bg-gray-700 dark:text-gray-100 text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
+                              className={`border-1 border-[#AFAFAF] w-full px-3 py-3  text-[#5B5B5B]  font-normal focus:outline-none rounded-[8px]   ${
                                 topicValidationErrors[index]?.reflectionQuestion
                                   ? "focus:ring-red-500 border-red-500"
                                   : "focus:ring-[#F6805C]"

@@ -222,7 +222,7 @@ const HumanbrailUpload = () => {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-             className={`w-full px-4 py-[0.85rem]  dark:bg-gray-700 dark:text-gray-100 text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
+             className={`w-full px-4 py-[0.85rem]  text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
               hasError
                 ? "focus:ring-red-500 border-red-500"
                 : "focus:ring-[#F6805C]"
@@ -244,7 +244,7 @@ const HumanbrailUpload = () => {
           </button>
 
           {isOpen && (
-            <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-700 border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto">
+            <div className="absolute z-10 w-full mt-1 bg-white  border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto">
               {options.map((option, index) => (
                 <div key={index}>
                   <button
@@ -253,7 +253,7 @@ const HumanbrailUpload = () => {
                       handleSelectChange(name, option);
                       setIsOpen(false);
                     }}
-                    className="w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-600 text-[#656565] dark:text-gray-100 font-mono text-[14px] transition-colors font-indie"
+                    className="w-full px-4 py-3 text-left hover:bg-gray-50  text-[#656565]  font-mono text-[14px] transition-colors font-indie"
                   >
                     {option}
                   </button>
@@ -286,7 +286,7 @@ const HumanbrailUpload = () => {
         <form onSubmit={handleSubmit}>
           {/* Image Upload */}
           <div className="pb-6">
-               <div className="border-1 border-[#AFAFAF] rounded-[8px] gap-5 bg-[#FFF] dark:bg-gray-800 py-6 mb-4 flex flex-col items-center justify-center relative">
+               <div className="border-1 border-[#AFAFAF] rounded-[8px] gap-5 bg-[#FFF]  py-6 mb-4 flex flex-col items-center justify-center relative">
                                <input
                                  type="file"
                                  id="profilePhoto"
@@ -305,8 +305,8 @@ const HumanbrailUpload = () => {
                                  </div>
                                ) : (
                                  <>
-                                   <Upload className="w-10 h-10 text-[#F6805C] dark:text-gray-300" />
-                                   <p className="text-[#FFF] font-[600] px-[12px] py-[12px] hover:bg-orange-600 bg-[#F6805C] rounded-[8px] dark:text-white text-[14px] mt-1">
+                                   <Upload className="w-10 h-10 text-[#F6805C] " />
+                                   <p className="text-[#FFF] font-[600] px-[12px] py-[12px] hover:bg-orange-600 bg-[#F6805C] rounded-[8px]  text-[14px] mt-1">
                                      Upload Image
                                    </p>
                                  </>

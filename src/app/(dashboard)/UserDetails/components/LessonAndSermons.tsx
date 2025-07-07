@@ -25,7 +25,7 @@ const LessonAndSermons = () => {
             type="text"
             readOnly
             value={formData.TotalLesson}
-            className="w-full px-4 py-3  font-normal rounded-lg focus:outline-none focus:ring-0 dark:bg-gray-700 dark:text-gray-100 cursor-not-allowed bg-[#D7D7D7] text-[#656565] border border-[#AFAFAF]"
+            className="w-full px-4 py-3  font-normal rounded-lg focus:outline-none focus:ring-0 cursor-not-allowed bg-[#D7D7D7] text-[#656565] border border-[#AFAFAF]"
           />
         </div>
 
@@ -38,7 +38,7 @@ const LessonAndSermons = () => {
               type="text"
               readOnly
               value={formData.Compeltelesson}
-              className="w-full px-4 py-3  font-normal rounded-lg focus:outline-none focus:ring-0 dark:bg-gray-700 dark:text-gray-100 cursor-not-allowed bg-[#D7D7D7] text-[#656565] border border-[#AFAFAF]"
+              className="w-full px-4 py-3  font-normal rounded-lg focus:outline-none focus:ring-0 cursor-not-allowed bg-[#D7D7D7] text-[#656565] border border-[#AFAFAF]"
             />
           </div>
 
@@ -50,7 +50,7 @@ const LessonAndSermons = () => {
               type="text"
               readOnly
               value={formData.Inprogres}
-              className="w-full px-4 py-3  font-normal rounded-lg focus:outline-none focus:ring-0 dark:bg-gray-700 dark:text-gray-100 cursor-not-allowed bg-[#D7D7D7] text-[#656565] border border-[#AFAFAF]"
+              className="w-full px-4 py-3  font-normal rounded-lg focus:outline-none focus:ring-0 cursor-not-allowed bg-[#D7D7D7] text-[#656565] border border-[#AFAFAF]"
             />
           </div>
         </div>
@@ -62,7 +62,7 @@ const LessonAndSermons = () => {
             type="text"
             readOnly
             value={formData.Saved}
-            className="w-full px-4 py-3  font-normal rounded-lg focus:outline-none focus:ring-0 dark:bg-gray-700 dark:text-gray-100 cursor-not-allowed bg-[#D7D7D7] text-[#656565] border border-[#AFAFAF]"
+            className="w-full px-4 py-3  font-normal rounded-lg focus:outline-none focus:ring-0 cursor-not-allowed bg-[#D7D7D7] text-[#656565] border border-[#AFAFAF]"
           />
         </div>
       </div>
@@ -79,7 +79,7 @@ const LessonAndSermons = () => {
             type="text"
             readOnly
             value={formData.Totalsermon}
-            className="w-full px-4 py-3  font-normal rounded-lg focus:outline-none focus:ring-0 dark:bg-gray-700 dark:text-gray-100 cursor-not-allowed bg-[#D7D7D7] text-[#656565] border border-[#AFAFAF]"
+            className="w-full px-4 py-3  font-normal rounded-lg focus:outline-none focus:ring-0 cursor-not-allowed bg-[#D7D7D7] text-[#656565] border border-[#AFAFAF]"
           />
         </div>
         <div className="mt-4">
@@ -90,7 +90,7 @@ const LessonAndSermons = () => {
             type="text"
             readOnly
             value={formData.downloadsermon}
-            className="w-full px-4 py-3  font-normal rounded-lg focus:outline-none focus:ring-0 dark:bg-gray-700 dark:text-gray-100 cursor-not-allowed bg-[#D7D7D7] text-[#656565] border border-[#AFAFAF]"
+            className="w-full px-4 py-3  font-normal rounded-lg focus:outline-none focus:ring-0 cursor-not-allowed bg-[#D7D7D7] text-[#656565] border border-[#AFAFAF]"
           />
         </div>
       </div>
