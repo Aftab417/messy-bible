@@ -3,7 +3,7 @@
 import type React from "react";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Upload, ChevronDown, Plus, Minus } from "lucide-react";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
@@ -132,16 +132,30 @@ const AddLesson = () => {
   };
 
   // Check if topics have any data
-  const topicsHaveData = (topics: typeof formData.topics) => {
-    return topics.some(
-      (topic) =>
-        topic.topicName ||
-        topic.scriptureReference ||
-        topic.description ||
-        topic.verseHighlight ||
-        topic.reflectionQuestion
-    );
-  };
+  const topicsHaveData = useCallback(
+    (
+      topics: Array<{
+        id: number;
+        topicName: string;
+        scriptureReference: string;
+        description: string;
+        verseHighlight: string;
+        reflectionQuestion: string;
+        isExpanded: boolean;
+        isSaved: boolean;
+      }>
+    ) => {
+      return topics.some(
+        (topic) =>
+          topic.topicName ||
+          topic.scriptureReference ||
+          topic.description ||
+          topic.verseHighlight ||
+          topic.reflectionQuestion
+      );
+    },
+    [] // ✅ no dependencies — safe and memoized
+  );
 
   // Check if at least one topic is completed
   const hasAtLeastOneCompletedTopic = () => {
@@ -199,7 +213,7 @@ const AddLesson = () => {
         }));
       }
     }
-  }, [formData.studyPlan]);
+  }, [formData.studyPlan, formData.topics, topicsHaveData]);
 
   // Validate step
   const validateStep = async (step: number) => {

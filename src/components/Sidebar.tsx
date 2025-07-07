@@ -137,7 +137,10 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
         <div className="flex flex-col justify-center items-center w-full">
           <nav className="space-y-2 w-full">
             {navItems.map((item, index) => {
-              const isActive = pathname === item.href;
+              const isActive =
+                item.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(item.href);
               const hasDropdown = item.dropdown;
               const isDropdownOpen = openDropdown === item.label;
               const isDropdownItemActive = hasDropdown

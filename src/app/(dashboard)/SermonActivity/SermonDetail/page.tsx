@@ -5,15 +5,13 @@ import React from "react";
 export default function DetailDevotion() {
   return (
     <>
-      <div className="lg:flex justify-between py-8">
+      <div className="justify-between py-8 lg:flex">
         <h1 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold pt-[15px]">
           Sermons Detail
         </h1>
-
-        
       </div>
 
-      <div className="   space-y-4">
+      <div className="space-y-4">
         {/* Header Info */}
         <div className="flex flex-wrap gap-2 mb-[20px]">
           <span className="bg-[#F6805C] rounded-[8px] px-[12px] py-[10px]   text-white  text-[14px] not-italic font-normal leading-normal">
@@ -52,20 +50,22 @@ export default function DetailDevotion() {
             Main Message
           </h2>
           <p className="text-[#5B5B5B] font-inter text-[14px] italic font-normal leading-normal pb-2 ">
-            Faith requires us to trust in God's promises even when circumstances
-            suggest otherwise. Like Abraham, who left his homeland without
-            knowing the destination, we are called to trust God's guidance.
+            Faith requires us to trust in God&apos;s promises even when
+            circumstances suggest otherwise. Like Abraham, who left his homeland
+            without knowing the destination, we are called to trust God&apos;s
+            guidance.
           </p>
           <p className="text-[#5B5B5B] font-inter text-[14px] italic font-normal leading-normal ">
-            When we walk by faith, we acknowledge that God's wisdom surpasses
-            our understanding. This doesn't mean we proceed blindly, but rather
-            we move forward with confidence in God's character and promises.
+            When we walk by faith, we acknowledge that God&apos;s wisdom
+            surpasses our understanding. This doesn&apos;t mean we proceed
+            blindly, but rather we move forward with confidence in God&apos;s
+            character and promises.
           </p>
         </div>
 
         <div className="bg-[#F6805C] p-[28px] rounded-[12px]">
           <h2 className="text-[#FFF]  text-[15.038px] not-italic font-bold leading-normal pb-3">
-           Reflection Questions
+            Reflection Questions
           </h2>
 
           <ol className="list-decimal list-inside text-sm text-[#FFF] space-y-1">
@@ -84,8 +84,11 @@ export default function DetailDevotion() {
             Closing Prayer
           </h2>
 
-       <p className="text-[#5B5B5B] font-inter text-[14px] italic font-normal leading-normal pb-2 ">
-            Heavenly Father, strengthen our faith as we walk with You. Help us trust Your guidance even when the path ahead seems uncertain. May we find peace in Your presence and confidence in Your promises. In Jesus' name, Amen.
+          <p className="text-[#5B5B5B] font-inter text-[14px] italic font-normal leading-normal pb-2 ">
+            Heavenly Father, strengthen our faith as we walk with You. Help us
+            trust Your guidance even when the path ahead seems uncertain. May we
+            find peace in Your presence and confidence in Your promises. In
+            Jesus&apos; name, Amen.
           </p>
         </div>
       </div>
