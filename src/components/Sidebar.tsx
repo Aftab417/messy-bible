@@ -119,7 +119,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
 
   return (
     <div
-      className="flex flex-col items-center w-full h-full md:h-[90vh] overflow-y-auto p-2 text-[#5B5B5B] bg-[#F9F9F9] scrollbar-hide dark:bg-gray-900 min-w-72 [&::-webkit-scrollbar]:w-1 
+      className="flex flex-col items-center w-full h-full md:h-[90vh] overflow-y-auto p-2 text-[#5B5B5B] bg-[#F9F9F9] scrollbar-hide min-w-72 [&::-webkit-scrollbar]:w-1 
   [&::-webkit-scrollbar-thumb]:rounded-full 
   [&::-webkit-scrollbar-thumb]:bg-gray-300 
   [&::-webkit-scrollbar-track]:bg-gray-100"
