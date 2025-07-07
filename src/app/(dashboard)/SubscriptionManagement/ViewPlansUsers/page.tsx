@@ -257,7 +257,7 @@ export default function User() {
             </th>
           </tr>
         </thead>
-        <tbody className="dark:bg-gray-900">
+        <tbody className="">
           {paginatedUserPlans.length === 0 ? (
             <tr>
               <td colSpan={7} className="p-3 text-center">
