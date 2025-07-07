@@ -616,13 +616,25 @@ const UserManagement = () => {
   };
 
   interface Lesson {
-    LessonType: "AI" | "Manually"; // or string if more types exist
-    // Add other properties used in `setFormData()` if needed
+    _id: string;
+    lessonName: string;
+    Createby: string;
+    StudyPlan: string;
+    Visibility: string;
+    LessonType: string;
+    createdAt: string;
   }
 
   const handleEdit = (lesson: Lesson) => {
     if (lesson.LessonType === "AI") {
-      setFormData(lesson); // preload form data
+      setFormData({
+        lessonName: lesson.lessonName,
+        description: "",
+        ageGroup: "",
+        bibleReference: "",
+        studyPlan: lesson.StudyPlan,
+        visibility: lesson.Visibility.toLowerCase()
+      }); // preload form data
       setIsAIModalOpen(true); // open modal
     } else if (lesson.LessonType === "Manually") {
       router.push("/LessonManagement/EditLesson");
@@ -730,7 +742,7 @@ const UserManagement = () => {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="w-full px-4 py-[0.85rem]  rounded-[8px] border border-[#AFAFAF] bg-[#FFF]  dark:bg-gray-700 dark:text-gray-100  bg-[#FFF] text-left flex justify-between items-center text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
+            className="w-full px-4 py-[0.85rem]  rounded-[8px] border border-[#AFAFAF]  dark:bg-gray-700 dark:text-gray-100  bg-[#FFF] text-left flex justify-between items-center text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
            "
           >
             <span className="font-inter">{value || placeholder}</span>
@@ -890,7 +902,7 @@ const UserManagement = () => {
                     </button>
                     <button className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"></button>
                     <button
-                      onClick={() => handleEdit(user)}
+                      onClick={() => handleEdit(user as Lesson)}
                       className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
                     >
                       <svg
@@ -1039,9 +1051,7 @@ const UserManagement = () => {
               {/* Form Body */}
               <form className="space-y-4">
                 <div>
-
-                   <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
-
+                  <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
                     Image Generation
                   </label>
                   <div className="flex items-center justify-between  bg-white   dark:bg-gray-700    w-full px-4 py-[0.85rem]   border-1 border-[#AFAFAF] rounded-[8px] dark:text-gray-100 text-[#656565] font-normal focus:outline-none">
