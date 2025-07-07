@@ -3,416 +3,413 @@ import type React from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
- 
 
 import { useRouter } from "next/navigation"; // Note: 'next/navigation' not 'next/router'
 
 const dummyUsers = [
   {
     _id: "1",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Young",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Young",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2023-05-15T08:23:12.000Z"
   },
   {
     _id: "2",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2023-04-22T14:45:00.000Z"
   },
   {
     _id: "3",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2023-03-10T09:12:33.000Z"
   },
   {
     _id: "4",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2023-02-28T16:30:45.000Z"
   },
   {
     _id: "5",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2023-01-15T11:05:21.000Z"
   },
   {
     _id: "6",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2022-12-05T07:45:10.000Z"
   },
   {
     _id: "7",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2022-11-20T13:22:54.000Z"
   },
   {
     _id: "8",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2022-10-10T10:15:30.000Z"
   },
   {
     _id: "9",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2022-09-01T18:40:15.000Z"
   },
   {
     _id: "10",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2022-08-12T09:30:45.000Z"
   },
   {
     _id: "11",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2022-07-25T14:20:33.000Z"
   },
   {
     _id: "12",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2022-06-30T11:10:22.000Z"
   },
   {
     _id: "13",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2022-05-18T16:45:19.000Z"
   },
   {
     _id: "14",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2022-04-05T08:30:40.000Z"
   },
   {
     _id: "15",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2022-03-12T12:15:25.000Z"
   },
   {
     _id: "16",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2022-02-28T09:50:10.000Z"
   },
   {
     _id: "17",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2022-01-15T14:25:05.000Z"
   },
   {
     _id: "18",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2021-12-10T17:40:30.000Z"
   },
   {
     _id: "19",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2021-11-05T10:15:20.000Z"
   },
   {
     _id: "20",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2021-10-01T13:30:15.000Z"
   },
   {
     _id: "21",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2021-09-15T08:45:40.000Z"
   },
   {
     _id: "22",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2021-08-20T11:20:25.000Z"
   },
   {
     _id: "23",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2021-07-10T15:35:10.000Z"
   },
   {
     _id: "24",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2021-06-05T09:10:45.000Z"
   },
   {
     _id: "25",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2021-05-01T12:25:30.000Z"
   },
   {
     _id: "26",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2021-04-15T16:50:15.000Z"
   },
   {
     _id: "27",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2021-03-10T10:15:40.000Z"
   },
   {
     _id: "28",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2021-02-05T13:40:25.000Z"
   },
   {
     _id: "29",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2021-01-01T17:05:10.000Z"
   },
   {
     _id: "30",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2020-12-15T09:30:45.000Z"
   },
   {
     _id: "31",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2020-11-10T12:55:30.000Z"
   },
   {
     _id: "32",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2020-10-05T16:20:15.000Z"
   },
   {
     _id: "33",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2020-09-01T10:45:40.000Z"
   },
   {
     _id: "34",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2020-08-15T14:10:25.000Z"
   },
   {
     _id: "35",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2020-07-10T17:35:10.000Z"
   },
   {
     _id: "36",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2020-06-05T11:00:45.000Z"
   },
   {
     _id: "37",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2020-05-01T14:25:30.000Z"
   },
   {
     _id: "38",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2020-04-15T17:50:15.000Z"
   },
   {
     _id: "39",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2020-03-10T10:15:40.000Z"
   },
   {
     _id: "40",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2020-02-05T13:40:25.000Z"
   },
   {
     _id: "41",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2020-01-01T17:05:10.000Z"
   },
   {
     _id: "42",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2019-12-15T09:30:45.000Z"
   },
   {
     _id: "43",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2019-11-10T12:55:30.000Z"
   },
   {
     _id: "44",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2019-10-05T16:20:15.000Z"
   },
   {
     _id: "45",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2019-09-01T10:45:40.000Z"
   },
   {
     _id: "46",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2019-08-15T14:10:25.000Z"
   },
   {
     _id: "47",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2019-07-10T17:35:10.000Z"
   },
   {
     _id: "48",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2019-06-05T11:00:45.000Z"
   },
   {
     _id: "49",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Old",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Old",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2019-05-01T14:25:30.000Z"
   },
   {
     _id: "50",
-SermonTopic:"Walking in Faith",
+    SermonTopic: "Walking in Faith",
     Createby: "admin",
-     AgeGroup: "Teen Age",
-     KeyVerse: "Galatians 5:22",
+    AgeGroup: "Teen Age",
+    KeyVerse: "Galatians 5:22",
     createdAt: "2019-04-15T17:50:15.000Z"
   }
 ];
 
 const UserManagement = () => {
- 
-
   //#############> Yup Star<############### t
   //#############> Yup End <###############
   const [users, setUsers] = useState(dummyUsers);
@@ -490,7 +487,6 @@ const UserManagement = () => {
             ...
           </span>
         );
-        
       }
 
       const start = Math.max(2, currentPage - 1);
@@ -541,10 +537,10 @@ const UserManagement = () => {
   // Filter users based on search term
   const filteredUsers = users.filter(
     (user) =>
-      user. SermonTopic.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.SermonTopic.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.Createby.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user. AgeGroup.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user. KeyVerse.toLowerCase().includes(searchTerm.toLowerCase())
+      user.AgeGroup.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.KeyVerse.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const totalPages = Math.ceil(filteredUsers.length / ITEMS_PER_PAGE);
@@ -559,14 +555,11 @@ const UserManagement = () => {
     router.push("/SermonActivity/SermonDetail"); // Now this will work correctly
   };
 
- 
-
- 
   return (
     <>
-      <div className="lg:flex justify-between">
+      <div className="justify-between lg:flex">
         <h1 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold pt-[15px]">
-            Sermon Activity 
+          Sermon Activity
         </h1>
 
         <div className="gap-4 items-center sm:flex">
@@ -594,17 +587,14 @@ const UserManagement = () => {
               />
             </svg>
           </div>
-
-         
         </div>
-
       </div>
 
       <div className="py-[20px] text-[#794A3A] font-dm-sans text-[16px] font-semibold">
-         All Sermons
+        All Sermons
       </div>
 
-      <div className="w-full overflow-x-auto">
+      <div className="overflow-x-auto w-full">
         <table className="min-w-[700px] w-full overflow-hidden shadow border-separate border-spacing-x-4">
           <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold ">
             <tr>
@@ -612,7 +602,7 @@ const UserManagement = () => {
                 S.No:
               </th>
               <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                 Sermon Topic	
+                Sermon Topic
               </th>
               <th className="p-[5px] border-b border-[#505050] text-center w-fit">
                 Created By
@@ -621,15 +611,15 @@ const UserManagement = () => {
                 Study Plan
               </th>
               <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                 KeyVerse
+                KeyVerse
               </th>
-              
+
               <th className="p-[5px] border-b border-[#505050] text-center w-fit">
                 Actions
               </th>
             </tr>
           </thead>
-          <tbody className="dark:bg-gray-900 ">
+          <tbody className="">
             {users.length === 0 ? (
               <tr>
                 <td colSpan={7} className="p-3 text-center">
@@ -643,22 +633,21 @@ const UserManagement = () => {
                     {(currentPage - 1) * ITEMS_PER_PAGE + i + 1}
                   </td>
                   <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    {user. SermonTopic}
+                    {user.SermonTopic}
                   </td>
                   <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {user.Createby}
                   </td>
                   <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    {user. AgeGroup}
+                    {user.AgeGroup}
                   </td>
                   <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    {user. KeyVerse}
+                    {user.KeyVerse}
                   </td>
 
-                  
-                  <td className="p-3 flex justify-center">
+                  <td className="flex justify-center p-3">
                     <button
-                      className="cursor-pointer mx-1  hover:scale-110 transition-transform duration-300 ease-in-out"
+                      className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
                       onClick={handleClick}
                     >
                       <svg
@@ -675,12 +664,11 @@ const UserManagement = () => {
                         />
                       </svg>
                     </button>
-                    <button className="cursor-pointer mx-1  hover:scale-110 transition-transform duration-300 ease-in-out"></button>
-                     
+                    <button className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"></button>
 
                     <button
                       onClick={() => handleDelete(user._id)}
-                      className="cursor-pointer mx-1  hover:scale-110 transition-transform duration-300 ease-in-out"
+                      className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
                     >
                       <svg
                         width="20"
@@ -743,9 +731,6 @@ const UserManagement = () => {
       </div>
 
       {/* Modal Start Start */}
-
-    
-       
     </>
   );
 };

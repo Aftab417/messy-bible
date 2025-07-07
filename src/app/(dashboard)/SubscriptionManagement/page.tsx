@@ -149,7 +149,7 @@ const UserManagement = () => {
               </th>
             </tr>
           </thead>
-          <tbody className="dark:bg-gray-900">
+          <tbody className="">
             {users.length === 0 ? (
               <tr>
                 <td colSpan={6} className="p-3 text-center">
