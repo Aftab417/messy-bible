@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`bg-white dark:bg-[#191919] text-[#37352f] dark:text-[#ffffffcf] ${dmSans.className} ${inter.className} ${indieFlower.className} `}
+        className={`bg-white text-[#37352f]  ${dmSans.className} ${inter.className} ${indieFlower.className} `}
       >
         <ThemeProvider
           attribute="class"
