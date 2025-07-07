@@ -15,22 +15,22 @@ const StatCard = ({
   image
 }: {
   title: string;
-  value: string;
+  value: number;
   image: string;
 }) => (
-  <div className="p-3 md:p-5 bg-[#F9F9F9]  rounded-[12px] border border-[#AFAFAF]">
+  <div className="p-3 md:p-6 bg-[#F9F9F9]  rounded-[12px] border border-[#AFAFAF]">
     <div className="flex items-center">
-      <div className=" w-[50px] h-[50px] rounded-[50px] bg-white relative ">
+      <div className="flex relative justify-center items-center w-12 h-12 bg-white rounded-full">
         <Image
           src={image}
           alt="Bar Graph"
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          width={20}
-          height={20}
+          width={30}
+          height={30}
         />
       </div>
       <div className="pl-[10px]">
-        <h3 className="text-[#794A3A] font-dm-sans text-base font-semibold">
+        <h3 className="text-[#794A3A] font-dm-sans text-sm font-semibold">
           {title}
         </h3>
         <p className="text-[#794A3A] font-inter text-xl font-bold">{value}</p>
@@ -50,22 +50,22 @@ const Home: React.FC = () => {
   const statsData = [
     {
       title: "Total Users",
-      value: counts.users.toLocaleString(),
+      value: counts.users,
       image: "/images/massy-image/totaluser.svg"
     },
     {
       title: "Total Sermons",
-      value: counts.smiles.toLocaleString(),
+      value: counts.smiles,
       image: "/images/massy-image/totalsermon.svg"
     },
     {
       title: "Total Lessons",
-      value: counts.dentists.toLocaleString(),
-      image: "/images/massy-image/TotalLesson.svg"
+      value: counts.dentists,
+      image: "/images/massy-image/totallesson.svg"
     },
     {
       title: "Total Games",
-      value: counts.totalgame.toLocaleString(),
+      value: counts.totalgame,
       image: "/images/massy-image/totalgame.svg"
     }
   ];
@@ -75,7 +75,7 @@ const Home: React.FC = () => {
       <h1 className="pt-[30px] pb-[15px] text-[#794A3A] font-dm-sans text-[32px] font-semibold">
         Hello, Jelly young
       </h1>
-      <div className="grid grid-cols-1 gap-6 mb-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 mb-6 sm:grid-cols-2 lg:grid-cols-4">
         {statsData.map((stat, index) => (
           <StatCard
             key={index}

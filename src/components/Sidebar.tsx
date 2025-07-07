@@ -119,7 +119,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
 
   return (
     <div
-      className="flex flex-col items-center w-full h-full md:h-[90vh] overflow-y-auto p-2 text-[#5B5B5B] bg-[#F9F9F9] scrollbar-hide min-w-72 [&::-webkit-scrollbar]:w-1 
+      className="flex flex-col items-center w-full h-full md:h-[90vh] overflow-y-auto pt-8 p-2 text-[#5B5B5B] bg-[#F9F9F9] scrollbar-hide min-w-72 [&::-webkit-scrollbar]:w-1 
   [&::-webkit-scrollbar-thumb]:rounded-full 
   [&::-webkit-scrollbar-thumb]:bg-gray-300 
   [&::-webkit-scrollbar-track]:bg-gray-100"
@@ -304,23 +304,21 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
             })}
           </nav>
 
-          <div className="">
-            <button
-              onClick={handleLogout}
-              onMouseEnter={() => setLogoutHover(true)}
-              onMouseLeave={() => setLogoutHover(false)}
-              className="flex items-center cursor-pointer min-w-64 w-full gap-2 px-4 py-3 mb-3 hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all"
-            >
-              <Image
-                src={logoutHover ? "/images/wLogout.png" : "/images/logout.png"}
-                alt="logout"
-                width={20}
-                height={20}
-                className="object-contain w-5 h-5"
-              />
-              <span className=""> Logout</span>
-            </button>
-          </div>
+          <button
+            onClick={handleLogout}
+            onMouseEnter={() => setLogoutHover(true)}
+            onMouseLeave={() => setLogoutHover(false)}
+            className="flex items-center cursor-pointer min-w-64 w-full gap-2 px-4  py-3 mb-3 hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all"
+          >
+            <Image
+              src={logoutHover ? "/images/logout.png" : "/images/logout.png"}
+              alt="logout"
+              width={20}
+              height={20}
+              className="object-contain w-5 h-5"
+            />
+            <span className=""> Logout</span>
+          </button>
         </div>
       </div>
     </div>
