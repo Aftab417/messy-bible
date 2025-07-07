@@ -7,40 +7,51 @@ const SubscriptionChart = ({ active = 1000, inactive = 200 }) => {
   const activeRadius = maxRadius;
   const inactiveRadius = Math.sqrt(inactive / active) * maxRadius;
 
-  return (
-    <div className="w-full   bg-[#F9F9F9] rounded-[12px] p-5  h-full border border-[#AFAFAF]">
-      <h3 className="text-[#794A3A] font-semibold text-lg mb-4">Subscription</h3>
+  const formatNumber = (num: number) => {
+    if (num >= 1_000_000)
+      return (num / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
+    if (num >= 1_000) return (num / 1_000).toFixed(1).replace(/\.0$/, "") + "k";
+    return num.toString();
+  };
 
-      <div className="relative flex justify-center items-center h-52">
+  return (
+    <div className="w-full   bg-[#F9F9F9] rounded-lg p-5 max-h-96  h-full border border-[#AFAFAF]">
+      <h3 className="text-[#794A3A] font-semibold text-lg mb-4">
+        Subscription
+      </h3>
+
+      <div className="flex relative justify-center items-center h-64">
         {/* Outer circle - Active */}
         <div
-          className="rounded-full bg-[#FA7149] flex items-end justify-center"
+          className="rounded-full bg-[#F6805C] flex items-end justify-start"
           style={{
-            width: `${activeRadius * 2}px`,
-            height: `${activeRadius * 2}px`,
+            width: `${activeRadius * 3}px`,
+            height: `${activeRadius * 3}px`
           }}
         >
           {/* Inner circle - Inactive */}
           <div
-            className="rounded-full bg-[#FACD4D]"
+            className="rounded-full mb-2.5 ms-7.5 bg-[#FCC978]"
             style={{
-              width: `${inactiveRadius * 2}px`,
-              height: `${inactiveRadius * 2}px`,
+              width: `${inactiveRadius * 3}px`,
+              height: `${inactiveRadius * 3}px`
             }}
           ></div>
         </div>
       </div>
 
       {/* Legend */}
-      <div className="flex justify-center mt-5 gap-6 text-sm">
-        <div className="flex items-center gap-2">
-          <span className="w-4 h-4 bg-[#FA7149] rounded"></span>
-          <span className="text-[#794A3A]">{active} Active</span>
+      <div className="flex gap-6 justify-center mt-5 text-sm">
+        <div className="flex gap-2 items-center">
+          <span className="w-4 h-4 bg-[#F6805C] rounded"></span>
+          <span className="text-[#794A3A]">{formatNumber(active)} Active</span>
         </div>
-        
-        <div className="flex items-center gap-2">
-          <span className="w-4 h-4 bg-[#FACD4D] rounded"></span>
-          <span className="text-[#794A3A]">{inactive} Inactive</span>
+
+        <div className="flex gap-2 items-center">
+          <span className="w-4 h-4 bg-[#FCC978] rounded"></span>
+          <span className="text-[#794A3A]">
+            {formatNumber(inactive)} Inactive
+          </span>
         </div>
       </div>
     </div>
