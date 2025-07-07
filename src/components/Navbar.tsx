@@ -1,8 +1,7 @@
 "use client";
 
-import {  FaBars } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import Image from "next/image";
- 
 
 interface NavbarProps {
   onMenuClick: () => void;
@@ -10,18 +9,18 @@ interface NavbarProps {
 
 export const Navbar = ({ onMenuClick }: NavbarProps) => {
   return (
- 
-    <div className="flex w-full items-center justify-between px-6 py-4 bg-[#6AC8C4] dark:bg-gray-900 ">
-    
-    
+    <div className="flex w-full items-center justify-between px-6 py-4 bg-[#6AC8C4]  ">
       {/* Mobile Menu Button */}
-      <button className="block text-xl text-white md:hidden" onClick={onMenuClick}>
+      <button
+        className="block text-xl text-white md:hidden"
+        onClick={onMenuClick}
+      >
         <FaBars />
       </button>
 
       {/* Search Input */}
       <div className="  hidden  md:flex items-center md:ml-0 pl-[40px]">
-          <div>
+        <div>
           <Image
             src="/images/massy-image/logo.png"
             alt="Bar Graph"
@@ -32,18 +31,25 @@ export const Navbar = ({ onMenuClick }: NavbarProps) => {
         </div>
 
         <p className="text-white flex  items-center pl-[40px] font-dm-sans text-[15px] font-medium not-italic leading-normal">
-  Dashboard <span className="mx-1 text-[#C4C4C4]">
-  <div className="px-[6px]">
-      <svg xmlns="http://www.w3.org/2000/svg" width="6" height="7" viewBox="0 0 6 7" fill="none">
-  <circle cx="3" cy="3.5" r="3" fill="white"/>
-</svg>
-  </div>
-</span> Overview
-</p>
-
+          Dashboard{" "}
+          <span className="mx-1 text-[#C4C4C4]">
+            <div className="px-[6px]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="6"
+                height="7"
+                viewBox="0 0 6 7"
+                fill="none"
+              >
+                <circle cx="3" cy="3.5" r="3" fill="white" />
+              </svg>
+            </div>
+          </span>{" "}
+          Overview
+        </p>
       </div>
 
-      <div className="flex items-center gap-6">
+      <div className="flex gap-6 items-center">
         {/* <ThemeToggle /> */}
         <div className="w-[40px] h-[40px] flex items-center justify-center bg-[#F5F5F5] rounded-[50px]">
           <svg
@@ -71,6 +77,5 @@ export const Navbar = ({ onMenuClick }: NavbarProps) => {
         </div>
       </div>
     </div>
- 
   );
 };
