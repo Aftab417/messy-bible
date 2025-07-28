@@ -3,7 +3,7 @@
 import type React from "react";
 
 import Image from "next/image";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Upload, ChevronDown, Plus, Minus } from "lucide-react";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
@@ -518,10 +518,32 @@ const AddLesson = () => {
     placeholder: string;
   }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const selectRef = useRef<HTMLDivElement>(null);
     const hasError = validationErrors[name];
 
+    // Close dropdown when clicking outside
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (
+          selectRef.current &&
+          !selectRef.current.contains(event.target as Node)
+        ) {
+          setIsOpen(false);
+        }
+      };
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    const handleOptionClick = (option: string) => {
+      handleSelectChange(name, option);
+      setIsOpen(false);
+    };
+
     return (
-      <div className="pb-[15px]">
+      <div className="pb-6" ref={selectRef}>
         <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
           {label}
         </label>
@@ -529,34 +551,42 @@ const AddLesson = () => {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className={`w-full px-4 py-[0.85rem]  text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
+            className={`w-full px-4 py-3 text-[#656565]  font-normal cursor-pointer [&_svg]:stroke-red-500 focus:outline-none ${
               hasError
                 ? "focus:ring-red-500 border-red-500"
                 : "focus:ring-[#F6805C]"
-            } rounded-[8px] border ${hasError ? "border-red-500" : "border-[#AFAFAF]"} bg-[#FFF] text-left flex justify-between items-center`}
+            } rounded-[8px] border ${
+              hasError ? "border-red-500" : "border-[#AFAFAF]"
+            } bg-[#FFF] text-left flex justify-between items-center`}
           >
-            <span className="font-inter">{value || placeholder}</span>
+            <span
+              className={`font-inter ${
+                value ? "text-black" : "text-[#5B5B5B]"
+              }`}
+            >
+              {value || placeholder}
+            </span>
+
             <ChevronDown
-              className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+              className={`w-4 h-4 transition-transform ${
+                isOpen ? "rotate-180" : ""
+              }`}
             />
           </button>
 
           {isOpen && (
-            <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-700 border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto">
+            <div className="absolute z-10 w-full mt-1 bg-white border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto">
               {options.map((option, index) => (
                 <div key={index}>
                   <button
                     type="button"
-                    onClick={() => {
-                      handleSelectChange(name, option);
-                      setIsOpen(false);
-                    }}
-                    className="w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-600 text-[#656565] dark:text-gray-100 font-mono text-[14px] transition-colors font-indie"
+                    onClick={() => handleOptionClick(option)}
+                    className="w-full px-4 py-3 text-left hover:bg-gray-50 text-[#656565] font-mono text-[14px] transition-colors"
                   >
                     {option}
                   </button>
                   {index < options.length - 1 && (
-                    <div className="mx-2 border-b border-gray-200 dark:border-gray-600"></div>
+                    <div className="mx-2 border-b border-gray-200"></div>
                   )}
                 </div>
               ))}
@@ -572,18 +602,18 @@ const AddLesson = () => {
 
   return (
     <>
-      <div className="justify-between lg:flex">
-        <h1 className="text-[#794A3A] py-[30px] font-dm-sans text-[18px] font-semibold pt-[15px]">
+      <div className="justify-between lg:flex ">
+        <h1 className="text-[#794A3A]  font-dm-sans text-[18px] font-semibold pb-3">
           {currentStep === 1 ? `Edit Lesson ` : "Edit Topics"}
         </h1>
       </div>
 
-      <div className="bg-[#F9F9F9] dark:bg-gray-900 dark:text-white rounded-[16px] w-full max-w-4xl p-6">
+      <div className="bg-[#F9F9F9] dark:bg-gray-900 dark:text-white rounded-[16px] w-full max-w-7xl p-6">
         <form onSubmit={handleSubmit}>
           {currentStep === 1 ? (
             <>
               {/* Thumbnail Upload */}
-              <div className="pb-[15px]">
+              <div className="pb-6">
                 <label className="text-[#5B5B5B] font-dm-sans text-[16px] font-semibold leading-normal pb-[10px] block">
                   Thumbnail
                 </label>
@@ -616,7 +646,7 @@ const AddLesson = () => {
               </div>
 
               {/* Lesson Name */}
-              <div className="pb-[15px]">
+              <div className="pb-6">
                 <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
                   Lesson Name
                 </label>
@@ -626,7 +656,7 @@ const AddLesson = () => {
                   value={formData.firstName}
                   onChange={handleInputChange}
                   placeholder="Enter Lesson Name"
-                  className={`w-full px-4 py-[0.85rem]  text-[#656565] font-normal focus:outline-none   ${
+                  className={`w-full px-4 py-3  text-black placeholder-[#5B5B5B] font-normal focus:outline-none   ${
                     validationErrors.firstName
                       ? "focus:ring-red-500 border-red-500"
                       : "focus:ring-[#F6805C]"
@@ -644,7 +674,7 @@ const AddLesson = () => {
               </div>
 
               {/* Description */}
-              <div className="pb-[15px]">
+              <div className="pb-6">
                 <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
                   Description
                 </label>
@@ -654,7 +684,7 @@ const AddLesson = () => {
                   onChange={handleInputChange}
                   placeholder="Enter Text Here"
                   rows={1}
-                  className={`w-full px-4 py-[0.85rem]  text-[#656565] font-normal focus:outline-none   ${
+                  className={`w-full px-4 py-3  text-black placeholder-[#5B5B5B]  font-normal focus:outline-none   ${
                     validationErrors.description
                       ? "focus:ring-red-500 border-red-500"
                       : "focus:ring-[#F6805C]"
@@ -686,7 +716,7 @@ const AddLesson = () => {
                 name="bibleReference"
                 value={formData.bibleReference}
                 options={bibleReferences}
-                placeholder="Select Bible Reference"
+                placeholder="Select Bible Reference e.g., Galatians 5:22"
               />
 
               {/* Study Plan */}
@@ -712,13 +742,14 @@ const AddLesson = () => {
                 )}
 
               {/* Save As */}
-              <div className="pb-[15px]">
+              <div className="pb-6">
                 <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
                   Save As
                 </label>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <label className="flex gap-2 justify-between items-center p-4 rounded-lg border cursor-pointer">
+                  {/* Public */}
+                  <label className="flex items-center justify-between gap-2 px-4 py-3 bg-white border border-[#AFAFAF] rounded-lg cursor-pointer">
                     <span className="text-sm text-gray-700">Public</span>
                     <input
                       type="radio"
@@ -726,11 +757,14 @@ const AddLesson = () => {
                       value="public"
                       checked={formData.saveAs === "public"}
                       onChange={() => handleRadioChange("public")}
-                      className="w-4 h-4 rounded-full border-2 border-red-400 transition appearance-none checked:bg-red-400 checked:border-red-400"
+                      className="appearance-none w-5 h-5 border-2 border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
+                 before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
+                 checked:before:scale-100"
                     />
                   </label>
 
-                  <label className="flex gap-2 justify-between items-center p-4 rounded-lg border cursor-pointer">
+                  {/* Private */}
+                  <label className="flex items-center justify-between gap-2 px-4 py-3 bg-white border border-[#AFAFAF] rounded-lg cursor-pointer">
                     <span className="text-sm text-gray-700">Private</span>
                     <input
                       type="radio"
@@ -738,10 +772,13 @@ const AddLesson = () => {
                       value="private"
                       checked={formData.saveAs === "private"}
                       onChange={() => handleRadioChange("private")}
-                      className="w-4 h-4 rounded-full border-2 border-red-400 transition appearance-none checked:bg-red-400 checked:border-red-400"
+                      className="appearance-none w-5 h-5 border-2 border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
+                 before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
+                 checked:before:scale-100"
                     />
                   </label>
                 </div>
+
                 {validationErrors.saveAs && (
                   <p className="mt-1 text-sm text-red-500 font-dm-sans">
                     {validationErrors.saveAs}
@@ -770,7 +807,7 @@ const AddLesson = () => {
                         onClick={() => toggleTopicExpansion(topic.id)}
                         className="flex justify-between items-center cursor-pointer  rounded-[8px] p-3  border-1 border-[#AFAFAF] bg-[#FFF] dark:bg-gray-700"
                       >
-                        <div className="flex gap-2 items-center">
+                        <div className="flex items-center gap-2">
                           <span className="text-[#5B5B5B] font-dm-sans text-[12px] font-[600]">
                             Topic {index + 1}
                           </span>
@@ -984,25 +1021,25 @@ const AddLesson = () => {
           )}
 
           {/* Form Actions */}
-          <div className="block justify-between pt-4 md:flex">
-            {currentStep === 2 && (
-              <button
-                type="button"
-                onClick={() => setCurrentStep(1)}
-                className="px-16 cursor-pointer py-3 mt-2 border border-[#F6805C] text-[#F6805C] rounded-[8px] hover:bg-[#F6805C] hover:text-white transition-colors"
-              >
-                Previous
-              </button>
-            )}
-
-            <button
-              type="submit"
-              className="py-[16px] px-[30px] mt-2  -md:w-full cursor-pointer bg-[#F6805C] text-white rounded-[10px] hover:bg-orange-600 transition-colors ml-auto"
-            >
-              {currentStep === 1 ? "Next Step" : "Create Lesson"}
-            </button>
-          </div>
         </form>
+      </div>
+      <div className="justify-between block pt-5 md:flex">
+        {currentStep === 2 && (
+          <button
+            type="button"
+            onClick={() => setCurrentStep(1)}
+            className="px-16 cursor-pointer py-3 mt-2 border border-[#F6805C] text-[#F6805C] rounded-[8px] hover:bg-[#F6805C] hover:text-white transition-colors"
+          >
+            Previous
+          </button>
+        )}
+
+        <button
+          type="submit"
+          className="py-3 px-[30px] mt-2  -md:w-full cursor-pointer bg-[#F6805C] text-white rounded-[10px] hover:bg-orange-600 transition-colors ml-auto"
+        >
+          {currentStep === 1 ? "Next Step" : "Create Lesson"}
+        </button>
       </div>
     </>
   );

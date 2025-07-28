@@ -75,7 +75,7 @@ export default function AddSubscription() {
 
   return (
     <>
-      <h1 className="text-[#794A3A]  text-lg pt-7 pb-7  font-semibold">
+      <h1 className="text-[#794A3A]  text-lg  pb-5  font-semibold">
         Add New Subscription
       </h1>
 
@@ -141,14 +141,22 @@ export default function AddSubscription() {
                 />
               </div>
             </div>
-            {formik.touched.pricingPeriod && formik.errors.pricingPeriod && (
-              <p className="text-sm text-red-600">
-                {formik.errors.pricingPeriod}
-              </p>
-            )}
-            {formik.touched.price && formik.errors.price && (
-              <p className="text-sm text-red-600">{formik.errors.price}</p>
-            )}
+            <div className="flex ">
+              <div className="max-w-36 ">
+                {formik.touched.pricingPeriod &&
+                  formik.errors.pricingPeriod && (
+                    <p className="text-sm text-red-600">
+                      {formik.errors.pricingPeriod}
+                    </p>
+                  )}
+              </div>
+              <div>
+                {" "}
+                {formik.touched.price && formik.errors.price && (
+                  <p className="text-sm text-red-600">{formik.errors.price}</p>
+                )}
+              </div>
+            </div>
           </div>
 
           {/* Subscription Status */}
@@ -163,7 +171,7 @@ export default function AddSubscription() {
                 {...formik.getFieldProps("subscriptionStatus")}
                 className="appearance-none cursor-pointer w-full text-sm px-4 py-4 pr-10 rounded-lg border border-[#AFAFAF] bg-[#FFFFFF] text-[#5B5B5B] font-normal focus:outline-none"
               >
-                <option value="">Active</option>
+                <option value="">Select Status</option>
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
                 <option value="pending">Pending</option>
@@ -194,7 +202,7 @@ export default function AddSubscription() {
 
           {/* Everything in Membership Plus Section */}
           <div className="space-y-4">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <label className="text-[#794A3A] font-semibold text-sm block pb-2">
                 Everything in Membership Plus:
               </label>
@@ -242,7 +250,7 @@ export default function AddSubscription() {
                       <button
                         type="button"
                         onClick={() => removePlanOption(index)}
-                        className="self-start px-3 py-1 mt-1 text-sm text-red-600 rounded-md border border-red-300 transition-colors hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                        className="self-start px-3 py-1 mt-1 text-sm text-red-600 transition-colors border border-red-300 rounded-md hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                       >
                         Remove
                       </button>

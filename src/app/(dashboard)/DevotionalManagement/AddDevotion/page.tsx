@@ -273,7 +273,7 @@ const HumanbrailUpload = () => {
 
   return (
     <div className="">
-      <h1 className="text-[#794A3A]  text-[18px] not-italic font-semibold leading-normal pt-[30px] pb-[20px]">
+      <h1 className="text-[#794A3A]  text-[18px] not-italic font-semibold leading-normal  pb-[20px]">
         Add New Devotional
       </h1>
 

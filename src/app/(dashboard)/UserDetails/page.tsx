@@ -23,16 +23,11 @@ const Settings = () => {
 
   return (
     <main>
-      <div className="mb-4">
-        {/* <h1 className="text-2xl font-bold">Smile</h1> */}
-        <h1  className="py-[30px] text-[#794A3A] font-dm-sans text-[18px] font-semibold leading-normal">
-         Users Detail
-        </h1>
-
-        
-      </div>
+      <h1 className="pb-5 text-[#794A3A] font-dm-sans text-[18px] font-semibold leading-normal">
+        Users Detail
+      </h1>
       {/* Sidebar */}
-      <div className="flex flex-col w-full lg:flex-row gap-3">
+      <div className="flex flex-col w-full gap-3 lg:flex-row">
         <div className=" lg:w-1/4 w-full p-4  h-fit  dark:bg-gray-900    rounded-[20px] bg-[#F9F9F9]">
           <ul className="space-y-2">
             <li>
@@ -56,7 +51,7 @@ const Settings = () => {
                     : "hover:bg-[#F6805C] hover:text-white dark:hover:bg-gray-700"
                 }`}
               >
-            Lesson & Sermons
+                Lesson & Sermons
               </button>
             </li>
             <li>
@@ -68,10 +63,9 @@ const Settings = () => {
                     : "hover:bg-[#F6805C] hover:text-white dark:hover:bg-gray-700"
                 }`}
               >
-             Game Activity
+                Game Activity
               </button>
             </li>
-          
           </ul>
         </div>
         <div className="flex-1 min-w-0">{renderTab()}</div>

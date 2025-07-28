@@ -125,14 +125,16 @@ const TabButton = ({
 const Card = ({
   badge,
   text,
-  onEdit
+  onEdit,
+  onDelete
 }: {
   badge: string;
   text: string;
   onEdit: () => void;
+  onDelete: () => void;
 }) => (
-  <div className="bg-[#F9F9F9] rounded-xl  p-2 relative min-h-28 flex flex-col gap-2">
-    <div className="flex justify-between items-start">
+  <div className="bg-[#F9F9F9] rounded-xl border border-[#AFAFAF]  p-2 relative min-h-28 flex flex-col gap-2">
+    <div className="flex items-start justify-between">
       <span className="inline-block text-base w-fit bg-[#F6805C] text-white  font-normal  px-3 py-1 font-indie rounded-xl mb-2">
         {badge}!
       </span>
@@ -145,6 +147,7 @@ const Card = ({
           <GoPencil className="font-semibold text-white" />
         </button>
         <button
+          onClick={onDelete}
           className="w-6 h-6 cursor-pointer flex items-center justify-center rounded-sm bg-[#FF2D2D] hover:bg-[#d91c1c] transition"
           title="Delete"
         >
@@ -159,15 +162,17 @@ const Card = ({
 const TipsCard = ({
   text,
   date,
-  onEdit
+  onEdit,
+  onDelete
 }: {
   text: string;
   date: string;
   onEdit: () => void;
+  onDelete: () => void;
 }) => (
-  <div className="bg-[#F9F9F9] rounded-xl  p-2 relative min-h-28    flex flex-col  justify-between">
+  <div className="bg-[#F9F9F9] rounded-xl border border-[#AFAFAF] p-2 relative min-h-28    flex flex-col  justify-between">
     <div className="text-[#6B6B6B] text-base font-indie  pb-2 pt-4">{text}</div>
-    <div className="flex justify-between items-center mt-auto">
+    <div className="flex items-center justify-between mt-auto">
       <span className="text-[#656565] text-sm font-normal">{date}</span>
       <div className="flex gap-2">
         <button
@@ -178,6 +183,7 @@ const TipsCard = ({
           <GoPencil className="font-semibold text-white" />
         </button>
         <button
+          onClick={onDelete}
           className="w-6 h-6 flex cursor-pointer items-center justify-center rounded-sm bg-[#FF2D2D] hover:bg-[#d91c1c] transition"
           title="Delete"
         >
@@ -194,6 +200,8 @@ const VerseAndTipsManagement = () => {
   const [showAddTip, setShowAddTip] = useState(false);
   const [showEditVerse, setShowEditVerse] = useState(false);
   const [showEditTip, setShowEditTip] = useState(false);
+  const [versesState, setVersesState] = useState(verses);
+  const [tipsState, setTipsState] = useState(tips);
 
   const [selectedVerse, setSelectedVerse] = useState<{
     id: number;
@@ -222,9 +230,18 @@ const VerseAndTipsManagement = () => {
     setSelectedTip(tip);
     setShowEditTip(true);
   };
+
+  const handleDeleteVerse = (id: number) => {
+    setVersesState((prev) => prev.filter((v) => v.id !== id));
+  };
+
+  const handleDeleteTip = (id: number) => {
+    setTipsState((prev) => prev.filter((t) => t.id !== id));
+  };
+
   return (
-    <div className="md:pt-5">
-      <div className="flex flex-col justify-between items-start mb-4 sm:items-center md:flex-row">
+    <div className="">
+      <div className="flex flex-col items-start justify-between mb-4 sm:items-center md:flex-row">
         <h2 className="flex-wrap text-lg whitespace-nowrap  w-full  font-semibold text-[#794A3A]">
           Verse & Tips Management
         </h2>
@@ -271,20 +288,22 @@ const VerseAndTipsManagement = () => {
       </div>
       <div className="grid grid-cols-1 gap-8 pt-5 sm:grid-cols-2 lg:grid-cols-3">
         {activeTab === "verse"
-          ? verses.map((item) => (
+          ? versesState.map((item) => (
               <Card
                 key={item.id}
                 badge={item.badge}
                 text={item.text}
                 onEdit={() => handleEditClick(item)}
+                onDelete={() => handleDeleteVerse(item.id)}
               />
             ))
-          : tips.map((item) => (
+          : tipsState.map((item) => (
               <TipsCard
                 key={item.id}
                 text={item.text}
                 date={item.date}
                 onEdit={() => handleEditTipClick(item)}
+                onDelete={() => handleDeleteTip(item.id)}
               />
             ))}
       </div>

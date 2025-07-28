@@ -224,8 +224,8 @@ export default function User() {
   };
 
   return (
-    <div className="overflow-x-auto w-full">
-      <h1 className="text-[#794A3A] font-dm-sans text-lg font-semibold pt-7">
+    <div className="w-full overflow-x-auto">
+      <h1 className="text-[#794A3A] font-dm-sans text-lg font-semibold">
         Freemium
       </h1>
       <h1 className="text-[#794A3A] font-dm-sans text-base font-semibold py-5">

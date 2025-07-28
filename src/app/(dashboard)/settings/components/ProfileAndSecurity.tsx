@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Image from "next/image";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { BiPencil } from "react-icons/bi";
 
 const ProfileAndSecurity = () => {
@@ -58,8 +58,8 @@ const ProfileAndSecurity = () => {
         <h3 className="font-semibold text-lg text-[#794A3A] mb-4">Profile</h3>
         <div className="p-3 md:px-6 bg-[#F9F9F9] rounded-xl ">
           <div className="">
-            <div className="flex gap-5 items-center">
-              <div className="flex relative flex-col items-center mb-4">
+            <div className="flex items-center gap-5">
+              <div className="relative flex flex-col items-center mb-4">
                 <Image
                   src={profile.avatar}
                   alt="Profile"
@@ -152,7 +152,7 @@ const ProfileAndSecurity = () => {
                 <input
                   type={showOld ? "text" : "password"}
                   name="oldPassword"
-                  placeholder="Enter"
+                  placeholder="Enter Your Old Password"
                   value={securityFormik.values.oldPassword}
                   onChange={securityFormik.handleChange}
                   onBlur={securityFormik.handleBlur}
@@ -165,9 +165,15 @@ const ProfileAndSecurity = () => {
                   tabIndex={-1}
                 >
                   {showOld ? (
-                    <FaEyeSlash size={18} className="cursor-pointer" />
+                    <AiOutlineEyeInvisible
+                      size={20}
+                      className="text-gray-600 cursor-pointer"
+                    />
                   ) : (
-                    <FaEye size={18} className="cursor-pointer" />
+                    <AiOutlineEye
+                      size={20}
+                      className="text-gray-600 cursor-pointer "
+                    />
                   )}
                 </button>
               </div>
@@ -186,7 +192,7 @@ const ProfileAndSecurity = () => {
                 <input
                   type={showNew ? "text" : "password"}
                   name="newPassword"
-                  placeholder="Enter"
+                  placeholder="Enter New Password"
                   value={securityFormik.values.newPassword}
                   onChange={securityFormik.handleChange}
                   onBlur={securityFormik.handleBlur}
@@ -199,9 +205,15 @@ const ProfileAndSecurity = () => {
                   tabIndex={-1}
                 >
                   {showNew ? (
-                    <FaEyeSlash size={18} className="cursor-pointer" />
+                    <AiOutlineEyeInvisible
+                      size={20}
+                      className="text-gray-600 cursor-pointer"
+                    />
                   ) : (
-                    <FaEye size={18} className="cursor-pointer" />
+                    <AiOutlineEye
+                      size={20}
+                      className="text-gray-600 cursor-pointer"
+                    />
                   )}
                 </button>
               </div>
@@ -220,7 +232,7 @@ const ProfileAndSecurity = () => {
                 <input
                   type={showConfirm ? "text" : "password"}
                   name="confirmPassword"
-                  placeholder="Enter"
+                  placeholder="Enter Confirm Password"
                   value={securityFormik.values.confirmPassword}
                   onChange={securityFormik.handleChange}
                   onBlur={securityFormik.handleBlur}
@@ -233,9 +245,15 @@ const ProfileAndSecurity = () => {
                   tabIndex={-1}
                 >
                   {showConfirm ? (
-                    <FaEyeSlash size={18} className="cursor-pointer" />
+                    <AiOutlineEyeInvisible
+                      size={20}
+                      className="text-gray-600 cursor-pointer"
+                    />
                   ) : (
-                    <FaEye size={18} className="cursor-pointer" />
+                    <AiOutlineEye
+                      size={20}
+                      className="text-gray-600 cursor-pointer"
+                    />
                   )}
                 </button>
               </div>
@@ -247,7 +265,7 @@ const ProfileAndSecurity = () => {
                 )}
             </div>
           </div>
-          <div className="flex gap-4 justify-end mt-8">
+          <div className="flex justify-end gap-4 mt-8">
             <button
               type="button"
               className="px-8 py-3 text-base cursor-pointer rounded-lg border border-[#F6805C] text-[#F6805C] font-medium bg-white hover:bg-[#FFF3F0] transition"

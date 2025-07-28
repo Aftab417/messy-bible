@@ -104,8 +104,8 @@ export default function SignInPage() {
 
   return (
     <main className=" p-3 w-full md:px-4 min-h-screen   bg-[#6AC8C4] ">
-      <div className="flex justify-center items-end w-full">
-        <div className="flex gap-2 justify-center items-center pb-6">
+      <div className="flex items-end justify-center w-full">
+        <div className="flex items-center justify-center gap-2 pb-6">
           <div className="relative w-28 h-28">
             <Image
               src="/images/massy-image/logo.png"
@@ -127,7 +127,7 @@ export default function SignInPage() {
           </p>
 
           <form onSubmit={formik.handleSubmit} className="flex flex-col w-full">
-            <div className="pb-4 mt-3 w-full">
+            <div className="w-full pb-4 mt-3">
               <div className="flex items-center gap-2 rounded-lg border-[0.5px] border-[#AFAFAF] bg-[#FFF] px-6 h-14 dark:border-gray-600 dark:bg-gray-900">
                 <span className="text-xl text-gray-400">
                   <svg
@@ -151,7 +151,7 @@ export default function SignInPage() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
-                  className="min-w-full h-14 text-base bg-transparent rounded-e-lg focus:outline-none"
+                  className="min-w-full text-base bg-transparent h-14 rounded-e-lg focus:outline-none"
                 />
               </div>
               {formik.touched.email && formik.errors.email && (
@@ -161,7 +161,7 @@ export default function SignInPage() {
               )}
             </div>
 
-            <div className="pb-2 w-full">
+            <div className="w-full pb-2">
               <div className="flex items-center gap-2 relative rounded-lg border-[0.5px] border-[#AFAFAF] bg-white dark:border-gray-600 dark:bg-gray-900 px-6 h-14 mt-3">
                 {/* Left Icon */}
                 <span className="text-lg text-gray-400">
@@ -192,14 +192,14 @@ export default function SignInPage() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
-                  className="pr-10 w-full text-base bg-transparent rounded-lg focus:outline-none"
+                  className="w-full pr-10 text-base bg-transparent rounded-lg focus:outline-none"
                 />
 
                 {/* Right Icon (Eye) */}
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 text-gray-500 -translate-y-1/2 cursor-pointer hover:text-gray-700"
+                  className="absolute text-gray-500 -translate-y-1/2 cursor-pointer right-4 top-1/2 hover:text-gray-700"
                 >
                   {showPassword ? (
                     <HiEyeOff className="w-5 h-5" />
@@ -227,7 +227,7 @@ export default function SignInPage() {
               }`}
             >
               {loading ? (
-                <span className="w-5 h-5 capitalize rounded-full border-2 border-white animate-spin border-t-transparent" />
+                <span className="w-5 h-5 capitalize border-2 border-white rounded-full animate-spin border-t-transparent" />
               ) : (
                 "Log in"
               )}

@@ -238,18 +238,18 @@ const Card = ({
 }) => (
   <div className="flex flex-row items-center border border-[#F6805C] rounded-2xl px-2 overflow-hidden sm:px-4 py-3 bg-white min-h-28 w-full">
     {/* Image Section */}
-    <div className="flex flex-shrink-0 justify-center items-center w-20 h-20">
+    <div className="flex items-center justify-center flex-shrink-0 w-20 h-20">
       <Image
         src={image}
         alt="card-img"
         width={80}
         height={80}
-        className="object-cover w-20 h-20 bg-gray-50 rounded-xl border border-gray-200"
+        className="object-cover w-20 h-20 border border-gray-200 bg-gray-50 rounded-xl"
       />
     </div>
     {/* Content Section */}
     <div className="flex flex-col flex-grow px-2 min-w-44">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <span className="text-lg  text-[#794A3A]  truncate">{heading}</span>
       </div>
       <div className="text-[#794A3A] text-xs truncate">{paragraph}</div>
@@ -266,7 +266,7 @@ const Card = ({
       </div>
     </div>
     {/* Status Section */}
-    <div className="flex flex-col justify-between items-end h-full">
+    <div className="flex flex-col items-end justify-between h-full">
       <span
         className="text-xs font-medium"
         style={{ color: status === "Active" ? "#2FFF47" : "#FF2F2F" }}
@@ -359,8 +359,8 @@ const GameManagement = () => {
   }
 
   return (
-    <div className="md:pt-5">
-      <div className="flex flex-col justify-between items-start mb-4 sm:items-center md:flex-row">
+    <div className="">
+      <div className="flex flex-col items-start justify-between mb-4 sm:items-center md:flex-row">
         <h2 className="flex-wrap text-lg whitespace-nowrap  w-full  font-semibold text-[#794A3A]">
           Games Management
         </h2>
@@ -432,7 +432,7 @@ const GameManagement = () => {
 
       {/* Modal for choosing AI/manual generation */}
       {isModalOpen && !showAIModal && !showManualPage && (
-        <div className="flex fixed inset-0 z-50 justify-center items-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
           {/* Overlay */}
           <div
             className="absolute inset-0 bg-black/70"
@@ -443,7 +443,7 @@ const GameManagement = () => {
             {/* Close Button */}
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 transition-colors hover:text-gray-600"
+              className="absolute text-gray-400 transition-colors top-4 right-4 hover:text-gray-600"
             >
               <span className="w-7 h-7 text-[#F6805C] cursor-pointer hover:scale-125 transition-transform duration-300 ease-in-out">
                 ✕

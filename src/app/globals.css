@@ -6,8 +6,8 @@
 }
 
 :root {
-  --font-indie-flower: 'Indie Flower', cursive;
-  --font-inter: 'Inter', sans-serif;
+  --font-indie-flower: "Indie Flower", cursive;
+  --font-inter: "Inter", sans-serif;
 }
 
 .font-indie {
@@ -16,4 +16,13 @@
 
 .font-inter {
   font-family: var(--font-inter);
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

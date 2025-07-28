@@ -119,7 +119,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
 
   return (
     <div
-      className="flex flex-col items-center w-full h-full md:h-[90vh] overflow-y-auto pt-8 p-2 text-[#5B5B5B] bg-[#F9F9F9] scrollbar-hide min-w-72 [&::-webkit-scrollbar]:w-1 
+      className="flex flex-col items-center w-full h-full md:h-[90vh] overflow-y-auto p-2 text-[#5B5B5B] bg-[#F9F9F9] scrollbar-hide max-w-64 [&::-webkit-scrollbar]:w-1 
   [&::-webkit-scrollbar-thumb]:rounded-full 
   [&::-webkit-scrollbar-thumb]:bg-gray-300 
   [&::-webkit-scrollbar-track]:bg-gray-100"
@@ -134,8 +134,8 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
         </button>
       )}
       <div className="flex flex-col items-center justify-between flex-grow w-full pt-[20px]">
-        <div className="flex flex-col justify-center items-center w-full">
-          <nav className="space-y-2 w-full">
+        <div className="flex flex-col items-center justify-center w-full">
+          <nav className="w-full space-y-2">
             {navItems.map((item, index) => {
               const isActive =
                 item.href === "/"
@@ -155,7 +155,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                     <Link
                       href={item.href}
                       onClick={handleLinkClick}
-                      className={`flex items-center min-w-64 w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
+                      className={`flex items-center  w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
                         isActive
                           ? "bg-[#F6805C] text-[#FFFFFF] font-semibold"
                           : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
@@ -170,13 +170,13 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                         alt={item.label}
                         width={20}
                         height={20}
-                        className={`w-5 h-5 object-contain ${isActive ? "":""}`}
+                        className={`w-5 h-5 object-contain ${isActive ? "" : ""}`}
                       />
                       <span>{item.label}</span>
                     </Link>
 
                     {/* Divider Line */}
-                    <div className="my-3 w-full border-t border-gray-300"></div>
+                    <div className="w-full my-3 border-t border-gray-300"></div>
 
                     {/* Content Management Heading */}
                     <div className="text-[#794A3A] font-inter text-sm font-semibold leading-normal">
@@ -197,7 +197,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                           : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
                       }`}
                     >
-                      <div className="flex gap-3 items-center">
+                      <div className="flex items-center gap-3">
                         <Image
                           src={
                             isActive || isDropdownItemActive || isDropdownOpen
@@ -266,12 +266,12 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                         alt={item.label}
                         width={20}
                         height={20}
-                        className={`w-5 h-5 object-contain ${isActive ? "":""}`}
+                        className={`w-5 h-5 object-contain ${isActive ? "" : ""}`}
                       />
                       <span>{item.label}</span>
                     </Link>
 
-                    <div className="my-3 mt-10 w-full"></div>
+                    <div className="w-full my-3 mt-10"></div>
                   </div>
                 );
               }
@@ -296,7 +296,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                     alt={item.label}
                     width={20}
                     height={20}
-                    className={`w-5 h-5 object-contain ${isActive ? "":""}`}
+                    className={`w-5 h-5 object-contain ${isActive ? "" : ""}`}
                   />
                   <span>{item.label}</span>
                 </Link>
@@ -308,7 +308,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
             onClick={handleLogout}
             onMouseEnter={() => setLogoutHover(true)}
             onMouseLeave={() => setLogoutHover(false)}
-            className="flex items-center cursor-pointer min-w-64 w-full gap-2 px-4  py-3 mb-3 hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all"
+            className="flex items-center cursor-pointer mt-3 min-w-64 w-full gap-2 px-4  py-3 mb-3 hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all"
           >
             <Image
               src={logoutHover ? "/images/logout.png" : "/images/logout.png"}

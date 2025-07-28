@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
-import { useRouter } from "next/navigation"; // Note: 'next/navigation' not 'next/router'
+import { useRouter } from "next/navigation";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const dummyUsers = [
   {
-    _id: "1",
+    _id: "01",
     username: "Emma Johnson",
     email: "emma.johnson@example.com",
     CurrentPlan: "Yearly",
@@ -15,7 +16,7 @@ const dummyUsers = [
     is_active: true
   },
   {
-    _id: "2",
+    _id: "02",
     username: "Liam Smith",
     email: "liam.smith@example.org",
     CurrentPlan: "Monthly",
@@ -23,7 +24,7 @@ const dummyUsers = [
     is_active: true
   },
   {
-    _id: "3",
+    _id: "03",
     username: "Olivia Brown",
     email: "olivia.brown@example.net",
     CurrentPlan: "Free",
@@ -31,7 +32,7 @@ const dummyUsers = [
     is_active: false
   },
   {
-    _id: "4",
+    _id: "04",
     username: "Noah Wilson",
     email: "noah.wilson@example.io",
     CurrentPlan: "Free",
@@ -39,7 +40,7 @@ const dummyUsers = [
     is_active: true
   },
   {
-    _id: "5",
+    _id: "05",
     username: "Ava Taylor",
     email: "ava.taylor@example.co",
     CurrentPlan: "Yearly",
@@ -47,7 +48,7 @@ const dummyUsers = [
     is_active: true
   },
   {
-    _id: "6",
+    _id: "06",
     username: "William Anderson",
     email: "william.anderson@example.me",
     CurrentPlan: "Monthly",
@@ -55,7 +56,7 @@ const dummyUsers = [
     is_active: false
   },
   {
-    _id: "7",
+    _id: "07",
     username: "Sophia Martinez",
     email: "sophia.martinez@example.us",
     CurrentPlan: "Free",
@@ -63,7 +64,7 @@ const dummyUsers = [
     is_active: true
   },
   {
-    _id: "8",
+    _id: "08",
     username: "Benjamin Thomas",
     email: "benjamin.thomas@example.biz",
     CurrentPlan: "Yearly",
@@ -71,7 +72,7 @@ const dummyUsers = [
     is_active: true
   },
   {
-    _id: "9",
+    _id: "09",
     username: "Isabella Garcia",
     email: "isabella.garcia@example.info",
     CurrentPlan: "Free",
@@ -411,8 +412,9 @@ const dummyUsers = [
 const UserManagement = () => {
   const [users, setUsers] = useState(dummyUsers);
   const [searchTerm, setSearchTerm] = useState("");
-  const ITEMS_PER_PAGE = 8;
+  const ITEMS_PER_PAGE = 10;
   const [currentPage, setCurrentPage] = useState(1);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const goToPage = (page: number) => {
     if (page >= 1 && page <= totalPages) {
@@ -556,8 +558,7 @@ const UserManagement = () => {
     currentPage * ITEMS_PER_PAGE
   );
 
-  // Export Start
-  const handleExport = () => {
+  const handleExportCSV = () => {
     try {
       const headers = [
         "ID",
@@ -593,28 +594,31 @@ const UserManagement = () => {
       link.click();
       document.body.removeChild(link);
 
-      toast.success("Export completed successfully!");
+      toast.success("CSV export completed!");
     } catch (error) {
-      console.error("Export failed", error);
-      toast.error("Failed to export data");
+      console.error("CSV export failed", error);
+      toast.error("Failed to export CSV");
     }
+  };
+  const handleExportPDF = () => {
+    toast("PDF export not implemented yet");
   };
 
   const router = useRouter();
 
   const handleClick = () => {
-    router.push("/UserDetails"); // Now this will work correctly
+    router.push("/UserDetails");
   };
 
   return (
     <>
-      <div className="justify-between lg:flex">
-        <h1 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold pt-[15px]">
+      <div className="items-center justify-between lg:flex">
+        <h1 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold">
           Users Management
         </h1>
 
-        <div className="gap-4 items-center sm:flex">
-          <div className="flex items-center bg-[#F5F5F5] rounded-[12px] px-[18px] py-[14px] md:w-[250px]">
+        <div className="items-center gap-4 sm:flex">
+          <div className="flex items-center bg-[#F5F5F5] border border-gray-200 rounded-[12px] px-[18px] py-[12px] md:w-[250px]">
             <input
               type="text"
               placeholder="Search User"
@@ -639,12 +643,42 @@ const UserManagement = () => {
             </svg>
           </div>
 
-          <button
-            onClick={handleExport}
-            className="bg-[#FA8059] cursor-pointer hover:bg-[#f96c42] text-white text-sm font-semibold px-[18px] w-full sm:w-[150px] py-[14px] rounded-[12px] transition mt-[10px] sm:mt-[0px]"
-          >
-            Export Data
-          </button>
+          <div className="relative inline-block text-left">
+            <button
+              onClick={() => setDropdownOpen((prev) => !prev)}
+              className="bg-[#FA8059] cursor-pointer hover:bg-[#f96c42] text-white text-sm font-semibold px-[18px] w-full sm:w-[150px] py-[14px] rounded-[12px] transition mt-[10px] sm:mt-[0px] flex items-center justify-between"
+            >
+              <span>Export Data</span>
+              <span className="ml-2">
+                {dropdownOpen ? <FaChevronUp /> : <FaChevronDown />}
+              </span>
+            </button>
+
+            {dropdownOpen && (
+              <div className="absolute right-0 z-10 mt-2 origin-top-right bg-white rounded-md shadow-lg w-44 ring-1 ring-black ring-opacity-5">
+                <div className="py-1">
+                  <button
+                    onClick={() => {
+                      setDropdownOpen(false);
+                      handleExportCSV();
+                    }}
+                    className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
+                  >
+                    Export Data CSV
+                  </button>
+                  <button
+                    onClick={() => {
+                      setDropdownOpen(false);
+                      handleExportPDF();
+                    }}
+                    className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
+                  >
+                    Export Data PDF
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -652,8 +686,8 @@ const UserManagement = () => {
         All Users
       </div>
 
-      <div className="overflow-x-auto w-full">
-        <table className="min-w-[700px] w-full overflow-hidden shadow border-separate border-spacing-x-4">
+      <div className="w-full overflow-x-auto -ms-4">
+        <table className="w-full overflow-hidden border-separate border-spacing-x-4">
           <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold ">
             <tr>
               <th className="p-[5px] border-b border-[#505050] text-center w-fit">
@@ -686,33 +720,44 @@ const UserManagement = () => {
             ) : (
               paginatedUsers.map((user, i) => (
                 <tr key={user._id} className="border-b border-[#DEE2E6]/50 ">
-                  <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    {(currentPage - 1) * ITEMS_PER_PAGE + i + 1}
+                  <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                    {String(
+                      (currentPage - 1) * ITEMS_PER_PAGE + i + 1
+                    ).padStart(2, "0")}
                   </td>
-                  <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+
+                  <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {user.username}
                   </td>
-                  <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                  <td className="p-[5px] text-center  text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {user.email}
                   </td>
-                  <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                  <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {user.CurrentPlan}
                   </td>
-                  <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    <select
-                      value={user.is_active ? "active" : "inactive"}
-                      onChange={(e) =>
-                        handleStatusChange(user._id, e.target.value)
-                      }
-                      className={`p-[6px] font-medium focus:outline-none transition-colors rounded-[6px]  cursor-pointer duration-200 ${getBgClass(user.is_active)}`}
-                    >
-                      <option value="active">Active</option>
-                      <option value="inactive">Inactive</option>
-                    </select>
+                  <td
+                    className={`p-[5px]  text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B] `}
+                  >
+                    <div className={`${getBgClass(user.is_active)} rounded-md`}>
+                      <select
+                        value={user.is_active ? "active" : "inactive"}
+                        onChange={(e) =>
+                          handleStatusChange(user._id, e.target.value)
+                        }
+                        className={`p-[6px]  font-medium focus:outline-none transition-colors   cursor-pointer duration-200 `}
+                      >
+                        <option value="active" className="text-gray-800 ">
+                          Active
+                        </option>
+                        <option value="inactive" className="text-gray-800">
+                          Inactive
+                        </option>
+                      </select>
+                    </div>
                   </td>
-                  <td className="flex justify-center p-3">
+                  <td className="flex justify-center p-3 border-b-1 border-[#F9F9F9]">
                     <button
-                      className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
+                      className="mx-1 text-sm transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
                       onClick={handleClick}
                     >
                       <svg
@@ -751,46 +796,39 @@ const UserManagement = () => {
                 </tr>
               ))
             )}
-
-            {/* Pagination */}
-            <tr className="w-full bg-[#F9F9F9] ">
-              <td colSpan={6}>
-                {/* Replace pagination part with below */}
-                <div className="flex items-center justify-end gap-1 text-sm px-[20px] py-[12px]">
-                  <button
-                    className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                    onClick={() => goToPage(1)}
-                    disabled={currentPage === 1}
-                  >
-                    First
-                  </button>
-                  <button
-                    className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                    onClick={() => goToPage(currentPage - 1)}
-                    disabled={currentPage === 1}
-                  >
-                    Back
-                  </button>
-                  {renderPaginationButtons()}
-                  <button
-                    className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                    onClick={() => goToPage(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                  >
-                    Next
-                  </button>
-                  <button
-                    className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                    onClick={() => goToPage(totalPages)}
-                    disabled={currentPage === totalPages}
-                  >
-                    Last
-                  </button>
-                </div>
-              </td>
-            </tr>
           </tbody>
         </table>
+      </div>
+      <div className="flex bg-[#F9F9F9] mt-4 items-center justify-end gap-1 text-sm px-[20px] py-[12px] ">
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(1)}
+          disabled={currentPage === 1}
+        >
+          First
+        </button>
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Back
+        </button>
+        {renderPaginationButtons()}
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(totalPages)}
+          disabled={currentPage === totalPages}
+        >
+          Last
+        </button>
       </div>
     </>
   );
