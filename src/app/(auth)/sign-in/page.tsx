@@ -128,7 +128,7 @@ export default function SignInPage() {
 
           <form onSubmit={formik.handleSubmit} className="flex flex-col w-full">
             <div className="w-full pb-4 mt-3">
-              <div className="flex items-center gap-2 rounded-lg border-[0.5px] border-[#AFAFAF] bg-[#FFF] px-6 h-14 dark:border-gray-600 dark:bg-gray-900">
+              <div className="flex items-center gap-2 rounded-lg border-[0.5px] border-[#AFAFAF] bg-[#FFF] px-6 h-14 ">
                 <span className="text-xl text-gray-400">
                   <svg
                     width="24"
@@ -162,7 +162,7 @@ export default function SignInPage() {
             </div>
 
             <div className="w-full pb-2">
-              <div className="flex items-center gap-2 relative rounded-lg border-[0.5px] border-[#AFAFAF] bg-white dark:border-gray-600 dark:bg-gray-900 px-6 h-14 mt-3">
+              <div className="flex items-center gap-2 relative rounded-lg border-[0.5px] border-[#AFAFAF] bg-white  px-6 h-14 mt-3">
                 {/* Left Icon */}
                 <span className="text-lg text-gray-400">
                   <svg
