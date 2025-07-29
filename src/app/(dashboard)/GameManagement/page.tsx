@@ -279,7 +279,7 @@ const Card = ({
 
 const GameManagement = () => {
   const [activeTab, setActiveTab] = useState<
-    "bibletriviaquiz" | "dailychallenges" | "bibleanswerquestion"
+    "bibletriviaquiz" | "bibleemojitranslator" | "searchwords"
   >("bibletriviaquiz");
   const [showAddVerse, setShowAddVerse] = useState(false);
   const [showAddTip, setShowAddTip] = useState(false);
@@ -337,9 +337,9 @@ const GameManagement = () => {
   }[] = [];
   if (activeTab === "bibletriviaquiz") {
     currentData = mapToCardData(BibleTriviaQuizData);
-  } else if (activeTab === "bibleanswerquestion") {
+  } else if (activeTab === "searchwords") {
     currentData = mapToCardData(BibleAnswerQuestionData);
-  } else if (activeTab === "dailychallenges") {
+  } else if (activeTab === "bibleemojitranslator") {
     currentData = mapToCardData(DailyChallengesData);
   }
 
@@ -393,14 +393,14 @@ const GameManagement = () => {
           Bible Trivia Quiz
         </TabButton>
         <TabButton
-          active={activeTab === "bibleanswerquestion"}
-          onClick={() => setActiveTab("bibleanswerquestion")}
+          active={activeTab === "searchwords"}
+          onClick={() => setActiveTab("searchwords")}
         >
-          Bible Answer Question
+          Search Words
         </TabButton>
         <TabButton
-          active={activeTab === "dailychallenges"}
-          onClick={() => setActiveTab("dailychallenges")}
+          active={activeTab === "bibleemojitranslator"}
+          onClick={() => setActiveTab("bibleemojitranslator")}
         >
           Daily Challenges
         </TabButton>

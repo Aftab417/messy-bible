@@ -28,13 +28,12 @@ export default function DetailDevotion() {
         </div>
       </div>
 
-      <div className="">
+      <div className="relative w-full h-72">
         <Image
           src="/images/massy-image/devotionimage.png"
           alt=""
-          width={100}
-          height={100}
-          className="w-full h-[150px] cover rounded-[12px]"
+          fill
+          className="object-cover rounded-[12px]"
         />
       </div>
 
