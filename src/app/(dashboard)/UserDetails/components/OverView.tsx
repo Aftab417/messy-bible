@@ -22,7 +22,28 @@ const OverView = () => {
     currentPlan: "Yearly"
   });
 
-  const bibleVersions = ["ESV", "NIV", "KJV", "NASB", "NLT", "MSG"];
+  const bibleVersions = [
+    "KJV", // King James Version (Classic)
+    "NKJV", // New King James Version (Modern KJV)
+    "ESV", // English Standard Version (Balanced)
+    "NIV", // New International Version (Popular)
+    "NASB", // New American Standard Bible (Literal)
+    "NLT", // New Living Translation (Easy Read)
+    "CSB", // Christian Standard Bible (Balanced)
+    "RSV", // Revised Standard Version (Traditional)
+    "NRSV", // New Revised Standard Version (Academic)
+    "AMP", // Amplified Bible (Detailed)
+    "MSG", // The Message (Paraphrase)
+    "CEB", // Common English Bible (Simple)
+    "GNT", // Good News Translation (Clear)
+    "WEB", // World English Bible (Public Domain)
+    "LEB", // Lexham English Bible (Literal)
+    "MEV", // Modern English Version (Conservative)
+    "NET", // New English Translation (Notes)
+    "TPT", // The Passion Translation (Charismatic)
+    "BSB", // Berean Study Bible (Study-Friendly)
+    "NIV84" // NIV 1984 Edition (Legacy)
+  ];
   const currentPlans = ["Yearly", "Monthly", "Free Trial"];
   const interestOptions = [
     "Spiritual Growth & Application",
@@ -56,8 +77,8 @@ const OverView = () => {
 
   return (
     <div className="flex-1 w-full p-6 bg-[#F9F9F9] dark:bg-gray-900 rounded-[16px]">
-      <div className="flex flex-col gap-4 justify-between mb-6 sm:flex-row sm:items-center">
-        <div className="flex gap-4 items-center">
+      <div className="flex flex-col justify-between gap-4 mb-6 sm:flex-row sm:items-center">
+        <div className="flex items-center gap-4">
           <Image
             width={200}
             height={300}
@@ -98,15 +119,15 @@ const OverView = () => {
             onChange={(e) =>
               setFormData((prev) => ({ ...prev, bibleVersion: e.target.value }))
             }
-            className="w-full px-4 py-3 bg-white border border-[#AFAFAF] appearance-none cursor-pointer text-[#656565] font-normal rounded-lg focus:outline-none focus:ring-0 "
+            className="w-full px-4 py-3   bg-white border border-[#AFAFAF] appearance-none cursor-pointer text-[#656565] font-normal rounded-lg focus:outline-none focus:ring-0 "
           >
             {bibleVersions.map((version) => (
-              <option key={version} value={version}>
+              <option className="" key={version} value={version}>
                 {version}
               </option>
             ))}
           </select>
-          <FaChevronDown className="absolute right-4 top-11 ml-auto text-gray-400 text-small" />
+          <FaChevronDown className="absolute ml-auto text-gray-400 right-4 top-11 text-small" />
         </div>
       </div>
 
@@ -159,19 +180,19 @@ const OverView = () => {
         />
       </div>
 
-      <div className="relative mt-4" ref={dropdownRef}>
+      <div className="relative mt-4 " ref={dropdownRef}>
         <label className="block mb-1 dark:text-white text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
           Interest
         </label>
         <div
-          className="w-full px-4 py-2 bg-white text-[#656565] border border-gray-300 font-normal rounded-lg focus:outline-none focus:ring-0  cursor-pointer flex items-center flex-wrap gap-2 min-h-[48px]"
+          className="w-full px-4 py-2 bg-white  text-[#656565] border  border-gray-300 font-normal rounded-lg focus:outline-none focus:ring-0  cursor-pointer flex items-center flex-wrap gap-2 min-h-[48px]"
           onClick={() => setShowInterestDropdown(!showInterestDropdown)}
         >
           {selectedInterests.length > 0 ? (
             selectedInterests.map((interest, index) => (
               <div
                 key={index}
-                className="flex items-center px-3 py-1 bg-[#F6F6F6] rounded-[10px]"
+                className="flex items-center   px-3 py-1 bg-[#F6F6F6] rounded-[10px]"
               >
                 <span className="text-[#794A3A] font-inter text-xs font-normal">
                   {interest}
@@ -192,7 +213,7 @@ const OverView = () => {
         </div>
 
         {showInterestDropdown && (
-          <div className="overflow-y-auto absolute z-10 mt-1 w-full max-h-60 bg-white rounded-lg border border-gray-300 shadow-lg dark:bg-gray-700 dark:border-gray-600">
+          <div className="absolute z-10 w-full mt-1 overflow-y-auto bg-white border border-gray-300 rounded-lg shadow-lg hide-scrollbar max-h-60 dark:bg-gray-700 dark:border-gray-600">
             {interestOptions.map((interest, index) => (
               <div
                 key={index}
@@ -219,7 +240,7 @@ const OverView = () => {
       </div>
 
       <div className="relative mt-4">
-        <label className="block mb-1 dark:text-white text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
+        <label className="block mb-1 dark:text-white  text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
           Current Plan
         </label>
         <select
@@ -227,7 +248,7 @@ const OverView = () => {
           onChange={(e) =>
             setFormData((prev) => ({ ...prev, currentPlan: e.target.value }))
           }
-          className="w-full px-4 py-3 bg-white cursor-pointer appearance-none text-[#656565] font-normal rounded-lg focus:outline-none focus:ring-0 "
+          className="w-full px-4 py-3 border border-[#AFAFAF] bg-white cursor-pointer appearance-none text-[#656565] font-normal rounded-lg focus:outline-none focus:ring-0 "
         >
           {currentPlans.map((plan) => (
             <option key={plan} value={plan}>
@@ -236,7 +257,7 @@ const OverView = () => {
           ))}
         </select>
 
-        <FaChevronDown className="absolute right-4 top-11 ml-auto text-gray-400 text-small" />
+        <FaChevronDown className="absolute ml-auto text-gray-400 right-4 top-11 text-small" />
       </div>
 
       <div className="mt-4">
@@ -250,12 +271,12 @@ const OverView = () => {
             onChange={(e) =>
               setFormData((prev) => ({ ...prev, password: e.target.value }))
             }
-            className="w-full px-4 py-3 bg-white text-[#656565] font-normal rounded-lg focus:outline-none focus:ring-0 "
+            className="w-full px-4 py-3 border border-[#AFAFAF] bg-white text-[#656565] font-normal rounded-lg focus:outline-none focus:ring-0 "
           />
           <button
             type="button"
             onClick={togglePassword}
-            className="absolute right-3 top-4 text-gray-500 cursor-pointer dark:text-gray-100 dark:hover:text-gray-300 hover:text-gray-700"
+            className="absolute text-gray-500 cursor-pointer right-3 top-4 dark:text-gray-100 dark:hover:text-gray-300 hover:text-gray-700"
           >
             {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
           </button>

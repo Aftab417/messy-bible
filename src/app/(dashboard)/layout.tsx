@@ -26,15 +26,11 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
   return (
     <div className="flex flex-col h-screen">
-      {/* Fixed Header */}
-      <header className="fixed top-0 right-0 left-0 z-50">
+      <header className="fixed top-0 left-0 right-0 z-50">
         <Navbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
       </header>
 
       <div className="flex flex-1 pt-[64px]">
-        {" "}
-        {/* Adjust pt-[64px] to match your Navbar height */}
-        {/* Fixed Sidebar for large screens */}
         <aside className="hidden md:block fixed left-0 top-[64px] h-[calc(100vh-64px)]  z-40">
           <Sidebar />
         </aside>
@@ -54,7 +50,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
           <Sidebar onClose={() => setSidebarOpen(false)} />
         </aside>
         {/* Main content */}
-        <main className="overflow-y-auto flex-1 md:ml-72">
+        <main className="flex-1 overflow-y-auto md:ml-64">
           <div className="p-2 mt-5 sm:p-3 md:p-4 lg:py-6 xl:py-6">
             {children}
           </div>

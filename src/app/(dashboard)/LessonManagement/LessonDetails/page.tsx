@@ -107,14 +107,14 @@ export default function LessonDetails() {
   const currentContent = devotionalData[activeDay];
 
   return (
-    <div className="mx-auto min-h-screen bg-white">
-      <div className="lg:flex justify-between pt-[20px] pb-[30px]">
+    <div className="min-h-screen mx-auto bg-white">
+      <div className="items-center justify-between pb-6 lg:flex">
         <h1 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold pt-[15px]">
           The Parables of Jesus
         </h1>
 
-        <div className="gap-4 items-center sm:flex">
-          <button className="bg-[#FA8059] cursor-pointer hover:bg-[#f96c42] text-white text-sm font-semibold px-[6px] w-full sm:w-[160px] py-[14px] rounded-[12px] transition mt-[10px] sm:mt-[0px]">
+        <div className="items-center gap-4 sm:flex">
+          <button className="bg-[#F6805C] cursor-pointer hover:bg-[#f96c42] text-white text-sm font-semibold px-5 py-[14px] rounded-xl transition mt-[10px] sm:mt-[0px]">
             Edit Lesson
           </button>
         </div>

@@ -15,6 +15,14 @@ interface ChartData {
   name: string;
   value: number;
 }
+interface CustomTickProps {
+  x: number;
+  y: number;
+  payload: {
+    value: string;
+  };
+  index: number;
+}
 
 interface DataByYear {
   [key: string]: ChartData[];
@@ -68,9 +76,26 @@ const AreaChartComponent = () => {
     ]
   };
 
+  const renderCustomTicks = ({ x, y, payload, index }: CustomTickProps) => {
+    const dx = index === 0 ? 10 : index === 11 ? -10 : 0;
+
+    return (
+      <text
+        x={x + dx}
+        y={y + 10}
+        fill="#5B5B5B"
+        fontSize={14}
+        fontWeight="700"
+        textAnchor="middle"
+      >
+        {payload.value}
+      </text>
+    );
+  };
+
   return (
-    <div className="w-full  bg-[#F9F9F9] rounded-xl mt-5">
-      <div className="flex justify-between items-center px-7 py-6 mb-6">
+    <div className="w-full  bg-[#F9F9F9] rounded-xl mt-5 overflow-hidden">
+      <div className="flex items-center justify-between py-6 mb-6 px-7">
         <h2 className="text-[#794A3A] text-base font-semibold">Revenue</h2>
 
         <div className="relative">
@@ -87,8 +112,8 @@ const AreaChartComponent = () => {
         </div>
       </div>
 
-      <div className="overflow-x-auto w-full">
-        <div className="min-w-full h-[250px] ">
+      <div className="w-full overflow-x-auto md:overflow-hidden">
+        <div className="min-w-full h-[250px]  ">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
               data={dataByYear[filter]}
@@ -102,7 +127,7 @@ const AreaChartComponent = () => {
               <XAxis
                 dataKey="name"
                 interval={0}
-                tick={{ fill: "#5B5B5B", fontSize: 14, fontWeight: "700" }}
+                tick={renderCustomTicks}
                 axisLine={false}
                 tickLine={false}
               />

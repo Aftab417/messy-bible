@@ -222,29 +222,30 @@ const HumanbrailUpload = () => {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-             className={`w-full px-4 py-[0.85rem]  text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
+            className={`w-full px-4 py-[0.85rem]   text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
               hasError
                 ? "focus:ring-red-500 border-red-500"
                 : "focus:ring-[#F6805C]"
             } rounded-[8px] border ${hasError ? "border-red-500" : "border-[#AFAFAF]"} bg-[#FFF] text-left flex justify-between items-center`}
-         
           >
             <span className="font-inter">{value || placeholder}</span>
             <svg
               className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
               viewBox="0 0 20 20"
-              fill="currentColor"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
             >
               <path
-                fillRule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                clipRule="evenodd"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5.293 7.293L10 12l4.707-4.707"
               />
             </svg>
           </button>
 
           {isOpen && (
-            <div className="absolute z-10 w-full mt-1 bg-white  border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto">
+            <div className="absolute z-10 w-full mt-1 bg-white border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto">
               {options.map((option, index) => (
                 <div key={index}>
                   <button
@@ -258,7 +259,7 @@ const HumanbrailUpload = () => {
                     {option}
                   </button>
                   {index < options.length - 1 && (
-                    <div className="border-b border-gray-200 mx-2"></div>
+                    <div className="mx-2 border-b border-gray-200"></div>
                   )}
                 </div>
               ))}
@@ -266,54 +267,54 @@ const HumanbrailUpload = () => {
           )}
         </div>
         {hasError && (
-          <p className="text-red-500 text-sm mt-1 font-dm-sans">{hasError}</p>
+          <p className="mt-1 text-sm text-red-500 font-dm-sans">{hasError}</p>
         )}
       </div>
     );
   };
 
   return (
-    <div className="" >
-      <h1 className="text-[#794A3A]  text-[18px] not-italic font-semibold leading-normal pt-[30px] pb-[20px]">
-        Edit Devotional
+    <div className="">
+      <h1 className="text-[#794A3A]  text-[18px] not-italic font-semibold leading-normal  pb-[20px]">
+        Add New Devotional
       </h1>
 
       <div className="bg-[#F9F9F9] rounded-[16px] p-[15px] md:p-[30px]">
-        <h2 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold mb-6">
-          Upload Image
+        <h2 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold mb-3">
+          Thumbnail
         </h2>
 
         <form onSubmit={handleSubmit}>
           {/* Image Upload */}
           <div className="pb-6">
-               <div className="border-1 border-[#AFAFAF] rounded-[8px] gap-5 bg-[#FFF]  py-6 mb-4 flex flex-col items-center justify-center relative">
-                               <input
-                                 type="file"
-                                 id="profilePhoto"
-                                 accept="image/*"
-                                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                 onChange={handleImageUpload}
-                               />
-                               {imagePreview ? (
-                                 <div className="relative w-24 h-24 rounded-[10px] overflow-hidden">
-                                   <Image
-                                     src={imagePreview || "/placeholder.svg"}
-                                     alt="Profile Preview"
-                                     layout="fill"
-                                     objectFit="cover"
-                                   />
-                                 </div>
-                               ) : (
-                                 <>
-                                   <Upload className="w-10 h-10 text-[#F6805C] " />
-                                   <p className="text-[#FFF] font-[600] px-[12px] py-[12px] hover:bg-orange-600 bg-[#F6805C] rounded-[8px]  text-[14px] mt-1">
-                                     Upload Image
-                                   </p>
-                                 </>
-                               )}
-                             </div>
+            <div className="border-1 border-[#AFAFAF] rounded-[8px] gap-5 bg-[#FFF]  py-6 mb-4 flex flex-col items-center justify-center relative">
+              <input
+                type="file"
+                id="profilePhoto"
+                accept="image/*"
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                onChange={handleImageUpload}
+              />
+              {imagePreview ? (
+                <div className="relative w-24 h-24 rounded-[10px] overflow-hidden">
+                  <Image
+                    src={imagePreview || "/placeholder.svg"}
+                    alt="Profile Preview"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
+              ) : (
+                <>
+                  <Upload className="w-10 h-10 text-[#F6805C] " />
+                  <p className="text-[#FFF] font-[600] px-[12px] py-[12px] hover:bg-orange-600 bg-[#F6805C] rounded-[8px]  text-[14px] mt-1">
+                    Upload Image
+                  </p>
+                </>
+              )}
+            </div>
             {validationErrors.image && (
-              <p className="text-red-500 text-sm mt-1 font-dm-sans">
+              <p className="mt-1 text-sm text-red-500 font-dm-sans">
                 {validationErrors.image}
               </p>
             )}
@@ -321,8 +322,8 @@ const HumanbrailUpload = () => {
 
           {/* Devoti */}
           <div className="pb-6">
-            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-2">
-              Devoti
+            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-3">
+              Devotional Title
             </label>
             <input
               type="text"
@@ -339,7 +340,7 @@ const HumanbrailUpload = () => {
               }`}
             />
             {validationErrors.devoti && (
-              <p className="text-red-500 text-sm mt-1 font-dm-sans">
+              <p className="mt-1 text-sm text-red-500 font-dm-sans">
                 {validationErrors.devoti}
               </p>
             )}
@@ -347,7 +348,7 @@ const HumanbrailUpload = () => {
 
           {/* Tagline */}
           <div className="pb-6">
-            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-2">
+            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-3">
               Tagline
             </label>
             <input
@@ -365,7 +366,7 @@ const HumanbrailUpload = () => {
               }`}
             />
             {validationErrors.tagline && (
-              <p className="text-red-500 text-sm mt-1 font-dm-sans">
+              <p className="mt-1 text-sm text-red-500 font-dm-sans">
                 {validationErrors.tagline}
               </p>
             )}
@@ -373,8 +374,8 @@ const HumanbrailUpload = () => {
 
           {/* Devotional */}
           <div className="pb-6">
-            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-2">
-              Devotional
+            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-3">
+              Devotional Body
             </label>
             <textarea
               name="devotional"
@@ -393,17 +394,15 @@ const HumanbrailUpload = () => {
               } resize-none`}
             />
             {validationErrors.devotional && (
-              <p className="text-red-500 text-sm mt-1 font-dm-sans">
+              <p className="mt-1 text-sm text-red-500 font-dm-sans">
                 {validationErrors.devotional}
               </p>
             )}
           </div>
 
-          <div className="border-t border-[#E5E5E5] my-6"></div>
-
           {/* Scripture Reference */}
           <div className="pb-6">
-            <h3 className="text-[#794A3A] font-dm-sans text-[16px] font-semibold mb-4">
+            <h3 className="text-[#794A3A] font-dm-sans text-[16px] font-semibold pb-3">
               Scripture Reference
             </h3>
             <CustomSelect
@@ -416,18 +415,16 @@ const HumanbrailUpload = () => {
 
           {/* Status */}
           <div className="pb-6">
-            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-2">
+            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-3">
               Status
             </label>
-           
-             
-              <CustomSelect
-                name="status"
-                value={formData.status}
-                options={statusOptions}
-                placeholder="Select Status"
-              />
-            
+
+            <CustomSelect
+              name="status"
+              value={formData.status}
+              options={statusOptions}
+              placeholder="Select Status"
+            />
           </div>
 
           {/* Submit Button */}
@@ -436,7 +433,7 @@ const HumanbrailUpload = () => {
               type="submit"
               className="px-[40px]  py-3 bg-[#F6805C] cursor-pointer text-white rounded-[10px] hover:bg-orange-600 transition-colors font-dm-sans text-[14px] font-medium"
             >
-           Save
+              Update
             </button>
           </div>
         </form>

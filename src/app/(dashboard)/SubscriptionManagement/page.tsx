@@ -74,7 +74,11 @@ const UserManagement = () => {
       });
 
       if (result.isConfirmed) {
-        setUsers((prev) => prev.filter((user) => user._id !== id));
+        setUsers((prevUsers) => {
+          const filtered = prevUsers.filter((user) => user._id !== id);
+          console.log("After delete:", filtered); // Optional: debug
+          return filtered;
+        });
         toast.success("User deleted successfully!");
       }
     } catch (error) {
@@ -106,12 +110,12 @@ const UserManagement = () => {
 
   return (
     <>
-      <div className="justify-between lg:flex">
-        <h1 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold pt-[15px]">
+      <div className="items-center justify-between lg:flex">
+        <h1 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold ">
           Subscription Management
         </h1>
 
-        <div className="gap-4 items-center sm:flex">
+        <div className="items-center gap-4 sm:flex">
           <button
             onClick={AddSubscription}
             className="bg-[#FA8059] cursor-pointer hover:bg-[#f96c42] text-white text-sm font-semibold px-[18px] w-full sm:w-[200px] py-[14px] rounded-[12px] transition mt-[10px] sm:mt-[0px]"
@@ -125,26 +129,26 @@ const UserManagement = () => {
         All Subscriptions
       </div>
 
-      <div className="overflow-x-auto w-full">
+      <div className="w-full overflow-x-auto -ms-4">
         <table className="min-w-[700px] w-full overflow-hidden shadow border-separate border-spacing-x-4">
-          <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold ">
+          <thead className="text-[#794A3A] text-center font-dm-sans text-[14px] font-semibold ">
             <tr>
-              <th className="p-[5px] border-b border-[#505050] text-start w-fit">
+              <th className="p-[5px] border-b text-center border-[#505050]  w-fit">
                 S.No:
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-start w-fit">
+              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
                 Plan Name
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-start w-fit">
+              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
                 Price
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-start w-fit">
+              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
                 Duration
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-start w-fit">
+              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
                 Status
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-start w-fit">
+              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
                 Actions
               </th>
             </tr>
@@ -162,29 +166,40 @@ const UserManagement = () => {
                   key={subscription._id}
                   className="border-b border-[#DEE2E6]/50 "
                 >
-                  <td className="p-[8px]  border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    {i + 1}
+                  <td className="p-[8px] border-b-1 text-center border-[#F9F9F9] text-[#5B5B5B]">
+                    {(i + 1).toString().padStart(2, "0")}
                   </td>
-                  <td className="p-[8px]  border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+
+                  <td className="p-[8px]  border-b-1 text-center border-[#F9F9F9] text-[#5B5B5B]">
                     {subscription.PlanName}
                   </td>
-                  <td className="p-[8px]  border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                  <td className="p-[8px]  border-b-1 text-center border-[#F9F9F9] text-[#5B5B5B]">
                     {subscription.Price}
                   </td>
-                  <td className="p-[8px]  border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                  <td className="p-[8px]  border-b-1 text-center border-[#F9F9F9] text-[#5B5B5B]">
                     {subscription.Duration}
                   </td>
-                  <td className="p-[8px] text-center  border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    <select
-                      value={subscription.is_active ? "active" : "inactive"}
-                      onChange={(e) =>
-                        handleStatusChange(subscription._id, e.target.value)
-                      }
-                      className={`p-[6px] font-medium focus:outline-none transition-colors rounded-[6px]  cursor-pointer duration-200 ${getBgClass(subscription.is_active)}`}
+                  <td
+                    className={`p-[5px]  text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B] `}
+                  >
+                    <div
+                      className={`${getBgClass(subscription.is_active)} rounded-md`}
                     >
-                      <option value="active">Active</option>
-                      <option value="inactive">Inactive</option>
-                    </select>
+                      <select
+                        value={subscription.is_active ? "active" : "inactive"}
+                        onChange={(e) =>
+                          handleStatusChange(subscription._id, e.target.value)
+                        }
+                        className={`p-[6px]  font-medium focus:outline-none transition-colors   cursor-pointer duration-200 `}
+                      >
+                        <option value="active" className="text-gray-800 ">
+                          Active
+                        </option>
+                        <option value="inactive" className="text-gray-800">
+                          Inactive
+                        </option>
+                      </select>
+                    </div>
                   </td>
                   <td className="flex justify-center p-3">
                     <button

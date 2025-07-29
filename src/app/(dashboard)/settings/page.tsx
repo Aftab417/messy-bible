@@ -19,11 +19,11 @@ const Settings = () => {
 
   return (
     <main>
-      <h1 className="font-dm-sans font-semibold text-lg py-5 align-middle text-[#794A3A] ">
+      <h1 className="font-dm-sans font-semibold text-lg pb-5 align-middle text-[#794A3A] ">
         Setting
       </h1>
       {/* Sidebar */}
-      <div className="flex flex-col gap-2 w-full lg:flex-row">
+      <div className="flex flex-col w-full gap-2 lg:flex-row">
         <div className="lg:w-1/5 w-full p-4 max-h-fit bg-[#f9f9f9]  shadow  rounded-xl">
           <ul className="space-y-2">
             <li>

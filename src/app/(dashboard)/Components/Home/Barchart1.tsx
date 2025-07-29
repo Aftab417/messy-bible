@@ -76,7 +76,7 @@ const Barchart1 = () => {
   return (
     <div className="w-full  bg-[#F9F9F9] max-h-96 min-h-96 rounded-xl">
       {/* Header */}
-      <div className="flex justify-between items-center px-7 py-6 mb-6">
+      <div className="flex items-center justify-between py-6 mb-6 px-7">
         <h2 className="text-[#794A3A] text-base font-semibold">
           User Activity
         </h2>
@@ -97,7 +97,7 @@ const Barchart1 = () => {
       </div>
 
       {/* Scrollable Chart */}
-      <div className="overflow-x-auto w-full">
+      <div className="w-full overflow-x-auto">
         <div className="min-w-[700px] md:min-w-full h-[250px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
@@ -118,7 +118,7 @@ const Barchart1 = () => {
                 tickLine={false}
                 tick={{
                   fill: "#5B5B5B",
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: "bold"
                 }}
               />
@@ -127,7 +127,7 @@ const Barchart1 = () => {
                 tickLine={false}
                 tick={{
                   fill: "#5B5B5B",
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: "bold"
                 }}
                 ticks={[0, 50, 100, 150, 200, 250]}

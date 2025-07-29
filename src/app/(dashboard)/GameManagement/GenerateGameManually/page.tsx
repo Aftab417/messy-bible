@@ -101,12 +101,12 @@ const GenerateGameManually = () => {
 
   return (
     <main>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex items-center justify-between mb-6">
         <h2 className="text-lg  font-semibold text-[#794A3A]">Add New Game</h2>
         <button
           type="button"
           onClick={formik.submitForm}
-          className="px-3 text-sm py-3 text-white bg-[#F6805C] rounded-lg font-semibold hover:opacity-90"
+          className="px-3 text-sm py-3 cursor-pointer text-white bg-[#F6805C] rounded-lg font-semibold hover:opacity-90"
         >
           Publish
         </button>
@@ -126,11 +126,11 @@ const GenerateGameManually = () => {
                   alt="Uploaded Thumbnail"
                   width={120}
                   height={120}
-                  className="object-contain py-5 w-auto h-full rounded-lg"
+                  className="object-contain w-auto h-full py-5 rounded-lg"
                 />
               ) : (
                 // Show icon + upload button initially
-                <div className="flex flex-col justify-center items-center">
+                <div className="flex flex-col items-center justify-center">
                   <Image
                     src="/images/arrowUpFile.png"
                     alt="Upload Icon"
@@ -268,7 +268,7 @@ const GenerateGameManually = () => {
               {({ push }) => (
                 <div className="mb-4">
                   <label className="block mb-2 text-[#794A3A] font-medium">
-                    First Question
+                    Guess the Bible verse
                   </label>
                   {formik.values.questions.map((q, qIdx) => (
                     <div key={qIdx} className="">

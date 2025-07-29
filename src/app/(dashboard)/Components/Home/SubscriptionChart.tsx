@@ -20,7 +20,7 @@ const SubscriptionChart = ({ active = 1000, inactive = 200 }) => {
         Subscription
       </h3>
 
-      <div className="flex relative justify-center items-center h-64">
+      <div className="relative flex items-center justify-center h-64">
         {/* Outer circle - Active */}
         <div
           className="rounded-full bg-[#F6805C] flex items-end justify-start"
@@ -41,14 +41,14 @@ const SubscriptionChart = ({ active = 1000, inactive = 200 }) => {
       </div>
 
       {/* Legend */}
-      <div className="flex gap-6 justify-center mt-5 text-sm">
-        <div className="flex gap-2 items-center">
-          <span className="w-4 h-4 bg-[#F6805C] rounded"></span>
+      <div className="flex items-center justify-start gap-6 mt-5 text-sm">
+        <div className="flex items-center gap-2">
+          <span className="w-6 h-6 bg-[#F6805C] rounded"></span>
           <span className="text-[#794A3A]">{formatNumber(active)} Active</span>
         </div>
 
-        <div className="flex gap-2 items-center">
-          <span className="w-4 h-4 bg-[#FCC978] rounded"></span>
+        <div className="flex items-center gap-2">
+          <span className="w-6 h-6 bg-[#FCC978] rounded"></span>
           <span className="text-[#794A3A]">
             {formatNumber(inactive)} Inactive
           </span>

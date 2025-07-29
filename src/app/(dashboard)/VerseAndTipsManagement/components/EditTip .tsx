@@ -21,10 +21,16 @@ const validationSchema = Yup.object({
 });
 
 const EditTip = ({ onClose, initialData }: EditTipProps) => {
+  const formatDateToISO = (dateStr: string): string => {
+    const parsedDate = new Date(dateStr);
+    if (isNaN(parsedDate.getTime()))
+      return new Date().toISOString().split("T")[0]; // fallback
+    return parsedDate.toISOString().split("T")[0];
+  };
   const formik = useFormik<FormValues>({
     initialValues: {
       text: initialData.text || "",
-      date: initialData.date || new Date().toISOString().split("T")[0]
+      date: formatDateToISO(initialData.date)
     },
     validationSchema,
     enableReinitialize: true,
@@ -34,8 +40,10 @@ const EditTip = ({ onClose, initialData }: EditTipProps) => {
     }
   });
 
+  console.log(initialData);
+
   return (
-    <div className="flex fixed inset-0 z-50 justify-center items-center px-2 backdrop-blur-sm bg-black/50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-2 backdrop-blur-sm bg-black/50">
       <form
         onSubmit={formik.handleSubmit}
         className="flex flex-col gap-6 p-2 sm:p-5 md:p-10 w-full sm:min-w-lg max-w-md bg-[#F9F9F9] rounded-2xl "

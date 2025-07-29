@@ -12,7 +12,7 @@ const dummyUsers = [
   {
     _id: "1",
     lessonName: "Emma Johnson",
-    Createby: "admin",
+    Createby: "User: Touseef",
     StudyPlan: "30 Day Plan",
     Visibility: "Public",
     LessonType: "Manually",
@@ -57,7 +57,7 @@ const dummyUsers = [
   {
     _id: "6",
     lessonName: "William Anderson",
-    Createby: "admin",
+    Createby: "User: Touseef",
     StudyPlan: "30 Day Plan",
     Visibility: "Public",
     LessonType: "AI",
@@ -475,7 +475,7 @@ const UserManagement = () => {
 
   const [isAIModalOpen, setIsAIModalOpen] = useState(false);
 
-  const ITEMS_PER_PAGE = 8;
+  const ITEMS_PER_PAGE = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
   const goToPage = (page: number) => {
@@ -780,16 +780,16 @@ const UserManagement = () => {
   //##############> Modal End  <################
   return (
     <>
-      <div className="justify-between lg:flex">
-        <h1 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold pt-[15px]">
+      <div className="items-center justify-between lg:flex">
+        <h1 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold">
           Lesson Management
         </h1>
 
-        <div className="gap-4 items-center sm:flex">
-          <div className="flex items-center bg-[#F5F5F5] rounded-[12px] px-[18px] py-[14px] md:w-[250px]">
+        <div className="items-center gap-4 sm:flex">
+          <div className="flex items-center bg-[#F5F5F5] border border-gray-200 rounded-[12px] px-[18px] py-[12px] md:w-[250px]">
             <input
               type="text"
-              placeholder="Search User"
+              placeholder="Search Lesson"
               className="w-full text-sm text-gray-700 bg-transparent focus:outline-none placeholder:text-gray-400"
               value={searchTerm}
               onChange={(e) => {
@@ -825,8 +825,8 @@ const UserManagement = () => {
         All Lessons
       </div>
 
-      <div className="overflow-x-auto w-full">
-        <table className="min-w-[700px] w-full overflow-hidden shadow border-separate border-spacing-x-4">
+      <div className="w-full overflow-x-auto -ms-4">
+        <table className="w-full overflow-hidden border-separate shadow border-spacing-x-4">
           <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold ">
             <tr>
               <th className="p-[5px] border-b border-[#505050] text-center w-fit">
@@ -862,26 +862,28 @@ const UserManagement = () => {
             ) : (
               paginatedUsers.map((user, i) => (
                 <tr key={user._id} className="border-b border-[#DEE2E6]/50 ">
-                  <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    {(currentPage - 1) * ITEMS_PER_PAGE + i + 1}
+                  <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                    {String(
+                      (currentPage - 1) * ITEMS_PER_PAGE + i + 1
+                    ).padStart(2, "0")}
                   </td>
-                  <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                  <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {user.lessonName}
                   </td>
-                  <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                  <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {user.Createby}
                   </td>
-                  <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                  <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {user.StudyPlan}
                   </td>
-                  <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                  <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {user.Visibility}
                   </td>
 
-                  <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                  <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {user.LessonType}
                   </td>
-                  <td className="flex justify-center p-3">
+                  <td className="flex justify-center p-3 text-sm">
                     <button
                       className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
                       onClick={handleClick}
@@ -900,7 +902,7 @@ const UserManagement = () => {
                         />
                       </svg>
                     </button>
-                    <button className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"></button>
+
                     <button
                       onClick={() => handleEdit(user as Lesson)}
                       className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
@@ -944,51 +946,47 @@ const UserManagement = () => {
             )}
 
             {/* Pagination */}
-            <tr className="w-full bg-[#F9F9F9] ">
-              <td colSpan={7}>
-                {/* Replace pagination part with below */}
-                <div className="flex items-center justify-end gap-1 text-sm px-[20px] py-[12px]">
-                  <button
-                    className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                    onClick={() => goToPage(1)}
-                    disabled={currentPage === 1}
-                  >
-                    First
-                  </button>
-                  <button
-                    className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                    onClick={() => goToPage(currentPage - 1)}
-                    disabled={currentPage === 1}
-                  >
-                    Back
-                  </button>
-                  {renderPaginationButtons()}
-                  <button
-                    className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                    onClick={() => goToPage(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                  >
-                    Next
-                  </button>
-                  <button
-                    className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                    onClick={() => goToPage(totalPages)}
-                    disabled={currentPage === totalPages}
-                  >
-                    Last
-                  </button>
-                </div>
-              </td>
-            </tr>
           </tbody>
         </table>
+      </div>
+
+      <div className="flex bg-[#F9F9F9] mt-4 items-center justify-end gap-1 text-sm px-[20px] py-[12px] ">
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(1)}
+          disabled={currentPage === 1}
+        >
+          First
+        </button>
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Back
+        </button>
+        {renderPaginationButtons()}
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(totalPages)}
+          disabled={currentPage === totalPages}
+        >
+          Last
+        </button>
       </div>
 
       {/* Modal Start Start */}
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="flex fixed inset-0 z-50 justify-center items-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
           {/* Overlay */}
           <div className="absolute inset-0 bg-black/70" onClick={closeModal} />
 
@@ -997,7 +995,7 @@ const UserManagement = () => {
             {/* Close Button */}
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 text-gray-400 transition-colors hover:text-gray-600"
+              className="absolute text-gray-400 transition-colors top-4 right-4 hover:text-gray-600"
             >
               <X className="w-7 h-7 text-[#F6805C]  cursor-pointer hover:scale-125 transition-transform duration-300 ease-in-out" />
             </button>
@@ -1027,7 +1025,7 @@ const UserManagement = () => {
 
       {/*##################> Second Modal Start<################  */}
       {isAIModalOpen && (
-        <div className="flex fixed inset-0 z-50 justify-center items-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div
             className="absolute inset-0 bg-black/70"
             onClick={() => setIsAIModalOpen(false)}
@@ -1144,7 +1142,7 @@ const UserManagement = () => {
                         type="radio"
                         name="visibility"
                         value="public"
-                        className="w-4 h-4 rounded-full border-2 border-red-400 transition appearance-none checked:bg-red-400 checked:border-red-400"
+                        className="w-4 h-4 transition border-2 border-red-400 rounded-full appearance-none checked:bg-red-400 checked:border-red-400"
                       />
                     </label>
 
@@ -1156,7 +1154,7 @@ const UserManagement = () => {
                         type="radio"
                         name="visibility"
                         value="private"
-                        className="w-4 h-4 rounded-full border-2 border-red-400 transition appearance-none checked:bg-red-400 checked:border-red-400"
+                        className="w-4 h-4 transition border-2 border-red-400 rounded-full appearance-none checked:bg-red-400 checked:border-red-400"
                       />
                     </label>
                   </div>

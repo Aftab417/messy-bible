@@ -214,7 +214,7 @@ const HumanbrailUpload = () => {
     return (
       <div className="pb-[15px]">
         {label && (
-          <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
+          <label className="text-[#794A3A]  text-[16px] font-medium leading-none block pb-[10px]">
             {label}
           </label>
         )}
@@ -232,12 +232,14 @@ const HumanbrailUpload = () => {
             <svg
               className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
               viewBox="0 0 20 20"
-              fill="currentColor"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
             >
               <path
-                fillRule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                clipRule="evenodd"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5.293 7.293L10 12l4.707-4.707"
               />
             </svg>
           </button>
@@ -252,7 +254,7 @@ const HumanbrailUpload = () => {
                       handleSelectChange(name, option);
                       setIsOpen(false);
                     }}
-                    className="w-full px-4 py-3 text-left hover:bg-gray-50  text-[#656565]  font-mono text-[14px] transition-colors font-indie"
+                    className="w-full px-4 py-3 text-left hover:bg-gray-50  text-[#656565]   text-[14px] transition-colors "
                   >
                     {option}
                   </button>
@@ -273,13 +275,13 @@ const HumanbrailUpload = () => {
 
   return (
     <div className="">
-      <h1 className="text-[#794A3A]  text-[18px] not-italic font-semibold leading-normal pt-[30px] pb-[20px]">
+      <h1 className="text-[#794A3A]  text-[18px] not-italic font-semibold leading-normal  pb-[20px]">
         Add New Devotional
       </h1>
 
       <div className="bg-[#F9F9F9] rounded-[16px] p-[15px] md:p-[30px]">
-        <h2 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold mb-6">
-          Upload Image
+        <h2 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold mb-3">
+          Thumbnail
         </h2>
 
         <form onSubmit={handleSubmit}>
@@ -320,8 +322,8 @@ const HumanbrailUpload = () => {
 
           {/* Devoti */}
           <div className="pb-6">
-            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-2">
-              Devoti
+            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-3">
+              Devotional Title
             </label>
             <input
               type="text"
@@ -346,7 +348,7 @@ const HumanbrailUpload = () => {
 
           {/* Tagline */}
           <div className="pb-6">
-            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-2">
+            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-3">
               Tagline
             </label>
             <input
@@ -372,8 +374,8 @@ const HumanbrailUpload = () => {
 
           {/* Devotional */}
           <div className="pb-6">
-            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-2">
-              Devotional
+            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-3">
+              Devotional Body
             </label>
             <textarea
               name="devotional"
@@ -398,11 +400,9 @@ const HumanbrailUpload = () => {
             )}
           </div>
 
-          <div className="border-t border-[#E5E5E5] my-6"></div>
-
           {/* Scripture Reference */}
           <div className="pb-6">
-            <h3 className="text-[#794A3A] font-dm-sans text-[16px] font-semibold mb-4">
+            <h3 className="text-[#794A3A] font-dm-sans text-[16px] font-semibold pb-3">
               Scripture Reference
             </h3>
             <CustomSelect
@@ -415,7 +415,7 @@ const HumanbrailUpload = () => {
 
           {/* Status */}
           <div className="pb-6">
-            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-2">
+            <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-3">
               Status
             </label>
 
