@@ -491,14 +491,14 @@ const UserManagement = () => {
         text: "You won't be able to revert this!",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#F6805C",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
       });
 
       if (result.isConfirmed) {
         setUsers((prev) => prev.filter((user) => user._id !== id));
-        toast.success("User deleted successfully!");
+        toast.success("Lesson deleted successfully!");
       }
     } catch (error) {
       console.error("Delete failed", error);
@@ -734,8 +734,8 @@ const UserManagement = () => {
     // Handle radio button changes
 
     return (
-      <div className="pb-[15px]">
-        <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
+      <div className="pb-4">
+        <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-2">
           {label}
         </label>
         <div className="relative">
@@ -752,7 +752,7 @@ const UserManagement = () => {
           </button>
 
           {isOpen && (
-            <div className="absolute z-10 w-full mt-1 bg-white  border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto">
+            <div className="absolute z-10 w-full mt-1 bg-white  border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto hide-scrollbar">
               {options.map((option, index) => (
                 <div key={index}>
                   <button
@@ -761,7 +761,7 @@ const UserManagement = () => {
                       handleSelectChange(name, option);
                       setIsOpen(false);
                     }}
-                    className="w-full px-4 py-3 text-left hover:bg-gray-50  text-[#656565]  font-mono text-[14px] transition-colors font-indie"
+                    className="w-full px-4 py-3 text-left hover:bg-gray-50  text-[#656565]   text-[14px] transition-colors "
                   >
                     {option}
                   </button>
@@ -1043,12 +1043,12 @@ const UserManagement = () => {
 
               {/* Form Header */}
               <h2 className=" text-[20px] font-[500] leading-normal text-[#794A3A] Fredoka text-center mb-8">
-                + AI Lesson Regeneration
+                + AI Lesson Generation
               </h2>
 
               {/* Form Body */}
-              <form className="space-y-4">
-                <div>
+              <form className="">
+                <div className="pb-4">
                   <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
                     Image Generation
                   </label>
@@ -1058,21 +1058,30 @@ const UserManagement = () => {
                     </span>
                     <div
                       onClick={() => toggle(setAiMatching)}
-                      className={`w-12  h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
+                      className={`w-10  h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
                         aiMatching ? "bg-[#F6805C]" : "bg-gray-400"
                       }`}
                     >
                       <div
                         className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${
-                          aiMatching ? "translate-x-6" : "translate-x-0"
+                          aiMatching ? "translate-x-4" : "translate-x-0"
                         }`}
                       ></div>
                     </div>
                   </div>
                 </div>
 
+                {/* Bible Reference */}
+                <CustomSelect
+                  label="Bible Reference"
+                  name="bibleReference"
+                  value={formData.bibleReference}
+                  options={bibleReferences}
+                  placeholder="Select Bible Reference e.g., Galatians 5:22"
+                />
+
                 {/* Lesson Name */}
-                <div className="pb-[15px]">
+                <div className="pb-4">
                   <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
                     Lesson Name
                   </label>
@@ -1087,7 +1096,7 @@ const UserManagement = () => {
                 </div>
 
                 {/* Description */}
-                <div className="pb-[15px]">
+                <div className="pb-4">
                   <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
                     Description
                   </label>
@@ -1109,15 +1118,6 @@ const UserManagement = () => {
                   placeholder="Select Age Group e.g, 25-30"
                 />
 
-                {/* Bible Reference */}
-                <CustomSelect
-                  label="Bible Reference"
-                  name="bibleReference"
-                  value={formData.bibleReference}
-                  options={bibleReferences}
-                  placeholder="Select Bible Reference e.g., Galatians 5:22"
-                />
-
                 {/* Study Plan */}
                 <CustomSelect
                   label="Study Plan"
@@ -1128,9 +1128,9 @@ const UserManagement = () => {
                 />
 
                 {/* Save As */}
-                <div className="pb-[15px]">
+                <div className="pb-4">
                   <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
-                    Save As
+                    Save A
                   </label>
 
                   <div className="grid gap-4">
@@ -1142,7 +1142,11 @@ const UserManagement = () => {
                         type="radio"
                         name="visibility"
                         value="public"
-                        className="w-4 h-4 transition border-2 border-red-400 rounded-full appearance-none checked:bg-red-400 checked:border-red-400"
+                        // checked={formData.saveAs === "public"}
+                        // onChange={() => handleRadioChange("public")}
+                        className="appearance-none w-5 h-5 border-2 border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
+                 before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
+                 checked:before:scale-100"
                       />
                     </label>
 
@@ -1154,7 +1158,11 @@ const UserManagement = () => {
                         type="radio"
                         name="visibility"
                         value="private"
-                        className="w-4 h-4 transition border-2 border-red-400 rounded-full appearance-none checked:bg-red-400 checked:border-red-400"
+                        // checked={formData.saveAs === "private"}
+                        // onChange={() => handleRadioChange("private")}
+                        className="appearance-none w-5 h-5 border-2 border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
+                 before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
+                 checked:before:scale-100"
                       />
                     </label>
                   </div>
@@ -1172,7 +1180,7 @@ const UserManagement = () => {
                     type="submit"
                     className="hover:bg-transparent text-[14px] font-[600]    py-3 rounded-[10px] px-[10]  border-1 hover:border-[#F6805C] hover:text-[#F6805C] bg-[#F6805C]  text-white  cursor-pointer"
                   >
-                    Regenerate Lesson
+                    Generate Lesson
                   </button>
                 </div>
               </form>

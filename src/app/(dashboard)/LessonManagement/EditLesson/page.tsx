@@ -602,10 +602,13 @@ const AddLesson = () => {
 
   return (
     <>
-      <div className="justify-between lg:flex ">
-        <h1 className="text-[#794A3A]  font-dm-sans text-[18px] font-semibold pb-3">
+      <div className="items-center justify-between px-1 mb-2 lg:flex ">
+        <h1 className="text-[#794A3A]  font-dm-sans text-base font-semibold pb-3">
           {currentStep === 1 ? `Edit Lesson ` : "Edit Topics"}
         </h1>
+        <button className="text-white bg-[#F6805C] rounded-lg py-2 px-6 font-dm-sans text-base font-semibold pb-3">
+          Edit Topics
+        </button>
       </div>
 
       <div className="bg-[#F9F9F9] dark:bg-gray-900 dark:text-white rounded-[16px] w-full max-w-7xl p-6">
@@ -1038,7 +1041,7 @@ const AddLesson = () => {
           type="submit"
           className="py-3 px-[30px] mt-2  -md:w-full cursor-pointer bg-[#F6805C] text-white rounded-[10px] hover:bg-orange-600 transition-colors ml-auto"
         >
-          {currentStep === 1 ? "Next Step" : "Create Lesson"}
+          {currentStep === 1 ? "Next " : "Create Lesson"}
         </button>
       </div>
     </>

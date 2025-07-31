@@ -101,11 +101,27 @@ const UserManagement = () => {
 
   const router = useRouter();
 
-  const handleClick = () => {
-    router.push("/SubscriptionManagement/ViewPlansUsers");
+  const handleClick = (planName: string) => {
+    router.push(
+      `/SubscriptionManagement/ViewPlansUsers?plan=${encodeURIComponent(planName)}`
+    );
   };
+
   const AddSubscription = () => {
     router.push("/SubscriptionManagement/AddSubscription");
+  };
+
+  const handleEdit = (subscription: Subscription) => {
+    router.push(
+      `/SubscriptionManagement/EditSubscription?` +
+        new URLSearchParams({
+          id: subscription._id,
+          name: subscription.PlanName,
+          price: subscription.Price,
+          duration: subscription.Duration,
+          active: subscription.is_active.toString()
+        }).toString()
+    );
   };
 
   return (
@@ -183,7 +199,7 @@ const UserManagement = () => {
                     className={`p-[5px]  text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B] `}
                   >
                     <div
-                      className={`${getBgClass(subscription.is_active)} rounded-md`}
+                      className={`${getBgClass(subscription.is_active)} rounded-md w-fit px-2 mx-auto`}
                     >
                       <select
                         value={subscription.is_active ? "active" : "inactive"}
@@ -204,7 +220,7 @@ const UserManagement = () => {
                   <td className="flex justify-center p-3">
                     <button
                       className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
-                      onClick={handleClick}
+                      onClick={() => handleClick(subscription.PlanName)}
                     >
                       <svg
                         width="20"
@@ -220,7 +236,10 @@ const UserManagement = () => {
                         />
                       </svg>
                     </button>
-                    <button className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110">
+                    <button
+                      onClick={() => handleEdit(subscription)}
+                      className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
+                    >
                       <svg
                         width="20"
                         height="20"

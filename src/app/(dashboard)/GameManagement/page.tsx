@@ -12,63 +12,63 @@ const BibleTriviaQuizData = [
   {
     id: 1,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With AI...",
     image: "/images/quiz.png",
     status: "Active"
   },
   {
     id: 2,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With Manually...",
     image: "/images/quiz.png",
     status: "Active"
   },
   {
     id: 3,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With Manually...",
     image: "/images/quiz.png",
     status: "Active"
   },
   {
     id: 4,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With AI...",
     image: "/images/quiz.png",
     status: "Active"
   },
   {
     id: 5,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With Manually...",
     image: "/images/quiz.png",
     status: "Active"
   },
   {
     id: 6,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With AI...",
     image: "/images/quiz.png",
-    status: "Active"
+    status: "inActive"
   },
   {
     id: 7,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With AI...",
     image: "/images/quiz.png",
     status: "InActive"
   },
   {
     id: 8,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With Manually...",
     image: "/images/quiz.png",
     status: "Active"
   },
   {
     id: 9,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With AI...",
     image: "/images/quiz.png",
     status: "Active"
   }
@@ -77,130 +77,130 @@ const BibleAnswerQuestionData = [
   {
     id: 1,
     heading: "Test Your answer IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With AI...",
     image: "/images/ans.png",
     status: "Active"
   },
   {
     id: 2,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With AI...",
     image: "/images/ans.png",
     status: "Active"
   },
   {
     id: 3,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With AI...",
     image: "/images/ans.png",
     status: "Active"
   },
   {
     id: 4,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With AI...",
     image: "/images/ans.png",
     status: "Active"
   },
   {
     id: 5,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With Manually...",
     image: "/images/ans.png",
     status: "InActive"
   },
   {
     id: 6,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With Manually...",
     image: "/images/ans.png",
     status: "Active"
   },
   {
     id: 7,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With Manually...",
     image: "/images/ans.png",
     status: "Active"
   },
   {
     id: 8,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With Manually...",
     image: "/images/ans.png",
     status: "Active"
   },
   {
     id: 9,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With Manually...",
     image: "/images/ans.png",
-    status: "Active"
+    status: "inActive"
   }
 ];
 const DailyChallengesData = [
   {
     id: 1,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With AI...",
     image: "/images/challenges.png",
     status: "Active"
   },
   {
     id: 2,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With AI...",
     image: "/images/challenges.png",
-    status: "Active"
+    status: "inActive"
   },
   {
     id: 3,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With AI...",
     image: "/images/challenges.png",
     status: "Active"
   },
   {
     id: 4,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With Manually...",
     image: "/images/challenges.png",
     status: "Active"
   },
   {
     id: 5,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With Manually...",
     image: "/images/challenges.png",
-    status: "Active"
+    status: "inActive"
   },
   {
     id: 6,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With Manually...",
     image: "/images/challenges.png",
     status: "Active"
   },
   {
     id: 7,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With AI...",
     image: "/images/challenges.png",
     status: "Active"
   },
   {
     id: 8,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With AI...",
     image: "/images/challenges.png",
     status: "Active"
   },
   {
     id: 9,
     heading: "Test Your Faith IQ!",
-    paragraph: '"For I know the plans I have for you," declares the LORD...',
+    paragraph: "Generate With Manually...",
     image: "/images/challenges.png",
-    status: "Active"
+    status: "inActive"
   }
 ];
 
@@ -214,8 +214,10 @@ const TabButton = ({
   children: React.ReactNode;
 }) => (
   <button
-    className={`px-1 min-w-fit  lg:min-w-56 whitespace-nowrap md:px-2 lg:px-6 xl:px-8 py-2 md:py-3 cursor-pointer text-xs sm:text-sm md:text-xs lg:text-sm rounded-t-xl font-semibold focus:outline-none transition-colors duration-200 ${
-      active ? "bg-[#F6805C] text-white" : "bg-transparent text-[#F6805C]"
+    className={`px-1 min-w-fit  lg:min-w-56 whitespace-nowrap md:px-2 lg:px-6 xl:px-8 py-2 md:py-3  cursor-pointer text-xs sm:text-sm md:text-xs lg:text-base rounded-t-xl font-semibold focus:outline-none transition-colors duration-200 ${
+      active
+        ? "bg-[#F6805C] text-white border-2 border-[#F6805C]"
+        : "bg-transparent text-[#F6805C] border-2 border-[#F6805C]"
     }`}
     onClick={onClick}
   >
@@ -244,7 +246,7 @@ const Card = ({
         alt="card-img"
         width={80}
         height={80}
-        className="object-cover w-20 h-20 border border-gray-200 bg-gray-50 rounded-xl"
+        className="object-cover w-24 h-24 border border-gray-200 bg-gray-50 rounded-xl"
       />
     </div>
     {/* Content Section */}
@@ -252,8 +254,8 @@ const Card = ({
       <div className="flex items-center justify-between">
         <span className="text-lg  text-[#794A3A]  truncate">{heading}</span>
       </div>
-      <div className="text-[#794A3A] text-xs truncate">{paragraph}</div>
-      <div className="flex gap-3 mt-1">
+      <div className="text-[#794A3A] text-xs truncate mt-1">{paragraph}</div>
+      <div className="flex gap-3 mt-2">
         <button
           onClick={onEdit}
           className="px-4 py-1.5 text-sm cursor-pointer rounded-lg bg-[#F6805C] text-white hover:opacity-90 transition"
@@ -374,7 +376,7 @@ const GameManagement = () => {
         </div>
       </div>
       <div
-        className="flex-wrap gap-1 sm:gap-3 md:gap-2 lg:gap-6"
+        className="flex-wrap "
         style={{
           borderBottom: "1.7px dashed #F6805C",
           borderBottomWidth: "2px",

@@ -23,26 +23,26 @@ const OverView = () => {
   });
 
   const bibleVersions = [
-    "KJV", // King James Version (Classic)
-    "NKJV", // New King James Version (Modern KJV)
-    "ESV", // English Standard Version (Balanced)
-    "NIV", // New International Version (Popular)
-    "NASB", // New American Standard Bible (Literal)
-    "NLT", // New Living Translation (Easy Read)
-    "CSB", // Christian Standard Bible (Balanced)
-    "RSV", // Revised Standard Version (Traditional)
-    "NRSV", // New Revised Standard Version (Academic)
-    "AMP", // Amplified Bible (Detailed)
-    "MSG", // The Message (Paraphrase)
-    "CEB", // Common English Bible (Simple)
-    "GNT", // Good News Translation (Clear)
-    "WEB", // World English Bible (Public Domain)
-    "LEB", // Lexham English Bible (Literal)
-    "MEV", // Modern English Version (Conservative)
-    "NET", // New English Translation (Notes)
-    "TPT", // The Passion Translation (Charismatic)
-    "BSB", // Berean Study Bible (Study-Friendly)
-    "NIV84" // NIV 1984 Edition (Legacy)
+    "King James Version", // Classic
+    "New King James Version", // Modern KJV
+    "English Standard Version", // Balanced
+    "New International Version", // Popular
+    "New American Standard Bible", // Literal
+    "New Living Translation", // Easy Read
+    "Christian Standard Bible", // Balanced
+    "Revised Standard Version", // Traditional
+    "New Revised Standard Version", // Academic
+    "Amplified Bible", // Detailed
+    "The Message", // Paraphrase
+    "Common English Bible", // Simple
+    "Good News Translation", // Clear
+    "World English Bible", // Public Domain
+    "Lexham English Bible", // Literal
+    "Modern English Version", // Conservative
+    "New English Translation", // Notes
+    "The Passion Translation", // Charismatic
+    "Berean Study Bible", // Study-Friendly
+    "New International Version 1984 Edition" // Legacy
   ];
   const currentPlans = ["Yearly", "Monthly", "Free Trial"];
   const interestOptions = [
@@ -57,7 +57,7 @@ const OverView = () => {
   // Close dropdown when clicking outside
 
   const togglePassword = () => setShowPassword(!showPassword);
-
+  const statusOptions = ["Active", "Inactive"];
   const toggleInterest = (interest: string) => {
     if (selectedInterests.includes(interest)) {
       setSelectedInterests(
@@ -105,9 +105,9 @@ const OverView = () => {
           </label>
           <input
             type="text"
-            readOnly
             value={formData.name}
-            className="w-full px-4 py-3 bg-[#D7D7D7] text-[#656565] font-normal rounded-lg focus:outline-none focus:ring-0  cursor-not-allowed border border-[#AFAFAF]"
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            className="w-full px-4 py-3 bg-white text-[#656565] font-normal rounded-lg focus:outline-none focus:ring-0 border border-[#AFAFAF]"
           />
         </div>
         <div className="relative">
@@ -119,7 +119,7 @@ const OverView = () => {
             onChange={(e) =>
               setFormData((prev) => ({ ...prev, bibleVersion: e.target.value }))
             }
-            className="w-full px-4 py-3   bg-white border border-[#AFAFAF] appearance-none cursor-pointer text-[#656565] font-normal rounded-lg focus:outline-none focus:ring-0 "
+            className="w-full px-4 py-3  hide-scrollbar  bg-white border border-[#AFAFAF] appearance-none cursor-pointer text-[#656565] font-normal rounded-lg focus:outline-none focus:ring-0 "
           >
             {bibleVersions.map((version) => (
               <option className="" key={version} value={version}>
@@ -144,16 +144,29 @@ const OverView = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-4 mt-4 lg:grid-cols-2 md:gap-6">
-        <div>
+        <div className="relative">
           <label className="block mb-1 dark:text-white text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
             Status
           </label>
-          <input
-            type="text"
-            readOnly
-            value={formData.status}
-            className="w-full px-4 py-3  font-normal rounded-lg focus:outline-none focus:ring-0  cursor-not-allowed bg-[#D7D7D7] text-[#656565] border border-[#AFAFAF]"
-          />
+          <div className="relative cursor-pointer">
+            <select
+              value={formData.status}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, status: e.target.value }))
+              }
+              className="w-full px-4 py-3 bg-white border border-[#AFAFAF] text-[#656565] font-normal rounded-lg focus:outline-none focus:ring-0 appearance-none cursor-pointer opacity-0 absolute inset-0"
+            >
+              {statusOptions.map((status) => (
+                <option key={status} value={status}>
+                  {status}
+                </option>
+              ))}
+            </select>
+            <div className="w-full px-4 py-3 bg-white border border-[#AFAFAF] text-[#656565] font-normal rounded-lg flex items-center justify-between">
+              <span>{formData.status}</span>
+              <FaChevronDown className="text-gray-400 text-small" />
+            </div>
+          </div>
         </div>
         <div>
           <label className="block mb-1 dark:text-white text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
@@ -174,9 +187,9 @@ const OverView = () => {
         </label>
         <input
           type="text"
-          readOnly
           value={formData.age}
-          className="w-full px-4 py-3   font-normal rounded-lg focus:outline-none focus:ring-0  cursor-not-allowed bg-[#D7D7D7] text-[#656565] border border-[#AFAFAF]"
+          onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+          className="w-full px-4 py-3 bg-white border border-[#AFAFAF] text-[#656565] font-normal rounded-lg focus:outline-none focus:ring-0"
         />
       </div>
 

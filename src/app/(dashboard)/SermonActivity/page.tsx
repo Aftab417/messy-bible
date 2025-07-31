@@ -18,7 +18,7 @@ const dummyUsers = [
   {
     _id: "2",
     SermonTopic: "Walking in Faith",
-    Createby: "admin",
+    Createby: "ahmad",
     AgeGroup: "Teen Age",
     KeyVerse: "Galatians 5:22",
     createdAt: "2023-04-22T14:45:00.000Z"
@@ -26,7 +26,7 @@ const dummyUsers = [
   {
     _id: "3",
     SermonTopic: "Walking in Faith",
-    Createby: "admin",
+    Createby: "muhammad",
     AgeGroup: "Old",
     KeyVerse: "Galatians 5:22",
     createdAt: "2023-03-10T09:12:33.000Z"
@@ -34,7 +34,7 @@ const dummyUsers = [
   {
     _id: "4",
     SermonTopic: "Walking in Faith",
-    Createby: "admin",
+    Createby: "ali",
     AgeGroup: "Old",
     KeyVerse: "Galatians 5:22",
     createdAt: "2023-02-28T16:30:45.000Z"
@@ -42,7 +42,7 @@ const dummyUsers = [
   {
     _id: "5",
     SermonTopic: "Walking in Faith",
-    Createby: "admin",
+    Createby: "usman",
     AgeGroup: "Teen Age",
     KeyVerse: "Galatians 5:22",
     createdAt: "2023-01-15T11:05:21.000Z"
@@ -415,7 +415,7 @@ const UserManagement = () => {
   const [users, setUsers] = useState(dummyUsers);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const ITEMS_PER_PAGE = 8;
+  const ITEMS_PER_PAGE = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
   const goToPage = (page: number) => {
@@ -431,14 +431,14 @@ const UserManagement = () => {
         text: "You won't be able to revert this!",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#F6805C",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
       });
 
       if (result.isConfirmed) {
         setUsers((prev) => prev.filter((user) => user._id !== id));
-        toast.success("User deleted successfully!");
+        toast.success("Sermon Deleted Successfully!");
       }
     } catch (error) {
       console.error("Delete failed", error);
@@ -566,7 +566,7 @@ const UserManagement = () => {
           <div className="flex items-center bg-[#F5F5F5] rounded-[12px] px-[18px] py-[14px] md:w-[250px]">
             <input
               type="text"
-              placeholder="Search User"
+              placeholder="Search Sermons"
               className="w-full text-sm text-gray-700 bg-transparent focus:outline-none placeholder:text-gray-400"
               value={searchTerm}
               onChange={(e) => {
@@ -594,7 +594,7 @@ const UserManagement = () => {
         All Sermons
       </div>
 
-      <div className="w-full overflow-x-auto">
+      <div className="w-full overflow-x-auto -ms-4">
         <table className="min-w-[700px] w-full overflow-hidden shadow border-separate border-spacing-x-4">
           <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold ">
             <tr>
@@ -611,7 +611,7 @@ const UserManagement = () => {
                 Study Plan
               </th>
               <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                KeyVerse
+                Key Verse
               </th>
 
               <th className="p-[5px] border-b border-[#505050] text-center w-fit">
@@ -630,8 +630,11 @@ const UserManagement = () => {
               paginatedUsers.map((user, i) => (
                 <tr key={user._id} className="border-b border-[#DEE2E6]/50 ">
                   <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    {(currentPage - 1) * ITEMS_PER_PAGE + i + 1}
+                    {String(
+                      (currentPage - 1) * ITEMS_PER_PAGE + i + 1
+                    ).padStart(2, "0")}
                   </td>
+
                   <td className="p-[5px] text-center border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {user.SermonTopic}
                   </td>
@@ -645,7 +648,7 @@ const UserManagement = () => {
                     {user.KeyVerse}
                   </td>
 
-                  <td className="flex justify-center p-3">
+                  <td className="flex justify-center p-3 border-b-1 border-[#F9F9F9]">
                     <button
                       className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
                       onClick={handleClick}
@@ -688,48 +691,40 @@ const UserManagement = () => {
                 </tr>
               ))
             )}
-
-            {/* Pagination */}
-            <tr className="w-full bg-[#F9F9F9] ">
-              <td colSpan={7}>
-                {/* Replace pagination part with below */}
-                <div className="flex items-center justify-end gap-1 text-sm px-[20px] py-[12px]">
-                  <button
-                    className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                    onClick={() => goToPage(1)}
-                    disabled={currentPage === 1}
-                  >
-                    First
-                  </button>
-                  <button
-                    className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                    onClick={() => goToPage(currentPage - 1)}
-                    disabled={currentPage === 1}
-                  >
-                    Back
-                  </button>
-                  {renderPaginationButtons()}
-                  <button
-                    className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                    onClick={() => goToPage(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                  >
-                    Next
-                  </button>
-                  <button
-                    className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                    onClick={() => goToPage(totalPages)}
-                    disabled={currentPage === totalPages}
-                  >
-                    Last
-                  </button>
-                </div>
-              </td>
-            </tr>
           </tbody>
         </table>
       </div>
-
+      <div className="flex mt-5 items-center w-full bg-[#F9F9F9] justify-end gap-1 text-sm px-[20px] py-[12px]">
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(1)}
+          disabled={currentPage === 1}
+        >
+          First
+        </button>
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Back
+        </button>
+        {renderPaginationButtons()}
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(totalPages)}
+          disabled={currentPage === totalPages}
+        >
+          Last
+        </button>
+      </div>
       {/* Modal Start Start */}
     </>
   );

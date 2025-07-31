@@ -1,14 +1,15 @@
 "use client";
 import React, { useRef } from "react";
-import { useFormik, FieldArray, FormikProvider, FormikErrors } from "formik";
+import { useFormik, FieldArray, FormikProvider } from "formik";
 import * as Yup from "yup";
 import Image from "next/image";
 
 const gameTypes = [
   { value: "Bible Trivia Quiz", label: "Bible Trivia Quiz" },
-  { value: "Bible Answer Question", label: "Bible Answer Question" },
-  { value: "Daily Challenges", label: "Daily Challenges" }
+  { value: "Search Words", label: "Search Words" },
+  { value: "Bible Emoji Translator", label: "Bible Emoji Translator" }
 ];
+
 const gameStatuses = [
   { value: "Active", label: "Active" },
   { value: "Inactive", label: "Inactive" }
@@ -70,7 +71,6 @@ const GenerateGameManually = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      // handle submit
       console.log(values);
     }
   });
@@ -81,28 +81,10 @@ const GenerateGameManually = () => {
     }
   };
 
-  // Helper to safely get nested errors
-  function getQuestionError<T extends keyof Question>(
-    errors: FormikErrors<FormValues>["questions"],
-    idx: number,
-    key: T
-  ): string | undefined {
-    if (
-      Array.isArray(errors) &&
-      errors[idx] &&
-      typeof errors[idx] === "object" &&
-      errors[idx] !== null
-    ) {
-      const err = errors[idx] as FormikErrors<Question>;
-      if (typeof err[key] === "string") return err[key] as string;
-    }
-    return undefined;
-  }
-
   return (
     <main>
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg  font-semibold text-[#794A3A]">Add New Game</h2>
+        <h2 className="text-lg font-semibold text-[#794A3A]">Add New Game</h2>
         <button
           type="button"
           onClick={formik.submitForm}
@@ -111,16 +93,16 @@ const GenerateGameManually = () => {
           Publish
         </button>
       </div>
-      <div className="p-6 mx-auto w-full bg-[#F9F9F9] rounded-xl ">
+
+      <div className="p-6 mx-auto w-full bg-[#F9F9F9] rounded-xl">
         <form onSubmit={formik.handleSubmit}>
+          {/* Thumbnail */}
           <div className="mb-6">
             <label className="block mb-2 text-[#794A3A] font-medium">
               Thumbnail
             </label>
-
             <div className="border border-[#E5E5E5] bg-white rounded-lg flex items-center justify-center h-32 mb-2 relative overflow-hidden">
               {formik.values.thumbnail ? (
-                // Show uploaded image
                 <Image
                   src={URL.createObjectURL(formik.values.thumbnail)}
                   alt="Uploaded Thumbnail"
@@ -129,7 +111,6 @@ const GenerateGameManually = () => {
                   className="object-contain w-auto h-full py-5 rounded-lg"
                 />
               ) : (
-                // Show icon + upload button initially
                 <div className="flex flex-col items-center justify-center">
                   <Image
                     src="/images/arrowUpFile.png"
@@ -147,7 +128,6 @@ const GenerateGameManually = () => {
                   </button>
                 </div>
               )}
-
               <input
                 ref={fileInputRef}
                 type="file"
@@ -156,7 +136,6 @@ const GenerateGameManually = () => {
                 onChange={handleThumbnailChange}
               />
             </div>
-
             {formik.touched.thumbnail && formik.errors.thumbnail && (
               <div className="mt-1 text-xs text-red-500">
                 {formik.errors.thumbnail as string}
@@ -176,7 +155,7 @@ const GenerateGameManually = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder="Enter Heading"
-              className="w-full px-4 py-3 border border-[#E5E5E5] bg-white rounded-lg focus:outline-none focus:ring-1 focus:ring-orange-400 focus:border-orange-400"
+              className="w-full px-4 py-3 border border-[#E5E5E5] bg-white rounded-lg"
             />
             {formik.touched.heading && formik.errors.heading && (
               <div className="mt-1 text-xs text-red-500">
@@ -197,7 +176,7 @@ const GenerateGameManually = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder="Enter Text"
-              className="w-full px-4 py-3 border border-[#E5E5E5] bg-white rounded-lg focus:outline-none focus:ring-1 focus:ring-orange-400 focus:border-orange-400"
+              className="w-full px-4 py-3 border border-[#E5E5E5] bg-white rounded-lg"
             />
             {formik.touched.description && formik.errors.description && (
               <div className="mt-1 text-xs text-red-500">
@@ -216,10 +195,10 @@ const GenerateGameManually = () => {
               value={formik.values.gameType}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              className="w-full px-4 py-3 border border-[#E5E5E5] bg-white rounded-lg focus:outline-none focus:ring-1 focus:ring-orange-400 focus:border-orange-400 appearance-none"
+              className="w-full px-4 py-3 border border-[#E5E5E5] bg-white rounded-lg"
             >
               <option value="" disabled>
-                Select Game Type e.g, Bible Trivia Quiz
+                Select Game Type
               </option>
               {gameTypes.map((type) => (
                 <option key={type.value} value={type.value}>
@@ -244,11 +223,8 @@ const GenerateGameManually = () => {
               value={formik.values.gameStatus}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              className="w-full px-4 py-3 border border-[#E5E5E5] bg-white rounded-lg focus:outline-none focus:ring-1 focus:ring-orange-400 focus:border-orange-400 appearance-none"
+              className="w-full px-4 py-3 border border-[#E5E5E5] bg-white rounded-lg"
             >
-              <option value="" disabled>
-                Select Game Status
-              </option>
               {gameStatuses.map((status) => (
                 <option key={status.value} value={status.value}>
                   {status.label}
@@ -262,113 +238,156 @@ const GenerateGameManually = () => {
             )}
           </div>
 
-          {/* First Question */}
+          {/* Conditional Game Section */}
           <FormikProvider value={formik}>
             <FieldArray name="questions">
               {({ push }) => (
-                <div className="mb-4">
-                  <label className="block mb-2 text-[#794A3A] font-medium">
-                    Guess the Bible verse
-                  </label>
-                  {formik.values.questions.map((q, qIdx) => (
-                    <div key={qIdx} className="">
+                <>
+                  {formik.values.gameType === "Bible Trivia Quiz" &&
+                    formik.values.questions.map((q, qIdx) => (
+                      <div key={qIdx}>
+                        <input
+                          type="text"
+                          name={`questions[${qIdx}].question`}
+                          value={q.question}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          placeholder="Who led the Israelites out of Egypt?"
+                          className="w-full px-4 py-3 mb-3 bg-white border rounded-lg"
+                        />
+                        {q.options.map((opt, optIdx) => (
+                          <div key={optIdx} className="relative mb-2">
+                            <input
+                              type="text"
+                              name={`questions[${qIdx}].options[${optIdx}]`}
+                              value={opt}
+                              onChange={formik.handleChange}
+                              placeholder={`Option ${optIdx + 1}`}
+                              className="w-full px-4 py-2 bg-white border rounded-lg"
+                            />
+                            <input
+                              type="radio"
+                              name={`questions[${qIdx}].correctAnswer`}
+                              checked={q.correctAnswer === optIdx}
+                              onChange={() =>
+                                formik.setFieldValue(
+                                  `questions[${qIdx}].correctAnswer`,
+                                  optIdx
+                                )
+                              }
+                              className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 border-2 rounded-full border-[#F6805C]"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+
+                  {formik.values.gameType === "Search Words" && (
+                    <div>
+                      <p className="font-semibold text-[#794A3A] mb-2">
+                        First Verse
+                      </p>
                       <input
                         type="text"
-                        name={`questions[${qIdx}].question`}
-                        value={q.question}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        placeholder="Who led the Israelites out of Egypt?"
-                        className="w-full px-4 py-3 border border-[#E5E5E5] bg-white rounded-lg focus:outline-none focus:ring-1 focus:ring-orange-400 focus:border-orange-400 mb-3"
+                        className="w-full px-4 py-3 bg-white border border-[#E5E5E5] mb-6 rounded-lg"
+                        placeholder="For God so loved the ____, that He gave His only _____ Son, that whoever believes in Him should not perish but have _____ life."
                       />
-                      {formik.touched.questions?.[qIdx]?.question &&
-                        getQuestionError(
-                          formik.errors.questions,
-                          qIdx,
-                          "question"
-                        ) && (
-                          <div className="mb-2 text-xs text-red-500">
-                            {getQuestionError(
-                              formik.errors.questions,
-                              qIdx,
-                              "question"
-                            )}
-                          </div>
-                        )}
-                      {q.options.map((opt, optIdx) => (
-                        <div key={optIdx} className="relative mb-2">
-                          <input
-                            type="text"
-                            name={`questions[${qIdx}].options[${optIdx}]`}
-                            value={opt}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            placeholder={`Enter Option ${optIdx + 1}`}
-                            className="flex-1 w-full px-4 py-2 pr-10 border border-[#E5E5E5] bg-white rounded-lg focus:outline-none focus:ring-1 focus:ring-orange-400 focus:border-orange-400"
-                          />
-                          <input
-                            type="radio"
-                            name={`questions[${qIdx}].correctAnswer`}
-                            checked={q.correctAnswer === optIdx}
-                            onChange={() =>
-                              formik.setFieldValue(
-                                `questions[${qIdx}].correctAnswer`,
-                                optIdx
-                              )
-                            }
-                            className={`absolute top-1/2 right-3 -translate-y-1/2 w-4 h-4 
-              appearance-none border-2 rounded-full 
-              ${q.correctAnswer === optIdx ? "border-[#F6805C]  bg-[#F6805C]" : "border-[#F6805C]"}
-              checked:accent-[#F6805C] `}
-                          />
-                        </div>
-                      ))}
-                      {formik.touched.questions?.[qIdx]?.options &&
-                        getQuestionError(
-                          formik.errors.questions,
-                          qIdx,
-                          "options"
-                        ) && (
-                          <div className="mb-2 text-xs text-red-500">
-                            {getQuestionError(
-                              formik.errors.questions,
-                              qIdx,
-                              "options"
-                            )}
-                          </div>
-                        )}
-                      {formik.touched.questions?.[qIdx]?.correctAnswer &&
-                        getQuestionError(
-                          formik.errors.questions,
-                          qIdx,
-                          "correctAnswer"
-                        ) && (
-                          <div className="mb-2 text-xs text-red-500">
-                            {getQuestionError(
-                              formik.errors.questions,
-                              qIdx,
-                              "correctAnswer"
-                            )}
-                          </div>
-                        )}
+                      <div className="flex justify-center mb-8">
+                        <Image
+                          src="/images/searchword.png"
+                          width={200}
+                          height={200}
+                          alt="Search Word Grid 1"
+                        />
+                      </div>
+
+                      <p className="font-semibold text-[#794A3A] mb-2">
+                        Second Verse
+                      </p>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-3 bg-white border border-[#E5E5E5] mb-6 rounded-lg"
+                        placeholder="For God so loved the ____, that He gave His only _____ Son, that whoever believes in Him should not perish but have _____ life."
+                      />
+                      <div className="flex justify-center">
+                        <Image
+                          src="/images/searchword.png"
+                          width={200}
+                          height={200}
+                          alt="Search Word Grid 2"
+                        />
+                      </div>
                     </div>
-                  ))}
-                  <div className="flex justify-end pt-5">
+                  )}
+
+                  {formik.values.gameType === "Bible Emoji Translator" &&
+                    formik.values.questions.map((q, qIdx) => (
+                      <div key={qIdx}>
+                        <h1 className="block mb-2 text-[#794A3A] font-medium">
+                          Guess the Bible verse{" "}
+                        </h1>
+                        <input
+                          type="text"
+                          name={`questions[${qIdx}].question`}
+                          value={q.question}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          placeholder="👑+🐑+🦁 ?"
+                          className="w-full px-4 py-3 mb-3 bg-white border rounded-lg"
+                        />
+                        {q.options.map((opt, optIdx) => (
+                          <div key={optIdx} className="relative mb-2">
+                            <input
+                              type="text"
+                              name={`questions[${qIdx}].options[${optIdx}]`}
+                              value={opt}
+                              onChange={formik.handleChange}
+                              placeholder={`Option ${optIdx + 1}`}
+                              className="w-full px-4 py-2 bg-white border rounded-lg"
+                            />
+                            <input
+                              type="radio"
+                              name={`questions[${qIdx}].correctAnswer`}
+                              checked={q.correctAnswer === optIdx}
+                              onChange={() =>
+                                formik.setFieldValue(
+                                  `questions[${qIdx}].correctAnswer`,
+                                  optIdx
+                                )
+                              }
+                              className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 border-2 rounded-full border-[#F6805C]"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+
+                  {/* Universal Add Button */}
+                  <div className="flex justify-end pt-6">
                     <button
                       type="button"
-                      onClick={() =>
-                        push({
-                          question: "",
-                          options: ["", "", "", ""],
-                          correctAnswer: 0
-                        })
-                      }
+                      onClick={() => {
+                        const type = formik.values.gameType;
+                        if (type === "Bible Trivia Quiz") {
+                          push({
+                            question: "",
+                            options: ["", "", "", ""],
+                            correctAnswer: 0
+                          });
+                        } else if (type === "Search Words") {
+                          alert(
+                            "Add logic for new verse or word search puzzle here."
+                          );
+                        } else if (type === "Bible Emoji Translator") {
+                          alert("Add logic for emoji translator entry here.");
+                        }
+                      }}
                       className="px-6 py-4 text-sm bg-[#F6805C] cursor-pointer text-white rounded-lg font-semibold hover:opacity-90"
                     >
                       + Add New Question
                     </button>
                   </div>
-                </div>
+                </>
               )}
             </FieldArray>
           </FormikProvider>
