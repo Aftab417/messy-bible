@@ -13,23 +13,30 @@ export const Navbar = ({ onMenuClick }: NavbarProps) => {
   const pathname = usePathname();
   const [showNotifications, setShowNotifications] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const getCurrentPage = () => {
+  const getBreadcrumbs = () => {
     const segments = pathname.split("/").filter(Boolean);
-    if (segments.length === 0) return "Overview";
+    if (segments.length === 0) return ["Dashboard"];
 
-    const lastSegment = segments[segments.length - 1];
+    const breadcrumbs = ["Dashboard"];
 
-    const withSpaces = lastSegment
-      .replace(/[-_]/g, " ") // Replace dashes/underscores with space
-      .replace(/([a-z])([A-Z])/g, "$1 $2"); // Add space before capital letters
+    segments.forEach((segment, index) => {
+      // Skip if it's the same as the previous segment (could happen with some paths)
+      if (index > 0 && segment === segments[index - 1]) return;
 
-    return withSpaces
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
+      const formattedSegment = segment
+        .replace(/[-_]/g, " ")
+        .replace(/([a-z])([A-Z])/g, "$1 $2")
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+
+      breadcrumbs.push(formattedSegment);
+    });
+
+    return breadcrumbs;
   };
 
-  const currentPage = getCurrentPage();
+  const breadcrumbs = getBreadcrumbs();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -66,22 +73,27 @@ export const Navbar = ({ onMenuClick }: NavbarProps) => {
           />
         </div>
 
-        <p className="text-white flex  items-center pl-[40px] font-dm-sans text-[15px] font-medium not-italic leading-normal">
-          Dashboard{" "}
-          <span className="mx-1 text-[#C4C4C4]">
-            <div className="px-[6px]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="6"
-                height="7"
-                viewBox="0 0 6 7"
-                fill="none"
-              >
-                <circle cx="3" cy="3.5" r="3" fill="white" />
-              </svg>
-            </div>
-          </span>{" "}
-          {currentPage}
+        <p className="text-white flex items-center pl-[40px] font-dm-sans text-[15px] font-medium not-italic leading-normal">
+          {breadcrumbs.map((crumb, index) => (
+            <span key={index} className="flex items-center">
+              {crumb}
+              {index < breadcrumbs.length - 1 && (
+                <span className="mx-1 text-[#C4C4C4]">
+                  <div className="px-[6px]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="6"
+                      height="7"
+                      viewBox="0 0 6 7"
+                      fill="none"
+                    >
+                      <circle cx="3" cy="3.5" r="3" fill="white" />
+                    </svg>
+                  </div>
+                </span>
+              )}
+            </span>
+          ))}
         </p>
       </div>
 

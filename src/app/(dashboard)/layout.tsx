@@ -51,9 +51,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         </aside>
         {/* Main content */}
         <main className="flex-1 overflow-y-auto md:ml-64">
-          <div className="p-2 mt-5 sm:p-3 md:p-4 lg:py-6 xl:py-6">
-            {children}
-          </div>
+          <div className="p-2 mt-5 sm:p-3 md:p-4 lg:py-6 ">{children}</div>
         </main>
       </div>
     </div>

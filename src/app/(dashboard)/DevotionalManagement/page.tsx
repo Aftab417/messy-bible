@@ -3,7 +3,8 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
-
+import Select from "react-select";
+import { CSSObjectWithLabel, OptionProps } from "react-select";
 const dummyDevotionals = [
   {
     _id: "1",
@@ -111,12 +112,65 @@ const dummyDevotionals = [
     createdAt: "2022-03-12T12:15:25.000Z"
   }
 ];
+type StatusOption = {
+  value: "active" | "inactive";
+  label: string;
+};
+
+const statusOptions: StatusOption[] = [
+  { value: "active", label: "Active" },
+  { value: "inactive", label: "Inactive" }
+];
 
 const DevotionalManagement = () => {
   const [devotionals, setDevotionals] = useState(dummyDevotionals);
   const [searchTerm, setSearchTerm] = useState("");
-  const ITEMS_PER_PAGE = 8;
+  const ITEMS_PER_PAGE = 10;
   const [currentPage, setCurrentPage] = useState(1);
+
+  const customStyles = {
+    control: (provided: CSSObjectWithLabel) => ({
+      ...provided,
+      border: "none",
+      boxShadow: "none",
+      backgroundColor: "transparent",
+      minHeight: "auto",
+      cursor: "pointer"
+    }),
+    singleValue: (provided: CSSObjectWithLabel) => ({
+      ...provided,
+      color: "white",
+      fontWeight: "500"
+    }),
+    dropdownIndicator: (provided: CSSObjectWithLabel) => ({
+      ...provided,
+      padding: "0",
+      color: "white",
+      "&:hover": {
+        color: "white"
+      }
+    }),
+    indicatorSeparator: () => ({
+      display: "none"
+    }),
+    menu: (provided: CSSObjectWithLabel) => ({
+      ...provided,
+      borderRadius: "4px",
+      overflow: "hidden"
+    }),
+    option: (
+      provided: CSSObjectWithLabel,
+      state: OptionProps<StatusOption, false>
+    ) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? "#F3F4F6" : "white",
+      color: "#1F2937",
+      "&:hover": {
+        backgroundColor: "#F6805C",
+        cursor: "pointer"
+      }
+    })
+  };
 
   const goToPage = (page: number) => {
     if (page >= 1 && page <= totalPages) {
@@ -148,7 +202,7 @@ const DevotionalManagement = () => {
     }
   };
 
-  const handleStatusChange = (id: string, value: string) => {
+  const handleStatusChange = (id: string, value: "active" | "inactive") => {
     setDevotionals((prevDevotionals) =>
       prevDevotionals.map((devotional) =>
         devotional._id === id
@@ -374,25 +428,35 @@ const DevotionalManagement = () => {
                   </td>
 
                   <td
-                    className={`p-[5px]  text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B] `}
+                    className={`p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]`}
                   >
                     <div
-                      className={`${getBgClass(devotional.status)} rounded-md`}
+                      className={`${getBgClass(devotional.status)} rounded-md w-fit px-2 mx-auto`}
                     >
-                      <select
-                        value={devotional.status ? "active" : "inactive"}
-                        onChange={(e) =>
-                          handleStatusChange(devotional._id, e.target.value)
+                      <Select
+                        options={statusOptions}
+                        value={
+                          devotional.status
+                            ? statusOptions[0]
+                            : statusOptions[1]
                         }
-                        className={`p-[6px]  font-medium focus:outline-none transition-colors   cursor-pointer duration-200 `}
-                      >
-                        <option value="active" className="text-gray-800 ">
-                          Active
-                        </option>
-                        <option value="inactive" className="text-gray-800">
-                          Inactive
-                        </option>
-                      </select>
+                        onChange={(selectedOption) => {
+                          if (selectedOption) {
+                            handleStatusChange(
+                              devotional._id,
+                              selectedOption.value
+                            );
+                          }
+                        }}
+                        styles={customStyles}
+                        isSearchable={false}
+                        menuPlacement="auto"
+                        className="py-2 min-w-24 react-select-container"
+                        classNamePrefix="react-select"
+                        components={{
+                          IndicatorSeparator: null
+                        }}
+                      />
                     </div>
                   </td>
 

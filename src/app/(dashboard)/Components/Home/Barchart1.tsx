@@ -74,7 +74,7 @@ const Barchart1 = () => {
 
   // Bar Chart Data End
   return (
-    <div className="w-full  bg-[#F9F9F9] max-h-96 min-h-96 rounded-xl">
+    <div className="w-full  bg-[#F9F9F9] max-h-96 min-h-96 rounded-xl overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between py-6 mb-6 px-7">
         <h2 className="text-[#794A3A] text-base font-semibold">
@@ -97,7 +97,7 @@ const Barchart1 = () => {
       </div>
 
       {/* Scrollable Chart */}
-      <div className="w-full overflow-x-auto">
+      <div className="w-full overflow-x-auto md:overflow-hidden">
         <div className="min-w-[700px] md:min-w-full h-[250px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart

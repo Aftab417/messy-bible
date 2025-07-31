@@ -86,7 +86,7 @@ const Home: React.FC = () => {
         ))}
       </div>
 
-      <div className="grid w-full grid-cols-1 gap-2 lg:grid-cols-3">
+      <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="col-span-1 lg:col-span-2">
           <Barchart1 />
         </div>
