@@ -534,7 +534,7 @@ const AddLesson = () => {
     const hasError = validationErrors[name];
 
     return (
-      <div className="pb-[15px]">
+      <div className="pb-4">
         <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
           {label}
         </label>
@@ -542,13 +542,20 @@ const AddLesson = () => {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className={`w-full px-4 py-[0.85rem]  text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
+            className={`w-full px-4 py-2.5  text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
               hasError
                 ? "focus:ring-red-500 border-red-500"
                 : "focus:ring-[#F6805C]"
             } rounded-[8px] border ${hasError ? "border-red-500" : "border-[#AFAFAF]"} bg-[#FFF] text-left flex justify-between items-center`}
           >
-            <span className="font-inter">{value || placeholder}</span>
+            <span
+              className={`font-inter ${
+                !value ? "text-[#5B5B5B]" : "text-[#656565]"
+              }`}
+            >
+              {value || placeholder}
+            </span>
+
             <ChevronDown
               className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
             />
@@ -585,18 +592,18 @@ const AddLesson = () => {
 
   return (
     <>
-      <div className="justify-between lg:flex">
+      <div className="justify-between w-full lg:flex">
         <h1 className="text-[#794A3A] py-[30px] font-dm-sans text-[18px] font-semibold pt-[15px]">
           {currentStep === 1 ? `Add Lesson ` : "Add Topics"}
         </h1>
       </div>
 
-      <div className="bg-[#F9F9F9]   rounded-[16px] w-full max-w-4xl p-6">
-        <form onSubmit={handleSubmit}>
+      <div className="bg-[#F9F9F9]   rounded-[16px] w-full max-w-7xl p-6">
+        <form id="addLessonForm" onSubmit={handleSubmit}>
           {currentStep === 1 ? (
             <>
               {/* Thumbnail Upload */}
-              <div className="pb-[15px]">
+              <div className="pb-4">
                 <label className="text-[#5B5B5B] font-dm-sans text-[16px] font-semibold leading-none pb-[10px] block">
                   Thumbnail
                 </label>
@@ -629,7 +636,7 @@ const AddLesson = () => {
               </div>
 
               {/* Lesson Name */}
-              <div className="pb-[15px]">
+              <div className="pb-4">
                 <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
                   Lesson Name
                 </label>
@@ -639,7 +646,7 @@ const AddLesson = () => {
                   value={formData.firstName}
                   onChange={handleInputChange}
                   placeholder="Enter Lesson Name"
-                  className={`w-full px-4 py-[0.85rem]  text-[#656565] font-normal focus:outline-none   ${
+                  className={`w-full px-4 py-2.5  text-[#656565] placeholder-[#5B5B5B] font-normal focus:outline-none   ${
                     validationErrors.firstName
                       ? "focus:ring-red-500 border-red-500"
                       : "focus:ring-[#F6805C]"
@@ -657,7 +664,7 @@ const AddLesson = () => {
               </div>
 
               {/* Description */}
-              <div className="pb-[15px]">
+              <div className="pb-4">
                 <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
                   Description
                 </label>
@@ -667,7 +674,7 @@ const AddLesson = () => {
                   onChange={handleInputChange}
                   placeholder="Enter Text Here"
                   rows={1}
-                  className={`w-full px-4 py-[0.85rem]  text-[#656565] font-normal focus:outline-none   ${
+                  className={`w-full px-4 py-2.5 placeholder-[#5B5B5B] text-[#656565] font-normal focus:outline-none   ${
                     validationErrors.description
                       ? "focus:ring-red-500 border-red-500"
                       : "focus:ring-[#F6805C]"
@@ -699,7 +706,7 @@ const AddLesson = () => {
                 name="bibleReference"
                 value={formData.bibleReference}
                 options={bibleReferences}
-                placeholder="Select Bible Reference"
+                placeholder="Select Bible Reference e.g., Galatians 5:22"
               />
 
               {/* Study Plan */}
@@ -727,31 +734,35 @@ const AddLesson = () => {
               {/* Save As */}
               <div className="pb-[15px]">
                 <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-none block pb-[10px]">
-                  Save As
+                  Update Status
                 </label>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <label className="flex gap-2 justify-between items-center p-4 rounded-lg border cursor-pointer">
+                  <label className="flex items-center justify-between gap-2 px-4 py-3 border rounded-lg cursor-pointer">
                     <span className="text-sm text-gray-700">Public</span>
                     <input
                       type="radio"
                       name="visibility"
                       value="public"
-                      checked={formData.saveAs === "public"}
+                      // checked={formData.saveAs === "public"}
                       onChange={() => handleRadioChange("public")}
-                      className="w-4 h-4 rounded-full border-2 border-red-400 transition appearance-none checked:bg-red-400 checked:border-red-400"
+                      className="appearance-none w-4 h-4 border border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
+                 before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
+                 checked:before:scale-100"
                     />
                   </label>
 
-                  <label className="flex gap-2 justify-between items-center p-4 rounded-lg border cursor-pointer">
+                  <label className="flex items-center justify-between gap-2 px-4 py-3 border rounded-lg cursor-pointer">
                     <span className="text-sm text-gray-700">Private</span>
                     <input
                       type="radio"
                       name="visibility"
                       value="private"
-                      checked={formData.saveAs === "private"}
+                      // checked={formData.saveAs === "private"}
                       onChange={() => handleRadioChange("private")}
-                      className="w-4 h-4 rounded-full border-2 border-red-400 transition appearance-none checked:bg-red-400 checked:border-red-400"
+                      className="appearance-none w-4 h-4 border border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
+                 before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
+                 checked:before:scale-100"
                     />
                   </label>
                 </div>
@@ -783,7 +794,7 @@ const AddLesson = () => {
                         onClick={() => toggleTopicExpansion(topic.id)}
                         className="flex justify-between items-center cursor-pointer  rounded-[8px] p-3  border-1 border-[#AFAFAF] bg-[#FFF] "
                       >
-                        <div className="flex gap-2 items-center">
+                        <div className="flex items-center gap-2">
                           <span className="text-[#5B5B5B] font-dm-sans text-[12px] font-[600]">
                             Topic {index + 1}
                           </span>
@@ -828,7 +839,7 @@ const AddLesson = () => {
                                 topicValidationErrors[index]?.topicName
                                   ? "border-red-500"
                                   : "border-[#AFAFAF]"
-                              } bg-[#FFF] placeholder-[#999999]`}
+                              } bg-[#FFF] placeholder-[##5B5B5B]`}
                             />
                             {topicValidationErrors[index]?.topicName && (
                               <p className="mt-1 text-sm text-red-500 font-dm-sans">
@@ -861,7 +872,7 @@ const AddLesson = () => {
                                 topicValidationErrors[index]?.scriptureReference
                                   ? "border-red-500"
                                   : "border-[#AFAFAF]"
-                              } bg-[#FFF] placeholder-[#999999]`}
+                              } bg-[#FFF] placeholder-[#5B5B5B]`}
                             />
                             {topicValidationErrors[index]
                               ?.scriptureReference && (
@@ -898,7 +909,7 @@ const AddLesson = () => {
                                 topicValidationErrors[index]?.description
                                   ? "border-red-500"
                                   : "border-[#AFAFAF]"
-                              } bg-[#FFF] resize-none placeholder-[#999999]`}
+                              } bg-[#FFF] resize-none placeholder-[#5B5B5B]`}
                             />
                             {topicValidationErrors[index]?.description && (
                               <p className="mt-1 text-sm text-red-500 font-dm-sans">
@@ -931,7 +942,7 @@ const AddLesson = () => {
                                 topicValidationErrors[index]?.verseHighlight
                                   ? "border-red-500"
                                   : "border-[#AFAFAF]"
-                              } bg-[#FFF] resize-none placeholder-[#999999]`}
+                              } bg-[#FFF] resize-none placeholder-[#5B5B5B]`}
                             />
                             {topicValidationErrors[index]?.verseHighlight && (
                               <p className="mt-1 text-sm text-red-500 font-dm-sans">
@@ -964,7 +975,7 @@ const AddLesson = () => {
                                 topicValidationErrors[index]?.reflectionQuestion
                                   ? "border-red-500"
                                   : "border-[#AFAFAF]"
-                              } bg-[#FFF] placeholder-[#999999]`}
+                              } bg-[#FFF] placeholder-[#5B5B5B]`}
                             />
                             {topicValidationErrors[index]
                               ?.reflectionQuestion && (
@@ -997,7 +1008,7 @@ const AddLesson = () => {
           )}
 
           {/* Form Actions */}
-          <div className="block justify-between pt-4 md:flex">
+          <div className="justify-between block pt-4 md:flex">
             {currentStep === 2 && (
               <button
                 type="button"
@@ -1007,16 +1018,16 @@ const AddLesson = () => {
                 Previous
               </button>
             )}
-
-            <button
-              type="submit"
-              className="py-[16px] px-[30px] mt-2  -md:w-full cursor-pointer bg-[#F6805C] text-white rounded-[10px] hover:bg-orange-600 transition-colors ml-auto"
-            >
-              {currentStep === 1 ? "Next Step" : "Create Lesson"}
-            </button>
           </div>
         </form>
       </div>
+      <button
+        type="submit"
+        form="addLessonForm"
+        className="py-3 px-14 mt-10  block cursor-pointer bg-[#F6805C] text-white rounded-[10px] hover:bg-orange-600 transition-colors ml-auto"
+      >
+        {currentStep === 1 ? "Next " : "Create Lesson"}
+      </button>
     </>
   );
 };

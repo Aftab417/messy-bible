@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 
 import { useRouter } from "next/navigation";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import Select from "react-select";
+import { CSSObjectWithLabel, OptionProps } from "react-select";
 
 const dummyUsers = [
   {
@@ -408,6 +410,59 @@ const dummyUsers = [
     is_active: true
   }
 ];
+type StatusOption = {
+  value: "active" | "inactive";
+  label: string;
+};
+
+const statusOptions: StatusOption[] = [
+  { value: "active", label: "Active" },
+  { value: "inactive", label: "Inactive" }
+];
+
+const customStyles = {
+  control: (provided: CSSObjectWithLabel) => ({
+    ...provided,
+    border: "none",
+    boxShadow: "none",
+    backgroundColor: "transparent",
+    minHeight: "auto",
+    cursor: "pointer"
+  }),
+  singleValue: (provided: CSSObjectWithLabel) => ({
+    ...provided,
+    color: "white",
+    fontWeight: "500"
+  }),
+  dropdownIndicator: (provided: CSSObjectWithLabel) => ({
+    ...provided,
+    padding: "0",
+    color: "white",
+    "&:hover": {
+      color: "white"
+    }
+  }),
+  indicatorSeparator: () => ({
+    display: "none"
+  }),
+  menu: (provided: CSSObjectWithLabel) => ({
+    ...provided,
+    borderRadius: "4px",
+    overflow: "hidden"
+  }),
+  option: (
+    provided: CSSObjectWithLabel,
+    state: OptionProps<StatusOption, false>
+  ) => ({
+    ...provided,
+    backgroundColor: state.isSelected ? "#F3F4F6" : "white",
+    color: "#1F2937",
+    "&:hover": {
+      backgroundColor: "#F6805C",
+      cursor: "pointer"
+    }
+  })
+};
 
 const UserManagement = () => {
   const [users, setUsers] = useState(dummyUsers);
@@ -429,7 +484,7 @@ const UserManagement = () => {
         text: "You won't be able to revert this!",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#FA865F",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
       });
@@ -607,7 +662,7 @@ const UserManagement = () => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push("/UserDetails");
+    router.push("/userManagement/UserDetails");
   };
 
   return (
@@ -686,7 +741,7 @@ const UserManagement = () => {
         All Users
       </div>
 
-      <div className="w-full overflow-x-auto -ms-4">
+      <div className="w-full overflow-x-auto -ms-4 ">
         <table className="w-full overflow-hidden border-separate border-spacing-x-4">
           <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold ">
             <tr>
@@ -735,26 +790,35 @@ const UserManagement = () => {
                   <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {user.CurrentPlan}
                   </td>
+
                   <td
-                    className={`p-[5px]  text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B] `}
+                    className={`p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]`}
                   >
-                    <div className={`${getBgClass(user.is_active)} rounded-md`}>
-                      <select
-                        value={user.is_active ? "active" : "inactive"}
-                        onChange={(e) =>
-                          handleStatusChange(user._id, e.target.value)
+                    <div
+                      className={`${getBgClass(user.is_active)} rounded-md w-fit px-2 mx-auto`}
+                    >
+                      <Select
+                        options={statusOptions}
+                        value={
+                          user.is_active ? statusOptions[0] : statusOptions[1]
                         }
-                        className={`p-[6px]  font-medium focus:outline-none transition-colors   cursor-pointer duration-200 `}
-                      >
-                        <option value="active" className="text-gray-800 ">
-                          Active
-                        </option>
-                        <option value="inactive" className="text-gray-800">
-                          Inactive
-                        </option>
-                      </select>
+                        onChange={(selectedOption) => {
+                          if (selectedOption) {
+                            handleStatusChange(user._id, selectedOption.value);
+                          }
+                        }}
+                        styles={customStyles}
+                        isSearchable={false}
+                        menuPlacement="auto"
+                        className="py-2 min-w-24 react-select-container"
+                        classNamePrefix="react-select"
+                        components={{
+                          IndicatorSeparator: null
+                        }}
+                      />
                     </div>
                   </td>
+
                   <td className="flex justify-center p-3 border-b-1 border-[#F9F9F9]">
                     <button
                       className="mx-1 text-sm transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"

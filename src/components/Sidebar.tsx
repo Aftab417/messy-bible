@@ -13,27 +13,26 @@ const navItems = [
   {
     label: "Dashboard",
     href: "/",
-    icon: "/images/dashboard.png",
-    iconActive: "/images/wDashboard.png"
+    icon: "/images/dashboard.svg",
+    iconActive: "/images/wDashboard.svg"
   },
   {
     label: "Users Management",
     href: "/userManagement",
-    icon: "/images/userManagement.png",
-    iconActive: "/images/wUserManagement.png"
+    icon: "/images/userManagement.svg",
+    iconActive: "/images/wUserManagement.svg"
   },
-  // Add a separator and heading after this item
   {
     label: "Lesson Management",
     href: "/LessonManagement",
-    icon: "/images/lessonManagement.png",
-    iconActive: "/images/wLessonManagement.png"
+    icon: "/images/lessonManagement.svg",
+    iconActive: "/images/wLessonManagement.svg"
   },
   {
     label: "Sermon Management",
     href: "#",
-    icon: "/images/sermonManagement.png",
-    iconActive: "/images/wSermonManagement.png",
+    icon: "/images/sermonManagement.svg",
+    iconActive: "/images/wSermonManagement.svg",
     dropdown: [
       { label: "Sermon Activity", href: "/SermonActivity" },
       { label: "Sermon Templates", href: "/SermonTemplates" }
@@ -42,38 +41,58 @@ const navItems = [
   {
     label: "Devotional Management",
     href: "/DevotionalManagement",
-    icon: "/images/devotionalManagement.png",
-    iconActive: "/images/wDevotionalManagement.png"
+    icon: "/images/devotionalManagement.svg",
+    iconActive: "/images/wDevotionalManagement.svg"
   },
   {
     label: "Verse & Tips Management",
     href: "/VerseAndTipsManagement",
-    icon: "/images/verseAndTips.png",
-    iconActive: "/images/wVerseAndTips.png"
+    icon: "/images/verseAndTips.svg",
+    iconActive: "/images/wVerseAndTips.svg"
   },
   {
     label: "Game Management",
     href: "/GameManagement",
-    icon: "/images/gameManagement.png",
-    iconActive: "/images/wGameManagement.png"
+    icon: "/images/gameManagement.svg",
+    iconActive: "/images/wGameManagement.svg"
   },
   {
     label: "Subscription Management",
     href: "/SubscriptionManagement",
-    icon: "/images/subscriptionManagement.png",
-    iconActive: "/images/wSubscriptionManagement.png"
+    icon: "/images/subscriptionManagement.svg",
+    iconActive: "/images/wSubscriptionManagement.svg"
   },
   {
     label: "Settings",
     href: "/settings",
-    icon: "/images/setting.png",
-    iconActive: "/images/wSetting.png"
+    icon: "/images/setting.svg",
+    iconActive: "/images/wSetting.svg"
   }
 ];
 
 interface SidebarProps {
   onClose?: () => void;
 }
+interface NavDropdownItem {
+  label: string;
+  href: string;
+}
+
+interface NavItem {
+  label: string;
+  href: string;
+  icon: string;
+  iconActive: string;
+  dropdown?: NavDropdownItem[];
+}
+
+type GetIconPathParams = {
+  item: NavItem;
+  isActive: boolean;
+  isHovered: boolean;
+  isDropdownItemActive: boolean;
+  isDropdownOpen: boolean;
+};
 
 export const Sidebar = ({ onClose }: SidebarProps) => {
   const pathname = usePathname();
@@ -82,6 +101,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [logoutHover, setLogoutHover] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -113,10 +133,21 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
   };
 
   const handleDropdownItemClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent event bubbling to parent
+    e.stopPropagation();
     if (onClose) onClose();
   };
-
+  const getIconPath = ({
+    item,
+    isActive,
+    isHovered,
+    isDropdownItemActive,
+    isDropdownOpen
+  }: GetIconPathParams): string => {
+    if (isActive || isDropdownItemActive || isDropdownOpen || isHovered) {
+      return item.iconActive;
+    }
+    return item.icon;
+  };
   return (
     <div
       className="flex flex-col items-center w-full h-full md:h-[90vh] overflow-y-auto p-2 text-[#5B5B5B] bg-[#F9F9F9] scrollbar-hide max-w-64 [&::-webkit-scrollbar]:w-1 
@@ -146,6 +177,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
               const isDropdownItemActive = hasDropdown
                 ? item.dropdown.some((option) => pathname === option.href)
                 : false;
+              // const isHovered = hoveredItem === item.label;
 
               // Add separator and heading after Users Management (index 1)
               if (index === 1) {
@@ -155,22 +187,26 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                     <Link
                       href={item.href}
                       onClick={handleLinkClick}
-                      className={`flex items-center  w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
+                      onMouseEnter={() => setHoveredItem(item.label)}
+                      onMouseLeave={() => setHoveredItem(null)}
+                      className={`flex items-center w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
                         isActive
                           ? "bg-[#F6805C] text-[#FFFFFF] font-semibold"
                           : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
                       }`}
                     >
                       <Image
-                        src={
-                          isActive || isDropdownItemActive || isDropdownOpen
-                            ? item.iconActive
-                            : item.icon
-                        }
+                        src={getIconPath({
+                          item,
+                          isActive,
+                          isHovered: hoveredItem === item.label,
+                          isDropdownItemActive,
+                          isDropdownOpen
+                        })}
                         alt={item.label}
                         width={20}
                         height={20}
-                        className={`w-5 h-5 object-contain ${isActive ? "" : ""}`}
+                        className="object-contain w-5 h-5"
                       />
                       <span>{item.label}</span>
                     </Link>
@@ -191,6 +227,8 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                   <div key={item.label} className="mb-2" ref={dropdownRef}>
                     <button
                       onClick={() => toggleDropdown(item.label)}
+                      onMouseEnter={() => setHoveredItem(item.label)}
+                      onMouseLeave={() => setHoveredItem(null)}
                       className={`flex items-center justify-between min-w-64 cursor-pointer w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
                         isDropdownItemActive || isDropdownOpen
                           ? "bg-[#F6805C] text-[#FFFFFF] font-semibold"
@@ -199,11 +237,13 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                     >
                       <div className="flex items-center gap-3">
                         <Image
-                          src={
-                            isActive || isDropdownItemActive || isDropdownOpen
-                              ? item.iconActive
-                              : item.icon
-                          }
+                          src={getIconPath({
+                            item,
+                            isActive,
+                            isHovered: hoveredItem === item.label,
+                            isDropdownItemActive,
+                            isDropdownOpen
+                          })}
                           alt={item.label}
                           width={20}
                           height={20}
@@ -251,6 +291,8 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                     <Link
                       href={item.href}
                       onClick={handleLinkClick}
+                      onMouseEnter={() => setHoveredItem(item.label)}
+                      onMouseLeave={() => setHoveredItem(null)}
                       className={`flex items-center min-w-64 w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
                         isActive
                           ? "bg-[#F6805C] text-[#FFFFFF] font-semibold"
@@ -258,15 +300,17 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                       }`}
                     >
                       <Image
-                        src={
-                          isActive || isDropdownItemActive || isDropdownOpen
-                            ? item.iconActive
-                            : item.icon
-                        }
+                        src={getIconPath({
+                          item,
+                          isActive,
+                          isHovered: hoveredItem === item.label,
+                          isDropdownItemActive,
+                          isDropdownOpen
+                        })}
                         alt={item.label}
                         width={20}
                         height={20}
-                        className={`w-5 h-5 object-contain ${isActive ? "" : ""}`}
+                        className="object-contain w-5 h-5"
                       />
                       <span>{item.label}</span>
                     </Link>
@@ -281,6 +325,8 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                   key={item.href}
                   href={item.href}
                   onClick={handleLinkClick}
+                  onMouseEnter={() => setHoveredItem(item.label)}
+                  onMouseLeave={() => setHoveredItem(null)}
                   className={`flex items-center min-w-64 w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
                     isActive
                       ? "bg-[#F6805C] text-[#FFFFFF] font-semibold"
@@ -288,15 +334,17 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                   }`}
                 >
                   <Image
-                    src={
-                      isActive || isDropdownItemActive || isDropdownOpen
-                        ? item.iconActive
-                        : item.icon
-                    }
+                    src={getIconPath({
+                      item,
+                      isActive,
+                      isHovered: hoveredItem === item.label,
+                      isDropdownItemActive,
+                      isDropdownOpen
+                    })}
                     alt={item.label}
                     width={20}
                     height={20}
-                    className={`w-5 h-5 object-contain ${isActive ? "" : ""}`}
+                    className="object-contain w-5 h-5"
                   />
                   <span>{item.label}</span>
                 </Link>
@@ -306,18 +354,26 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
 
           <button
             onClick={handleLogout}
-            onMouseEnter={() => setLogoutHover(true)}
-            onMouseLeave={() => setLogoutHover(false)}
-            className="flex items-center cursor-pointer mt-3 min-w-64 w-full gap-2 px-4  py-3 mb-3 hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all"
+            onMouseEnter={() => {
+              setLogoutHover(true);
+              setHoveredItem("logout");
+            }}
+            onMouseLeave={() => {
+              setLogoutHover(false);
+              setHoveredItem(null);
+            }}
+            className="flex items-center cursor-pointer mt-3 ps-5 min-w-64 w-full gap-2 px-4 py-3 mb-3 hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all"
           >
-            <Image
-              src={logoutHover ? "/images/logout.png" : "/images/logout.png"}
-              alt="logout"
-              width={20}
-              height={20}
-              className="object-contain w-5 h-5"
-            />
-            <span className=""> Logout</span>
+            <span className="flex gap-2 ps-1">
+              <Image
+                src={logoutHover ? "/images/wLogout.svg" : "/images/logout.svg"}
+                alt="logout"
+                width={20}
+                height={20}
+                className="object-contain w-5 h-5"
+              />
+              <span>Logout</span>
+            </span>
           </button>
         </div>
       </div>

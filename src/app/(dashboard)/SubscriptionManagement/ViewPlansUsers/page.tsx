@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { useSearchParams } from "next/navigation";
 
 interface UserPlan {
   _id: string;
@@ -7,7 +8,7 @@ interface UserPlan {
   planName: string;
   startDate: string;
   amount: number;
-  status: "active" | "inactive" | "pending" | "cancelled";
+  status: "active" | "active" | "active" | "cancelled";
 }
 
 const dummyUserPlans: UserPlan[] = [
@@ -25,7 +26,7 @@ const dummyUserPlans: UserPlan[] = [
     planName: "Premium",
     startDate: "2024-04-15",
     amount: 99,
-    status: "inactive"
+    status: "active"
   },
   {
     _id: "3",
@@ -33,7 +34,7 @@ const dummyUserPlans: UserPlan[] = [
     planName: "Family",
     startDate: "2024-03-20",
     amount: 149,
-    status: "pending"
+    status: "active"
   },
   {
     _id: "4",
@@ -41,7 +42,7 @@ const dummyUserPlans: UserPlan[] = [
     planName: "Annual",
     startDate: "2024-01-10",
     amount: 199,
-    status: "cancelled"
+    status: "active"
   },
   {
     _id: "5",
@@ -57,7 +58,7 @@ const dummyUserPlans: UserPlan[] = [
     planName: "Freemium",
     startDate: "2024-06-10",
     amount: 0,
-    status: "inactive"
+    status: "active"
   },
   {
     _id: "7",
@@ -73,7 +74,7 @@ const dummyUserPlans: UserPlan[] = [
     planName: "Annual",
     startDate: "2023-12-01",
     amount: 199,
-    status: "cancelled"
+    status: "active"
   },
   {
     _id: "9",
@@ -81,7 +82,7 @@ const dummyUserPlans: UserPlan[] = [
     planName: "Premium",
     startDate: "2024-03-12",
     amount: 99,
-    status: "pending"
+    status: "active"
   },
   {
     _id: "10",
@@ -97,7 +98,7 @@ const dummyUserPlans: UserPlan[] = [
     planName: "Freemium",
     startDate: "2024-04-07",
     amount: 0,
-    status: "inactive"
+    status: "active"
   },
   {
     _id: "12",
@@ -105,7 +106,7 @@ const dummyUserPlans: UserPlan[] = [
     planName: "Annual",
     startDate: "2024-01-25",
     amount: 199,
-    status: "pending"
+    status: "active"
   },
   {
     _id: "13",
@@ -121,7 +122,7 @@ const dummyUserPlans: UserPlan[] = [
     planName: "Family",
     startDate: "2024-02-10",
     amount: 149,
-    status: "cancelled"
+    status: "active"
   }
 ];
 
@@ -129,6 +130,9 @@ export default function User() {
   const [userPlans] = React.useState<UserPlan[]>(dummyUserPlans);
   const [currentPage, setCurrentPage] = React.useState<number>(1);
   const ITEMS_PER_PAGE = 5;
+
+  const searchParams = useSearchParams();
+  const selectedPlan = searchParams.get("plan") || "Unknown";
 
   const totalPages = Math.ceil(userPlans.length / ITEMS_PER_PAGE);
   const paginatedUserPlans = userPlans.slice(
@@ -224,127 +228,130 @@ export default function User() {
   };
 
   return (
-    <div className="w-full overflow-x-auto">
-      <h1 className="text-[#794A3A] font-dm-sans text-lg font-semibold">
-        Freemium
-      </h1>
-      <h1 className="text-[#794A3A] font-dm-sans text-base font-semibold py-5">
-        All Active User
-      </h1>
-      <table className="min-w-[700px] w-full overflow-hidden shadow border-separate border-spacing-x-4">
-        <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold ">
-          <tr>
-            <th className="p-[5px] border-b border-[#505050] text-start w-fit">
-              S.No:
-            </th>
-            <th className="p-[5px] border-b border-[#505050] text-start w-fit">
-              User Name
-            </th>
-            <th className="p-[5px] border-b border-[#505050] text-start w-fit">
-              Plan Name
-            </th>
-            <th className="p-[5px] border-b border-[#505050] text-start w-fit">
-              Start Date
-            </th>
-            <th className="p-[5px] border-b border-[#505050] text-start w-fit">
-              Amount
-            </th>
-            <th className="p-[5px] border-b border-[#505050] text-start w-fit">
-              Status
-            </th>
-            <th className="p-[5px] border-b border-[#505050] text-start w-fit">
-              Action
-            </th>
-          </tr>
-        </thead>
-        <tbody className="">
-          {paginatedUserPlans.length === 0 ? (
-            <tr>
-              <td colSpan={7} className="p-3 text-center">
-                No users found.
-              </td>
-            </tr>
-          ) : (
-            paginatedUserPlans.map((plan, i) => (
-              <tr key={plan._id} className="border-b border-[#DEE2E6]/50 ">
-                <td className="p-[8px] border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                  {(currentPage - 1) * ITEMS_PER_PAGE + i + 1}
-                </td>
-                <td className="p-[8px] border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                  {plan.userName}
-                </td>
-                <td className="p-[8px] border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                  {plan.planName}
-                </td>
-                <td className="p-[8px] border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                  {plan.startDate}
-                </td>
-                <td className="p-[8px] border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                  ${plan.amount}
-                </td>
-                <td className="p-[8px] border-b-1 border-[#F9F9F9] text-[#5B5B5B] capitalize">
-                  {plan.status}
-                </td>
-                <td className="flex justify-start p-3">
-                  <button
-                    // onClick={() => handleDelete(subscription._id)}
-                    className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
-                  >
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect width="20" height="20" rx="3" fill="#FF1919" />
-                      <path
-                        d="M6.875 16C6.53125 16 6.23708 15.8696 5.9925 15.6087C5.74792 15.3478 5.62542 15.0338 5.625 14.6667V6H5V4.66667H8.125V4H11.875V4.66667H15V6H14.375V14.6667C14.375 15.0333 14.2527 15.3473 14.0081 15.6087C13.7635 15.87 13.4692 16.0004 13.125 16H6.875ZM8.125 13.3333H9.375V7.33333H8.125V13.3333ZM10.625 13.3333H11.875V7.33333H10.625V13.3333Z"
-                        fill="white"
-                      />
-                    </svg>
-                  </button>
-                </td>
+    <>
+      <div className="w-full overflow-x-auto">
+        <h1 className="text-[#794A3A] font-dm-sans text-lg font-semibold">
+          {selectedPlan}
+        </h1>
+
+        <h1 className="text-[#794A3A] font-dm-sans text-base font-semibold py-5">
+          All Active User
+        </h1>
+        <div className="w-full overflow-x-auto -ms-4">
+          <table className="min-w-[700px] w-full overflow-hidden shadow border-separate border-spacing-x-4">
+            <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold ">
+              <tr>
+                <th className="p-[5px] border-b border-[#505050] text-center w-fit">
+                  S.No:
+                </th>
+                <th className="p-[5px] border-b border-[#505050] text-center w-fit">
+                  User Name
+                </th>
+                <th className="p-[5px] border-b border-[#505050] text-center w-fit">
+                  Plan Name
+                </th>
+                <th className="p-[5px] border-b border-[#505050] text-center w-fit">
+                  Start Date
+                </th>
+                <th className="p-[5px] border-b border-[#505050] text-center w-fit">
+                  Amount
+                </th>
+                <th className="p-[5px] border-b border-[#505050] text-center w-fit">
+                  Status
+                </th>
+                <th className="p-[5px] border-b border-[#505050] text-center w-fit">
+                  Action
+                </th>
               </tr>
-            ))
-          )}
-          <tr className="w-full bg-[#F9F9F9] ">
-            <td colSpan={7}>
-              <div className="flex items-center justify-end gap-1 text-sm px-[20px] py-[12px]">
-                <button
-                  className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                  onClick={() => goToPage(1)}
-                  disabled={currentPage === 1}
-                >
-                  First
-                </button>
-                <button
-                  className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                  onClick={() => goToPage(currentPage - 1)}
-                  disabled={currentPage === 1}
-                >
-                  Back
-                </button>
-                {renderPaginationButtons()}
-                <button
-                  className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                  onClick={() => goToPage(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                >
-                  Next
-                </button>
-                <button
-                  className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
-                  onClick={() => goToPage(totalPages)}
-                  disabled={currentPage === totalPages}
-                >
-                  Last
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+            </thead>
+            <tbody className="">
+              {paginatedUserPlans.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="p-3 text-center">
+                    No users found.
+                  </td>
+                </tr>
+              ) : (
+                paginatedUserPlans.map((plan, i) => (
+                  <tr key={plan._id} className="border-b border-[#DEE2E6]/50 ">
+                    <td className="p-[8px] border-b-1 text-center border-[#F9F9F9] text-[#5B5B5B]">
+                      {String(
+                        (currentPage - 1) * ITEMS_PER_PAGE + i + 1
+                      ).padStart(2, "0")}
+                    </td>
+                    <td className="p-[8px] border-b-1 text-center border-[#F9F9F9] text-[#5B5B5B]">
+                      {plan.userName}
+                    </td>
+                    <td className="p-[8px] border-b-1 text-center border-[#F9F9F9] text-[#5B5B5B]">
+                      {selectedPlan}
+                    </td>
+                    <td className="p-[8px] border-b-1 text-center border-[#F9F9F9] text-[#5B5B5B]">
+                      {plan.startDate}
+                    </td>
+                    <td className="p-[8px] border-b-1 text-center border-[#F9F9F9] text-[#5B5B5B]">
+                      ${plan.amount}
+                    </td>
+                    <td className="p-[8px] border-b-1 text-center border-[#F9F9F9] text-[#5B5B5B] capitalize">
+                      {plan.status}
+                    </td>
+                    <td className="flex justify-center p-3 border-b-1 border-[#F9F9F9] text text-center">
+                      <button
+                        // onClick={() => handleDelete(subscription._id)}
+                        className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect width="20" height="20" rx="3" fill="#FF1919" />
+                          <path
+                            d="M6.875 16C6.53125 16 6.23708 15.8696 5.9925 15.6087C5.74792 15.3478 5.62542 15.0338 5.625 14.6667V6H5V4.66667H8.125V4H11.875V4.66667H15V6H14.375V14.6667C14.375 15.0333 14.2527 15.3473 14.0081 15.6087C13.7635 15.87 13.4692 16.0004 13.125 16H6.875ZM8.125 13.3333H9.375V7.33333H8.125V13.3333ZM10.625 13.3333H11.875V7.33333H10.625V13.3333Z"
+                            fill="white"
+                          />
+                        </svg>
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div className="flex bg-[#F9F9F9] mt-4 items-center justify-end gap-1 text-sm px-[20px] py-[12px] ">
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(1)}
+          disabled={currentPage === 1}
+        >
+          First
+        </button>
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Back
+        </button>
+        {renderPaginationButtons()}
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+        <button
+          className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
+          onClick={() => goToPage(totalPages)}
+          disabled={currentPage === totalPages}
+        >
+          Last
+        </button>
+      </div>
+    </>
   );
 }

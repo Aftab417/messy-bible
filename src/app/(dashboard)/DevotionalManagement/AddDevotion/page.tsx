@@ -212,7 +212,7 @@ const HumanbrailUpload = () => {
     const hasError = validationErrors[name];
 
     return (
-      <div className="pb-[15px]">
+      <div className="">
         {label && (
           <label className="text-[#794A3A]  text-[16px] font-medium leading-none block pb-[10px]">
             {label}
@@ -286,7 +286,7 @@ const HumanbrailUpload = () => {
 
         <form onSubmit={handleSubmit}>
           {/* Image Upload */}
-          <div className="pb-6">
+          <div className="pb-5">
             <div className="border-1 border-[#AFAFAF] rounded-[8px] gap-5 bg-[#FFF]  py-6 mb-4 flex flex-col items-center justify-center relative">
               <input
                 type="file"
@@ -321,7 +321,7 @@ const HumanbrailUpload = () => {
           </div>
 
           {/* Devoti */}
-          <div className="pb-6">
+          <div className="pb-5">
             <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-3">
               Devotional Title
             </label>
@@ -347,7 +347,7 @@ const HumanbrailUpload = () => {
           </div>
 
           {/* Tagline */}
-          <div className="pb-6">
+          <div className="pb-5">
             <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-3">
               Tagline
             </label>
@@ -373,7 +373,7 @@ const HumanbrailUpload = () => {
           </div>
 
           {/* Devotional */}
-          <div className="pb-6">
+          <div className="pb-5">
             <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-3">
               Devotional Body
             </label>
@@ -401,7 +401,7 @@ const HumanbrailUpload = () => {
           </div>
 
           {/* Scripture Reference */}
-          <div className="pb-6">
+          <div className="pb-5">
             <h3 className="text-[#794A3A] font-dm-sans text-[16px] font-semibold pb-3">
               Scripture Reference
             </h3>
@@ -414,7 +414,7 @@ const HumanbrailUpload = () => {
           </div>
 
           {/* Status */}
-          <div className="pb-6">
+          <div className="pb-5">
             <label className="text-[#794A3A] font-dm-sans text-[16px] font-semibold leading-none block pb-3">
               Status
             </label>
@@ -428,15 +428,15 @@ const HumanbrailUpload = () => {
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-end pt-4">
-            <button
-              type="submit"
-              className="px-[40px]  py-3 bg-[#F6805C] cursor-pointer text-white rounded-[10px] hover:bg-orange-600 transition-colors font-dm-sans text-[14px] font-medium"
-            >
-              Save
-            </button>
-          </div>
         </form>
+      </div>
+      <div className="flex justify-end pt-6">
+        <button
+          type="submit"
+          className="px-12  py-3 bg-[#F6805C] cursor-pointer text-white rounded-[10px] hover:bg-orange-600 transition-colors font-dm-sans text-[14px] font-medium"
+        >
+          Save
+        </button>
       </div>
     </div>
   );
