@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import { useSearchParams } from "next/navigation";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 interface UserPlan {
   _id: string;
@@ -227,6 +229,23 @@ export default function User() {
     return buttons;
   };
 
+  const handleDelete = (id: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        toast.success("Deleted successfully");
+        // 👉 Yahan API call ya state update logic lag sakti hai agar required ho
+      }
+    });
+  };
+
   return (
     <>
       <div className="w-full overflow-x-auto">
@@ -296,7 +315,7 @@ export default function User() {
                     </td>
                     <td className="flex justify-center p-3 border-b-1 border-[#F9F9F9] text text-center">
                       <button
-                        // onClick={() => handleDelete(subscription._id)}
+                        onClick={() => handleDelete(plan._id)}
                         className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
                       >
                         <svg
