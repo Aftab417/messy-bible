@@ -594,7 +594,10 @@ const UserManagement = () => {
         All Sermons
       </div>
 
-      <div className="w-full overflow-x-auto -ms-4">
+
+      {/* <div className="w-full overflow-x-auto -ms-4"> */}
+      <div className="w-full overflow-x-auto">
+
         <table className="min-w-[700px] w-full overflow-hidden shadow border-separate border-spacing-x-4">
           <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold ">
             <tr>

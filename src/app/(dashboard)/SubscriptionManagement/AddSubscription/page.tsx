@@ -91,7 +91,7 @@ export default function AddSubscription() {
               type="text"
               {...formik.getFieldProps("heading")}
               placeholder="Enter Plan Name (e.g Freemium, monthly etc)"
-              className="w-full text-sm px-4 py-4 rounded-lg border border-[#AFAFAF] bg-[#FFFfff] text-[#5B5B5B] font-normal focus:outline-none"
+              className="w-full text-sm px-4 py-4 rounded-lg border border-[#AFAFAF] bg-[#FFFfff] text-[#5B5B5B] font-normal focus:outline-none placeholder-[#5B5B5B]"
             />
             {formik.touched.heading && formik.errors.heading && (
               <p className="text-sm text-red-600">{formik.errors.heading}</p>
@@ -112,7 +112,7 @@ export default function AddSubscription() {
                   className="appearance-none cursor-pointer w-full text-sm px-4 py-4 pr-10 rounded-lg border border-[#AFAFAF] bg-white text-[#5B5B5B] font-normal focus:outline-none"
                 >
                   <option value="">Month</option>
-                  <option value="month">Month</option>
+                  {/* <option value="month">Month</option> */}
                   <option value="year">Year</option>
                   <option value="week">Week</option>
                 </select>
@@ -137,7 +137,7 @@ export default function AddSubscription() {
                   type="number"
                   {...formik.getFieldProps("price")}
                   placeholder="1200$"
-                  className="w-full text-sm px-4 py-4 rounded-lg border border-[#AFAFAF] bg-[#FFFfff] text-[#5B5B5B]  font-normal focus:outline-none"
+                  className="w-full text-sm px-4 py-4 rounded-lg border border-[#AFAFAF] bg-[#FFFfff] text-[#5B5B5B]  font-normal focus:outline-none placeholder-[#5B5B5B]"
                 />
               </div>
             </div>
@@ -169,7 +169,7 @@ export default function AddSubscription() {
               <select
                 id="subscriptionStatus"
                 {...formik.getFieldProps("subscriptionStatus")}
-                className="appearance-none cursor-pointer w-full text-sm px-4 py-4 pr-10 rounded-lg border border-[#AFAFAF] bg-[#FFFFFF] text-[#5B5B5B] font-normal focus:outline-none"
+                className="appearance-none cursor-pointer w-full text-sm px-4 py-4 pr-10 rounded-lg border border-[#AFAFAF] bg-[#FFFFFF] text-[#5B5B5B] font-normal focus:outline-none placeholder-[#5B5B5B]"
               >
                 <option value="">Select Status</option>
                 <option value="active">Active</option>
@@ -243,7 +243,7 @@ export default function AddSubscription() {
                         formik.setFieldValue("planOptions", newOptions);
                       }}
                       placeholder={`Plan Option ${index + 1}:`}
-                      className="w-full text-sm px-4 py-4 rounded-lg border border-[#AFAFAF] bg-[#FFFfff] text-[#5B5B5B] font-normal focus:outline-none"
+                      className="w-full text-sm px-4 py-4 rounded-lg border border-[#AFAFAF] bg-[#FFFfff] text-[#5B5B5B] font-normal focus:outline-none placeholder-[#5B5B5B]"
                     />
 
                     {formik.values.planOptions.length > 1 && (
