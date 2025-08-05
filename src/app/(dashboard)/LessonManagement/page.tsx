@@ -827,28 +827,70 @@ const UserManagement = () => {
 
       <div className="w-full overflow-x-auto -ms-4">
         <table className="w-full overflow-hidden border-separate shadow border-spacing-x-4">
-          <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold ">
+          <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold">
             <tr>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                S.No:
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  S.No:
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "43px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Lesson Name
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Lesson Name
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "160px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Created By
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Created By
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "120px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Study Plan
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Study Plan
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "120px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Visibility
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Visibility
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "100px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Lesson Type
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Lesson Type
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "120px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Actions
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Actions
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "102px" }}
+                  ></div>
+                </div>
               </th>
             </tr>
           </thead>
