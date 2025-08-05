@@ -28,7 +28,9 @@ const Settings = () => {
       </h1>
       {/* Sidebar */}
       <div className="flex flex-col w-full gap-3 lg:flex-row">
-        <div className=" lg:w-1/4 w-full p-4  h-fit  dark:bg-gray-900    rounded-[20px] bg-[#F9F9F9]">
+        <div className=" lg:w-1/4 w-full p-4  h-fit rounded-[20px] bg-[#F9F9F9]">
+
+        {/* <div className=" lg:w-1/4 w-full p-4  h-fit  dark:bg-gray-900    rounded-[20px] bg-[#F9F9F9]"> */}
           <ul className="space-y-2">
             <li>
               <button

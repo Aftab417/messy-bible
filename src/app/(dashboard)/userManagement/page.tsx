@@ -410,6 +410,7 @@ const dummyUsers = [
     is_active: true
   }
 ];
+
 type StatusOption = {
   value: "active" | "inactive";
   label: string;
@@ -448,7 +449,8 @@ const customStyles = {
   menu: (provided: CSSObjectWithLabel) => ({
     ...provided,
     borderRadius: "4px",
-    overflow: "hidden"
+    overflow: "hidden",
+    zIndex: 9999 // Ensure dropdown appears above other elements
   }),
   option: (
     provided: CSSObjectWithLabel,
@@ -655,6 +657,7 @@ const UserManagement = () => {
       toast.error("Failed to export CSV");
     }
   };
+
   const handleExportPDF = () => {
     toast("PDF export not implemented yet");
   };
@@ -741,27 +744,67 @@ const UserManagement = () => {
         All Users
       </div>
 
-      <div className="w-full overflow-x-auto -ms-4 ">
+      {/* Table Container with extra bottom padding for dropdown space */}
+      <div className="w-full overflow-x-auto -ms-4 pb-20">
         <table className="w-full overflow-hidden border-separate border-spacing-x-4">
           <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold ">
             <tr>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  S.No:
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "43px" }}
+                  ></div>
+                </div>
+              </th>
+              {/* <th className="p-[5px] border-b border-[#505050] text-center w-fit">
                 S.No:
+              </th> */}
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  User Name
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "160px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                User Name
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Email
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "220px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Email
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Current Plan
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "130px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Current Plan
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Status
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "130px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Status
-              </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Actions
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Actions
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "102px" }}
+                  ></div>
+                </div>
               </th>
             </tr>
           </thead>
@@ -773,97 +816,107 @@ const UserManagement = () => {
                 </td>
               </tr>
             ) : (
-              paginatedUsers.map((user, i) => (
-                <tr key={user._id} className="border-b border-[#DEE2E6]/50 ">
-                  <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    {String(
-                      (currentPage - 1) * ITEMS_PER_PAGE + i + 1
-                    ).padStart(2, "0")}
-                  </td>
+              paginatedUsers.map((user, i) => {
+                // Determine if this is one of the last two rows
+                const isLastTwoRows = i >= paginatedUsers.length - 2;
 
-                  <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    {user.username}
-                  </td>
-                  <td className="p-[5px] text-center  text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    {user.email}
-                  </td>
-                  <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
-                    {user.CurrentPlan}
-                  </td>
+                return (
+                  <tr key={user._id} className="border-b border-[#DEE2E6]/50 ">
+                    <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                      {String(
+                        (currentPage - 1) * ITEMS_PER_PAGE + i + 1
+                      ).padStart(2, "0")}
+                    </td>
 
-                  <td
-                    className={`p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]`}
-                  >
-                    <div
-                      className={`${getBgClass(user.is_active)} rounded-md w-fit px-2 mx-auto`}
+                    <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                      {user.username}
+                    </td>
+                    <td className="p-[5px] text-center  text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                      {user.email}
+                    </td>
+                    <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                      {user.CurrentPlan}
+                    </td>
+
+                    <td
+                      className={`p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]`}
                     >
-                      <Select
-                        options={statusOptions}
-                        value={
-                          user.is_active ? statusOptions[0] : statusOptions[1]
-                        }
-                        onChange={(selectedOption) => {
-                          if (selectedOption) {
-                            handleStatusChange(user._id, selectedOption.value);
+                      <div
+                        className={`${getBgClass(user.is_active)} rounded-md w-fit px-2 mx-auto`}
+                      >
+                        <Select
+                          options={statusOptions}
+                          value={
+                            user.is_active ? statusOptions[0] : statusOptions[1]
                           }
-                        }}
-                        styles={customStyles}
-                        isSearchable={false}
-                        menuPlacement="auto"
-                        className="py-2 min-w-24 react-select-container"
-                        classNamePrefix="react-select"
-                        components={{
-                          IndicatorSeparator: null
-                        }}
-                      />
-                    </div>
-                  </td>
+                          onChange={(selectedOption) => {
+                            if (selectedOption) {
+                              handleStatusChange(
+                                user._id,
+                                selectedOption.value
+                              );
+                            }
+                          }}
+                          styles={customStyles}
+                          isSearchable={false}
+                          menuPlacement={isLastTwoRows ? "top" : "auto"} // Force upward placement for last two rows
+                          className="py-2 min-w-24 react-select-container"
+                          classNamePrefix="react-select"
+                          components={{
+                            IndicatorSeparator: null
+                          }}
+                        />
+                      </div>
+                    </td>
 
-                  <td className="flex justify-center p-3 border-b-1 border-[#F9F9F9]">
-                    <button
-                      className="mx-1 text-sm transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
-                      onClick={handleClick}
-                    >
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+                    <td className="flex justify-center p-3 border-b-1 border-[#F9F9F9]">
+                      <button
+                        className="mx-1 text-sm transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
+                        onClick={handleClick}
                       >
-                        <rect width="20" height="20" rx="3" fill="#6AC8C4" />
-                        <path
-                          d="M10 8C9.42135 8 8.86639 8.21071 8.45722 8.58579C8.04805 8.96086 7.81818 9.46957 7.81818 10C7.81818 10.5304 8.04805 11.0391 8.45722 11.4142C8.86639 11.7893 9.42135 12 10 12C10.5787 12 11.1336 11.7893 11.5428 11.4142C11.9519 11.0391 12.1818 10.5304 12.1818 10C12.1818 9.46957 11.9519 8.96086 11.5428 8.58579C11.1336 8.21071 10.5787 8 10 8ZM10 13.3333C9.03558 13.3333 8.11065 12.9821 7.4287 12.357C6.74675 11.7319 6.36364 10.8841 6.36364 10C6.36364 9.11595 6.74675 8.2681 7.4287 7.64298C8.11065 7.01786 9.03558 6.66667 10 6.66667C10.9644 6.66667 11.8893 7.01786 12.5713 7.64298C13.2532 8.2681 13.6364 9.11595 13.6364 10C13.6364 10.8841 13.2532 11.7319 12.5713 12.357C11.8893 12.9821 10.9644 13.3333 10 13.3333ZM10 5C6.36364 5 3.25818 7.07333 2 10C3.25818 12.9267 6.36364 15 10 15C13.6364 15 16.7418 12.9267 18 10C16.7418 7.07333 13.6364 5 10 5Z"
-                          fill="white"
-                        />
-                      </svg>
-                    </button>
-                    <button
-                      onClick={() => handleDelete(user._id)}
-                      className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
-                    >
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect width="20" height="20" rx="3" fill="#6AC8C4" />
+                          <path
+                            d="M10 8C9.42135 8 8.86639 8.21071 8.45722 8.58579C8.04805 8.96086 7.81818 9.46957 7.81818 10C7.81818 10.5304 8.04805 11.0391 8.45722 11.4142C8.86639 11.7893 9.42135 12 10 12C10.5787 12 11.1336 11.7893 11.5428 11.4142C11.9519 11.0391 12.1818 10.5304 12.1818 10C12.1818 9.46957 11.9519 8.96086 11.5428 8.58579C11.1336 8.21071 10.5787 8 10 8ZM10 13.3333C9.03558 13.3333 8.11065 12.9821 7.4287 12.357C6.74675 11.7319 6.36364 10.8841 6.36364 10C6.36364 9.11595 6.74675 8.2681 7.4287 7.64298C8.11065 7.01786 9.03558 6.66667 10 6.66667C10.9644 6.66667 11.8893 7.01786 12.5713 7.64298C13.2532 8.2681 13.6364 9.11595 13.6364 10C13.6364 10.8841 13.2532 11.7319 12.5713 12.357C11.8893 12.9821 10.9644 13.3333 10 13.3333ZM10 5C6.36364 5 3.25818 7.07333 2 10C3.25818 12.9267 6.36364 15 10 15C13.6364 15 16.7418 12.9267 18 10C16.7418 7.07333 13.6364 5 10 5Z"
+                            fill="white"
+                          />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={() => handleDelete(user._id)}
+                        className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
                       >
-                        <rect width="20" height="20" rx="3" fill="#FF1919" />
-                        <path
-                          d="M6.875 16C6.53125 16 6.23708 15.8696 5.9925 15.6087C5.74792 15.3478 5.62542 15.0338 5.625 14.6667V6H5V4.66667H8.125V4H11.875V4.66667H15V6H14.375V14.6667C14.375 15.0333 14.2527 15.3473 14.0081 15.6087C13.7635 15.87 13.4692 16.0004 13.125 16H6.875ZM8.125 13.3333H9.375V7.33333H8.125V13.3333ZM10.625 13.3333H11.875V7.33333H10.625V13.3333Z"
-                          fill="white"
-                        />
-                      </svg>
-                    </button>
-                  </td>
-                </tr>
-              ))
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect width="20" height="20" rx="3" fill="#FF1919" />
+                          <path
+                            d="M6.875 16C6.53125 16 6.23708 15.8696 5.9925 15.6087C5.74792 15.3478 5.62542 15.0338 5.625 14.6667V6H5V4.66667H8.125V4H11.875V4.66667H15V6H14.375V14.6667C14.375 15.0333 14.2527 15.3473 14.0081 15.6087C13.7635 15.87 13.4692 16.0004 13.125 16H6.875ZM8.125 13.3333H9.375V7.33333H8.125V13.3333ZM10.625 13.3333H11.875V7.33333H10.625V13.3333Z"
+                            fill="white"
+                          />
+                        </svg>
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
             )}
           </tbody>
         </table>
       </div>
-      <div className="flex bg-[#F9F9F9] mt-4 items-center justify-end gap-1 text-sm px-[20px] py-[12px] ">
+
+      {/* Pagination with increased top margin */}
+      <div className="flex bg-[#F9F9F9] mt-8 items-center justify-end gap-1 text-sm px-[20px] py-[12px] ">
         <button
           className="flex items-center py-[6px] px-[16px] border border-[#AFAFAF] rounded-[8px] hover:bg-[#F6805C] hover:border-[#F6805C] cursor-pointer hover:text-white text-[#5B5B5B]"
           onClick={() => goToPage(1)}
@@ -897,5 +950,4 @@ const UserManagement = () => {
     </>
   );
 };
-
 export default UserManagement;
