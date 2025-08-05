@@ -7,6 +7,24 @@ import Image from "next/image";
 import GenerateGameManually from "./GenerateGameManually/page";
 import GenerateGameUsingAIModal from "./components/GenerateGameUsingAIModal";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
+
+const handleDelete = async () => {
+  const result = await Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, delete it!"
+  });
+
+  if (result.isConfirmed) {
+    toast.success("Deleted successfully!");
+  }
+};
 
 const BibleTriviaQuizData = [
   {
@@ -262,7 +280,7 @@ const Card = ({
         >
           Edit
         </button>
-        <button className="px-4 py-1.5 text-sm cursor-pointer rounded-lg bg-[#FF2D2D] text-white hover:opacity-90 transition">
+        <button onClick={handleDelete} className="px-4 py-1.5 text-sm cursor-pointer rounded-lg bg-[#FF2D2D] text-white hover:opacity-90 transition">
           Delete
         </button>
       </div>
@@ -404,7 +422,7 @@ const GameManagement = () => {
           active={activeTab === "bibleemojitranslator"}
           onClick={() => setActiveTab("bibleemojitranslator")}
         >
-          Daily Challenges
+          Bible emoji translator 
         </TabButton>
       </div>
       <div className="grid grid-cols-1 gap-6 pt-5 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
