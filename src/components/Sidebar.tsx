@@ -229,7 +229,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                       onClick={() => toggleDropdown(item.label)}
                       onMouseEnter={() => setHoveredItem(item.label)}
                       onMouseLeave={() => setHoveredItem(null)}
-                      className={`flex items-center justify-between min-w-64 cursor-pointer w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
+                      className={`flex items-center justify-between min-w-50 cursor-pointer w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
                         isDropdownItemActive || isDropdownOpen
                           ? "bg-[#F6805C] text-[#FFFFFF] font-semibold"
                           : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
@@ -293,7 +293,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                       onClick={handleLinkClick}
                       onMouseEnter={() => setHoveredItem(item.label)}
                       onMouseLeave={() => setHoveredItem(null)}
-                      className={`flex items-center min-w-64 w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
+                      className={`flex items-center min-w-50 w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
                         isActive
                           ? "bg-[#F6805C] text-[#FFFFFF] font-semibold"
                           : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
@@ -327,7 +327,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                   onClick={handleLinkClick}
                   onMouseEnter={() => setHoveredItem(item.label)}
                   onMouseLeave={() => setHoveredItem(null)}
-                  className={`flex items-center min-w-64 w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
+                  className={`flex items-center min-w-50 w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
                     isActive
                       ? "bg-[#F6805C] text-[#FFFFFF] font-semibold"
                       : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
@@ -362,18 +362,20 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
               setLogoutHover(false);
               setHoveredItem(null);
             }}
-            className="flex items-center cursor-pointer mt-3 ps-5 min-w-64 w-full gap-2 px-4 py-3 mb-3 hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all"
+            className={`flex items-center w-full gap-3 px-4 py-3 mt-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
+              logoutHover
+                ? "bg-[#F6805C] text-[#FFFFFF] font-semibold"
+                : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
+            }`}
           >
-            <span className="flex gap-2 ps-1">
-              <Image
-                src={logoutHover ? "/images/wLogout.svg" : "/images/logout.svg"}
-                alt="logout"
-                width={20}
-                height={20}
-                className="object-contain w-5 h-5"
-              />
-              <span>Logout</span>
-            </span>
+            <Image
+              src={logoutHover ? "/images/wLogout.svg" : "/images/logout.svg"}
+              alt="logout"
+              width={20}
+              height={20}
+              className="object-contain w-5 h-5"
+            />
+            <span>Logout</span>
           </button>
         </div>
       </div>
