@@ -758,6 +758,7 @@ const UserManagement = () => {
                   ></div>
                 </div>
               </th>
+
               <th className="p-[5px] text-center w-fit relative">
                 <div className="relative inline-block pb-2">
                   User Name

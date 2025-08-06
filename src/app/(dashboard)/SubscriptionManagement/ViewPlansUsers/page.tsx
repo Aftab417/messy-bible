@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
 import { useSearchParams } from "next/navigation";
-<<<<<<< HEAD
+
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
-=======
->>>>>>> 495fe1f (QA reports fixing)
+
+
 
 interface UserPlan {
   _id: string;
@@ -318,11 +318,9 @@ export default function User() {
                     </td>
                     <td className="flex justify-center p-3 border-b-1 border-[#F9F9F9] text text-center">
                       <button
-<<<<<<< HEAD
+
                         onClick={() => handleDelete(plan._id)}
-=======
-                        // onClick={() => handleDelete(subscription._id)}
->>>>>>> 495fe1f (QA reports fixing)
+
                         className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
                       >
                         <svg
