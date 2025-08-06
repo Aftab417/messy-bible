@@ -5,8 +5,7 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { ChevronDown } from "lucide-react";
 import { X } from "lucide-react";
-
-import { useRouter } from "next/navigation"; // Note: 'next/navigation' not 'next/router'
+import { useRouter } from "next/navigation";
 
 const dummyUsers = [
   {
@@ -463,17 +462,19 @@ const dummyUsers = [
 
 const UserManagement = () => {
   const [aiMatching, setAiMatching] = useState(true);
+  const [users, setUsers] = useState(dummyUsers);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isAIModalOpen, setIsAIModalOpen] = useState(false);
+  const [customBibleReference, setCustomBibleReference] = useState("");
 
   const toggle = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
     setter((prev) => !prev);
   };
 
-  //#############> Yup Star<############### t
-  //#############> Yup End <###############
-  const [users, setUsers] = useState(dummyUsers);
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const [isAIModalOpen, setIsAIModalOpen] = useState(false);
+  // Remove the duplicate declarations here - they were causing the error
+  // const [users, setUsers] = useState(dummyUsers); // REMOVED
+  // const [searchTerm, setSearchTerm] = useState(""); // REMOVED
+  // const [isAIModalOpen, setIsAIModalOpen] = useState(false); // REMOVED
 
   const ITEMS_PER_PAGE = 10;
   const [currentPage, setCurrentPage] = useState(1);
@@ -612,7 +613,7 @@ const UserManagement = () => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push("/LessonManagement/LessonDetails"); // Now this will work correctly
+    router.push("/LessonManagement/LessonDetails");
   };
 
   interface Lesson {
@@ -634,23 +635,18 @@ const UserManagement = () => {
         bibleReference: "",
         studyPlan: lesson.StudyPlan,
         visibility: lesson.Visibility.toLowerCase()
-      }); // preload form data
-      setIsAIModalOpen(true); // open modal
+      });
+      setIsAIModalOpen(true);
     } else if (lesson.LessonType === "Manually") {
       router.push("/LessonManagement/EditLesson");
     }
   };
 
-  // const  handleAdd= () => {
-  //   router.push("/LessonManagement/AddLesson"); // Now this will work correctly
-  // };
-
   const handleGenerateAI = () => {
-    closeModal(); // Close the first modal
-    setIsAIModalOpen(true); // Open the AI Lesson modal
+    closeModal();
+    setIsAIModalOpen(true);
   };
 
-  //##############> Modal start <################
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
@@ -661,8 +657,6 @@ const UserManagement = () => {
     closeModal();
   };
 
-  // Handle form input changes
-
   const [formData, setFormData] = useState({
     lessonName: "",
     description: "",
@@ -671,6 +665,7 @@ const UserManagement = () => {
     studyPlan: "",
     visibility: "private"
   });
+  
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -693,12 +688,12 @@ const UserManagement = () => {
 
   const bibleReferences = [
     "Genesis 1:1",
+    "Psalm 23:1",
     "John 3:16",
-    "Psalm 23",
-    "Matthew 5:16",
     "Romans 8:28",
-    "Philippians 4:13",
-    "1 Corinthians 13"
+    "Galatians 5:22",
+    "Proverbs 3:5",
+    "Others"
   ];
 
   const studyPlans = [
@@ -707,14 +702,12 @@ const UserManagement = () => {
     "30 Day Plan"
   ];
 
-  // Handle select changes
   const handleSelectChange = (name: string, value: string) => {
     setFormData((prev) => ({
       ...prev,
       [name]: value
     }));
   };
-  // Custom Select Component
 
   const CustomSelect = ({
     label,
@@ -731,8 +724,6 @@ const UserManagement = () => {
   }) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    // Handle radio button changes
-
     return (
       <div className="pb-4">
         <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-2">
@@ -742,8 +733,7 @@ const UserManagement = () => {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="w-full px-4 py-[0.85rem]  rounded-[8px] border border-[#AFAFAF]   bg-[#FFF] text-left flex justify-between items-center text-[#656565] font-normal cursor-pointer  [&_svg]:stroke-red-500 focus:outline-none   ${
-           "
+            className="w-full px-4 py-[0.85rem] rounded-[8px] border border-[#AFAFAF] bg-[#FFF] text-left flex justify-between items-center text-[#656565] font-normal cursor-pointer focus:outline-none"
           >
             <span className="font-inter">{value || placeholder}</span>
             <ChevronDown
@@ -752,7 +742,7 @@ const UserManagement = () => {
           </button>
 
           {isOpen && (
-            <div className="absolute z-10 w-full mt-1 bg-white  border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto hide-scrollbar">
+            <div className="absolute z-10 w-full mt-1 bg-white border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto hide-scrollbar">
               {options.map((option, index) => (
                 <div key={index}>
                   <button
@@ -761,12 +751,12 @@ const UserManagement = () => {
                       handleSelectChange(name, option);
                       setIsOpen(false);
                     }}
-                    className="w-full px-4 py-3 text-left hover:bg-gray-50  text-[#656565]   text-[14px] transition-colors "
+                    className="w-full px-4 py-3 text-left hover:bg-gray-50 text-[#656565] text-[14px] transition-colors"
                   >
                     {option}
                   </button>
                   {index < options.length - 1 && (
-                    <div className="mx-2 border-b border-gray-200 "></div>
+                    <div className="mx-2 border-b border-gray-200"></div>
                   )}
                 </div>
               ))}
@@ -777,7 +767,6 @@ const UserManagement = () => {
     );
   };
 
-  //##############> Modal End  <################
   return (
     <>
       <div className="items-center justify-between lg:flex">
@@ -812,7 +801,6 @@ const UserManagement = () => {
           </div>
 
           <button
-            //  onClick={handleAdd}
             onClick={openModal}
             className="bg-[#FA8059] cursor-pointer hover:bg-[#f96c42] text-white text-sm font-semibold px-[6px] w-full sm:w-[160px] py-[14px] rounded-[12px] transition mt-[10px] sm:mt-[0px]"
           >
@@ -827,28 +815,70 @@ const UserManagement = () => {
 
       <div className="w-full overflow-x-auto -ms-4">
         <table className="w-full overflow-hidden border-separate shadow border-spacing-x-4">
-          <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold ">
+          <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold">
             <tr>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                S.No:
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  S.No:
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "43px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Lesson Name
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Lesson Name
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "160px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Created By
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Created By
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "120px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Study Plan
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Study Plan
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "120px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Visibility
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Visibility
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "100px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Lesson Type
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Lesson Type
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "120px" }}
+                  ></div>
+                </div>
               </th>
-              <th className="p-[5px] border-b border-[#505050] text-center w-fit">
-                Actions
+              <th className="p-[5px] text-center w-fit relative">
+                <div className="relative inline-block pb-2">
+                  Actions
+                  <div
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 border-b border-[#505050]"
+                    style={{ width: "102px" }}
+                  ></div>
+                </div>
               </th>
             </tr>
           </thead>
@@ -944,8 +974,6 @@ const UserManagement = () => {
                 </tr>
               ))
             )}
-
-            {/* Pagination */}
           </tbody>
         </table>
       </div>
@@ -982,35 +1010,26 @@ const UserManagement = () => {
         </button>
       </div>
 
-      {/* Modal Start Start */}
-
-      {/* Modal */}
+      {/* Modal Start */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          {/* Overlay */}
           <div className="absolute inset-0 bg-black/70" onClick={closeModal} />
-
-          {/* Modal Content */}
-          <div className="relative bg-[#F9F9F9] rounded-[20px]   md:px-8 py-8 max-w-md w-full mx-4">
-            {/* Close Button */}
+          <div className="relative bg-[#F9F9F9] rounded-[20px] md:px-8 py-8 max-w-md w-full mx-4">
             <button
               onClick={closeModal}
               className="absolute text-gray-400 transition-colors top-4 right-4 hover:text-gray-600"
             >
-              <X className="w-7 h-7 text-[#F6805C]  cursor-pointer hover:scale-125 transition-transform duration-300 ease-in-out" />
+              <X className="w-7 h-7 text-[#F6805C] cursor-pointer hover:scale-125 transition-transform duration-300 ease-in-out" />
             </button>
 
-            {/* Modal Body */}
             <div className="space-y-4 p-[20px]">
-              {/* AI Generation Button */}
               <button
                 onClick={handleGenerateAI}
-                className="w-full bg-[#6AC8C4]  hover:bg-teal-600 text-white text-[18px] cursor-pointer font-[500] py-4 px-6 rounded-[12px] transition-colors"
+                className="w-full bg-[#6AC8C4] hover:bg-teal-600 text-white text-[18px] cursor-pointer font-[500] py-4 px-6 rounded-[12px] transition-colors"
               >
                 Generate Lesson Using AI
               </button>
 
-              {/* Manual Generation Button */}
               <button
                 onClick={handleGenerateManually}
                 className="w-full bg-[#F6805C] cursor-pointer hover:bg-orange-600 text-white text-[18px] font-[500] py-4 px-6 rounded-[12px] transition-colors"
@@ -1021,9 +1040,8 @@ const UserManagement = () => {
           </div>
         </div>
       )}
-      {/* Modal Start End */}
 
-      {/*##################> Second Modal Start<################  */}
+      {/* AI Modal */}
       {isAIModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div
@@ -1039,26 +1057,22 @@ const UserManagement = () => {
               [&::-webkit-scrollbar-thumb]:bg-gray-300 
               [&::-webkit-scrollbar-track]:bg-gray-100"
             >
-              {/* Close Button */}
-
-              {/* Form Header */}
-              <h2 className=" text-[20px] font-[500] leading-normal text-[#794A3A] Fredoka text-center mb-8">
+              <h2 className="text-[20px] font-[500] leading-normal text-[#794A3A] Fredoka text-center mb-8">
                 + AI Lesson Generation
               </h2>
 
-              {/* Form Body */}
               <form className="">
                 <div className="pb-4">
                   <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
                     Image Generation
                   </label>
-                  <div className="flex items-center justify-between  bg-white      w-full px-4 py-[0.85rem]   border-1 border-[#AFAFAF] rounded-[8px]  text-[#656565] font-normal focus:outline-none">
-                    <span className="text-[#656565]  w-[70%] font-inter text-sm not-italic font-normal leading-normal capitalize">
+                  <div className="flex items-center justify-between bg-white w-full px-4 py-[0.85rem] border-1 border-[#AFAFAF] rounded-[8px] text-[#656565] font-normal focus:outline-none">
+                    <span className="text-[#656565] w-[70%] font-inter text-sm not-italic font-normal leading-normal capitalize">
                       Do you want to generate an image?
                     </span>
                     <div
                       onClick={() => toggle(setAiMatching)}
-                      className={`w-10  h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
+                      className={`w-10 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
                         aiMatching ? "bg-[#F6805C]" : "bg-gray-400"
                       }`}
                     >
@@ -1071,16 +1085,6 @@ const UserManagement = () => {
                   </div>
                 </div>
 
-                {/* Bible Reference */}
-                <CustomSelect
-                  label="Bible Reference"
-                  name="bibleReference"
-                  value={formData.bibleReference}
-                  options={bibleReferences}
-                  placeholder="Select Bible Reference e.g., Galatians 5:22"
-                />
-
-                {/* Lesson Name */}
                 <div className="pb-4">
                   <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
                     Lesson Name
@@ -1095,7 +1099,6 @@ const UserManagement = () => {
                   />
                 </div>
 
-                {/* Description */}
                 <div className="pb-4">
                   <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
                     Description
@@ -1106,7 +1109,7 @@ const UserManagement = () => {
                     onChange={handleInputChange}
                     placeholder="Enter Text Here"
                     rows={3}
-                    className="w-full px-4 py-[0.85rem]  border-1 border-[#AFAFAF] rounded-[8px]  text-[#656565] font-normal focus:outline-none"
+                    className="w-full px-4 py-[0.85rem] border-1 border-[#AFAFAF] rounded-[8px] text-[#656565] font-normal focus:outline-none"
                   />
                 </div>
 
@@ -1118,7 +1121,46 @@ const UserManagement = () => {
                   placeholder="Select Age Group e.g, 25-30"
                 />
 
-                {/* Study Plan */}
+                <div className="pb-4">
+                  <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
+                    Bible Reference
+                  </label>
+
+                  {formData.bibleReference === "Others" ? (
+                    <input
+                      type="text"
+                      value={customBibleReference}
+                      onChange={(e) => setCustomBibleReference(e.target.value)}
+                      placeholder="Enter your Bible reference"
+                      className="w-full px-4 py-[0.85rem] border-1 border-[#AFAFAF] rounded-[8px] text-[#656565] font-normal focus:outline-none"
+                    />
+                  ) : (
+                    <CustomSelect
+                      label=""
+                      name="bibleReference"
+                      value={formData.bibleReference}
+                      options={bibleReferences}
+                      placeholder="Select Bible Reference e.g., Galatians 5:22"
+                    />
+                  )}
+
+                  {formData.bibleReference === "Others" && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFormData((prev) => ({
+                          ...prev,
+                          bibleReference: ""
+                        }));
+                        setCustomBibleReference("");
+                      }}
+                      className="mt-2 text-sm text-[#F6805C] hover:underline"
+                    >
+                      ← Back to options
+                    </button>
+                  )}
+                </div>
+
                 <CustomSelect
                   label="Study Plan"
                   name="studyPlan"
@@ -1127,26 +1169,23 @@ const UserManagement = () => {
                   placeholder="Select Study Plan (e.g. 7 day)"
                 />
 
-                {/* Save As */}
                 <div className="pb-4">
                   <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
-                    Save A
+                    Save As
                   </label>
 
                   <div className="grid gap-4">
-                    <label className="flex items-center gap-2 p-4  border-1 border-[#AFAFAF] text-[#656565]  rounded-lg cursor-pointer justify-between">
-                      <span className="text-[#656565] text-[14px] font-[400] ">
+                    <label className="flex items-center gap-2 p-4 border-1 border-[#AFAFAF] text-[#656565] rounded-lg cursor-pointer justify-between">
+                      <span className="text-[#656565] text-[14px] font-[400]">
                         Public
                       </span>
                       <input
                         type="radio"
                         name="visibility"
                         value="public"
-                        // checked={formData.saveAs === "public"}
-                        // onChange={() => handleRadioChange("public")}
                         className="appearance-none w-5 h-5 border-2 border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
-                 before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
-                 checked:before:scale-100"
+                          before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
+                          checked:before:scale-100"
                       />
                     </label>
 
@@ -1158,11 +1197,9 @@ const UserManagement = () => {
                         type="radio"
                         name="visibility"
                         value="private"
-                        // checked={formData.saveAs === "private"}
-                        // onChange={() => handleRadioChange("private")}
                         className="appearance-none w-5 h-5 border-2 border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
-                 before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
-                 checked:before:scale-100"
+                          before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
+                          checked:before:scale-100"
                       />
                     </label>
                   </div>
@@ -1172,15 +1209,15 @@ const UserManagement = () => {
                   <button
                     type="button"
                     onClick={() => setIsAIModalOpen(false)}
-                    className="bg-transparent text-[14px] font-[600]    py-3 rounded-[10px] px-[10px]  border-1 border-[#F6805C] text-[#F6805C]  hover:bg-[#F6805C]  hover:text-white  cursor-pointer "
+                    className="bg-transparent text-[14px] font-[600] py-3 rounded-[10px] px-[10px] border-1 border-[#F6805C] text-[#F6805C] hover:bg-[#F6805C] hover:text-white cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="hover:bg-transparent text-[14px] font-[600]    py-3 rounded-[10px] px-[10]  border-1 hover:border-[#F6805C] hover:text-[#F6805C] bg-[#F6805C]  text-white  cursor-pointer"
+                    className="hover:bg-transparent text-[14px] font-[600] py-3 rounded-[10px] px-[10px] border-1 hover:border-[#F6805C] hover:text-[#F6805C] bg-[#F6805C] text-white cursor-pointer"
                   >
-                    Generate Lesson
+                    Regenerate Lesson
                   </button>
                 </div>
               </form>
@@ -1188,8 +1225,6 @@ const UserManagement = () => {
           </div>
         </div>
       )}
-
-      {/*##################> Second Modal  End <################ */}
     </>
   );
 };

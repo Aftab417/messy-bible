@@ -606,12 +606,11 @@ const AddLesson = () => {
         <h1 className="text-[#794A3A]  font-dm-sans text-base font-semibold pb-3">
           {currentStep === 1 ? `Edit Lesson ` : "Edit Topics"}
         </h1>
-        <button className="text-white bg-[#F6805C] rounded-lg py-2 px-6 font-dm-sans text-base font-semibold pb-3">
+        <button className="text-white bg-[#F6805C] rounded-lg font-dm-sans text-base font-semibold py-3 px-4">
           Edit Topics
         </button>
       </div>
-
-      <div className="bg-[#F9F9F9] dark:bg-gray-900 dark:text-white rounded-[16px] w-full max-w-7xl p-6">
+      <div className="bg-[#F9F9F9] dark:text-white rounded-[16px] w-full max-w-7xl p-6">
         <form onSubmit={handleSubmit}>
           {currentStep === 1 ? (
             <>
@@ -620,7 +619,7 @@ const AddLesson = () => {
                 <label className="text-[#5B5B5B] font-dm-sans text-[16px] font-semibold leading-normal pb-[10px] block">
                   Thumbnail
                 </label>
-                <div className="border-1 border-[#AFAFAF] rounded-[8px] gap-5 bg-[#FFF] dark:bg-gray-800 py-6 mb-4 flex flex-col items-center justify-center relative">
+                <div className="border-1 border-[#AFAFAF] rounded-[8px] gap-5 bg-[#FFF]  py-6 mb-4 flex flex-col items-center justify-center relative">
                   <input
                     type="file"
                     id="profilePhoto"
@@ -647,7 +646,6 @@ const AddLesson = () => {
                   )}
                 </div>
               </div>
-
               {/* Lesson Name */}
               <div className="pb-6">
                 <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
@@ -705,31 +703,88 @@ const AddLesson = () => {
               </div>
 
               {/* Age Group */}
-              <CustomSelect
-                label="Age Group"
-                name="ageGroup"
-                value={formData.ageGroup}
-                options={ageGroups}
-                placeholder="Select Age Group e.g, 25-30"
-              />
-
+              <div className="pb-6">
+                <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
+                  Age Group
+                </label>
+                <div className="relative">
+                  <select
+                    name="ageGroupNew"
+                    className="w-full px-4 py-3 text-[#5B5B5B] font-normal focus:outline-none focus:ring-[#F6805C] rounded-[8px] border border-[#AFAFAF] bg-[#FFF] appearance-none cursor-pointer"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23F6805C' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
+                      backgroundPosition: "right 0.5rem center",
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "1.5em 1.5em"
+                    }}
+                  >
+                    <option value="" className="text-[#999999]">
+                      Select Age Group e.g, 25-30
+                    </option>
+                    <option value="under-13">Under 13</option>
+                    <option value="13-17">13–17</option>
+                    <option value="18-24">18–24</option>
+                    <option value="25-34">25–34</option>
+                    <option value="35-44">35–44</option>
+                    <option value="45-60">45–60</option>
+                    <option value="60+">60+</option>
+                  </select>
+                </div>
+              </div>
               {/* Bible Reference */}
-              <CustomSelect
-                label="Bible Reference"
-                name="bibleReference"
-                value={formData.bibleReference}
-                options={bibleReferences}
-                placeholder="Select Bible Reference e.g., Galatians 5:22"
-              />
-
+              <div className="pb-6">
+                <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
+                  Bible Reference
+                </label>
+                <div className="relative">
+                  <select
+                    name="bibleReferenceNew"
+                    className="w-full px-4 py-3 text-[#5B5B5B] font-normal focus:outline-none focus:ring-[#F6805C] rounded-[8px] border border-[#AFAFAF] bg-[#FFF] appearance-none cursor-pointer"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23F6805C' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
+                      backgroundPosition: "right 0.5rem center",
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "1.5em 1.5em"
+                    }}
+                  >
+                    <option value="" className="text-[#999999]">
+                      Select Bible Reference e.g., Galatians 5:22
+                    </option>
+                    <option value="genesis-1-1">Genesis 1:1</option>
+                    <option value="john-3-16">John 3:16</option>
+                    <option value="psalm-23">Psalm 23</option>
+                    <option value="matthew-5-16">Matthew 5:16</option>
+                    <option value="romans-8-28">Romans 8:28</option>
+                    <option value="philippians-4-13">Philippians 4:13</option>
+                    <option value="1-corinthians-13">1 Corinthians 13</option>
+                    <option value="galatians-5-22">Galatians 5:22</option>
+                  </select>
+                </div>
+              </div>
               {/* Study Plan */}
-              <CustomSelect
-                label="Study Plan"
-                name="studyPlan"
-                value={formData.studyPlan}
-                options={studyPlans}
-                placeholder="Select Study Plan (e.g. 7 day)"
-              />
+              <div className="pb-6">
+                <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
+                  Study Plan
+                </label>
+                <div className="relative">
+                  <select
+                    name="studyPlanNew"
+                    className="w-full px-4 py-3 text-[#5B5B5B] font-normal focus:outline-none focus:ring-[#F6805C] rounded-[8px] border border-[#AFAFAF] bg-[#FFF] appearance-none cursor-pointer"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23F6805C' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
+                      backgroundPosition: "right 0.5rem center",
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "1.5em 1.5em"
+                    }}
+                  >
+                    <option value="" className="text-[#999999]">
+                      Select Study Plan e.g, 7 day
+                    </option>
+                    <option value="7-day">7 Day Plan</option>
+                    <option value="30-day">30 Day Plan</option>
+                  </select>
+                </div>
+              </div>
 
               {/* Show topic count preview */}
               {formData.studyPlan &&
@@ -743,7 +798,6 @@ const AddLesson = () => {
                     </div>
                   </div>
                 )}
-
               {/* Save As */}
               <div className="pb-6">
                 <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
@@ -1026,6 +1080,7 @@ const AddLesson = () => {
           {/* Form Actions */}
         </form>
       </div>
+      {/* Form Actions */}
       <div className="justify-between block pt-5 md:flex">
         {currentStep === 2 && (
           <button
@@ -1037,12 +1092,31 @@ const AddLesson = () => {
           </button>
         )}
 
-        <button
-          type="submit"
-          className="py-3 px-[30px] mt-2  -md:w-full cursor-pointer bg-[#F6805C] text-white rounded-[10px] hover:bg-orange-600 transition-colors ml-auto"
-        >
-          {currentStep === 1 ? "Next " : "Create Lesson"}
-        </button>
+        {/* Container for Cancel and Update buttons */}
+        <div className="flex gap-3 ml-auto">
+          {/* Cancel Button - ADD THIS */}
+          <button
+            type="button"
+            onClick={() => {
+              // Add your cancel logic here
+              resetForm();
+              setCurrentStep(1);
+              // Or navigate back to previous page
+              // router.back(); // if using Next.js router
+            }}
+            className="py-3 px-[40px] mt-2 cursor-pointer border border-[#F6805C] text-[#F6805C] rounded-[10px] hover:bg-gray-100 transition-colors"
+          >
+            Cancel
+          </button>
+
+          {/* Update Button - EXISTING */}
+          <button
+            type="submit"
+            className="py-3 px-[40px] mt-2 cursor-pointer bg-[#F6805C] text-white rounded-[10px] hover:bg-orange-600 transition-colors"
+          >
+            {currentStep === 1 ? "Update" : "Create Lesson"}
+          </button>
+        </div>
       </div>
     </>
   );

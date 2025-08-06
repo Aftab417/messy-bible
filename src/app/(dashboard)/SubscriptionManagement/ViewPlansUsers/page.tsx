@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
 import { useSearchParams } from "next/navigation";
+
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+
 
 
 interface UserPlan {
@@ -316,6 +318,7 @@ export default function User() {
                     </td>
                     <td className="flex justify-center p-3 border-b-1 border-[#F9F9F9] text text-center">
                       <button
+
                         onClick={() => handleDelete(plan._id)}
 
                         className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
