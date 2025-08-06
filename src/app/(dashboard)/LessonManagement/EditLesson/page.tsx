@@ -606,11 +606,10 @@ const AddLesson = () => {
         <h1 className="text-[#794A3A]  font-dm-sans text-base font-semibold pb-3">
           {currentStep === 1 ? `Edit Lesson ` : "Edit Topics"}
         </h1>
-        <button className="text-white bg-[#F6805C] rounded-lg py-2 px-6 font-dm-sans text-base font-semibold pb-3">
+        <button className="text-white bg-[#F6805C] rounded-lg font-dm-sans text-base font-semibold py-3 px-4">
           Edit Topics
         </button>
       </div>
-
       <div className="bg-[#F9F9F9] dark:text-white rounded-[16px] w-full max-w-7xl p-6">
         <form onSubmit={handleSubmit}>
           {currentStep === 1 ? (
@@ -674,8 +673,7 @@ const AddLesson = () => {
                   </p>
                 )}
               </div>
-             
-             
+
               {/* Description */}
               <div className="pb-6">
                 <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
@@ -704,7 +702,7 @@ const AddLesson = () => {
                 )}
               </div>
 
-               {/* Age Group */}
+              {/* Age Group */}
               <div className="pb-6">
                 <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
                   Age Group
@@ -787,7 +785,7 @@ const AddLesson = () => {
                   </select>
                 </div>
               </div>
-              
+
               {/* Show topic count preview */}
               {formData.studyPlan &&
                 formData.studyPlan !== "Select Study Plan (e.g. 7 day)" && (
@@ -1082,6 +1080,7 @@ const AddLesson = () => {
           {/* Form Actions */}
         </form>
       </div>
+      {/* Form Actions */}
       <div className="justify-between block pt-5 md:flex">
         {currentStep === 2 && (
           <button
@@ -1093,12 +1092,31 @@ const AddLesson = () => {
           </button>
         )}
 
-        <button
-          type="submit"
-          className="py-3 px-[30px] mt-2  -md:w-full cursor-pointer bg-[#F6805C] text-white rounded-[10px] hover:bg-orange-600 transition-colors ml-auto"
-        >
-          {currentStep === 1 ? "Next " : "Create Lesson"}
-        </button>
+        {/* Container for Cancel and Update buttons */}
+        <div className="flex gap-3 ml-auto">
+          {/* Cancel Button - ADD THIS */}
+          <button
+            type="button"
+            onClick={() => {
+              // Add your cancel logic here
+              resetForm();
+              setCurrentStep(1);
+              // Or navigate back to previous page
+              // router.back(); // if using Next.js router
+            }}
+            className="py-3 px-[40px] mt-2 cursor-pointer border border-[#F6805C] text-[#F6805C] rounded-[10px] hover:bg-gray-100 transition-colors"
+          >
+            Cancel
+          </button>
+
+          {/* Update Button - EXISTING */}
+          <button
+            type="submit"
+            className="py-3 px-[40px] mt-2 cursor-pointer bg-[#F6805C] text-white rounded-[10px] hover:bg-orange-600 transition-colors"
+          >
+            {currentStep === 1 ? "Update" : "Create Lesson"}
+          </button>
+        </div>
       </div>
     </>
   );
