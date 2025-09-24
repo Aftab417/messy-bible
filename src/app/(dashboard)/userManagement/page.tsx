@@ -695,7 +695,7 @@ const UserManagement = () => {
       doc.setFont("helvetica", "normal");
       yPosition = 55;
       
-      filteredUsers.forEach((user, index) => {
+      filteredUsers.forEach((user) => {
         // Check if we need a new page
         if (yPosition > 280) {
           doc.addPage();
