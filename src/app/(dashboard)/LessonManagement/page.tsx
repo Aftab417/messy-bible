@@ -612,8 +612,14 @@ const UserManagement = () => {
 
   const router = useRouter();
 
-  const handleClick = () => {
-    router.push("/LessonManagement/LessonDetails");
+  const handleClick = (lesson: Lesson) => {
+    if (lesson.LessonType === "AI") {
+      // For AI lessons, go to topics management
+      router.push(`/LessonManagement/TopicsManagement?lessonId=${lesson._id}&lessonName=${encodeURIComponent(lesson.lessonName)}`);
+    } else {
+      // For manual lessons, go to lesson details
+      router.push("/LessonManagement/LessonDetails");
+    }
   };
 
   interface Lesson {
@@ -916,7 +922,7 @@ const UserManagement = () => {
                   <td className="flex justify-center p-3 text-sm">
                     <button
                       className="mx-1 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110"
-                      onClick={handleClick}
+                      onClick={() => handleClick(user as Lesson)}
                     >
                       <svg
                         width="20"
@@ -1184,7 +1190,7 @@ const UserManagement = () => {
                         name="visibility"
                         value="public"
                         className="appearance-none w-5 h-5 border-2 border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
-                          before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
+                          before:content-[''] before:absolute before:w-3 before:h-3 before:bg-red-400 before:rounded-full before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:scale-0 before:transition-transform
                           checked:before:scale-100"
                       />
                     </label>
@@ -1198,7 +1204,7 @@ const UserManagement = () => {
                         name="visibility"
                         value="private"
                         className="appearance-none w-5 h-5 border-2 border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
-                          before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
+                          before:content-[''] before:absolute before:w-3 before:h-3 before:bg-red-400 before:rounded-full before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:scale-0 before:transition-transform
                           checked:before:scale-100"
                       />
                     </label>

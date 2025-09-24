@@ -16,7 +16,7 @@ import { encryptTransform } from "redux-persist-transform-encrypt";
 
 // Encryption transform configuration
 const encryptor = encryptTransform({
-  secretKey: process.env.NEXT_PUBLIC_REDUX_KEY!,
+  secretKey: process.env.NEXT_PUBLIC_REDUX_KEY || "default-secret-key-for-development-only-32-chars",
   onError: function (error) {
     console.error("Encryption error:", error);
     storage.removeItem("persist:root");

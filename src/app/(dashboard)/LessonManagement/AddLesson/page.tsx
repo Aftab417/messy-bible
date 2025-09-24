@@ -5,6 +5,7 @@ import type React from "react";
 import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
 import { Upload, ChevronDown, Plus, Minus } from "lucide-react";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
@@ -41,6 +42,7 @@ const step2Schema = Yup.object().shape({
 });
 
 const AddLesson = () => {
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [validationErrors, setValidationErrors] = useState<
     Record<string, string>
@@ -213,7 +215,7 @@ const AddLesson = () => {
         }));
       }
     }
-  }, [formData.studyPlan, formData.topics, topicsHaveData]);
+  }, [formData.studyPlan, topicsHaveData]);
 
   // Validate step
   const validateStep = async (step: number) => {
@@ -483,9 +485,8 @@ const AddLesson = () => {
         confirmButtonColor: "#F6805C"
       });
 
-      // Reset form
-      resetForm();
-      setCurrentStep(1);
+      // Redirect to topics management
+      router.push(`/LessonManagement/TopicsManagement?lessonName=${encodeURIComponent(formData.firstName)}&studyPlan=${encodeURIComponent(formData.studyPlan)}`);
     } catch (error) {
       console.error("Failed to add lesson:", error);
 
@@ -696,7 +697,9 @@ const AddLesson = () => {
                 </label>
                 <div className="relative">
                   <select
-                    name="ageGroupNew"
+                    name="ageGroup"
+                    value={formData.ageGroup}
+                    onChange={(e) => handleSelectChange("ageGroup", e.target.value)}
                     className="w-full px-4 py-3 text-[#5B5B5B] font-normal focus:outline-none focus:ring-[#F6805C] rounded-[8px] border border-[#AFAFAF] bg-[#FFF] appearance-none cursor-pointer"
                     style={{
                       backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23F6805C' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
@@ -725,7 +728,9 @@ const AddLesson = () => {
                 </label>
                 <div className="relative">
                   <select
-                    name="bibleReferenceNew"
+                    name="bibleReference"
+                    value={formData.bibleReference}
+                    onChange={(e) => handleSelectChange("bibleReference", e.target.value)}
                     className="w-full px-4 py-3 text-[#5B5B5B] font-normal focus:outline-none focus:ring-[#F6805C] rounded-[8px] border border-[#AFAFAF] bg-[#FFF] appearance-none cursor-pointer"
                     style={{
                       backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23F6805C' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
@@ -755,7 +760,9 @@ const AddLesson = () => {
                 </label>
                 <div className="relative">
                   <select
-                    name="studyPlanNew"
+                    name="studyPlan"
+                    value={formData.studyPlan}
+                    onChange={(e) => handleSelectChange("studyPlan", e.target.value)}
                     className="w-full px-4 py-3 text-[#5B5B5B] font-normal focus:outline-none focus:ring-[#F6805C] rounded-[8px] border border-[#AFAFAF] bg-[#FFF] appearance-none cursor-pointer"
                     style={{
                       backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23F6805C' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
@@ -799,8 +806,8 @@ const AddLesson = () => {
                       value="public"
                       // checked={formData.saveAs === "public"}
                       onChange={() => handleRadioChange("public")}
-                      className="appearance-none w-4 h-4 border border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
-                 before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
+                      className="appearance-none w-5 h-5 border-2 border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
+                 before:content-[''] before:absolute before:w-3 before:h-3 before:bg-red-400 before:rounded-full before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:scale-0 before:transition-transform
                  checked:before:scale-100"
                     />
                   </label>
@@ -813,8 +820,8 @@ const AddLesson = () => {
                       value="private"
                       // checked={formData.saveAs === "private"}
                       onChange={() => handleRadioChange("private")}
-                      className="appearance-none w-4 h-4 border border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
-                 before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
+                      className="appearance-none w-5 h-5 border-2 border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
+                 before:content-[''] before:absolute before:w-3 before:h-3 before:bg-red-400 before:rounded-full before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:scale-0 before:transition-transform
                  checked:before:scale-100"
                     />
                   </label>

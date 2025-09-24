@@ -21,7 +21,7 @@ const OverView = () => {
     status: "Active",
     joined: "2025-05-14",
     age: "19",
-    currentPlan: "Yearly"
+    currentPlan: "1 Year"
   });
 
   const bibleVersions = [
@@ -46,7 +46,7 @@ const OverView = () => {
     "Berean Study Bible", // Study-Friendly
     "New International Version 1984 Edition" // Legacy
   ];
-  const currentPlans = ["Yearly", "Monthly", "Free Trial"];
+  const currentPlans = ["Always Free", "Monthly", "1 Year", "Lifetime"];
   const interestOptions = [
     "Spiritual Growth & Application",
     "Faith Communication & Apologetics",

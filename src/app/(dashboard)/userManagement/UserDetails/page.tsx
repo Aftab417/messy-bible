@@ -30,7 +30,7 @@ const Settings = () => {
       <div className="flex flex-col w-full gap-3 lg:flex-row">
         <div className=" lg:w-1/4 w-full p-4  h-fit rounded-[20px] bg-[#F9F9F9]">
 
-        {/* <div className=" lg:w-1/4 w-full p-4  h-fit  dark:bg-gray-900    rounded-[20px] bg-[#F9F9F9]"> */}
+        {/* <div className=" lg:w-1/4 w-full p-4  h-fit     rounded-[20px] bg-[#F9F9F9]"> */}
           <ul className="space-y-2">
             <li>
               <button
@@ -38,7 +38,7 @@ const Settings = () => {
                 className={`w-full px-4 py-3 text-left   text-[17px] text-[#794A3A] font-inter text-lg font-semibold leading-normal  rounded-[10px] cursor-pointer ${
                   activeTab === "overview1"
                     ? "bg-[#F6805C] text-white "
-                    : "hover:bg-[#F6805C] hover:text-white dark:hover:bg-gray-700"
+                    : "hover:bg-[#f6805ce2] hover:text-white "
                 }`}
               >
                 Overview
@@ -50,7 +50,7 @@ const Settings = () => {
                 className={` w-full px-4 py-3 text-left  text-[17px] text-[#794A3A] font-inter text-lg font-semibold leading-normal  rounded-[10px] cursor-pointer ${
                   activeTab === "lesson"
                     ? "bg-[#F6805C] text-white"
-                    : "hover:bg-[#F6805C] hover:text-white dark:hover:bg-gray-700"
+                    : "hover:bg-[#F6805C] hover:text-white "
                 }`}
               >
                 Lesson & Sermons
@@ -62,7 +62,7 @@ const Settings = () => {
                 className={` w-full px-4 py-3 text-left    text-[17px] text-[#794A3A] font-inter text-lg font-semibold leading-normal  rounded-[10px] cursor-pointer ${
                   activeTab === "GameAct"
                     ? "bg-[#F6805C] text-white"
-                    : "hover:bg-[#F6805C] hover:text-white dark:hover:bg-gray-700"
+                    : "hover:bg-[#F6805C] hover:text-white "
                 }`}
               >
                 Game Activity

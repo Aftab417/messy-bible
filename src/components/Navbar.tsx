@@ -2,8 +2,7 @@
 
 import { FaBars } from "react-icons/fa";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 interface NavbarProps {
   onMenuClick: () => void;
@@ -11,8 +10,7 @@ interface NavbarProps {
 
 export const Navbar = ({ onMenuClick }: NavbarProps) => {
   const pathname = usePathname();
-  const [showNotifications, setShowNotifications] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
   const getBreadcrumbs = () => {
     const segments = pathname.split("/").filter(Boolean);
     if (segments.length === 0) return ["Dashboard"];
@@ -37,21 +35,6 @@ export const Navbar = ({ onMenuClick }: NavbarProps) => {
   };
 
   const breadcrumbs = getBreadcrumbs();
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setShowNotifications(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
   return (
     <div className="flex w-full items-center justify-between px-6 py-1 bg-[#6AC8C4]  ">
       {/* Mobile Menu Button */}
@@ -100,7 +83,7 @@ export const Navbar = ({ onMenuClick }: NavbarProps) => {
       <div className="flex items-center gap-6">
         <div
           className="w-12 h-12 flex items-center justify-center bg-[#F5F5F5] rounded-xl cursor-pointer relative"
-          onClick={() => setShowNotifications((prev) => !prev)}
+          onClick={() => router.push('/Notifications')}
         >
           <svg
             width="24"
@@ -114,18 +97,6 @@ export const Navbar = ({ onMenuClick }: NavbarProps) => {
               fill="#DC5343"
             />
           </svg>
-
-          {/* Dropdown menu */}
-          {showNotifications && (
-            <div className="absolute right-0 z-10 w-64 p-4 bg-white rounded-lg shadow-md top-14">
-              <p className="mb-2 text-sm font-semibold">Notifications</p>
-              <ul className="space-y-2 text-sm">
-                <li>You have a new message</li>
-                <li>Server backup completed</li>
-                <li>New user registered</li>
-              </ul>
-            </div>
-          )}
         </div>
 
         {/* <FaUser className="text-2xl" /> */}

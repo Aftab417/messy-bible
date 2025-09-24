@@ -815,7 +815,7 @@ const AddLesson = () => {
                       checked={formData.saveAs === "public"}
                       onChange={() => handleRadioChange("public")}
                       className="appearance-none w-5 h-5 border-2 border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
-                 before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
+                 before:content-[''] before:absolute before:w-3 before:h-3 before:bg-red-400 before:rounded-full before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:scale-0 before:transition-transform
                  checked:before:scale-100"
                     />
                   </label>
@@ -830,7 +830,7 @@ const AddLesson = () => {
                       checked={formData.saveAs === "private"}
                       onChange={() => handleRadioChange("private")}
                       className="appearance-none w-5 h-5 border-2 border-red-400 rounded-full flex items-center justify-center relative cursor-pointer
-                 before:content-[''] before:absolute before:w-2.5 before:h-2.5 before:bg-red-400 before:rounded-full before:scale-0 before:transition-transform
+                 before:content-[''] before:absolute before:w-3 before:h-3 before:bg-red-400 before:rounded-full before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:scale-0 before:transition-transform
                  checked:before:scale-100"
                     />
                   </label>

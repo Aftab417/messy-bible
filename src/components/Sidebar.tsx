@@ -29,6 +29,12 @@ const navItems = [
     iconActive: "/images/wLessonManagement.svg"
   },
   {
+    label: "Interest Management",
+    href: "/InterestManagement",
+    icon: "/images/interestManagement.svg",
+    iconActive: "/images/wInterestManagement.svg"
+  },
+  {
     label: "Sermon Management",
     href: "#",
     icon: "/images/sermonManagement.svg",
@@ -150,7 +156,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
   };
   return (
     <div
-      className="flex flex-col items-center w-full h-full md:h-[90vh] overflow-y-auto p-2 text-[#5B5B5B] bg-[#F9F9F9] scrollbar-hide max-w-64 [&::-webkit-scrollbar]:w-1 
+      className="flex flex-col items-center w-full h-full md:h-[90vh] overflow-y-auto p-4 text-[#5B5B5B] bg-[#F9F9F9] scrollbar-hide max-w-64 [&::-webkit-scrollbar]:w-1 
   [&::-webkit-scrollbar-thumb]:rounded-full 
   [&::-webkit-scrollbar-thumb]:bg-gray-300 
   [&::-webkit-scrollbar-track]:bg-gray-100"
@@ -189,7 +195,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                       onClick={handleLinkClick}
                       onMouseEnter={() => setHoveredItem(item.label)}
                       onMouseLeave={() => setHoveredItem(null)}
-                      className={`flex items-center w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
+                      className={`flex items-center w-full gap-3 px-3 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
                         isActive
                           ? "bg-[#F6805C] text-[#FFFFFF] font-semibold"
                           : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
@@ -229,13 +235,13 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                       onClick={() => toggleDropdown(item.label)}
                       onMouseEnter={() => setHoveredItem(item.label)}
                       onMouseLeave={() => setHoveredItem(null)}
-                      className={`flex items-center justify-between min-w-50 cursor-pointer w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
+                      className={`flex items-center justify-between min-w-50 cursor-pointer w-full gap-3 px-3 py-3 text-[#5B5B5B] font-inter text-[13px] font-normal rounded-lg transition-all ${
                         isDropdownItemActive || isDropdownOpen
                           ? "bg-[#F6805C] text-[#FFFFFF] font-semibold"
                           : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
                       }`}
                     >
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-3 text-justify">
                         <Image
                           src={getIconPath({
                             item,
@@ -267,7 +273,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                               key={option.href}
                               href={option.href}
                               onClick={handleDropdownItemClick}
-                              className={`flex items-center text-center w-full gap-3 px-4 py-2 text-[#5B5B5B] font-inter text-[14px] font-normal transition-all ${
+                              className={`flex items-center text-center w-full gap-3 px-3 py-2 text-[#5B5B5B] font-inter text-[14px] font-normal transition-all ${
                                 isOptionActive
                                   ? "text-[#F6805C] border-b border-b-[#F6805C] text-center font-semibold"
                                   : "hover:text-[#F6805C] hover:font-semibold border-b border-b-[#AFAFAF]"
@@ -293,7 +299,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                       onClick={handleLinkClick}
                       onMouseEnter={() => setHoveredItem(item.label)}
                       onMouseLeave={() => setHoveredItem(null)}
-                      className={`flex items-center min-w-50 w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
+                      className={`flex items-center min-w-50 w-full gap-3 px-3 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
                         isActive
                           ? "bg-[#F6805C] text-[#FFFFFF] font-semibold"
                           : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
@@ -327,7 +333,7 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
                   onClick={handleLinkClick}
                   onMouseEnter={() => setHoveredItem(item.label)}
                   onMouseLeave={() => setHoveredItem(null)}
-                  className={`flex items-center min-w-50 w-full gap-3 px-4 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
+                  className={`flex items-center min-w-50 w-full gap-3 px-3 py-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
                     isActive
                       ? "bg-[#F6805C] text-[#FFFFFF] font-semibold"
                       : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
@@ -362,18 +368,20 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
               setLogoutHover(false);
               setHoveredItem(null);
             }}
-            className={`flex items-center w-full gap-3 px-4 py-3 mt-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
+            className={`flex items-center w-full gap-3 px-3 py-3 mt-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
               logoutHover
                 ? "bg-[#F6805C] text-[#FFFFFF] font-semibold"
                 : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
             }`}
           >
             <Image
-              src={logoutHover ? "/images/wLogout.svg" : "/images/logout.svg"}
+              src="/images/logout.svg"
               alt="logout"
               width={20}
               height={20}
-              className="object-contain w-5 h-5"
+              className={`object-contain w-5 h-5 transition-all ${
+                logoutHover ? "brightness-0 invert" : ""
+              }`}
             />
             <span>Logout</span>
           </button>

@@ -381,23 +381,23 @@ const DevotionalManagement = () => {
         <table className="min-w-[700px] w-full overflow-hidden shadow border-separate border-spacing-x-4">
           <thead className="text-[#794A3A] font-dm-sans text-[14px] font-semibold ">
             <tr>
-              <th className="p-[5px] border-b border-[#505050]  text-center   w-fit">
+              <th className="p-[4px] border-b border-[#505050]  text-center   w-fit">
                 S.No:
               </th>
-              <th className="p-[5px] border-b border-[#505050]  text-center   w-fit">
+              <th className="p-[4px] border-b border-[#505050]  text-center   w-fit">
                 Title
               </th>
-              <th className="p-[5px] border-b border-[#505050]  text-center   w-fit">
+              <th className="p-[4px] border-b border-[#505050]  text-center   w-fit">
                 Scripture
               </th>
-              <th className="p-[5px] border-b border-[#505050]  text-center   w-fit">
+              <th className="p-[4px] border-b border-[#505050]  text-center   w-fit">
                 Status
               </th>
-              <th className="p-[5px] border-b border-[#505050]  text-center   w-fit">
-                Created At
+              <th className="p-[4px] border-b border-[#505050]  text-center   w-fit">
+              Date Created
               </th>
-              <th className="p-[5px] border-b border-[#505050]  text-center   w-fit">
-                Actions
+              <th className="p-[4px] border-b border-[#505050]  text-center   w-fit">
+                Action
               </th>
             </tr>
           </thead>
@@ -414,24 +414,24 @@ const DevotionalManagement = () => {
                   key={devotional._id}
                   className="border-b border-[#DEE2E6]/50 "
                 >
-                  <td className="p-[5px] text-center border-b-1 text-sm border-[#F9F9F9] text-[#5B5B5B]">
+                  <td className="p-[4px] text-center border-b-1 text-sm border-[#F9F9F9] text-[#5B5B5B]">
                     {((currentPage - 1) * ITEMS_PER_PAGE + i + 1)
                       .toString()
                       .padStart(2, "0")}
                   </td>
 
-                  <td className="p-[5px] text-center text-sm  border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                  <td className="p-[4px] text-center text-sm  border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {devotional.title}
                   </td>
-                  <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                  <td className="p-[4px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {devotional.scripture}
                   </td>
 
                   <td
-                    className={`p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]`}
+                    className={`p-[4px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]`}
                   >
                     <div
-                      className={`${getBgClass(devotional.status)} rounded-md w-fit px-2 mx-auto`}
+                      className={`${getBgClass(devotional.status)} rounded-md w-fit px-1 mx-auto`}
                     >
                       <Select
                         options={statusOptions}
@@ -451,7 +451,7 @@ const DevotionalManagement = () => {
                         styles={customStyles}
                         isSearchable={false}
                         menuPlacement="auto"
-                        className="py-2 min-w-24 react-select-container"
+                        className="py-1 min-w-24 react-select-container"
                         classNamePrefix="react-select"
                         components={{
                           IndicatorSeparator: null
@@ -460,7 +460,7 @@ const DevotionalManagement = () => {
                     </div>
                   </td>
 
-                  <td className="p-[5px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
+                  <td className="p-[4px] text-center text-sm border-b-1 border-[#F9F9F9] text-[#5B5B5B]">
                     {new Date(devotional.createdAt).toISOString().slice(0, 10)}
                   </td>
 

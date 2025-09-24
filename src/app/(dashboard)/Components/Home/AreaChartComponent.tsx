@@ -102,7 +102,7 @@ const AreaChartComponent = () => {
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="px-3 py-2 cursor-pointer  font-semibold rounded-lg text-base text-[#5B5B5B] w-24 appearance-none border border-[#F6805C] focus:outline-none focus:ring-0"
+            className="px-3 py-3 cursor-pointer  font-semibold rounded-lg text-base text-[#5B5B5B] w-24 appearance-none border border-[#F6805C] focus:outline-none focus:ring-0"
           >
             <option value="2023">2023</option>
             <option value="2024">2024</option>
