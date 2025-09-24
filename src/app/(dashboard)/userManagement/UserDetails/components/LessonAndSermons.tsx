@@ -16,8 +16,8 @@ const LessonAndSermons = () => {
         Lessons
       </h1>
 
-      <div className="w-full px-6 pb-6 pt-4 bg-[#F9F9F9] max-w-7xl dark:bg-gray-900 rounded-xl">
-        <label className="block mb-1 dark:text-white text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
+      <div className="w-full px-6 pb-6 pt-4 bg-[#F9F9F9] max-w-7xl rounded-xl">
+        <label className="block mb-1  text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
           Total Lesson Generated
         </label>
         <input
@@ -29,7 +29,7 @@ const LessonAndSermons = () => {
 
         <div className="grid grid-cols-1 gap-4 mb-4 sm:grid-cols-2 sm:gap-4">
           <div className="mt-4">
-            <label className="block mb-1 dark:text-white text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
+            <label className="block mb-1  text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
               Completed Lessons:
             </label>
             <input
@@ -41,7 +41,7 @@ const LessonAndSermons = () => {
           </div>
 
           <div className="mt-4">
-            <label className="block mb-1 dark:text-white text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
+            <label className="block mb-1  text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
               In Progress:
             </label>
             <input
@@ -53,7 +53,7 @@ const LessonAndSermons = () => {
           </div>
         </div>
         <div className="mt-4">
-          <label className="block mb-1 dark:text-white text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
+          <label className="block mb-1  text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
             Saved:
           </label>
           <input
@@ -68,9 +68,9 @@ const LessonAndSermons = () => {
         Sermons
       </h1>
 
-      <div className="w-full px-6 pb-6 pt-4 bg-[#F9F9F9] max-w-7xl dark:bg-gray-900 rounded-xl">
+      <div className="w-full px-6 pb-6 pt-4 bg-[#F9F9F9] max-w-7xl rounded-xl">
         <div className="">
-          <label className="block mb-1 dark:text-white text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
+          <label className="block mb-1  text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
             Total Sermons Generated
           </label>
           <input
@@ -81,7 +81,7 @@ const LessonAndSermons = () => {
           />
         </div>
         <div className="mt-4">
-          <label className="block mb-1 dark:text-white text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
+          <label className="block mb-1  text-[#5B5B5B] font-dm-sans text-base font-semibold normal-case">
             Downloaded Sermons
           </label>
           <input

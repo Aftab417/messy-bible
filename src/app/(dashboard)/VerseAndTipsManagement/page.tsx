@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { GoPencil } from "react-icons/go";
 import { RiDeleteBin6Fill } from "react-icons/ri";
+import toast from "react-hot-toast";
 import AddNewVerse from "../VerseAndTipsManagement/components/AddNewVerse";
 import AddNewTip from "../VerseAndTipsManagement/components/AddNewTip";
 import EditVerse from "../VerseAndTipsManagement/components/EditVerse";
@@ -233,10 +234,12 @@ const VerseAndTipsManagement = () => {
 
   const handleDeleteVerse = (id: number) => {
     setVersesState((prev) => prev.filter((v) => v.id !== id));
+    toast.success("Verse deleted successfully!");
   };
 
   const handleDeleteTip = (id: number) => {
     setTipsState((prev) => prev.filter((t) => t.id !== id));
+    toast.success("Tip deleted successfully!");
   };
 
   return (

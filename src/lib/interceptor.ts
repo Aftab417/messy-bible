@@ -8,7 +8,7 @@ type ErrorResponse = {
 };
 
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL || "https://bible.alrightech.com/api",
   withCredentials: true,
   headers: {
     Accept: "application/json",
@@ -19,9 +19,9 @@ const apiClient = axios.create({
 // Request interceptor
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const token = store.getState().user?.accessToken;
+    const token = store.getState().user?.accessToken || store.getState().user?.token;
     if (token) {
-      config.headers.Authorization =`Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },

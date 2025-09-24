@@ -55,7 +55,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`bg-white text-[#37352f]  ${dmSans.className} ${inter.className} ${indieFlower.className} `}
+        className="bg-white text-[#37352f]"
+        style={{
+          fontFamily: `${dmSans.style.fontFamily}, ${inter.style.fontFamily}, ${indieFlower.style.fontFamily}`
+        }}
+        suppressHydrationWarning
       >
         <ThemeProvider
           attribute="class"

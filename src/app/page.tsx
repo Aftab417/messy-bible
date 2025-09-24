@@ -1,22 +1,76 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/redux";
+import { setUser } from "@/redux/authSlice";
+import { authApi } from "@/lib/api";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
-import { setUser } from "@/redux/authSlice";
-import { authApi } from "@/lib/api";
 
-export default function SignInPage() {
+export default function RootPage() {
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+  const user = useSelector((state: RootState) => state.user);
+  
+  const isAuthenticated = user?.token || user?.accessToken;
+  const isAdmin = user?.role === "admin";
+
+  useEffect(() => {
+    // Give Redux Persist time to rehydrate
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (isLoading) return;
+
+    // Only redirect to dashboard if user is already authenticated
+    if (isAuthenticated && isAdmin) {
+      router.replace("/dashboard");
+    }
+    // Otherwise, stay on root page and show login screen
+  }, [isLoading, isAuthenticated, isAdmin, router]);
+
+  // Show loading while determining redirect
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-[#6AC8C4]">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-white font-medium">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // If not authenticated, show login screen directly
+  if (!isAuthenticated || !isAdmin) {
+    return <LoginScreen />;
+  }
+
+  // If authenticated, show loading while redirecting
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-[#6AC8C4]">
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-white font-medium">Redirecting to dashboard...</p>
+      </div>
+    </div>
+  );
+}
+
+// Login Screen Component
+function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const searchParams = useSearchParams();
-  const role = searchParams.get("role");
-  console.log(role);
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -43,7 +97,7 @@ export default function SignInPage() {
           
           // Create user object for Redux store
           const userData = {
-            _id: "admin_user", // You might want to get this from a profile API call
+            _id: "admin_user",
             email: values.email,
             role: "admin" as const,
             is_verified: true,
@@ -89,7 +143,7 @@ export default function SignInPage() {
   });
 
   return (
-    <main className=" p-3 w-full md:px-4 min-h-screen   bg-[#6AC8C4] ">
+    <main className="p-3 w-full md:px-4 min-h-screen bg-[#6AC8C4]">
       <div className="flex items-end justify-center w-full">
         <div className="flex items-center justify-center gap-2 pb-6">
           <div className="relative w-28 h-28">
@@ -104,17 +158,17 @@ export default function SignInPage() {
       </div>
 
       <div className="flex justify-center">
-        <div className="w-full md:w-7/12 bg-[#F9F9F9] rounded-4xl px-2 sm:px-10 md:px-14 xl:px-20 py-14 ">
+        <div className="w-full md:w-7/12 bg-[#F9F9F9] rounded-4xl px-2 sm:px-10 md:px-14 xl:px-20 py-14">
           <h1 className="text-[#794A3A] text-center font-dm-sans text-3xl font-semibold capitalize">
             Log in
           </h1>
           <p className="text-[#5B5B5B] text-center font-inter text-base font-light leading-normal py-6">
-            Let’s Get to Know You!
+            Let's Get to Know You!
           </p>
 
           <form onSubmit={formik.handleSubmit} className="flex flex-col w-full">
             <div className="w-full pb-4 mt-3">
-              <div className="flex items-center gap-2 rounded-lg border-[0.5px] border-[#AFAFAF] bg-[#FFF] px-6 h-14 ">
+              <div className="flex items-center gap-2 rounded-lg border-[0.5px] border-[#AFAFAF] bg-[#FFF] px-6 h-14">
                 <span className="text-xl text-gray-400">
                   <svg
                     width="24"
@@ -148,8 +202,7 @@ export default function SignInPage() {
             </div>
 
             <div className="w-full pb-2">
-              <div className="flex items-center gap-2 relative rounded-lg border-[0.5px] border-[#AFAFAF] bg-white  px-6 h-14 mt-3">
-                {/* Left Icon */}
+              <div className="flex items-center gap-2 relative rounded-lg border-[0.5px] border-[#AFAFAF] bg-white px-6 h-14 mt-3">
                 <span className="text-lg text-gray-400">
                   <svg
                     width="24"
@@ -169,7 +222,6 @@ export default function SignInPage() {
                   </svg>
                 </span>
 
-                {/* Password Input */}
                 <input
                   id="password"
                   name="password"
@@ -181,7 +233,6 @@ export default function SignInPage() {
                   className="w-full pr-10 text-base bg-transparent rounded-lg focus:outline-none"
                 />
 
-                {/* Right Icon (Eye) */}
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -195,7 +246,6 @@ export default function SignInPage() {
                 </button>
               </div>
 
-              {/* Error Message */}
               {formik.touched.password && formik.errors.password && (
                 <div className="mt-1 text-sm text-red-500">
                   {formik.errors.password}
@@ -206,7 +256,7 @@ export default function SignInPage() {
             <button
               type="submit"
               disabled={loading}
-              className={`text-[#FFF] capitalize  text-base font-medium leading-normal tracking-[0.32px] flex items-center   justify-center     transition px-3 mt-3 py-4 rounded-xl ${
+              className={`text-[#FFF] capitalize text-base font-medium leading-normal tracking-[0.32px] flex items-center justify-center transition px-3 mt-3 py-4 rounded-xl ${
                 loading
                   ? "bg-[#F6805C] cursor-not-allowed"
                   : "bg-[#F6805C] hover:bg-white hover:text-[#F6805C] border-1 border-[#F6805C] cursor-pointer"

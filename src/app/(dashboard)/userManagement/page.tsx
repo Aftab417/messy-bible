@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import jsPDF from "jspdf";
 
 import { useRouter } from "next/navigation";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
@@ -659,7 +660,74 @@ const UserManagement = () => {
   };
 
   const handleExportPDF = () => {
-    toast("PDF export not implemented yet");
+    try {
+      const doc = new jsPDF();
+      
+      // Add title
+      doc.setFontSize(16);
+      doc.setFont("helvetica", "bold");
+      doc.text("User Management Report", 14, 22);
+      
+      // Add date
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "normal");
+      doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 30);
+      
+      // Add table headers
+      const headers = ["ID", "Username", "Email", "Current Plan", "Status", "Created At"];
+      const colWidths = [15, 35, 50, 25, 20, 30];
+      let xPosition = 14;
+      
+      // Draw header row
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "bold");
+      let yPosition = 45;
+      
+      headers.forEach((header, index) => {
+        doc.text(header, xPosition, yPosition);
+        xPosition += colWidths[index];
+      });
+      
+      // Draw line under headers
+      doc.line(14, yPosition + 2, 14 + colWidths.reduce((a, b) => a + b, 0), yPosition + 2);
+      
+      // Add data rows
+      doc.setFont("helvetica", "normal");
+      yPosition = 55;
+      
+      filteredUsers.forEach((user, index) => {
+        // Check if we need a new page
+        if (yPosition > 280) {
+          doc.addPage();
+          yPosition = 20;
+        }
+        
+        xPosition = 14;
+        const rowData = [
+          user._id,
+          user.username.length > 20 ? user.username.substring(0, 17) + "..." : user.username,
+          user.email.length > 30 ? user.email.substring(0, 27) + "..." : user.email,
+          user.CurrentPlan,
+          user.is_active ? "Active" : "Inactive",
+          new Date(user.createdAt).toLocaleDateString()
+        ];
+        
+        rowData.forEach((data, colIndex) => {
+          doc.text(data.toString(), xPosition, yPosition);
+          xPosition += colWidths[colIndex];
+        });
+        
+        yPosition += 8;
+      });
+      
+      // Save the PDF
+      doc.save(`users_export_${new Date().toISOString().slice(0, 10)}.pdf`);
+      
+      toast.success("PDF export completed!");
+    } catch (error) {
+      console.error("PDF export failed", error);
+      toast.error("Failed to export PDF");
+    }
   };
 
   const router = useRouter();
