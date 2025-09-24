@@ -132,9 +132,9 @@ function LoginScreen() {
         } else {
           toast.error("Login failed. Please check your credentials.");
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error("Login error:", error);
-        const errorMessage = error?.response?.data?.message || "An error occurred during login. Please try again.";
+        const errorMessage = (error as { response?: { data?: { message?: string } } })?.response?.data?.message || "An error occurred during login. Please try again.";
         toast.error(errorMessage);
       } finally {
         setLoading(false);
@@ -163,7 +163,7 @@ function LoginScreen() {
             Log in
           </h1>
           <p className="text-[#5B5B5B] text-center font-inter text-base font-light leading-normal py-6">
-            Let's Get to Know You!
+            Let&apos;s Get to Know You!
           </p>
 
           <form onSubmit={formik.handleSubmit} className="flex flex-col w-full">
