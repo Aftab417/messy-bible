@@ -56,13 +56,13 @@ export const Navbar = ({ onMenuClick }: NavbarProps) => {
           />
         </div>
 
-        <p className="text-white flex items-center pl-[40px] font-dm-sans text-[15px] font-medium not-italic leading-normal">
+        <div className="text-white flex items-center pl-[40px] font-dm-sans text-[15px] font-medium not-italic leading-normal">
           {breadcrumbs.map((crumb, index) => (
             <span key={index} className="flex items-center">
               {crumb}
               {index < breadcrumbs.length - 1 && (
                 <span className="mx-1 text-[#C4C4C4]">
-                  <div className="px-[6px]">
+                  <span className="px-[6px]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="6"
@@ -72,12 +72,12 @@ export const Navbar = ({ onMenuClick }: NavbarProps) => {
                     >
                       <circle cx="3" cy="3.5" r="3" fill="white" />
                     </svg>
-                  </div>
+                  </span>
                 </span>
               )}
             </span>
           ))}
-        </p>
+        </div>
       </div>
 
       <div className="flex items-center gap-6">

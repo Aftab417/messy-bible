@@ -9,7 +9,7 @@ interface UserState {
   phone?: string;
   password?: string;
   profilePhoto?: string;
-  role: "user" | "dentist" | "admin";
+  role: "user" | "admin";
   otp?: string;
   otp_expiry?: number;
   is_verified: boolean;
@@ -22,11 +22,14 @@ interface UserState {
   last_login?: number;
   is_complete: boolean;
   account_status?: "Active" | "Inactive";
-  qualifications: string;
-  servicesOffered: string[];
-  location: string;
-  fee: number;
+  qualifications?: string;
+  servicesOffered?: string[];
+  location?: string;
+  fee?: number;
   accessToken?: string;
+  token?: string; // For the new API response
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 const initialState: UserState = {
@@ -48,14 +51,17 @@ const initialState: UserState = {
   language: "en",
   is_two_factor: false,
   is_active: true,
-  signup_date: Date.now(),
-  last_login: Date.now(),
+  signup_date: 0,
+  last_login: 0,
   account_status: "Active",
   qualifications: "",
-  servicesOffered: [""],
+  servicesOffered: [],
   location: "",
   fee: 0,
-  accessToken: ""
+  accessToken: "",
+  token: "",
+  createdAt: "",
+  updatedAt: ""
 };
 
 const userSlice = createSlice({
