@@ -1,13 +1,12 @@
 "use client";
 
-import { resetUser } from "@/redux/authSlice";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
-import { useDispatch } from "react-redux";
 import Image from "next/image";
+import LogoutService from "@/lib/logoutService";
 
 const navItems = [
   {
@@ -102,12 +101,11 @@ type GetIconPathParams = {
 
 export const Sidebar = ({ onClose }: SidebarProps) => {
   const pathname = usePathname();
-  const dispatch = useDispatch();
-  const router = useRouter();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [logoutHover, setLogoutHover] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -125,9 +123,20 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
     };
   }, []);
 
-  const handleLogout = () => {
-    dispatch(resetUser());
-    router.push("/sign-in");
+  const handleLogout = async () => {
+    if (isLoggingOut) return; // Prevent multiple logout attempts
+    
+    setIsLoggingOut(true);
+    try {
+      await LogoutService.logout({
+        showConfirmation: true,
+        redirectTo: "/sign-in",
+        showToast: true
+      });
+    } catch (error) {
+      console.error('Logout error:', error);
+      setIsLoggingOut(false);
+    }
   };
 
   const toggleDropdown = (label: string) => {
@@ -360,30 +369,39 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
 
           <button
             onClick={handleLogout}
+            disabled={isLoggingOut}
             onMouseEnter={() => {
-              setLogoutHover(true);
-              setHoveredItem("logout");
+              if (!isLoggingOut) {
+                setLogoutHover(true);
+                setHoveredItem("logout");
+              }
             }}
             onMouseLeave={() => {
               setLogoutHover(false);
               setHoveredItem(null);
             }}
             className={`flex items-center w-full gap-3 px-3 py-3 mt-3 text-[#5B5B5B] font-inter text-[14px] font-normal rounded-lg transition-all ${
-              logoutHover
+              isLoggingOut
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : logoutHover
                 ? "bg-[#F6805C] text-[#FFFFFF] font-semibold"
                 : "hover:bg-[#F6805C] hover:text-[#FFFFFF] hover:font-semibold"
             }`}
           >
-            <Image
-              src="/images/logout.svg"
-              alt="logout"
-              width={20}
-              height={20}
-              className={`object-contain w-5 h-5 transition-all ${
-                logoutHover ? "brightness-0 invert" : ""
-              }`}
-            />
-            <span>Logout</span>
+            {isLoggingOut ? (
+              <div className="w-5 h-5 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
+            ) : (
+              <Image
+                src="/images/logout.svg"
+                alt="logout"
+                width={20}
+                height={20}
+                className={`object-contain w-5 h-5 transition-all ${
+                  logoutHover ? "brightness-0 invert" : ""
+                }`}
+              />
+            )}
+            <span>{isLoggingOut ? "Logging out..." : "Logout"}</span>
           </button>
         </div>
       </div>

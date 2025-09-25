@@ -11,6 +11,10 @@ export interface LoginResponse {
   token: string;
 }
 
+export interface LogoutResponse {
+  message: string;
+}
+
 export interface User {
   _id: string;
   email: string;
@@ -37,9 +41,10 @@ export const authApi = {
     return response.data;
   },
 
-  // Logout (if needed)
-  logout: async (): Promise<void> => {
-    await apiClient.post('/admin/logout');
+  // Logout
+  logout: async (): Promise<LogoutResponse> => {
+    const response = await apiClient.post('/admin/logout');
+    return response.data;
   }
 };
 

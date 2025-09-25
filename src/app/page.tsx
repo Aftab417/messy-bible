@@ -14,8 +14,11 @@ import toast from "react-hot-toast";
 
 export default function RootPage() {
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const user = useSelector((state: RootState) => state.user);
+  
+  // Safely get user from Redux store
+  const user = useSelector((state: RootState) => state?.user || null);
   
   const isAuthenticated = user?.token || user?.accessToken;
   const isAdmin = user?.role === "admin";
@@ -23,7 +26,13 @@ export default function RootPage() {
   useEffect(() => {
     // Give Redux Persist time to rehydrate
     const timer = setTimeout(() => {
-      setIsLoading(false);
+      try {
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error during loading:', error);
+        setError('Failed to load application');
+        setIsLoading(false);
+      }
     }, 1000);
 
     return () => clearTimeout(timer);
@@ -32,12 +41,36 @@ export default function RootPage() {
   useEffect(() => {
     if (isLoading) return;
 
-    // Only redirect to dashboard if user is already authenticated
-    if (isAuthenticated && isAdmin) {
-      router.replace("/dashboard");
+    try {
+      // Only redirect to dashboard if user is already authenticated
+      if (isAuthenticated && isAdmin) {
+        router.replace("/dashboard");
+      }
+      // Otherwise, stay on root page and show login screen
+    } catch (error) {
+      console.error('Error during navigation:', error);
+      setError('Navigation error occurred');
     }
-    // Otherwise, stay on root page and show login screen
   }, [isLoading, isAuthenticated, isAdmin, router]);
+
+  // Show error if any
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-[#6AC8C4]">
+        <div className="flex flex-col items-center gap-4 p-8 bg-white rounded-lg shadow-lg">
+          <div className="text-red-500 text-6xl">⚠️</div>
+          <h2 className="text-xl font-semibold text-gray-800">Application Error</h2>
+          <p className="text-gray-600 text-center">{error}</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="px-4 py-2 bg-[#F6805C] text-white rounded-lg hover:bg-[#e6734a] transition-colors"
+          >
+            Reload Page
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   // Show loading while determining redirect
   if (isLoading) {

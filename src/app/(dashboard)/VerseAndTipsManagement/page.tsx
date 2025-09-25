@@ -243,7 +243,7 @@ const VerseAndTipsManagement = () => {
   };
 
   return (
-    <div className="">
+    <div className="p-2 mt-5 sm:p-3 md:p-4 lg:py-6">
       <div className="flex flex-col items-start justify-between mb-4 sm:items-center md:flex-row">
         <h2 className="flex-wrap text-lg whitespace-nowrap  w-full  font-semibold text-[#794A3A]">
           Verse & Tips Management

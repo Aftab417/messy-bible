@@ -232,7 +232,8 @@ export default function User() {
     return buttons;
   };
 
-  const handleDelete = (id: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleDelete = (_id: string) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",

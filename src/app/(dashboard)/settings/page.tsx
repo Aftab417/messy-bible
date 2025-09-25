@@ -18,7 +18,7 @@ const Settings = () => {
   };
 
   return (
-    <main>
+    <div className="p-2 mt-5 sm:p-3 md:p-4 lg:py-6">
       <h1 className="font-dm-sans font-semibold text-lg pb-5 align-middle text-[#794A3A] ">
         Setting
       </h1>
@@ -54,7 +54,7 @@ const Settings = () => {
         </div>
         <div className="flex-1 min-w-0">{renderTab()}</div>
       </div>
-    </main>
+    </div>
   );
 };
 

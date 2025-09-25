@@ -1,6 +1,7 @@
 import store from "@/redux";
 import axios, { InternalAxiosRequestConfig, AxiosError } from "axios";
 import { toast } from "react-hot-toast";
+import LogoutService from "./logoutService";
 
 type ErrorResponse = {
   message?: string;
@@ -33,15 +34,22 @@ apiClient.interceptors.request.use(
 // Response interceptor
 apiClient.interceptors.response.use(
   (response) => response,
-  (error: AxiosError<ErrorResponse>) => {
+  async (error: AxiosError<ErrorResponse>) => {
     if (error.response) {
       const { status, data } = error.response;
       const errorMessage = data?.message || getDefaultErrorMessage(status);
 
-      toast.error(errorMessage);
+      // Don't show toast for logout endpoint errors
+      if (!error.config?.url?.includes('/admin/logout')) {
+        toast.error(errorMessage);
+      }
 
       if (status === 401) {
-        // Signal logout to the caller (don't redirect here)
+        // Check if this is not a logout request to avoid infinite loops
+        if (!error.config?.url?.includes('/admin/logout')) {
+          // Force logout for unauthorized access
+          await LogoutService.forceLogout('Session expired. Please log in again.');
+        }
         return Promise.reject({ ...error, isUnauthorized: true });
       }
     } else {

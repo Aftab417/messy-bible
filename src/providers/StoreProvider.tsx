@@ -18,6 +18,18 @@ export function StoreProvider({
           </div>
         } 
         persistor={persistor}
+        onBeforeLift={() => {
+          // Clear any corrupted persist data on startup
+          try {
+            const persistData = localStorage.getItem('persist:root');
+            if (persistData) {
+              JSON.parse(persistData);
+            }
+          } catch (error) {
+            console.error('Corrupted persist data detected, clearing...', error);
+            localStorage.removeItem('persist:root');
+          }
+        }}
       >
         {children}
       </PersistGate>
