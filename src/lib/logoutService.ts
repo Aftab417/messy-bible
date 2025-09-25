@@ -38,9 +38,12 @@ export class LogoutService {
         if (showToast) {
           toast.success(response.message || 'Logged out successfully', { id: 'logout' });
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         // Handle API errors gracefully
-        if (error.response?.status === 401) {
+        const isAxiosError = error && typeof error === 'object' && 'response' in error;
+        const status = isAxiosError ? (error as { response?: { status?: number } }).response?.status : undefined;
+        
+        if (status === 401) {
           // User is already unauthenticated, which is fine for logout
           if (showToast) {
             toast.success('Logged out successfully', { id: 'logout' });
