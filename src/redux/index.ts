@@ -19,7 +19,12 @@ const encryptor = encryptTransform({
   secretKey: process.env.NEXT_PUBLIC_REDUX_KEY || "default-secret-key-for-development-only-32-chars",
   onError: function (error) {
     console.error("Encryption error:", error);
-    storage.removeItem("persist:root");
+    // Clear storage on encryption error
+    try {
+      storage.removeItem("persist:root");
+    } catch (e) {
+      console.error("Failed to clear storage:", e);
+    }
   }
 });
 
@@ -29,7 +34,7 @@ const persistConfig = {
   storage,
   transforms: [encryptor],
   timeout: 2000,
-  whitelist: ["user", "contest"]
+  whitelist: ["user"]
 };
 const rootReducer = combineReducers({
   user: userReducer

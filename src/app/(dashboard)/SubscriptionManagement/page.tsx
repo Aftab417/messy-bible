@@ -125,7 +125,7 @@ const UserManagement = () => {
   };
 
   return (
-    <>
+    <div className="p-2 mt-5 sm:p-3 md:p-4 lg:py-6">
       <div className="items-center justify-between lg:flex">
         <h1 className="text-[#794A3A] font-dm-sans text-[18px] font-semibold ">
           Subscription Management
@@ -279,7 +279,7 @@ const UserManagement = () => {
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 };
 

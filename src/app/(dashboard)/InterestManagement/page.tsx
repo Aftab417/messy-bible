@@ -31,7 +31,7 @@ const InterestManagement = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F9F9F9] p-4 sm:p-4 lg:p-6">
+    <div className="p-2 mt-5 sm:p-3 md:p-4 lg:py-6">
       <div className="max-w-4xl mx-auto">
         {/* Main Card */}
         <div className="">

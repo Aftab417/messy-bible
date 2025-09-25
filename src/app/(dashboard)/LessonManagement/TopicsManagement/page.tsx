@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Plus, Minus, Save, ArrowLeft } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
@@ -17,11 +17,11 @@ interface Topic {
   isSaved: boolean;
 }
 
-interface TopicsManagementProps {
-  lessonId?: string;
-  lessonName?: string;
-  onBack?: () => void;
-}
+// interface TopicsManagementProps {
+//   lessonId?: string;
+//   lessonName?: string;
+//   onBack?: () => void;
+// }
 
 // Validation schema for topics
 const topicSchema = Yup.object().shape({
@@ -32,11 +32,8 @@ const topicSchema = Yup.object().shape({
   reflectionQuestion: Yup.string().required("Reflection question is required")
 });
 
-const TopicsManagement: React.FC<TopicsManagementProps> = ({ 
-  lessonId, 
-  lessonName = "Lesson Topics",
-  onBack 
-}) => {
+const TopicsManagement = () => {
+  const lessonName = "Lesson Topics";
   const router = useRouter();
   const searchParams = useSearchParams();
   const lessonNameFromUrl = searchParams.get('lessonName');
@@ -58,7 +55,7 @@ const TopicsManagement: React.FC<TopicsManagementProps> = ({
     }
   ]);
 
-  const [nextTopicId, setNextTopicId] = useState(2);
+  // const [nextTopicId, setNextTopicId] = useState(2);
   const [validationErrors, setValidationErrors] = useState<Record<number, Record<string, string>>>({});
 
   // Generate topics based on study plan
@@ -95,7 +92,7 @@ const TopicsManagement: React.FC<TopicsManagementProps> = ({
     if (studyPlanFromUrl) {
       const generatedTopics = generateTopicsForPlan(studyPlanFromUrl);
       setTopics(generatedTopics);
-      setNextTopicId(generatedTopics.length + 1);
+      // setNextTopicId(generatedTopics.length + 1);
     } else if (topics.length === 1) {
       // Fallback to 7 topics if no study plan provided
       const initialTopics = Array.from({ length: 6 }, (_, index) => ({
@@ -109,26 +106,26 @@ const TopicsManagement: React.FC<TopicsManagementProps> = ({
         isSaved: false
       }));
       setTopics(prev => [...prev, ...initialTopics]);
-      setNextTopicId(8);
+      // setNextTopicId(8);
     }
-  }, [studyPlanFromUrl]);
+  }, [studyPlanFromUrl, topics.length]);
 
-  const addNewTopic = () => {
-    const newTopic: Topic = {
-      id: nextTopicId,
-      topicName: "",
-      scriptureReference: "",
-      description: "",
-      verseHighlight: "",
-      reflectionQuestion: "",
-      isExpanded: true,
-      isSaved: false
-    };
-    
-    setTopics(prev => [...prev, newTopic]);
-    setNextTopicId(prev => prev + 1);
-    toast.success("New topic added!");
-  };
+  // const addNewTopic = () => {
+  //   const newTopic: Topic = {
+  //     id: nextTopicId,
+  //     topicName: "",
+  //     scriptureReference: "",
+  //     description: "",
+  //     verseHighlight: "",
+  //     reflectionQuestion: "",
+  //     isExpanded: true,
+  //     isSaved: false
+  //   };
+  //   
+  //   setTopics(prev => [...prev, newTopic]);
+  //   setNextTopicId(prev => prev + 1);
+  //   toast.success("New topic added!");
+  // };
 
   const toggleTopicExpansion = (topicId: number) => {
     setTopics(prev => 
@@ -225,11 +222,7 @@ const TopicsManagement: React.FC<TopicsManagementProps> = ({
 
     toast.success("Lesson created successfully!");
     
-    if (onBack) {
-      onBack();
-    } else {
-      router.push("/LessonManagement");
-    }
+    router.push("/LessonManagement");
   };
 
   return (
@@ -243,7 +236,7 @@ const TopicsManagement: React.FC<TopicsManagementProps> = ({
             </h1>
             {displayLessonName && displayLessonName !== "Lesson Topics" && (
               <p className="text-[#5B5B5B] font-dm-sans text-[14px] -mt-2 mb-1">
-                for "{displayLessonName}"
+                for &quot;{displayLessonName}&quot;
               </p>
             )}
             {studyPlanFromUrl && (

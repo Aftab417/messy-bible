@@ -78,9 +78,9 @@ export default function SignInPage() {
         } else {
           toast.error("Login failed. Please check your credentials.");
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error("Login error:", error);
-        const errorMessage = error?.response?.data?.message || "An error occurred during login. Please try again.";
+        const errorMessage = (error as { response?: { data?: { message?: string } } })?.response?.data?.message || "An error occurred during login. Please try again.";
         toast.error(errorMessage);
       } finally {
         setLoading(false);

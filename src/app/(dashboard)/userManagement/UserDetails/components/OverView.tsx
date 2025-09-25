@@ -75,7 +75,7 @@ const OverView = () => {
     );
   };
 
-  const handleBibleVersionSelect = (version) => {
+  const handleBibleVersionSelect = (version: string) => {
     setFormData((prev) => ({ ...prev, bibleVersion: version }));
     setShowBibleVersionDropdown(false);
   };

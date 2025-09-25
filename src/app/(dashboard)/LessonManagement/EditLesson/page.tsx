@@ -3,8 +3,8 @@
 import type React from "react";
 
 import Image from "next/image";
-import { useState, useEffect, useCallback, useRef } from "react";
-import { Upload, ChevronDown, Plus, Minus } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { Upload, Plus, Minus } from "lucide-react";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
@@ -78,31 +78,31 @@ const AddLesson = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   // Dropdown options - Updated to only include 7 and 30 day plans
-  const ageGroups = [
-    "Under 13",
-    "13–17",
-    "18–24",
-    "25–34",
-    "35–44",
-    "45–60",
-    "60+"
-  ];
+  // const ageGroups = [
+  //   "Under 13",
+  //   "13–17",
+  //   "18–24",
+  //   "25–34",
+  //   "35–44",
+  //   "45–60",
+  //   "60+"
+  // ];
 
-  const bibleReferences = [
-    "Genesis 1:1",
-    "John 3:16",
-    "Psalm 23",
-    "Matthew 5:16",
-    "Romans 8:28",
-    "Philippians 4:13",
-    "1 Corinthians 13"
-  ];
+  // const bibleReferences = [
+  //   "Genesis 1:1",
+  //   "John 3:16",
+  //   "Psalm 23",
+  //   "Matthew 5:16",
+  //   "Romans 8:28",
+  //   "Philippians 4:13",
+  //   "1 Corinthians 13"
+  // ];
 
-  const studyPlans = [
-    "Select Study Plan (e.g. 7 day)",
-    "7 Day Plan",
-    "30 Day Plan"
-  ];
+  // const studyPlans = [
+  //   "Select Study Plan (e.g. 7 day)",
+  //   "7 Day Plan",
+  //   "30 Day Plan"
+  // ];
 
   // Generate topics based on study plan
   const generateTopicsForPlan = (planType: string): Topic[] => {
@@ -307,21 +307,6 @@ const AddLesson = () => {
     }
   };
 
-  // Handle select changes
-  const handleSelectChange = (name: string, value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-
-    // Clear validation error for this field
-    if (validationErrors[name]) {
-      setValidationErrors((prev) => ({
-        ...prev,
-        [name]: ""
-      }));
-    }
-  };
 
   // Handle radio button changes
   const handleRadioChange = (value: string) => {
@@ -503,102 +488,6 @@ const AddLesson = () => {
     setTopicValidationErrors({});
   };
 
-  // Custom Select Component
-  const CustomSelect = ({
-    label,
-    name,
-    value,
-    options,
-    placeholder
-  }: {
-    label: string;
-    name: string;
-    value: string;
-    options: string[];
-    placeholder: string;
-  }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const selectRef = useRef<HTMLDivElement>(null);
-    const hasError = validationErrors[name];
-
-    // Close dropdown when clicking outside
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (
-          selectRef.current &&
-          !selectRef.current.contains(event.target as Node)
-        ) {
-          setIsOpen(false);
-        }
-      };
-
-      document.addEventListener("mousedown", handleClickOutside);
-      return () =>
-        document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
-
-    const handleOptionClick = (option: string) => {
-      handleSelectChange(name, option);
-      setIsOpen(false);
-    };
-
-    return (
-      <div className="pb-6" ref={selectRef}>
-        <label className="text-[#794A3A] font-dm-sans text-[16px] font-medium leading-normal block pb-[10px]">
-          {label}
-        </label>
-        <div className="relative">
-          <button
-            type="button"
-            onClick={() => setIsOpen(!isOpen)}
-            className={`w-full px-4 py-3 text-[#656565]  font-normal cursor-pointer [&_svg]:stroke-red-500 focus:outline-none ${
-              hasError
-                ? "focus:ring-red-500 border-red-500"
-                : "focus:ring-[#F6805C]"
-            } rounded-[8px] border ${
-              hasError ? "border-red-500" : "border-[#AFAFAF]"
-            } bg-[#FFF] text-left flex justify-between items-center`}
-          >
-            <span
-              className={`font-inter ${
-                value ? "text-black" : "text-[#5B5B5B]"
-              }`}
-            >
-              {value || placeholder}
-            </span>
-
-            <ChevronDown
-              className={`w-4 h-4 transition-transform ${
-                isOpen ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-
-          {isOpen && (
-            <div className="absolute z-10 w-full mt-1 bg-white border border-[#AFAFAF] rounded-[8px] shadow-lg max-h-48 overflow-y-auto">
-              {options.map((option, index) => (
-                <div key={index}>
-                  <button
-                    type="button"
-                    onClick={() => handleOptionClick(option)}
-                    className="w-full px-4 py-3 text-left hover:bg-gray-50 text-[#656565] font-mono text-[14px] transition-colors"
-                  >
-                    {option}
-                  </button>
-                  {index < options.length - 1 && (
-                    <div className="mx-2 border-b border-gray-200"></div>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-        {hasError && (
-          <p className="mt-1 text-sm text-red-500 font-dm-sans">{hasError}</p>
-        )}
-      </div>
-    );
-  };
 
   return (
     <>

@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react'
 import { ChevronDown, ArrowLeft } from 'lucide-react'
-import linesBg from './/images/lines-bg.png'
+// import linesBg from './/images/lines-bg.png'
 
 
 interface TemplateCardProps {
@@ -109,17 +109,19 @@ interface TemplateSectionProps {
   quote?: string
 }
 
-function TemplateSection({ title, content, bgColorClass, type = 'text', layout = 'full', verse, quote }: TemplateSectionProps) {
+function TemplateSection({ title, content, bgColorClass, type = 'text', verse, quote }: TemplateSectionProps) {
   return (
     <div className={`rounded-xl shadow-md p-6 ${bgColorClass} text-gray-800`}>
       {title && <h3 className="text-lg font-semibold mb-2 text-black">{title}</h3>}
       {verse && <p className="text-lg font-semibold mb-1 text-black">{verse}</p>}
-      {quote && <p className="text-sm italic mb-2 text-black">"{quote}"</p>}
+      {quote && <p className="text-sm italic mb-2 text-black">&quot;{quote}&quot;</p>}
 
       {type === 'text' && (
         Array.isArray(content) ? (
           content.map((paragraph, i) => (
-            <p key={i} className="text-sm mb-2 last:mb-0 text-black">{paragraph}</p>
+            <p key={i} className="text-sm mb-2 last:mb-0 text-black">
+              {typeof paragraph === 'string' ? paragraph : paragraph.question}
+            </p>
           ))
         ) : (
           <p className="text-sm text-black">{content}</p>
@@ -128,17 +130,17 @@ function TemplateSection({ title, content, bgColorClass, type = 'text', layout =
       {type === 'list' && Array.isArray(content) && (
         <ol className="list-decimal list-inside text-sm space-y-1 text-black">
           {content.map((item, i) => (
-            <li key={i}>{item}</li>
+            <li key={i}>{typeof item === 'string' ? item : item.question}</li>
           ))}
         </ol>
       )}
       {type === 'input' && Array.isArray(content) && (
         <div className="space-y-3">
-          {content.map((item: any, i) => (
+          {content.map((item, i) => (
             <input
               key={i}
               type="text"
-              placeholder={item.question}
+              placeholder={typeof item === 'string' ? item : item.question}
               className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           ))}
@@ -348,7 +350,7 @@ export default function SermonTemplatesPage() {
   const selectedTemplate = templates.find(t => t.id === selectedTemplateId)
 
   return (
-    <>
+    <div className="p-2 mt-5 sm:p-3 md:p-4 lg:py-6">
       {selectedTemplate ? (
         <TemplateDetailView template={selectedTemplate} onBack={() => setSelectedTemplateId(null)} />
       ) : (
@@ -369,6 +371,6 @@ export default function SermonTemplatesPage() {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
