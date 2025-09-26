@@ -23,13 +23,6 @@ const inter = Inter({
   display: "swap"
 });
 
-// export const metadata: Metadata = {
-//   title: "Messy Bible Dashboard",
-//   description: "Messy Bible Dashboard",
-//   icons: {
-//     icon: "/images/logo.png"
-//   }
-// };
 export const metadata: Metadata = {
   title: "Messy Bible Dashboard",
   description: "Messy Bible Dashboard",

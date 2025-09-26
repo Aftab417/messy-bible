@@ -6,9 +6,12 @@ const nextConfig: NextConfig = {
   
   // Fix for Vercel deployment issues
   experimental: {
-    // Disable problematic features that cause deployment issues
-    serverComponentsExternalPackages: [],
+    // Fix for client reference manifest issues
+    optimizePackageImports: ['lucide-react', 'react-icons'],
   },
+  
+  // External packages for server components
+  serverExternalPackages: [],
   
   // Configure images
   images: {
@@ -28,8 +31,8 @@ const nextConfig: NextConfig = {
     ],
   },
   
-  // Simplified webpack configuration for Vercel
-  webpack: (config, { isServer }) => {
+  // Webpack configuration for Vercel
+  webpack: (config, { isServer, dev }) => {
     // Fix for client reference manifest issues on Vercel
     if (!isServer) {
       config.resolve.fallback = {
@@ -38,6 +41,29 @@ const nextConfig: NextConfig = {
         net: false,
         tls: false,
         crypto: false,
+        stream: false,
+        util: false,
+        url: false,
+        assert: false,
+        http: false,
+        https: false,
+        os: false,
+        buffer: false,
+      };
+    }
+    
+    // Fix for Vercel build issues
+    if (!dev && !isServer) {
+      config.optimization.splitChunks = {
+        ...config.optimization.splitChunks,
+        cacheGroups: {
+          ...config.optimization.splitChunks?.cacheGroups,
+          default: {
+            minChunks: 1,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+        },
       };
     }
     
@@ -45,7 +71,7 @@ const nextConfig: NextConfig = {
   },
   
   // Output configuration for Vercel deployment
-  // Remove standalone output for Vercel compatibility
+  // output: 'standalone', // Commented out for Vercel compatibility
 };
 
 export default nextConfig;
