@@ -58,9 +58,17 @@ const nextConfig: NextConfig = {
     
     // Fix for Vercel client reference manifest error
     if (!isServer) {
+      // Ignore server-side files on client
       config.plugins.push(
         new webpack.IgnorePlugin({
           resourceRegExp: /^\.\/server\/.*\.js$/,
+        })
+      );
+      
+      // Ignore client reference manifest files
+      config.plugins.push(
+        new webpack.IgnorePlugin({
+          resourceRegExp: /client-reference-manifest/,
         })
       );
     }
@@ -92,6 +100,11 @@ const nextConfig: NextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: false,
+  },
+  
+  // Disable problematic features for Vercel
+  generateBuildId: async () => {
+    return 'build-' + Date.now();
   },
 };
 
