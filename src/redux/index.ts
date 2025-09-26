@@ -20,10 +20,12 @@ const encryptor = encryptTransform({
   onError: function (error) {
     console.error("Encryption error:", error);
     // Clear storage on encryption error
-    try {
-      storage.removeItem("persist:root");
-    } catch (e) {
-      console.error("Failed to clear storage:", e);
+    if (typeof window !== 'undefined') {
+      try {
+        storage.removeItem("persist:root");
+      } catch (e) {
+        console.error("Failed to clear storage:", e);
+      }
     }
   }
 });
