@@ -1,105 +1,38 @@
 "use client";
 
-import AuthGuard from "@/components/AuthGuard";
-import Image from "next/image";
-import React, { useState } from "react";
-import Barchart1 from "../(dashboard)/Components/Home/Barchart1";
-import SubscriptionChart from "../(dashboard)/Components/Home/SubscriptionChart";
-import AreaChartComponent from "../(dashboard)/Components/Home/AreaChartComponent";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux";
 
-// Static data types
-const StatCard = ({
-  title,
-  value,
-  image
-}: {
-  title: string;
-  value: number;
-  image: string;
-}) => (
-  <div className="p-3 md:p-6 bg-[#F9F9F9]  rounded-[12px] border border-[#AFAFAF]">
-    <div className="flex items-center">
-      <div className="relative flex items-center justify-center w-12 h-12 bg-white rounded-full">
-        <Image
-          src={image}
-          alt="Bar Graph"
-          className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-          width={30}
-          height={30}
-        />
-      </div>
-      <div className="pl-[10px]">
-        <h3 className="text-[#794A3A] font-dm-sans text-sm font-semibold">
-          {title}
-        </h3>
-        <p className="text-[#794A3A] font-inter text-xl font-bold">{value}</p>
-      </div>
-    </div>
-  </div>
-);
+// Import the Home component from the (dashboard) route group
+import Home from "../(dashboard)/page";
 
-const Dashboard: React.FC = () => {
-  const [counts] = useState({
-    users: 1200,
-    dentists: 111,
-    smiles: 1100,
-    totalgame: 59
-  });
+export default function DashboardPage() {
+  const router = useRouter();
+  const user = useSelector((state: RootState) => state?.user || null);
+  
+  const isAuthenticated = user?.token || user?.accessToken;
+  const isAdmin = user?.role === "admin";
 
-  const statsData = [
-    {
-      title: "Total Users",
-      value: counts.users,
-      image: "/images/massy-image/totaluser.svg"
-    },
-    {
-      title: "Total Sermons",
-      value: counts.smiles,
-      image: "/images/massy-image/totalsermon.svg"
-    },
-    {
-      title: "Total Lessons",
-      value: counts.dentists,
-      image: "/images/massy-image/totallesson.svg"
-    },
-    {
-      title: "Total Games",
-      value: counts.totalgame,
-      image: "/images/massy-image/totalgame.svg"
+  useEffect(() => {
+    // Redirect to login if not authenticated
+    if (!isAuthenticated || !isAdmin) {
+      router.replace("/");
     }
-  ];
+  }, [isAuthenticated, isAdmin, router]);
 
-  return (
-    <AuthGuard requireAuth={true}>
-      <div className="p-2 mt-5 sm:p-3 md:p-4 lg:py-6">
-        <h1 className="pb-[15px] text-[#794A3A] font-dm-sans text-[32px] font-semibold">
-          Hello, Jelly young
-        </h1>
-        <div className="grid grid-cols-1 gap-3 mb-6 sm:grid-cols-2 lg:grid-cols-4">
-          {statsData.map((stat, index) => (
-            <StatCard
-              key={index}
-              title={stat.title}
-              value={stat.value}
-              image={stat.image}
-            />
-          ))}
+  // Show loading while checking authentication
+  if (!isAuthenticated || !isAdmin) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-[#6AC8C4]">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-white font-medium">Loading...</p>
         </div>
-
-        <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-3">
-          <div className="col-span-1 lg:col-span-2">
-            <Barchart1 />
-          </div>
-
-          <div className="">
-            <SubscriptionChart />
-          </div>
-        </div>
-
-        <AreaChartComponent />
       </div>
-    </AuthGuard>
-  );
-};
+    );
+  }
 
-export default Dashboard;
+  return <Home />;
+}
