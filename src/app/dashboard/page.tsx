@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux";
 
-// Import the Home component from the (dashboard) route group components
-import Home from "../(dashboard)/components/Home";
+// Import the Home component from the (dashboard) route group Components
+import Home from "../(dashboard)/Components/Home";
 
 export default function DashboardPage() {
   const router = useRouter();
