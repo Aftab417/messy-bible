@@ -1,11 +1,9 @@
 import Image from "next/image";
 import React from "react";
 
-import Barchart1 from "./Components/Home/Barchart1";
-import SubscriptionChart from "./Components/Home/SubscriptionChart";
-import AreaChartComponent from "./Components/Home/AreaChartComponent";
-
-// Static data types
+import Barchart1 from "../Components/Home/Barchart1";
+import SubscriptionChart from "../Components/Home/SubscriptionChart";
+import AreaChartComponent from "../Components/Home/AreaChartComponent";
 
 const StatCard = ({
   title,
@@ -100,3 +98,5 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
+
