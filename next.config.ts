@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
   experimental: {
     // Fix for client reference manifest issues
     optimizePackageImports: ['lucide-react', 'react-icons'],
+    // Disable problematic features for Vercel
+    serverActions: {
+      allowedOrigins: ['localhost:3000'],
+    },
   },
   
   // External packages for server components
@@ -32,7 +36,7 @@ const nextConfig: NextConfig = {
   },
   
   // Webpack configuration for Vercel
-  webpack: (config, { isServer, dev }) => {
+  webpack: (config, { isServer, dev, webpack }) => {
     // Fix for client reference manifest issues on Vercel
     if (!isServer) {
       config.resolve.fallback = {
@@ -50,6 +54,15 @@ const nextConfig: NextConfig = {
         os: false,
         buffer: false,
       };
+    }
+    
+    // Fix for Vercel client reference manifest error
+    if (!isServer) {
+      config.plugins.push(
+        new webpack.IgnorePlugin({
+          resourceRegExp: /^\.\/server\/.*\.js$/,
+        })
+      );
     }
     
     // Fix for Vercel build issues
@@ -72,6 +85,14 @@ const nextConfig: NextConfig = {
   
   // Output configuration for Vercel deployment
   // output: 'standalone', // Commented out for Vercel compatibility
+  
+  // Additional Vercel-specific fixes
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
 };
 
 export default nextConfig;
