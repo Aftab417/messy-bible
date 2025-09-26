@@ -1,7 +1,5 @@
-"use client";
 import Image from "next/image";
-
-import React, { useState } from "react";
+import React from "react";
 
 import Barchart1 from "./Components/Home/Barchart1";
 import SubscriptionChart from "./Components/Home/SubscriptionChart";
@@ -40,12 +38,12 @@ const StatCard = ({
 );
 
 const Home: React.FC = () => {
-  const [counts] = useState({
+  const counts = {
     users: 1200,
     dentists: 111,
     smiles: 1100,
     totalgame: 59
-  });
+  };
 
   const statsData = [
     {
